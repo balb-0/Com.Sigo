@@ -99,7 +99,32 @@ _conteúdo_
 _conteúdo_
 
 ## 2.1 Contexto da Indústria do Parceiro
-_conteúdo_
+
+**Visão Geral do Setor**:
+
+O setor de distribuição de gás natural no Brasil atua em um ambiente altamente regulado, com forte exigência de segurança, confiabilidade e qualidade no atendimento ao cliente. A crescente demanda por energia limpa e eficiente tem impulsionado a digitalização dos serviços, mas o atendimento humano ainda é essencial para resolver questões sensíveis, emergenciais ou complexas. Um dos principais desafios do setor é garantir uma experiência consistente e de alta qualidade, mesmo diante do alto volume de interações e da diversidade de perfis de clientes atendidos.
+
+A Comgás, maior distribuidora de gás natural canalizado da América Latina, atende mais de 2,6 milhões de clientes no Estado de São Paulo. A companhia atende três perfis distintos: pessoas físicas, clientes comerciais (como restaurantes e pequenos comércios) e clientes industriais (como fábricas e grandes indústrias). Enquanto as pessoas físicas representam o maior volume de atendimentos, os clientes industriais são os mais estratégicos, pois o setor industrial responde por mais de 20% do PIB brasileiro e possui alto consumo de gás, sendo um segmento fundamental para a sustentabilidade do negócio.
+
+**Posicionamento do Parceiro**:
+
+A Comgás atua como referência nacional em distribuição de gás natural, não apenas pela escala de sua operação, mas por seu papel de liderança em inovação e experiência do cliente. Em um setor tradicionalmente conservador, a empresa se diferencia por adotar tecnologias avançadas de automação e inteligência artificial como pilares da sua estratégia de atendimento. Com 94% dos atendimentos já resolvidos por canais digitais, como chatbot, URA, WhatsApp e site, a Comgás demonstra um alto nível de maturidade digital, raro entre empresas de infraestrutura no Brasil.
+
+Esse posicionamento a coloca na vanguarda do setor, onde o próximo passo natural não é apenas automatizar mais, mas tornar a qualidade do serviço mensurável, escalável e inteligente. Projetos como o de automação do monitoramento de chamadas com PLN e reconhecimento de áudio são consequência direta dessa postura: enquanto muitas empresas ainda avaliam atendimento de forma manual e pontual, a Comgás busca transformar dados de voz em insights acionáveis, em tempo real e com cobertura massiva. Isso reforça seu compromisso com a excelência operacional e posiciona a empresa como uma utility inteligente, alinhada às demandas de um mercado cada vez mais exigente.
+
+**Contexto Operacional e Desafio Atual**:
+
+A central de atendimento da Comgás recebe entre 120 mil e 150 mil ligações por mês, com toda a operação de atendimento humano terceirizada. Os atendentes, em sua maioria jovens entre 20 e 30 anos, atendem em diversos turnos, 24 horas por dia nos canais de emergência, como vazamentos de gás, e em horário comercial para demandas não emergenciais, como dúvidas sobre faturas, religações e troca de titularidade.
+
+Todas as chamadas são gravadas por obrigatoriedade regulatória. No entanto, apenas cerca de 1% delas são avaliadas manualmente por monitores de qualidade, que escutam cada gravação por completo e verificam critérios como confirmação de dados do cliente (CPF, endereço), cumprimento de roteiros, clareza nas respostas e postura do atendente. Esse processo é lento, pouco escalável e consome tempo operacional, limitando a capacidade da empresa de garantir a qualidade em larga escala.
+
+O atendimento é desafiador por diversos fatores operacionais e comportamentais. A maioria das chamadas chega sem identificação do cliente, exigindo confirmação de dados antes do atendimento. Há também uma forte sazonalidade: no inverno, o consumo de gás aumenta naturalmente, mesmo sem mudança nos hábitos de uso, pois a água entra mais fria e exige mais gás para aquecimento. Isso gera um pico de ligações de clientes preocupados com o valor da conta, muitas vezes por motivos improcedentes, como ter regulado o medidor, recebido visitas que usaram mais água quente ou não compreendido o funcionamento do consumo sazonal.
+
+Apesar de 94% dos atendimentos serem resolvidos por canais digitais, os 6% que transbordam para o atendimento humano trazem os casos mais sensíveis, urgentes ou emocionais. Essas interações muitas vezes envolvem situações de emergência, reclamações financeiras ou risco de perda de cliente. Por isso, a qualidade dessas interações é crítica: resolver rápido, com empatia e precisão é essencial para manter a reputação e a fidelidade.
+
+Nesse cenário, a automação do monitoramento de qualidade se torna um diferencial estratégico. A meta é aumentar a cobertura de análise de 1% para pelo menos 20% das ligações, sem impacto nos custos operacionais. A aplicação de tecnologias como reconhecimento de áudio, processamento de linguagem natural (PLN) e análise de sentimento permite não apenas escalar a avaliação, mas também identificar padrões, mapear boas práticas, detectar falhas recorrentes e realimentar o treinamento de atendentes.
+
+Essa iniciativa está diretamente ligada à estratégia de experiência do cliente (CX) da Comgás: garantir que cada interação, mesmo em larga escala, seja resolutiva, ágil e empática. Automatizar a escuta qualificada não é apenas uma evolução operacional, é uma alavanca para melhoria contínua, retenção de clientes e fortalecimento da reputação da marca.
 
 ## 2.2 Problema
 _conteúdo_
@@ -328,5 +353,6 @@ _conteúdo_
 
 # Referências
 _conteúdo_
+
 
 
