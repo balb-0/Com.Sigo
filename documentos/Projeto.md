@@ -113,12 +113,65 @@ _conteúdo_
 _conteúdo_
 
 ## 2.5 Modelagem do Fluxo de Negócio
-_conteúdo_
+
+Como parte do entendimento do negócio, foi modelado o fluxo de processo atual (AS-IS) de avaliação da qualidade do atendimento prestado aos clientes da Comgás, utilizando a notação BPMN (Business Process Model and Notation). O objetivo deste mapeamento é representar de forma clara as etapas e interações entre os principais atores responsáveis pelo atendimento e pela análise de conformidade com os padrões da empresa.
+
+Como a única alteração relevante com a aplicação da solução proposta seria a substituição da atuação humana na etapa de monitoria por um sistema automatizado de análise com IA, optou-se por modelar apenas o fluxo atual (AS-IS). Na prática, o processo seguiria exatamente as mesmas etapas, mas a avaliação das chamadas seria executada pela IA em vez de um monitor humano, podendo, no melhor cenário, substituir totalmente o trabalho manual. A única mudança visível no diagrama seria a renomeação da lane de “Monitor” para “Sistema de Monitoramento” e a inclusão da geração automática de relatórios ou o envio direto das métricas para um dashboard.
+
+**Atores Principais**
+
+* **Cliente**: Consumidor dos serviços da Comgás, podendo ser pessoa física, comércio ou indústria. É quem identifica uma demanda (ex.: conta alta, religação de gás, vazamento) e aciona os canais de atendimento.
+
+* **Cris / Canais Digitais**: Chatbot e outros canais automatizados (WhatsApp, chat no site, SMS) responsáveis por resolver demandas simples e recorrentes, como emissão de segunda via de conta ou informações básicas.
+
+* **Atendente Humano**: Profissional terceirizado que atende demandas mais complexas, como emergências, contestações de conta e problemas técnicos. O atendente deve seguir protocolos da Comgás, como confirmar a identidade do cliente e, quando necessário, abrir uma Nota de Serviço (OS).
+
+* **Sistema de Gravação**: Responsável por registrar 100% das ligações, conforme exigência regulatória. A gravação ocorre em paralelo ao atendimento, do início ao fim da chamada.
+
+* **Monitor de Qualidade**: Funcionário terceirizado que avalia, por amostragem, a aderência do atendimento aos padrões da Comgás. Hoje, cerca de 1% das chamadas são avaliadas, o que corresponde a aproximadamente duas ligações por atendente.
+
+### **Fluxo de Negócio do Processo Atual (AS-IS)**
+
+<div align = center>
+<img src="img/diagram (3).svg" alt="Mapeamento do fluxo atual de negócio em BPMN">
+</div>
+
+O fluxo inicia quando o cliente identifica uma demanda e aciona um dos canais de suporte. A partir daí:
+
+1. **Entrada do cliente nos canais de atendimento**
+   O cliente entra em contato com o suporte por telefone, chatbot Cris, WhatsApp, chat no site ou SMS.
+
+2. **Decisão inicial**
+   Se a demanda for simples e puder ser solucionada pela Cris ou outro canal automatizado, o processo é encerrado. Caso contrário, a chamada é direcionada a um atendente humano.
+
+3. **Atendimento humano**
+   O atendente segue protocolos estabelecidos: confirmar dados do cliente, compreender a demanda, verificar informações no sistema e, se necessário, abrir uma Nota de Serviço.
+
+4. **Gravação da chamada em paralelo**
+   Enquanto o atendimento ocorre, o sistema de gravação registra integralmente a ligação.
+
+5. **Seleção da amostra de chamadas**
+   Após o atendimento, o monitor de qualidade seleciona, seguindo critérios internos (ex.: 2 chamadas por atendente), as ligações que serão avaliadas.
+
+6. **Avaliação de qualidade**
+   O monitor acessa a gravação e verifica a aderência do atendimento aos padrões da Comgás, como cordialidade, cumprimento de roteiro, conferência de dados e clareza das informações prestadas.
+
+O processo é encerrado após a conclusão da avaliação pelo monitor.
+
+**Representação das cores no BPMN**
+
+* **Roxo**: Representa subprocessos, indicando que a atividade é composta por várias etapas internas que não estão detalhadas no diagrama, mas fazem parte do procedimento padrão.
+
+* **Laranja**: Indica pontos de decisão no processo, onde é avaliado um critério que determina o fluxo seguinte (ex.: demanda resolvível digitalmente ou não).
+
+* **Vermelho**: Representa eventos de término do processo, encerrando o fluxo em diferentes cenários possíveis.
+
+* **Azul**: Representa dados gerados ou consumidos ao longo do processo
+
+
+Em conclusão, o mapeamento BPMN do processo atual de avaliação da qualidade no atendimento telefônico da Comgás permitiu identificar de forma clara o papel de cada ator, as interações entre eles e a sequência lógica das atividades. Embora o fluxo de atendimento ao cliente não se altere significativamente com a introdução da solução proposta, o uso de tecnologias de reconhecimento de voz e processamento de linguagem natural na etapa de monitoria tem potencial de multiplicar quantidade de chamadas avaliadas, aumentando a cobertura sem acréscimo de custo operacional. Esse ganho de escala contribui para maior precisão no monitoramento da experiência do cliente, reforça a capacidade de identificar desvios de padrão e oferece à Comgás mais dados para melhorar continuamente seu atendimento.
 
 ## 2.5.1 Cadeia de Valor
-_conteúdo_
-
-## 2.5.2 Fluxo de Negócio Proposto (AS-IS e TO-BE)
 _conteúdo_
 
 ## 2.6 Matriz de Risco do Projeto
@@ -275,4 +328,5 @@ _conteúdo_
 
 # Referências
 _conteúdo_
+
 
