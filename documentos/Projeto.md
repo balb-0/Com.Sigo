@@ -139,6 +139,8 @@ _conteúdo_
 
 ## 3.2 Requisitos Não Funcionais (RNFs)
 
+Nessa seção constam os requisitos não funcionais da solução.
+
 <div align="center"> <sub>Tabela X - Requisitos Não Funcionais</sub><br>
 
 | Requisito                                                                                                                          | Teste Necessário                                                                                | Pré-condição                                                                  | Procedimento                                                                                                  | Resultado Esperado                                                      | Pós-condição                                                 | Critérios de Aceitação                                                                                                             |
