@@ -122,7 +122,31 @@ _conteúdo_
 _conteúdo_
 
 ## 2.6 Matriz de Risco do Projeto
-_conteúdo_
+
+&emsp;Nesta seção se encontra a matriz de riscos do projeto.
+
+<div align="center"> <sub>Imagem 2.6.1 - Requisitos Não Funcionais</sub><br>
+
+
+<img src="img/section2/matriz_riscos.png" alt="Matriz de riscos" border="0">
+
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
+
+
+
+<div align="center"> <sub>Tabela 2.6.1 - Requisitos Não Funcionais</sub><br>
+
+| Nº | Risco                                         | Probabilidade | Impacto    | Mitigação                                                                                 |
+| -- | --------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------------------------------------- |
+| 1  | Processamento lento ou falha em áudios longos | Média         | Alto       | Otimizar algoritmos de transcrição; usar processamento assíncrono; limitar simultaneidade |
+| 2  | Baixa acurácia na identificação de intenções  | Média         | Alto       | Treinar e validar modelos com dados variados; implementar feedback para correção manual   |
+| 3  | Vazamento ou perda de dados sensíveis         | Baixa         | Muito Alto | Implementar criptografia local; políticas rígidas de acesso; logs de auditoria            |
+| 4  | Interface pouco intuitiva para operadores     | Média         | Médio      | Realizar testes de usabilidade; coletar feedback dos usuários e iterar no design          |
+| 5  | Incompatibilidade com formatos de áudio       | Baixa         | Médio      | Suportar múltiplos formatos comuns; validar arquivos antes do processamento               |
+
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
 
 ## 2.7 Ideação
 _conteúdo_
