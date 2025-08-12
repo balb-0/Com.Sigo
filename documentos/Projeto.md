@@ -140,7 +140,7 @@ _conteúdo_
 | Nº | Risco                                         | Probabilidade | Impacto    | Mitigação                                                                                 |
 | -- | --------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------------------------------------- |
 | 1  | Processamento lento ou falha em áudios longos | Média         | Alto       | Otimizar algoritmos de transcrição; usar processamento assíncrono; limitar simultaneidade |
-| 2  | Baixa acurácia na identificação de intenções  | Média         | Alto       | Treinar e validar modelos com dados variados; implementar feedback para correção manual   |
+| 2  | Baixa acurácia na identificação de intenções  | Média         | Muito alto       | Treinar e validar modelos com dados variados; implementar feedback para correção manual   |
 | 3  | Vazamento ou perda de dados sensíveis         | Baixa         | Muito Alto | Implementar criptografia local; políticas rígidas de acesso; logs de auditoria            |
 | 4  | Interface pouco intuitiva para operadores     | Média         | Médio      | Realizar testes de usabilidade; coletar feedback dos usuários e iterar no design          |
 | 5  | Incompatibilidade com formatos de áudio       | Baixa         | Médio      | Suportar múltiplos formatos comuns; validar arquivos antes do processamento               |
