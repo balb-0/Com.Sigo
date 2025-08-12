@@ -123,9 +123,11 @@ _conteúdo_
 
 ## 2.6 Matriz de Risco do Projeto
 
+### Matriz de Risco
+
 &emsp;Nesta seção se encontra a matriz de riscos do projeto.
 
-<div align="center"> <sub>Imagem 2.6.1 - Requisitos Não Funcionais</sub><br>
+<div align="center"> <sub>Imagem 2.6.1 - Matriz de Riscos</sub><br>
 
 
 <img src="img/section2/matriz_riscos.png" alt="Matriz de riscos" border="0">
@@ -135,18 +137,46 @@ _conteúdo_
 
 
 
-<div align="center"> <sub>Tabela 2.6.1 - Requisitos Não Funcionais</sub><br>
+<div align="center"> <sub>Tabela 2.6.1 - Tabela de Riscos</sub><br>
 
 | Nº | Risco                                         | Probabilidade | Impacto    | Mitigação                                                                                 |
 | -- | --------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------------------------------------- |
 | 1  | Processamento lento ou falha em áudios longos | Média         | Alto       | Otimizar algoritmos de transcrição; usar processamento assíncrono; limitar simultaneidade |
 | 2  | Baixa acurácia na identificação de intenções  | Média         | Muito alto       | Treinar e validar modelos com dados variados; implementar feedback para correção manual   |
 | 3  | Vazamento ou perda de dados sensíveis         | Baixa         | Muito Alto | Implementar criptografia local; políticas rígidas de acesso; logs de auditoria            |
-| 4  | Interface pouco intuitiva para operadores     | Média         | Médio      | Realizar testes de usabilidade; coletar feedback dos usuários e iterar no design          |
-| 5  | Incompatibilidade com formatos de áudio       | Baixa         | Médio      | Suportar múltiplos formatos comuns; validar arquivos antes do processamento               |
+| 4  | Interface pouco intuitiva para operadores     | Baixa         | Média      | Realizar testes de usabilidade; coletar feedback dos usuários e iterar no design          |
+| 5  | Incompatibilidade com formatos de áudio       | Média         | Média      | Suportar múltiplos formatos comuns; validar arquivos antes do processamento               |
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
 </div>
+
+### Matriz de Oportunidade
+
+&emsp;Nesta seção se encontra a matriz de riscos do projeto.
+
+<div align="center"> <sub>Imagem 2.6.2 - Matriz de Oportunidades</sub><br>
+
+
+<img src="img/section2/matriz_oportunidades.png" alt="Matriz de oportunidades" border="0">
+
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
+
+
+
+<div align="center"> <sub>Tabela 2.6.2 - Tabela de Oportunidades</sub><br>
+
+| Nº | Oportunidade                                                | Probabilidade | Impacto | Mitigação/Ação Potencial                                                                 |
+| -- | ----------------------------------------------------------- | ------------- | ------- | ---------------------------------------------------------------------------------------- |
+| 3  | Oferecer relatórios automáticos com métricas de atendimento | Alta          | Médio   | Desenvolver módulo de relatórios integrado; coletar métricas-chave de forma automatizada |
+| 4  | Integrar análise de sentimentos mais detalhada              | Média         | Alto    | Implementar modelos de NLP mais avançados e treinar com dados específicos da empresa     |
+| 8  | Incorporar tradução automática das transcrições             | Baixa          | Alto    | Integrar APIs de tradução; permitir configuração de idiomas prioritários                 |
+| 10 | Criar interface personalizável para operadores              | Alta          | Médio   | Adicionar opções de layout, atalhos e personalização de dashboards                       |
+
+
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
+
 
 ## 2.7 Ideação
 _conteúdo_
