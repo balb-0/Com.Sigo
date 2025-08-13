@@ -248,6 +248,7 @@ Nessa seção constam os requisitos não funcionais da solução.
 ## 3.3 Correlação RFs e RNFs
 
 <div align="center"> <sub>Tabela 3.3.1 - Correlação entre RFs e RNFs</sub><br>
+
 | **Requisito Funcional (RF)**                                                                                             | **RNF01 - Suporte a Arquivos Longos** | **RNF02 - Desempenho de Transcrição** | **RNF03 - Precisão na Detecção de Intenção** | **Justificativa** |
 | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- | -------------------------------------- | --------------------------------------------- | ----------------- |
 | **RF01** – Enviar entradas em áudio ou texto                                                                             | ✅                                     | ✅                                      | ✅                                             | Necessita suportar áudios longos (RNF01), processar no tempo esperado (RNF02) e identificar corretamente a intenção (RNF03). |
@@ -435,3 +436,4 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
