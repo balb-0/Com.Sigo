@@ -247,7 +247,19 @@ Nessa seção constam os requisitos não funcionais da solução.
 
 ## 3.3 Correlação RFs e RNFs
 
-_conteúdo_
+<div align="center"> <sub>Tabela 3.3.1 - Correlação entre RFs e RNFs</sub><br>
+| **Requisito Funcional (RF)**                                                                                             | **RNF01 - Suporte a Arquivos Longos** | **RNF02 - Desempenho de Transcrição** | **RNF03 - Precisão na Detecção de Intenção** | **Justificativa** |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- | -------------------------------------- | --------------------------------------------- | ----------------- |
+| **RF01** – Enviar entradas em áudio ou texto                                                                             | ✅                                     | ✅                                      | ✅                                             | Necessita suportar áudios longos (RNF01), processar no tempo esperado (RNF02) e identificar corretamente a intenção (RNF03). |
+| **RF02** – Receber três critérios de avaliação                                                                           | ⬜                                     | ⬜                                      | ✅                                             | Avaliação depende da precisão da detecção de intenção para gerar notas corretas. |
+| **RF03** – Visualizar painel de indicadores                                                                              | ⬜                                     | ⬜                                      | ✅                                             | Indicadores refletem a precisão da detecção de intenções, garantindo métricas confiáveis. |
+| **RF04** – Identificar automaticamente áudio ou texto                                                                    | ⬜                                     | ✅                                      | ✅                                             | Precisa identificar rápido o tipo de entrada (RNF02) e classificar intenções com acurácia (RNF03). |
+| **RF05** – Upload múltiplo de chamadas                                                                                   | ✅                                     | ✅                                      | ⬜                                             | Necessita suportar áudios longos (RNF01) e manter bom desempenho de processamento (RNF02). |
+| **RF06** – Destacar chamadas com desempenho abaixo do limite                                                             | ⬜                                     | ⬜                                      | ✅                                             | Depende da precisão da detecção para identificar corretamente chamadas problemáticas. |
+| **RF07** – Armazenar dados de cada chamada                                                                               | ✅                                     | ⬜                                      | ✅                                             | Deve armazenar arquivos longos (RNF01) e manter registro fiel das intenções detectadas (RNF03). |
+
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
 
 ## 3.4 Casos de Uso
 
