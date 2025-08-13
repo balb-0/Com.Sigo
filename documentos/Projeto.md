@@ -37,7 +37,7 @@
     - [2.5.2 Fluxo de Negócio Proposto (AS-IS e TO-BE)](#252-fluxo-de-negócio-proposto-as-is-e-to-be)
   - [2.6 Matriz de Risco do Projeto](#26-matriz-de-risco-do-projeto)
   - [2.7 Matriz SWOT](#26-matriz-swot)
-  - [2.8 Ideação](#27-ideação)
+  - [ Ideação](#27-ideação)
   - [2.9 Canvas do Projeto](#28-canvas-do-projeto)
 - [3. Requisitos do Projeto](#3-requisitos-do-projeto)
   - [3.1 Requisitos Funcionais (RFs)](#31-requisitos-funcionais-rfs)
@@ -199,9 +199,97 @@ _conteúdo_
    - A solução depende de serviços externos (como speech-to-text e PLN em nuvem), que podem ter custos variáveis, limitações de uso gratuito, falhas de integração ou até descontinuidade, impactando a estabilidade e escalabilidade do protótipo.
 
 ## 2.8 Ideação
+Esta seção apresenta o levantamento de funcionalidades potenciais para o projeto, com base no contexto da Comgás, no problema de negócio, nos requisitos funcionais (RFs) e não funcionais (RNFs) definidos, e nas diretrizes do MVP.
 
-_conteúdo_
-Obs.: Seção dedicada a discussão sobre ideias e priorização de features.
+O objetivo é identificar funcionalidades que atendam ao escopo do projeto, com alto impacto na qualidade do atendimento e viabilidade técnica, priorizando aquelas essenciais para o MVP.
+
+### 2.8.1 Metodologia de Priorização
+
+Utilizamos uma matriz Impacto vs Viabilidade, considerando:
+
+- **Impacto**:  
+  1. Alinhamento com o objetivo principal: automatizar e escalar a avaliação de qualidade  
+  2. Contribuição para retenção de clientes, reputação e melhoria contínua  
+  3. Geração de insights acionáveis para gestão e treinamento  
+
+- **Viabilidade**:  
+  1. Alinhamento com os requisitos funcionais e não funcionais  
+  2. Adequação ao MVP (protótipo funcional com score, dashboard e validação)
+
+As funcionalidades foram classificadas em:  
+- **MVP (Must Have)** – Essenciais para entrega  
+- **Futuro (Nice to Have)** – Estratégicas, mas fora do escopo atual
+
+<div align="center">
+
+| ID | Nome da Feature | Descrição | Vinculação com RFs/RNFs | Classificação |
+|----|------------------|-----------|--------------------------|---------------|
+| F01 | Classificação Automática de Entrada (Áudio/Texto) | Identifica automaticamente se a entrada é áudio ou texto e direciona para o fluxo adequado. | RF01, RF04, RNF02, RNF03 | MVP |
+| F02 | Transcrição de Áudio com Suporte a Longas Durações | Converte arquivos de áudio (até 75 min) em texto, garantindo completude. | RF01, RNF01, RNF02 | MVP |
+| F03 | Geração de Score de Qualidade (0 a 5) | Atribui pontuação com base em três critérios objetivos, conforme RF02. | RF02, RNF03 | MVP |
+| F04 | Análise de Sentimento e Intenção | Detecta emoções e intenções com precisão ≥90%, conforme RNF03. | RF02, RF06, RNF03 | MVP |
+| F05 | Dashboard de Indicadores de Qualidade | Painel com métricas agregadas: média de score, % de chamadas abaixo do limite. | RF03, RF06 | MVP |
+| F06 | Upload em Lote de Chamadas | Permite envio simultâneo de múltiplas chamadas para análise em massa. | RF05, RNF01 | MVP |
+| F07 | Armazenamento Seguro de Dados | Armazena entrada, transcrição, score e metadados com segurança. | RF07, RNF01, RNF03 | MVP |
+| F08 | Destaque de Atendimentos Críticos | Identifica e destaca chamadas com score abaixo do limite definido. | RF06 | MVP |
+| F09 | Identificação de Atendimentos "Top" (Excelência) | Destaca chamadas com desempenho máximo para uso em treinamento. | — | Futuro |
+| F10 | Análise de Transbordo do Canal Digital | Cruzamento entre chamadas que vieram do chatbot e motivo do atendimento. | — | Futuro |
+| F11 | Detecção de Risco de Perda de Cliente | Identifica frases de insatisfação ou ameaça de cancelamento. | — | Futuro |
+| F12 | Recomendação de Treinamento por Padrão de Erro | Mapeia erros recorrentes e sugere treinamentos personalizados. | — | Futuro |
+</div>
+
+Tabela de Priorização: Impacto vs Viabilidade
+
+<div align="center">
+
+| Feature | Impacto | Viabilidade | Prioridade Final | Categoria |
+|--------|--------|------------|------------------|----------|
+| F01 – Classificação Automática | Alto | Alta | Alta | MVP |
+| F02 – Transcrição de Áudio | Alto | Alta | Alta | MVP |
+| F03 – Geração de Score | Alto | Alta | Alta | MVP |
+| F04 – Análise de Sentimento | Alto | Média | Alta | MVP |
+| F05 – Dashboard | Médio | Alta | Alta | MVP |
+| F06 – Upload em Lote | Médio | Alta | Alta | MVP |
+| F07 – Armazenamento de Dados | Médio | Alta | Alta | MVP |
+| F08 – Destaque de Críticos | Médio | Alta | Alta | MVP |
+| F09 – Atendimentos "Top" | Médio | Média | Média | Futuro |
+| F10 – Análise de Transbordo | Alto | Média | Média | Futuro |
+| F11 – Risco de Perda | Alto | Baixa | Média | Futuro |
+| F12 – Recomendação de Treinamento | Alto | Média | Média | Futuro |
+</div>
+
+Alinhamento com Requisitos
+
+<div align="center">
+
+| Feature | RF01 | RF02 | RF03 | RF04 | RF05 | RF06 | RF07 | RNF01 | RNF02 | RNF03 |
+|--------|------|------|------|------|------|------|------|-------|-------|-------|
+| F01 | ✅ | ⬜ | ⬜ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ✅ | ✅ |
+| F02 | ✅ | ⬜ | ⬜ | ⬜ | ✅ | ⬜ | ✅ | ✅ | ✅ | ⬜ |
+| F03 | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ✅ |
+| F04 | ✅ | ✅ | ✅ | ✅ | ⬜ | ✅ | ✅ | ⬜ | ⬜ | ✅ |
+| F05 | ⬜ | ⬜ | ✅ | ⬜ | ⬜ | ✅ | ⬜ | ⬜ | ⬜ | ✅ |
+| F06 | ✅ | ⬜ | ⬜ | ⬜ | ✅ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
+| F07 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ | ✅ |
+| F08 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ✅ | ⬜ | ⬜ | ⬜ | ✅ |
+
+</div>
+
+### 2.8.2 Roadmap Previsto
+
+A priorização das funcionalidades foi desenvolvida com base na facilidade de implementação, no valor entregue para a Comgás e na coerência com o cronograma acadêmico. As features foram distribuídas entre as sprints 3, 4 e 5 de forma a garantir um desenvolvimento incremental, viabilizando a integração contínua entre processamento de áudio, geração de score, armazenamento de dados e interface de visualização, sempre alinhado ao escopo do MVP.
+
+<div align="center">
+
+| Sprint | Funcionalidades | Objetivo |
+|--------|------------------|---------|
+| 3 | F01, F02, F03, F04 | Implementar a recepção e classificação de entradas (áudio/texto), transcrição de áudio, análise de sentimento e geração inicial do score com base em três critérios. Inicia-se a base do motor de avaliação automatizada. |
+| 4 | F05, F06, F07 | Desenvolver o dashboard básico, habilitar upload em lote de chamadas e implementar o armazenamento seguro dos dados processados, integrando a solução com o banco de dados. |
+| 5 | F08 | Implementar o destaque automático de chamadas com desempenho abaixo do limite definido, permitindo ações corretivas rápidas. Concluir com a validação cruzada entre análise automática e avaliação humana. |
+
+</div>
+
+Em conclusão, todas as funcionalidades do MVP estão diretamente vinculadas aos requisitos definidos no projeto. A solução proposta permite automatizar a avaliação de qualidade com foco em escalabilidade, acurácia e custo-efetividade. Ao final da sprint 5, o protótipo entregue será capaz de processar chamadas em áudio ou texto, gerar um score de qualidade com base em três critérios, exibir métricas em um dashboard simples e destacar atendimentos abaixo do padrão, atendendo integralmente ao escopo do MVP.
 
 ## 2.9 Canvas do Projeto
 
@@ -436,4 +524,5 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
