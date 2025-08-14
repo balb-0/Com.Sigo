@@ -355,7 +355,47 @@ _conteúdo_
 
 ## 5.2 Diagrama de Componentes da UML
 
-_conteúdo_
+
+&emsp; Um Diagrama de Componentes UML é essencial para a identificação dos principais módulos de uma aplicação, seus relacionamentos e suas responsabilidades dentro de uma arquitetura de software. Esse tipo de diagrama permite visualizar, de forma modular, como cada parte do sistema se comunica, garantindo organização, coesão e clareza estrutural.
+
+&emsp; A seguir, apresenta-se o Diagrama de Componentes para o sistema de análise automática de transcrições de áudios.
+
+<div align="center">
+<sub>Figura 5.2.1 - Diagrama de Componentes (Arquitetura Monolítica)</sub><br>
+<img src="img/section5/diagrama_componentes.png" width="80%"><br>
+<sup>Fonte: Material produzido pelos autores (2025) </sup>
+</div>
+
+| Componente | Descrição |
+| :--- | :--- |
+| **Aplicação Monolítica** | Representa o sistema centralizado que integra todos os componentes internos para fornecer as funcionalidades de transcrição e análise de áudio. |
+| **Frontend** | Interface web que permite ao operador fazer o upload dos arquivos de áudio, visualizar as transcrições e os resultados da análise de intenção. |
+| **Backend** | Responsável por receber as requisições do frontend, gerenciar a lógica de negócio, orquestrar o processamento dos dados e persistir as informações. |
+| **Banco de Dados (PostgreSQL)** | Armazena os dados da aplicação, como informações dos arquivos de áudio, as transcrições geradas e os resultados da análise (reclamações, elogios, etc.). |
+| **Modelo de Processamento de Dados (API Interna)** | Componente interno que realiza a transcrição do áudio e se comunica com serviços externos para identificar as intenções do cliente no texto transcrito. |
+| **API Externa (ChatGPT/Gemini)** | Serviço de IA externo utilizado pelo Modelo de Processamento para analisar o texto da transcrição e identificar com alta precisão as intenções do cliente. |
+
+### **Divisão interna da Aplicação Monolítica**
+
+O **Frontend** permite a interação do usuário final com a aplicação, garantindo a usabilidade para os operadores. Dentro do mesmo sistema, o **Backend** gerencia as requisições, coordena o fluxo de trabalho e interage diretamente com o **Banco de Dados (PostgreSQL)** para persistência. Quando uma análise é solicitada, o Backend aciona o **Modelo de Processamento de Dados**, que atua como uma API interna. Este modelo, por sua vez, consome a **API Externa (ChatGPT/Gemini)** para realizar a análise de sentimento e intenção, garantindo a segurança ao não expor dados sensíveis diretamente.
+
+### **Relacionamentos Entre os Componentes**
+
+1.  **Frontend** → **Backend**
+    - O Frontend envia requisições do usuário (como upload de áudio) para o Backend via chamadas HTTP/JSON.
+      <br>
+
+2.  **Backend** ↔ **Banco de Dados (PostgreSQL)**
+    - O Backend lê e grava informações no Banco de Dados, como o estado do processamento e os resultados da análise, garantindo a persistência dos dados.
+      <br>
+
+3.  **Backend** → **Modelo de Processamento de Dados (API Interna)**
+    - O Backend invoca o Modelo de Processamento através de uma chamada de função interna para iniciar a análise de um arquivo de áudio.
+      <br>
+
+4.  **Modelo de Processamento de Dados** → **API Externa (ChatGPT/Gemini)**
+    - O Modelo de Processamento envia o texto transcrito para a API Externa para obter a análise de intenção e sentimento.
+      <br>
 
 ## 5.3 Diagramas de Sequência da UML
 
