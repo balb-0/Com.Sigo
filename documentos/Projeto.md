@@ -347,11 +347,45 @@ _conteúdo_
 
 # 5. Solução Técnica (Design)
 
-_conteúdo_
+Esta seção busca mostrar os diagramas que vão compor a solução final.
 
 ## 5.1 Diagrama de Classes
 
-_conteúdo_
+&emsp; Um Diagrama de Classes UML é essencial para a identificação das principais entidades de uma aplicação, seus atributos, métodos e relacionamentos. Esse tipo de diagrama permite visualizar como cada classe interage com as demais.
+
+&emsp; A seguir, apresenta-se o Diagrama de Classes para o sistema de gestão de chamadas, transcrições e avaliações de atendimento.
+
+<div align="center">
+<sub>Figura 5.1.1 - Diagrama de Classes</sub><br>
+<img src="img/section5/diagrama-de-classes.png" width="80%"><br>
+<sup>Fonte: Material produzido pelos autores (2025) </sup>
+</div>
+
+| Classe | Descrição |
+| :--- | :--- |
+| **Cliente** | Representa o cliente que realiza chamadas. Contém informações básicas como `id`, `nome` e `telefone`, e o método `fazerLigacao` para iniciar uma chamada. |
+| **Chamada** | Registra os dados de cada chamada, incluindo `tipoEntrada`, `conteudo`, `duracao` e `dataHora`. Possui métodos para `receberEntrada`, `identificarTipoEntrada` e `registrar`. Serve como base para a transcrição e checklist. |
+| **Checklist** | Classe responsável pelo acompanhamento do atendimento. Possui atributos booleanos como `iniciarChamada`, `entenderProblema`, `resolverProblema` e `finalizarAtendimento`. Inclui o método `validarChecklist` e mantém correlação com a **Avaliacao**. |
+| **Avaliacao** | Representa a avaliação do atendimento baseada no checklist, incluindo critérios numéricos (`criterio1`, `criterio2`, `criterio3`), `notaFinal` e flags de acompanhamento (`problemaResolvido`, `duracaoAtingiuLimite`). Possui o método `calcularNotaFinal`. |
+| **Transcricao** | Classe responsável por processar entradas de áudio. Contém o método `transcrever` que recebe um arquivo de áudio e retorna a transcrição em formato de string. |
+
+### **Relacionamentos Entre as Classes**
+
+1. **Cliente → Chamada**
+   - O Cliente realiza uma Chamada, iniciando o fluxo de atendimento. Essa etapa, o usuário vai imputar os dados da chamada que já ocorreu.
+   <br>
+
+2. **Chamada → Checklist**
+   - A Chamada mantém uma correlação com o Checklist, permitindo acompanhar o progresso do atendimento.
+   <br>
+
+3. **Checklist → Avaliacao**
+   - O Checklist serve como base para gerar uma Avaliacao do atendimento, calculando a nota final e verificando se os critérios foram cumpridos.
+   <br>
+
+4. **Chamada → Transcricao**
+   - A Chamada utiliza a classe Transcricao quando a entrada é do tipo áudio, convertendo o áudio em texto para análise posterior.
+
 
 ## 5.2 Diagrama de Componentes da UML
 
@@ -361,7 +395,7 @@ _conteúdo_
 &emsp; A seguir, apresenta-se o Diagrama de Componentes para o sistema de análise automática de transcrições de áudios.
 
 <div align="center">
-<sub>Figura 5.2.1 - Diagrama de Componentes (Arquitetura Monolítica)</sub><br>
+<sub>Figura 5.2.1 - Diagrama de Componentes </sub><br>
 <img src="img/section5/diagrama_componentes.png" width="80%"><br>
 <sup>Fonte: Material produzido pelos autores (2025) </sup>
 </div>
@@ -399,7 +433,27 @@ O **Frontend** permite a interação do usuário final com a aplicação, garant
 
 ## 5.3 Diagramas de Sequência da UML
 
-_conteúdo_
+&emsp; Um Diagrama de Sequência UML é essencial para entender o fluxo temporal de interações entre os componentes de um sistema durante a execução de um processo. Este tipo de diagrama permite visualizar a ordem das mensagens trocadas, os responsáveis por cada ação e como os dados são processados ao longo do fluxo.  
+
+&emsp; A seguir, apresenta-se o Diagrama de Sequência para o fluxo de avaliação de chamadas.
+
+<div align="center">
+<sub>Figura 5.3.1 - Diagrama de Sequência </sub><br>
+<img src="img/section5/diagrama-de-sequencia.png" width="80%"><br>
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
+
+| Elemento | Descrição |
+| :--- | :--- |
+| **Cliente** | Inicia o processo enviando uma entrada, que pode ser um áudio ou texto, para avaliação. |
+| **Frontend** | Recebe a entrada do cliente, envia os dados para o backend via HTTP/JSON e exibe o resultado final da avaliação. |
+| **Backend** | Gerencia o fluxo do processamento, encaminhando o áudio ou texto para o modelo de processamento e gerando registros no banco de dados. |
+| **Modelo de Processamento** | Processa a entrada de áudio convertendo-a em texto (quando necessário) e envia a transcrição ou texto ao backend. |
+| **Banco de Dados (PostgreSQL)** | Persiste informações da chamada, checklist e avaliação, garantindo rastreabilidade e histórico do fluxo. |
+| **API Externa (ChatGPT/Gemini)** | Recebe a transcrição e realiza a análise de intenção do texto, retornando os resultados ao backend. |
+| **Checklist** | Cria um checklist da chamada baseado nos dados recebidos para auxiliar na avaliação. |
+| **Avaliação** | Gera a avaliação final com base no checklist e retorna o resultado ao backend, que envia ao frontend para exibição ao cliente. |
+
 
 # 6. Mapeamento Técnico de Infraestrutura e Implantação
 
