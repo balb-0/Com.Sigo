@@ -36,8 +36,9 @@
     - [2.5.1 Cadeia de Valor](#251-cadeia-de-valor)
     - [2.5.2 Fluxo de Negócio Proposto (AS-IS e TO-BE)](#252-fluxo-de-negócio-proposto-as-is-e-to-be)
   - [2.6 Matriz de Risco do Projeto](#26-matriz-de-risco-do-projeto)
-  - [2.7 Ideação](#27-ideação)
-  - [2.8 Canvas do Projeto](#28-canvas-do-projeto)
+  - [2.7 Matriz SWOT](#26-matriz-swot)
+  - [2.8 Ideação](#27-ideação)
+  - [2.9 Canvas do Projeto](#28-canvas-do-projeto)
 - [3. Requisitos do Projeto](#3-requisitos-do-projeto)
   - [3.1 Requisitos Funcionais (RFs)](#31-requisitos-funcionais-rfs)
   - [3.2 Requisitos Não Funcionais (RNFs)](#32-requisitos-não-funcionais-rnfs)
@@ -85,40 +86,50 @@
   - [10.2 Implantação do Protótipo para uso por equipe de desenvolvimento](#102-implantação-do-protótipo-para-uso-por-equipe-de-desenvolvimento)
 - [Referências](#referências)
 
-
 # 1. Introdução
+
 _conteúdo_
 
 ## 1.1 Termos e Abreviações
+
 _conteúdo_
 
 ## 1.2 Objetivo do Documento
+
 _conteúdo_
 
 # 2. Entendimento do Projeto e do Negócio
+
 _conteúdo_
 
 ## 2.1 Contexto da Indústria do Parceiro
+
 _conteúdo_
 
 ## 2.2 Problema
+
 _conteúdo_
 
 ## 2.3 Visão do Projeto e do Produto
-  _conteúdo_
 
-  **Nota**: _Insira aqui informações sobre o que se trata o projeto e que valor ele vai entregar, Objetivos do Produto e O que o produto faz e não faz._
+_conteúdo_
+
+**Nota**: _Insira aqui informações sobre o que se trata o projeto e que valor ele vai entregar, Objetivos do Produto e O que o produto faz e não faz._
 
 ## 2.4 Personas e Jornada do Usuário
+
 _conteúdo_
 
 ## 2.5 Modelagem do Fluxo de Negócio
+
 _conteúdo_
 
 ## 2.5.1 Cadeia de Valor
+
 _conteúdo_
 
 ## 2.5.2 Fluxo de Negócio Proposto (AS-IS e TO-BE)
+
 _conteúdo_
 
 ## 2.6 Matriz de Risco do Projeto
@@ -177,12 +188,75 @@ _conteúdo_
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
 </div>
 
+## 2.7 Análise SWOT
 
-## 2.7 Ideação
+&nbsp;&nbsp;&nbsp;&nbsp;A matriz SWOT é uma ferramenta de análises de mercado utilizada para identificar e analisar as forças (Strengths), fraquezas (Weaknesses), oportunidades (Opportunities) e ameaças (Threats) de uma empresa ou projeto. O objetivo dessa análise é oferecer uma visão clara e agrangente das condições internas e externas que podem impactar no desenvolvimento de um projeto e no desempenho da empresa, o que ajuda na formulação de estratégias eficientes para alcançar os objetivos empresariais.
+
+<div align="center">
+<sub>Figura 2.7.1 - Matriz Swot</sub><br>
+<img src="../documentos/img/matriz-swot.png" width="80%" ><br>
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
+
+#### Forças (Strengths)
+
+1. **Alto volume de dados disponível**
+
+   - A **Comgás** possui alto volume de dados de atendimento acumulados, com ligações e interações por canais digitais. Isso nos ajuda a criar e validar modelos de análise, com representatividade e confiabilidade estatística.
+
+2. **Equipe ativa para suporte**
+
+   - O projeto conta com o envolvimento direto de profissionais das áreas de inovação, tecnologia e canais digitais da **Comgás**. Esse suporte ajuda no alinhamento com as necessidades reais da empresa, facilita o acesso a dados e aumenta as chances de adoção futura.
+
+3. **Escopo bem definido**
+   - O projeto possui objetivos claros e delimitados, com entregáveis tangíveis do MVP. Essa definição garante a organização da equipe, no controle das entregas e na avaliação das métricas do projeto.
+
+#### Fraquezas (Weaknesses)
+
+1. **Alta margem para melhora de análise**
+
+   - Atualmente, apenas cerca de 1% das ligações é analisada manualmente, o que indica pouca visibilidade sobre a qualidade do atendimento. Isso limita a base de comparação para validação e pode dificultar a melhora inicial dos modelos.
+
+2. **Processo manual é custoso**
+
+   - O modelo atual de escuta humana consome tempo e recursos operacionais significativos, dificultando a escalabilidade. Essa dependência do fator humano compromete a eficiência e impõe limites rígidos à expansão da análise.
+
+3. **Dependência de dados padronizados**
+   - O projeto exige que os dados de entrada (transcrições, gravações e anotações) estejam limpos e padronizados. Isso pode se tornar um gargalo, caso os dados sejam entregues de forma desorganizada.
+
+#### Oportunidades (Opportunities)
+
+1. **Alta escalabilidade**
+
+   - Uma vez validado, o modelo de análise automatizada pode ser ampliado para cobrir grande parte ou até a totalidade dos atendimentos. A **Comgás** poderá multiplicar a cobertura da monitoria e extrair insights em tempo real.
+
+2. **Alta margem para melhora de análise**
+
+   - A baixa cobertura atual representa também uma grande oportunidade: há um espaço amplo para crescimento do volume de interações analisadas, o que pode gerar impactos diretos na qualidade do atendimento e na experiência do cliente.
+
+3. **Adoção de automações na área de CX**
+   - O mercado está em crescente movimento de automação de processos de Customer Experience, com ampla aceitação de tecnologias como NLP e IA. Isso cria um ambiente favorável para que a **Comgás** adote soluções inovadoras com bom retorno estratégico.
+
+#### Ameaças (Threats)
+
+1. **Possíveis mudanças de regulamentos**
+
+   - Alterações na legislação de proteção de dados (como a LGPD) ou novas diretrizes internas podem restringir o uso de gravações ou exigir anonimização mais rigorosa, afetando a viabilidade do projeto.
+
+2. **Falta de alinhamento durante o projeto**
+
+   - O envolvimento de múltiplos pontos de contato (negócio, inovação, dados) pode gerar desalinhamentos de expectativa ou prioridades, o que pode comprometer prazos e decisões técnicas ao longo do desenvolvimento.
+
+3. **Dependência de ferramentas externas**
+   - A solução depende de serviços externos (como speech-to-text e PLN em nuvem), que podem ter custos variáveis, limitações de uso gratuito, falhas de integração ou até descontinuidade, impactando a estabilidade e escalabilidade do protótipo.
+
+## 2.8 Ideação
+
 _conteúdo_
 Obs.: Seção dedicada a discussão sobre ideias e priorização de features.
 
-## 2.8 Canvas do Projeto
+## 2.9 Canvas do Projeto
+
 _conteúdo_
 
 # 3. Requisitos do Projeto
@@ -224,138 +298,194 @@ Nessa seção constam os requisitos não funcionais da solução.
 </div>
 
 ## 3.3 Correlação RFs e RNFs
-_conteúdo_
+
+<div align="center"> <sub>Tabela 3.3.1 - Correlação entre RFs e RNFs</sub><br>
+
+| **Requisito Funcional (RF)**                                                                                             | **RNF01 - Suporte a Arquivos Longos** | **RNF02 - Desempenho de Transcrição** | **RNF03 - Precisão na Detecção de Intenção** | **Justificativa** |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- | -------------------------------------- | --------------------------------------------- | ----------------- |
+| **RF01** – Enviar entradas em áudio ou texto                                                                             | ✅                                     | ✅                                      | ✅                                             | Necessita suportar áudios longos (RNF01), processar no tempo esperado (RNF02) e identificar corretamente a intenção (RNF03). |
+| **RF02** – Receber três critérios de avaliação                                                                           | ⬜                                     | ⬜                                      | ✅                                             | Avaliação depende da precisão da detecção de intenção para gerar notas corretas. |
+| **RF03** – Visualizar painel de indicadores                                                                              | ⬜                                     | ⬜                                      | ✅                                             | Indicadores refletem a precisão da detecção de intenções, garantindo métricas confiáveis. |
+| **RF04** – Identificar automaticamente áudio ou texto                                                                    | ⬜                                     | ✅                                      | ✅                                             | Precisa identificar rápido o tipo de entrada (RNF02) e classificar intenções com acurácia (RNF03). |
+| **RF05** – Upload múltiplo de chamadas                                                                                   | ✅                                     | ✅                                      | ⬜                                             | Necessita suportar áudios longos (RNF01) e manter bom desempenho de processamento (RNF02). |
+| **RF06** – Destacar chamadas com desempenho abaixo do limite                                                             | ⬜                                     | ⬜                                      | ✅                                             | Depende da precisão da detecção para identificar corretamente chamadas problemáticas. |
+| **RF07** – Armazenar dados de cada chamada                                                                               | ✅                                     | ⬜                                      | ✅                                             | Deve armazenar arquivos longos (RNF01) e manter registro fiel das intenções detectadas (RNF03). |
+
+<sup>Fonte: Material produzido pelos autores (2025)</sup>
+</div>
 
 ## 3.4 Casos de Uso
+
 _conteúdo_
 
 ## 3.5 Casos de Uso x Requisitos Funcionais
+
 _conteúdo_
 
 # 4. Modelagem de Dados
+
 _conteúdo_
 
 ## 4.1 Especificação da Base de Dados para Modelo de Recomendação
+
 _conteúdo_
-Obs.: Insira aqui informações sobre a construção do artefato da Sprint 1. 
+Obs.: Insira aqui informações sobre a construção do artefato da Sprint 1.
 
 ## 4.2 Modelo Conceitual de Dados
+
 _conteúdo_
 
 ## 4.3 Modelo Lógico de Dados
+
 _conteúdo_
 
 ## 4.4 Modelo Físico de Dados
+
 _conteúdo_
 
 **Nota:** Insira uma explicação e direcionamento para o readme.md da pasta database.
 
 # 5. Solução Técnica (Design)
+
 _conteúdo_
 
 ## 5.1 Diagrama de Classes
+
 _conteúdo_
 
 ## 5.2 Diagrama de Componentes da UML
+
 _conteúdo_
 
 ## 5.3 Diagramas de Sequência da UML
+
 _conteúdo_
 
 # 6. Mapeamento Técnico de Infraestrutura e Implantação
+
 _conteúdo_
 
 ## 6.1 Diagrama de Implantação da UML
+
 _conteúdo_
 
 ## 6.2 Justificativa das Escolhas de Implantação
+
 _conteúdo_
 
 ## 6.3 Considerações sobre Desempenho e Segurança
+
 _conteúdo_
 
 # 7. Projeto Visual da Solução
+
 _conteúdo_
 
 ## 7.1 Desenvolvimento de Wireframes
+
 _conteúdo_
 
 ## 7.2 Desenvolvimento de Mockups
+
 _conteúdo_
 
 ## 7.3 Guia Visual
+
 _conteúdo_
 
 # 8. Desenvolvimento do Projeto
+
 _conteúdo_
 
 ## 8.1 Arquitetura de Codificação e Estrutura de Diretórios
+
 _conteúdo_
 
 ## 8.2 Modelo de Recomendação
+
 _conteúdo_
 
 ## 8.3 Desenvolvimento de Features
+
 _conteúdo_
 
 **Nota:** Insira uma explicação de entregas em cada Sprint.
 
 ## 8.3.1 Sprint 3
+
 _conteúdo_
 
 ## 8.3.2 Sprint 4
+
 _conteúdo_
 
 ## 8.3.3 Sprint 5
+
 _conteúdo_
 
 ## 8.4 Testes Unitários e de Integração
+
 _conteúdo_
 Obs.: Insira informações sobre estratégias para realização dos testes
 
 ## 8.5 Documentações automáticas
+
 _conteúdo_
 Obs.: Insira informações sobre quais frameworks foram usados e como acessar.
 
 # 9. Planejamento e Execução de Testes
+
 _conteúdo_
 
 ## 9.1 Testes Funcionais
+
 _conteúdo_
 
 ## 9.1.1 Planejamento
+
 _conteúdo_
 
 ## 9.1.2 Resultados
+
 _conteúdo_
 
 ## 9.2 Testes de RNFs
+
 _conteúdo_
 
 ## 9.2.1 Planejamento
+
 _conteúdo_
 
 ## 9.2.2 Resultados
+
 _conteúdo_
 
 ## 9.3 Testes de Usabilidade
+
 _conteúdo_
 
 ## 9.3.1 Planejamento
+
 _conteúdo_
 
 ## 9.3.2 Resultados
+
 _conteúdo_
 
 # 10. Procedimentos de Implantação
+
 _conteúdo_
 
 ## 10.1 Implantação e Configuração do Banco de Dados
+
 _conteúdo_
 
 ## 10.2 Implantação do Protótipo para uso por equipe de desenvolvimento
+
 _conteúdo_
 
 # Referências
+
 _conteúdo_
 
