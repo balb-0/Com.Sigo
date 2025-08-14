@@ -140,25 +140,24 @@ _conteúdo_
 
 <div align="center"> <sub>Imagem 2.6.1 - Matriz de Riscos</sub><br>
 
-
 <img src="img/section2/matriz_riscos.png" alt="Matriz de riscos" border="0">
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
+
 </div>
-
-
 
 <div align="center"> <sub>Tabela 2.6.1 - Tabela de Riscos</sub><br>
 
-| Nº | Risco                                         | Probabilidade | Impacto    | Mitigação                                                                                 |
-| -- | --------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------------------------------------- |
-| 1  | Processamento lento ou falha em áudios longos | Média         | Alto       | Otimizar algoritmos de transcrição; usar processamento assíncrono; limitar simultaneidade |
-| 2  | Baixa acurácia na identificação de intenções  | Média         | Muito alto       | Treinar e validar modelos com dados variados; implementar feedback para correção manual   |
-| 3  | Vazamento ou perda de dados sensíveis         | Baixa         | Muito Alto | Implementar criptografia local; políticas rígidas de acesso; logs de auditoria            |
-| 4  | Interface pouco intuitiva para operadores     | Baixa         | Média      | Realizar testes de usabilidade; coletar feedback dos usuários e iterar no design          |
-| 5  | Incompatibilidade com formatos de áudio       | Média         | Média      | Suportar múltiplos formatos comuns; validar arquivos antes do processamento               |
+| Nº  | Risco                                         | Probabilidade | Impacto    | Mitigação                                                                                 |
+| --- | --------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------------------------------------- |
+| 1   | Processamento lento ou falha em áudios longos | Média         | Alto       | Otimizar algoritmos de transcrição; usar processamento assíncrono; limitar simultaneidade |
+| 2   | Baixa acurácia na identificação de intenções  | Média         | Muito alto | Treinar e validar modelos com dados variados; implementar feedback para correção manual   |
+| 3   | Vazamento ou perda de dados sensíveis         | Baixa         | Muito Alto | Implementar criptografia local; políticas rígidas de acesso; logs de auditoria            |
+| 4   | Interface pouco intuitiva para operadores     | Baixa         | Média      | Realizar testes de usabilidade; coletar feedback dos usuários e iterar no design          |
+| 5   | Incompatibilidade com formatos de áudio       | Média         | Média      | Suportar múltiplos formatos comuns; validar arquivos antes do processamento               |
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
+
 </div>
 
 ### Matriz de Oportunidade
@@ -167,25 +166,23 @@ _conteúdo_
 
 <div align="center"> <sub>Imagem 2.6.2 - Matriz de Oportunidades</sub><br>
 
-
 <img src="img/section2/matriz_oportunidades.png" alt="Matriz de oportunidades" border="0">
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
+
 </div>
-
-
 
 <div align="center"> <sub>Tabela 2.6.2 - Tabela de Oportunidades</sub><br>
 
-| Nº | Oportunidade                                                | Probabilidade | Impacto | Mitigação/Ação Potencial                                                                 |
-| -- | ----------------------------------------------------------- | ------------- | ------- | ---------------------------------------------------------------------------------------- |
-| 3  | Oferecer relatórios automáticos com métricas de atendimento | Alta          | Médio   | Desenvolver módulo de relatórios integrado; coletar métricas-chave de forma automatizada |
-| 4  | Integrar análise de sentimentos mais detalhada              | Média         | Alto    | Implementar modelos de NLP mais avançados e treinar com dados específicos da empresa     |
-| 8  | Incorporar tradução automática das transcrições             | Baixa          | Alto    | Integrar APIs de tradução; permitir configuração de idiomas prioritários                 |
-| 10 | Criar interface personalizável para operadores              | Alta          | Médio   | Adicionar opções de layout, atalhos e personalização de dashboards                       |
-
+| Nº  | Oportunidade                                                | Probabilidade | Impacto | Mitigação/Ação Potencial                                                                 |
+| --- | ----------------------------------------------------------- | ------------- | ------- | ---------------------------------------------------------------------------------------- |
+| 3   | Oferecer relatórios automáticos com métricas de atendimento | Alta          | Médio   | Desenvolver módulo de relatórios integrado; coletar métricas-chave de forma automatizada |
+| 4   | Integrar análise de sentimentos mais detalhada              | Média         | Alto    | Implementar modelos de NLP mais avançados e treinar com dados específicos da empresa     |
+| 8   | Incorporar tradução automática das transcrições             | Baixa         | Alto    | Integrar APIs de tradução; permitir configuração de idiomas prioritários                 |
+| 10  | Criar interface personalizável para operadores              | Alta          | Médio   | Adicionar opções de layout, atalhos e personalização de dashboards                       |
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
+
 </div>
 
 ## 2.7 Análise SWOT
@@ -345,7 +342,13 @@ Em conclusão, todas as funcionalidades do MVP estão diretamente vinculadas aos
 
 ## 2.9 Canvas do Projeto
 
-_conteúdo_
+&nbsp;&nbsp;&nbsp;&nbsp;Segue abaixo, o Canvas MVP da aplicação web desenvolvido a partir das atividades realizadas durante os encontros com o parceiro e as discussões em grupo.
+
+<div align="center">
+<sub>Figura 2.9.1 - Canvas MVP do projeto</sub><br>
+<img src="img/canvas_mvp.png"><br>
+<sup>Fonte: Material produzido pelos autores (2025) </sup>
+</div>
 
 # 3. Requisitos do Projeto
 
@@ -357,17 +360,18 @@ Nessa seção constam os requisitos funcionais da solução.
 
 <div align="center"> <sub>Tabela 3.1.1 - Requisitos Funcionais</sub><br>
 
-| **ID**   | **User Story (Requisito Funcional)**                                                                                                                                                                                                                                                                   | **Pré-condição**                         | **Procedimento**                                       | **Resultado Esperado**                                        | **Pós-condição**                                      | **Critérios de Aceite**                                                                                                  |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **RF01** | Como usuário, desejo enviar entradas em formato de áudio ou texto, para que o sistema possa processar e avaliar o conteúdo.                                                                                                                                                                             | Acesso ao sistema                      | Submeter uma entrada em áudio ou texto                  | Sistema recebe e reconhece o tipo de entrada                   | Entrada registrada para processamento                | Sistema aceita entrada em áudio ou texto e identifica corretamente o tipo da entrada.                                    |
-| **RF02** | Como usuário, desejo receber três critérios de avaliação com notas de 0 a 5 para cada chamada, para compreender a qualidade do atendimento.                                                                                                                                                            | Entrada processada                     | Solicitar a avaliação após o processamento              | Sistema exibe três critérios de avaliação com notas 0 a 5       | Avaliação armazenada junto à chamada                  | Avaliação retorna 3 critérios com notas entre 0 e 5, e dados são armazenados corretamente.                                 |
-| **RF03** | Como gestor, desejo visualizar um painel com indicadores gerais de atendimento, para obter uma visão consolidada da performance.                                                                                                                                                                       | Dados processados e avaliados disponíveis | Acessar o painel de indicadores                          | Sistema exibe gráficos e métricas consolidadas                  | Visualização registrada no log de acessos              | Painel mostra indicadores consolidados, gráficos atualizados e acesso ao painel é registrado.                              |
-| **RF04** | Como usuário, preciso que o sistema identifique automaticamente se a entrada recebida é áudio ou texto, para aplicar o processamento adequado a cada tipo.                                                                                                                                                             | Entrada enviada pelo usuário          | Enviar áudio e, em seguida, texto                        | Sistema classifica corretamente o tipo da entrada               | Tipo da entrada registrado                            | Entrada é classificada com 100% de assertividade e o fluxo correto é acionado para cada tipo.                             |
-| **RF05** | Como usuário, desejo realizar o upload de múltiplas chamadas simultaneamente, para otimizar o envio e análise em lote.                                                                                                                                                                                 | Acesso à funcionalidade de upload     | Selecionar e enviar mais de um arquivo de chamada       | Sistema aceita múltiplos arquivos e os coloca na fila de processamento | Chamadas registradas individualmente para análise    | Sistema aceita uploads múltiplos simultâneos sem erro, e cada chamada é registrada separadamente.                         |
-| **RF06** | Como gestor, desejo que o sistema destaque chamadas com desempenho abaixo de um limite definido, para facilitar a identificação de problemas.                                                                                                                                                         | Chamadas avaliadas e notas registradas | Definir limite e acessar lista de chamadas               | Chamadas com desempenho abaixo do limite aparecem destacadas   | Destaques registrados no histórico de visualização   | Chamadas abaixo do limite configurado são claramente destacadas visualmente e histórico de destaque é registrado.         |
-| **RF07** | Como usuário preciso que o sistema armazene os dados de cada chamada processada, para manter o histórico e possibilitar consultas futuras.                                                                                                                                                                            | Chamada processada                    | Concluir o processamento de uma chamada                  | Dados da chamada (entrada, notas e metadados) armazenados com sucesso | Registro disponível no banco de dados para consulta | Dados da chamada ficam disponíveis para consulta, com integridade e sem perdas.                                           |
+| **ID**   | **User Story (Requisito Funcional)**                                                                                                                       | **Pré-condição**                          | **Procedimento**                                  | **Resultado Esperado**                                                 | **Pós-condição**                                    | **Critérios de Aceite**                                                                                           |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **RF01** | Como usuário, desejo enviar entradas em formato de áudio ou texto, para que o sistema possa processar e avaliar o conteúdo.                                | Acesso ao sistema                         | Submeter uma entrada em áudio ou texto            | Sistema recebe e reconhece o tipo de entrada                           | Entrada registrada para processamento               | Sistema aceita entrada em áudio ou texto e identifica corretamente o tipo da entrada.                             |
+| **RF02** | Como usuário, desejo receber três critérios de avaliação com notas de 0 a 5 para cada chamada, para compreender a qualidade do atendimento.                | Entrada processada                        | Solicitar a avaliação após o processamento        | Sistema exibe três critérios de avaliação com notas 0 a 5              | Avaliação armazenada junto à chamada                | Avaliação retorna 3 critérios com notas entre 0 e 5, e dados são armazenados corretamente.                        |
+| **RF03** | Como gestor, desejo visualizar um painel com indicadores gerais de atendimento, para obter uma visão consolidada da performance.                           | Dados processados e avaliados disponíveis | Acessar o painel de indicadores                   | Sistema exibe gráficos e métricas consolidadas                         | Visualização registrada no log de acessos           | Painel mostra indicadores consolidados, gráficos atualizados e acesso ao painel é registrado.                     |
+| **RF04** | Como usuário, preciso que o sistema identifique automaticamente se a entrada recebida é áudio ou texto, para aplicar o processamento adequado a cada tipo. | Entrada enviada pelo usuário              | Enviar áudio e, em seguida, texto                 | Sistema classifica corretamente o tipo da entrada                      | Tipo da entrada registrado                          | Entrada é classificada com 100% de assertividade e o fluxo correto é acionado para cada tipo.                     |
+| **RF05** | Como usuário, desejo realizar o upload de múltiplas chamadas simultaneamente, para otimizar o envio e análise em lote.                                     | Acesso à funcionalidade de upload         | Selecionar e enviar mais de um arquivo de chamada | Sistema aceita múltiplos arquivos e os coloca na fila de processamento | Chamadas registradas individualmente para análise   | Sistema aceita uploads múltiplos simultâneos sem erro, e cada chamada é registrada separadamente.                 |
+| **RF06** | Como gestor, desejo que o sistema destaque chamadas com desempenho abaixo de um limite definido, para facilitar a identificação de problemas.              | Chamadas avaliadas e notas registradas    | Definir limite e acessar lista de chamadas        | Chamadas com desempenho abaixo do limite aparecem destacadas           | Destaques registrados no histórico de visualização  | Chamadas abaixo do limite configurado são claramente destacadas visualmente e histórico de destaque é registrado. |
+| **RF07** | Como usuário preciso que o sistema armazene os dados de cada chamada processada, para manter o histórico e possibilitar consultas futuras.                 | Chamada processada                        | Concluir o processamento de uma chamada           | Dados da chamada (entrada, notas e metadados) armazenados com sucesso  | Registro disponível no banco de dados para consulta | Dados da chamada ficam disponíveis para consulta, com integridade e sem perdas.                                   |
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
+
 </div>
 
 ## 3.2 Requisitos Não Funcionais (RNFs)
@@ -383,23 +387,25 @@ Nessa seção constam os requisitos não funcionais da solução.
 | **RNF03 - Precisão na Detecção de Intenção**<br>O sistema deve identificar corretamente pelo menos 90% das intenções em chamadas.  | Testar a detecção de intenções com base em um conjunto validado de áudios anotados manualmente. | Base de áudios rotulada com intenções (elogios, reclamações, palavrões etc.). | Comparar as detecções automáticas com os rótulos manuais e calcular acurácia.                                 | Precisão ≥ 90% na identificação das intenções.                          | Intenções extraídas corretamente e classificadas no sistema. | O sistema deve garantir **acurácia mínima de 90%** na detecção de intenções e expressões em chamadas, com base em dados validados. |
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
+
 </div>
 
 ## 3.3 Correlação RFs e RNFs
 
 <div align="center"> <sub>Tabela 3.3.1 - Correlação entre RFs e RNFs</sub><br>
 
-| **Requisito Funcional (RF)**                                                                                             | **RNF01 - Suporte a Arquivos Longos** | **RNF02 - Desempenho de Transcrição** | **RNF03 - Precisão na Detecção de Intenção** | **Justificativa** |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- | -------------------------------------- | --------------------------------------------- | ----------------- |
-| **RF01** – Enviar entradas em áudio ou texto                                                                             | ✅                                     | ✅                                      | ✅                                             | Necessita suportar áudios longos (RNF01), processar no tempo esperado (RNF02) e identificar corretamente a intenção (RNF03). |
-| **RF02** – Receber três critérios de avaliação                                                                           | ⬜                                     | ⬜                                      | ✅                                             | Avaliação depende da precisão da detecção de intenção para gerar notas corretas. |
-| **RF03** – Visualizar painel de indicadores                                                                              | ⬜                                     | ⬜                                      | ✅                                             | Indicadores refletem a precisão da detecção de intenções, garantindo métricas confiáveis. |
-| **RF04** – Identificar automaticamente áudio ou texto                                                                    | ⬜                                     | ✅                                      | ✅                                             | Precisa identificar rápido o tipo de entrada (RNF02) e classificar intenções com acurácia (RNF03). |
-| **RF05** – Upload múltiplo de chamadas                                                                                   | ✅                                     | ✅                                      | ⬜                                             | Necessita suportar áudios longos (RNF01) e manter bom desempenho de processamento (RNF02). |
-| **RF06** – Destacar chamadas com desempenho abaixo do limite                                                             | ⬜                                     | ⬜                                      | ✅                                             | Depende da precisão da detecção para identificar corretamente chamadas problemáticas. |
-| **RF07** – Armazenar dados de cada chamada                                                                               | ✅                                     | ⬜                                      | ✅                                             | Deve armazenar arquivos longos (RNF01) e manter registro fiel das intenções detectadas (RNF03). |
+| **Requisito Funcional (RF)**                                 | **RNF01 - Suporte a Arquivos Longos** | **RNF02 - Desempenho de Transcrição** | **RNF03 - Precisão na Detecção de Intenção** | **Justificativa**                                                                                                            |
+| ------------------------------------------------------------ | ------------------------------------- | ------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **RF01** – Enviar entradas em áudio ou texto                 | ✅                                    | ✅                                    | ✅                                           | Necessita suportar áudios longos (RNF01), processar no tempo esperado (RNF02) e identificar corretamente a intenção (RNF03). |
+| **RF02** – Receber três critérios de avaliação               | ⬜                                    | ⬜                                    | ✅                                           | Avaliação depende da precisão da detecção de intenção para gerar notas corretas.                                             |
+| **RF03** – Visualizar painel de indicadores                  | ⬜                                    | ⬜                                    | ✅                                           | Indicadores refletem a precisão da detecção de intenções, garantindo métricas confiáveis.                                    |
+| **RF04** – Identificar automaticamente áudio ou texto        | ⬜                                    | ✅                                    | ✅                                           | Precisa identificar rápido o tipo de entrada (RNF02) e classificar intenções com acurácia (RNF03).                           |
+| **RF05** – Upload múltiplo de chamadas                       | ✅                                    | ✅                                    | ⬜                                           | Necessita suportar áudios longos (RNF01) e manter bom desempenho de processamento (RNF02).                                   |
+| **RF06** – Destacar chamadas com desempenho abaixo do limite | ⬜                                    | ⬜                                    | ✅                                           | Depende da precisão da detecção para identificar corretamente chamadas problemáticas.                                        |
+| **RF07** – Armazenar dados de cada chamada                   | ✅                                    | ⬜                                    | ✅                                           | Deve armazenar arquivos longos (RNF01) e manter registro fiel das intenções detectadas (RNF03).                              |
 
 <sup>Fonte: Material produzido pelos autores (2025)</sup>
+
 </div>
 
 ## 3.4 Casos de Uso
@@ -443,7 +449,6 @@ _conteúdo_
 
 ## 5.2 Diagrama de Componentes da UML
 
-
 &emsp; Um Diagrama de Componentes UML é essencial para a identificação dos principais módulos de uma aplicação, seus relacionamentos e suas responsabilidades dentro de uma arquitetura de software. Esse tipo de diagrama permite visualizar, de forma modular, como cada parte do sistema se comunica, garantindo organização, coesão e clareza estrutural.
 
 &emsp; A seguir, apresenta-se o Diagrama de Componentes para o sistema de análise automática de transcrições de áudios.
@@ -454,14 +459,14 @@ _conteúdo_
 <sup>Fonte: Material produzido pelos autores (2025) </sup>
 </div>
 
-| Componente | Descrição |
-| :--- | :--- |
-| **Aplicação Monolítica** | Representa o sistema centralizado que integra todos os componentes internos para fornecer as funcionalidades de transcrição e análise de áudio. |
-| **Frontend** | Interface web que permite ao operador fazer o upload dos arquivos de áudio, visualizar as transcrições e os resultados da análise de intenção. |
-| **Backend** | Responsável por receber as requisições do frontend, gerenciar a lógica de negócio, orquestrar o processamento dos dados e persistir as informações. |
-| **Banco de Dados (PostgreSQL)** | Armazena os dados da aplicação, como informações dos arquivos de áudio, as transcrições geradas e os resultados da análise (reclamações, elogios, etc.). |
-| **Modelo de Processamento de Dados (API Interna)** | Componente interno que realiza a transcrição do áudio e se comunica com serviços externos para identificar as intenções do cliente no texto transcrito. |
-| **API Externa (ChatGPT/Gemini)** | Serviço de IA externo utilizado pelo Modelo de Processamento para analisar o texto da transcrição e identificar com alta precisão as intenções do cliente. |
+| Componente                                         | Descrição                                                                                                                                                  |
+| :------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Aplicação Monolítica**                           | Representa o sistema centralizado que integra todos os componentes internos para fornecer as funcionalidades de transcrição e análise de áudio.            |
+| **Frontend**                                       | Interface web que permite ao operador fazer o upload dos arquivos de áudio, visualizar as transcrições e os resultados da análise de intenção.             |
+| **Backend**                                        | Responsável por receber as requisições do frontend, gerenciar a lógica de negócio, orquestrar o processamento dos dados e persistir as informações.        |
+| **Banco de Dados (PostgreSQL)**                    | Armazena os dados da aplicação, como informações dos arquivos de áudio, as transcrições geradas e os resultados da análise (reclamações, elogios, etc.).   |
+| **Modelo de Processamento de Dados (API Interna)** | Componente interno que realiza a transcrição do áudio e se comunica com serviços externos para identificar as intenções do cliente no texto transcrito.    |
+| **API Externa (ChatGPT/Gemini)**                   | Serviço de IA externo utilizado pelo Modelo de Processamento para analisar o texto da transcrição e identificar com alta precisão as intenções do cliente. |
 
 ### **Divisão interna da Aplicação Monolítica**
 
@@ -470,14 +475,17 @@ O **Frontend** permite a interação do usuário final com a aplicação, garant
 ### **Relacionamentos Entre os Componentes**
 
 1.  **Frontend** → **Backend**
+
     - O Frontend envia requisições do usuário (como upload de áudio) para o Backend via chamadas HTTP/JSON.
       <br>
 
 2.  **Backend** ↔ **Banco de Dados (PostgreSQL)**
+
     - O Backend lê e grava informações no Banco de Dados, como o estado do processamento e os resultados da análise, garantindo a persistência dos dados.
       <br>
 
 3.  **Backend** → **Modelo de Processamento de Dados (API Interna)**
+
     - O Backend invoca o Modelo de Processamento através de uma chamada de função interna para iniciar a análise de um arquivo de áudio.
       <br>
 
@@ -616,5 +624,3 @@ _conteúdo_
 # Referências
 
 _conteúdo_
-
-
