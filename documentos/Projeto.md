@@ -1,26 +1,32 @@
 <Table>
   <tr>
-    <td><a href= "https://www.btgpactual.com/"><img src="img/logo-btg.png" alt="Centro Paula Souza" border="0"></td>
     <td>
-      <a href= "https://www.inteli.edu.br/"><img src="img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
+      <a href="https://www.querocomgas.com.br/?utm_source=google&utm_medium=cpc&utm_term=comg%C3%A1s&utm_campaign=21432544487&utm_content=765228372932&gad_source=1&gad_campaignid=21432544487&gbraid=0AAAAABVP93Y1dgkYEH7cb900l9xETrtQj&gclid=CjwKCAjwtfvEBhAmEiwA-DsKjgFtOeGUYeQECLrAI8S2y4lavUc_XcfZPp2zRsE2z1Vt1NAQdp2__xoCbvYQAvD_BwE">
+        <img src="img/image.png" alt="Comgas" width="150" border="0">
+      </a>
+    </td>
+    <td>
+      <a href="https://www.inteli.edu.br/">
+        <img src="img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="150" border="0">
+      </a>
     </td>
   </tr>
-</table>
+</Table>
 
-# Nome do Projeto: <nome do projeto>
+# Nome do Projeto: Com.Sigo
 
-## Nome do Grupo: <nome do grupo>
+## Nome do Grupo: Com.Segue
 
 ## Integrantes:
 
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
-- <a href="https://www.linkedin.com/in/username/">Nome</a>
+- <a href="https://www.linkedin.com/in/andre-lobo-dev/">André Eduardo Lobo de Paula</a>
+- <a href="https://www.linkedin.com/in/joao-souza-campos/">João Victor de Souza Campos</a>
+- <a href="https://www.linkedin.com/in/otavio-vasc/">Otavio de Carvalho Vasconcelos</a>
+- <a href="https://www.linkedin.com/in/rafaelbarbosa-dev/">Rafael Rocha Barbosa</a>
+- <a href="https://www.linkedin.com/in/rodrigo-lee/">Rodrigo Hu Tchie Lee</a>
+- <a href="https://www.linkedin.com/in/ryan-botelho-gartlan/">Ryan Botelho Gartlan</a>
+- <a href="https://www.linkedin.com/in/vitor-balbo/">Vitor Margarido Balbo</a>
+
 
 # Sumário
 
@@ -88,15 +94,22 @@
 
 # 1. Introdução
 
-_conteúdo_
+A Comgás (Companhia de Gás de São Paulo) é a maior distribuidora de gás natural encanado da América Latina, atuando no estado de São Paulo. A empresa é responsável por levar gás natural canalizado para residências, comércios, indústrias e outros segmentos em sua área de concessão, que inclui a região metropolitana de São Paulo, Campinas, Vale do Paraíba e Baixada Santista
 
 ## 1.1 Termos e Abreviações
 
-_conteúdo_
+* RF (Requisitos Funcionais) – Descrevem as funcionalidades e comportamentos esperados do sistema ou software.
+* RNF (Requisitos Não Funcionais) – Especificações que definem restrições e qualidades do sistema, como desempenho, segurança e usabilidade.
+* CA (Critério de Aceite) – Conjunto de condições que um produto ou funcionalidade deve atender para ser considerado aceito pelo cliente ou equipe.
+* T (Teste) – Processo de verificação para garantir que um sistema, software ou produto funciona conforme esperado.
+* API (Application Programming Interface) – Conjunto de definições e protocolos que permite a comunicação entre diferentes sistemas ou softwares.
+* Features – Funcionalidades ou características específicas de um software ou produto.
+* MVP (Minimum Viable Product) – Produto mínimo viável, versão inicial de um produto com funcionalidades básicas para validar sua viabilidade.
+* ISO (International Organization for Standardization) – Organização internacional responsável pela padronização e normatização de processos e produtos em diversas áreas.
 
 ## 1.2 Objetivo do Documento
 
-_conteúdo_
+&nbsp;&nbsp;&nbsp;&nbsp;Para registrar nosso processo de criação do projeto, desde a idealização até a entrega, desenvolvemos esta documentação. Além de detalhar as fases iniciais de desenvolvimento, o documento explica as tecnologias utilizadas e como foram aplicadas, facilitando a implementação do sistema.
 
 # 2. Entendimento do Projeto e do Negócio
 
