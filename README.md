@@ -1,25 +1,31 @@
 <Table>
   <tr>
-       <td>
-      <a href= "https://www.inteli.edu.br/"><img src="documentos/img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
+    <td>
+      <a href="https://www.querocomgas.com.br/?utm_source=google&utm_medium=cpc&utm_term=comg%C3%A1s&utm_campaign=21432544487&utm_content=765228372932&gad_source=1&gad_campaignid=21432544487&gbraid=0AAAAABVP93Y1dgkYEH7cb900l9xETrtQj&gclid=CjwKCAjwtfvEBhAmEiwA-DsKjgFtOeGUYeQECLrAI8S2y4lavUc_XcfZPp2zRsE2z1Vt1NAQdp2__xoCbvYQAvD_BwE">
+        <img src="img/image.png" alt="Comgas" width="150" border="0">
+      </a>
+    </td>
+    <td>
+      <a href="https://www.inteli.edu.br/">
+        <img src="img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="150" border="0">
+      </a>
     </td>
   </tr>
-</table>
+</Table>
 
-# Nome do Projeto: <nome do projeto>
+# Nome do Projeto: Com.Sigo
 
-## Nome do Grupo: <nome do grupo>
+## Nome do Grupo: Com.Segue
 
 ## Integrantes:
 
-- <a href="https://www.linkedin.com/in/aluno1/">Aluno 1</a>
-- <a href="https://www.linkedin.com/in/aluno2/">Aluno 2</a>
-- <a href="https://www.linkedin.com/in/aluno3/">Aluno 3</a>
-- <a href="https://www.linkedin.com/in/aluno4">Aluno 4</a>
-- <a href="https://www.linkedin.com/in/aluno5">Aluno 5</a>
-- <a href="https://www.linkedin.com/in/aluno6">Aluno 6</a>
-- <a href="https://www.linkedin.com/in/aluno7">Aluno 7</a>
-- <a href="https://www.linkedin.com/in/aluno7">Aluno 8</a>
+- <a href="https://www.linkedin.com/in/andre-lobo-dev/">André Eduardo Lobo de Paula</a>
+- <a href="https://www.linkedin.com/in/joao-souza-campos/">João Victor de Souza Campos</a>
+- <a href="https://www.linkedin.com/in/otavio-vasc/">Otavio de Carvalho Vasconcelos</a>
+- <a href="https://www.linkedin.com/in/rafaelbarbosa-dev/">Rafael Rocha Barbosa</a>
+- <a href="https://www.linkedin.com/in/rodrigo-lee/">Rodrigo Hu Tchie Lee</a>
+- <a href="https://www.linkedin.com/in/ryan-botelho-gartlan/">Ryan Botelho Gartlan</a>
+- <a href="https://www.linkedin.com/in/vitor-balbo/">Vitor Margarido Balbo</a>
 
 ## Professores:
 
@@ -29,11 +35,14 @@
 
 ### Instrutores
 
-- <a href="https://www.linkedin.com/in/professor1/">Computação - Jefferson de Oliveira</a>
-- <a href="https://www.linkedin.com/in/professor1/">Matemática e Física - Diogo Morais</a>
-- <a href="https://www.linkedin.com/in/professor1/">Negócios - Lisane Valdo</a>
-- <a href="https://www.linkedin.com/in/professor1/">Design - Guilherme Cestari</a>
-- <a href="https://www.linkedin.com/in/professor1/">Liderança - Filipe Gonçalves</a>
+- <a href="https://www.linkedin.com/in/reginaldo-arakaki-9574222b/">Computação - Reginaldo Arakaki</a>
+- <a href="https://www.linkedin.com/in/bryan-kano/">Computação - Bryan Kano Ferreira</a>
+- <a href="https://www.linkedin.com/in/ovidio-netto/">Computação - Ovidio Lopes da Cruz Netto</a>
+- <a href="https://www.linkedin.com/in/hermano-peixoto-1091796/">Computação - Hermano Peixoto de Oliveira Junior</a>
+- <a href="https://www.linkedin.com/in/cristinagramani/">Maria Cristina Nogueira Gramani</a>
+- <a href="https://www.linkedin.com/in/lisane-valdo/">Negócios - Lisane Valdo</a>
+- <a href="https://www.linkedin.com/in/francisco-escobar/">Design - Francisco de Souza Escobar</a>
+- <a href="https://www.linkedin.com/in/filipe-gon%C3%A7alves-08a55015b/">Liderança - Filipe Gonçalves</a>
 
 ## 📝 Descrição
 
