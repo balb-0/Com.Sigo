@@ -232,7 +232,65 @@ Como objetivos secundários, a plataforma busca:
 
 ## 2.4 Personas e Jornada do Usuário
 
-_conteúdo_
+&emsp;Esta seção apresenta as duas principais personas (Julia Souza, Analista de Qualidade de Atendimento, e Carlos Martins, Supervisor de Atendimento Humano) e suas respectivas jornadas antes e depois da implantação da solução. É importante esclarecer que ambas as personas são usuárias diretas do sistema, utilizando a plataforma para otimizar seus respectivos processos de trabalho. Esses mapas de jornada foram elaborados para revelar as necessidades, pensamentos e pontos de atrito em cada etapa do processo e assim orientar o desenvolvimento das telas, dos fluxos e das funcionalidades do sistema, garantindo que ambos os usuários tenham uma experiência fluida, com mais eficiência, clareza e confiança.
+
+&emsp; Abaixo a imagem da persona **Julia Souza** (Analista de Qualidade de Atendimento):
+
+<div align="center">
+  <sub>Figura X - Persona 1 - Julia Souza (Analista de Qualidade de Atendimento)</sub> <br>
+
+  <img src="img/section2/Persona 1 Julia.png" alt="Persona 1 - Julia Souza (Analista de Qualidade de Atendimento)" style="max-width: 700px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+
+&emsp; Abaixo as imagens das jornadas da persona **Julia Souza** (Analista de Qualidade de Atendimento):
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Antes da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
+
+  <img src="img/section2/Jornada de Usuário Julia Antes.png" alt="Jornada do Usuário Antes da Solução (Julia Souza, Analista de Qualidade de Atendimento)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Depois da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
+
+  <img src="img/section2/Jornada de Usuário Julia Depois.png" alt="Jornada do Usuário Depois da Solução (Julia Souza, Analista de Qualidade de Atendimento)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+
+&emsp; Abaixo a imagem da persona **Carlos Martins** (Supervisor de Atendimento Humano):
+
+<div align="center">
+  <sub>Figura X - Persona 2 - Carlos Martins (Supervisor de Atendimento Humano)</sub> <br>
+
+  <img src="img/section2/Persona 2 Carlos.png" alt="Persona 2 - Carlos Martins (Supervisor de Atendimento Humano)" style="max-width: 700px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+&emsp; Abaixo as imagens das jornadas da persona **Carlos Martins** (Supervisor de Atendimento Humano):
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Antes da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
+
+  <img src="img/section2/Jornada do Usuário Carlos Antes.png" alt="Jornada do Usuário Antes da Solução (Carlos Martins, Supervisor de Atendimento Humano)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Depois da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
+
+  <img src="img/section2/Jornada do Usuário Carlos Depois.png" alt="Jornada do Usuário Depois da Solução (Carlos Martins, Supervisor de Atendimento Humano)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
 
 ## 2.5 Modelagem do Fluxo de Negócio
 
