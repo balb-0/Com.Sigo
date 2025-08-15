@@ -100,7 +100,7 @@ _conteúdo_
 
 # 2. Entendimento do Projeto e do Negócio
 
-_conteúdo_
+&ensp; Nesta seção, é apresentado o detalhamento completo do entendimento do negócio que norteia este projeto. O objetivo é fornecer uma visão 360º do desafio proposto pela Comgás, começando pela definição clara do problema de negócio e seus impactos diretos na operação e na estratégia da companhia. Em seguida, será apresentada a visão do produto concebido para solucionar este problema, incluindo seus objetivos, funcionalidades e escopo. A análise se aprofunda ao mapear as personas que serão beneficiadas pela solução, os fluxos de negócio envolvidos, e uma matriz estratégica de riscos e oportunidades, culminando na apresentação do Canvas do MVP que guiará o desenvolvimento.
 
 ## 2.1 Contexto da Indústria do Parceiro
 
@@ -132,13 +132,89 @@ Essa iniciativa está diretamente ligada à estratégia de experiência do clien
 
 ## 2.2 Problema
 
-_conteúdo_
+### Descrição do Problema
+&ensp;A Comgás, maior distribuidora de gás natural canalizado da América Latina, enfrenta um desafio significativo na monitoria da qualidade do seu atendimento telefônico. Com uma central que recebe entre 120 e 150 mil ligações mensais, o método atual de avaliação de qualidade é predominantemente manual e limitado, operando de duas formas:
+
+**Avaliação Direta:** Baseada na nota de satisfação que o cliente atribui ao final do atendimento.
+
+**Análise por Amostragem:** Uma equipe de analistas de qualidade escuta manualmente as gravações de aproximadamente 1% do volume total de chamadas para verificar a conformidade com um checklist de qualidade pré-definido.
+
+&ensp;Este processo, embora importante, é inerentemente lento, caro e não escalável. A amostragem de apenas 1% é insuficiente para gerar uma visão estatisticamente relevante da qualidade geral do serviço, deixando uma lacuna de 99% das interações sem análise aprofundada. Com o crescimento contínuo da base de clientes (cerca de 450 novos por dia), a manutenção desse modelo manual se torna cada vez mais insustentável, gerando um gargalo operacional e estratégico.
+
+&ensp;O cerne do problema é a incapacidade de escalar a monitoria de qualidade na mesma proporção do crescimento da operação, o que impede a Comgás de ter uma visão abrangente e em tempo hábil sobre a experiência real de seus clientes no canal de voz.
+
+### Impacto
+&ensp;O problema descrito gera impactos negativos diretos para o negócio e seu posicionamento no setor:
+
+#### Impacto no Negócio:
+
+**Visibilidade Limitada da Experiência do Cliente (CX):** A baixa cobertura da amostragem impede a identificação de problemas sistêmicos, falhas recorrentes em scripts e oportunidades de melhoria no atendimento. Isso pode levar a uma degradação silenciosa da satisfação do cliente.
+
+**Ineficiência Operacional:** O custo de manter uma equipe de analistas para cobrir uma fração tão pequena do total de chamadas é alto. Escalar essa equipe para atingir uma cobertura maior (como os 20% desejados) seria financeiramente inviável no modelo atual.
+
+**Feedback Impreciso para Atendentes:** Com dados limitados, o feedback fornecido aos operadores da central de atendimento pode não ser representativo, dificultando o desenvolvimento e o treinamento direcionado da equipe.
+
+**Tomada de Decisão Reativa:** A falta de dados abrangentes força a gestão a tomar decisões baseadas em informações parciais ou apenas após a escalada de reclamações, em vez de agir proativamente.
+
+#### Impacto no Setor:
+
+**Perda de Competitividade:** No setor de serviços, a experiência do cliente é um diferencial competitivo crucial. Concorrentes que utilizam tecnologias de automação para análise de atendimento podem obter vantagens significativas em eficiência e qualidade.
+
+**Desalinhamento com a Transformação Digital:** Enquanto 94% dos atendimentos da Comgás já ocorrem em canais digitais, a monitoria do canal de voz permanece artesanal. Essa dissonância enfraquece a estratégia de integração e eficiência da companhia.
+
+**Risco à Reputação da Marca:** Falhas de qualidade não detectadas podem levar a experiências negativas que se espalham rapidamente, especialmente em mídias sociais, afetando a percepção pública da marca.
 
 ## 2.3 Visão do Projeto e do Produto
 
-_conteúdo_
+### Visão Geral e Objetivo do Produto
 
-**Nota**: _Insira aqui informações sobre o que se trata o projeto e que valor ele vai entregar, Objetivos do Produto e O que o produto faz e não faz._
+&ensp;A solução proposta é uma plataforma de automação para monitoria e análise da qualidade de atendimento (Quality Assurance Automation). O produto visa transformar o processo atual, substituindo a escuta manual e limitada por uma análise automatizada, escalável e baseada em dados, utilizando tecnologias de Inteligência Artificial.
+
+&ensp;O objetivo principal do produto é desenvolver um protótipo funcional que automatize a transcrição e a análise das gravações das chamadas telefônicas, aumentando a cobertura de monitoria de 1% para, no mínimo, 20% do total de ligações, sem acarretar aumento nos custos operacionais.
+
+Como objetivos secundários, a plataforma busca:
+
+- Fornecer insights objetivos e acionáveis para a área de Experiência do Cliente (CX).
+
+- Padronizar os critérios de avaliação, reduzindo a subjetividade humana.
+
+- Reduzir drasticamente o tempo entre a ocorrência da chamada e a sua análise.
+
+- Gerar uma base de dados estruturada para futuras análises preditivas e de causa raiz.
+
+#### O que o Produto Faz (Principais Funcionalidades)
+
+**Processamento de Entradas:** Aceita o envio de arquivos de áudio (gravações de chamadas) e texto para análise.
+
+**Transcrição Automática:** Converte os arquivos de áudio em texto utilizando um serviço de speech-to-text.
+
+**Análise de Conteúdo por PLN:** Utiliza Processamento de Linguagem Natural para analisar o texto transcrito, identificando:
+
+- Sentimento do cliente e do atendente.
+
+- Cumprimento de etapas do script (saudação, despedida, etc.).
+
+- Uso de palavras-chave (positivas ou negativas, como "problema" ou "resolvido").
+
+- Detecção de interrupções, sobreposição de voz e uso de linguagem imprópria.
+
+**Geração de Score de Qualidade:** Atribui uma pontuação objetiva e personalizável a cada chamada com base em critérios pré-definidos (ex: cordialidade, eficiência, conformidade).
+
+**Visualização de Dados:** Apresenta os resultados em uma interface simples (dashboard), exibindo o score da ligação, a transcrição e métricas agregadas (pontuação média, tendências, etc.).
+
+#### O que o Produto Não Faz (Escopo e Limitações)
+
+&ensp;Conforme as restrições do projeto, o protótipo não contemplará:
+
+**Análise em Tempo Real:** A análise será feita em lote (batch processing), a partir de gravações já finalizadas, não durante a chamada.
+
+**Produto Comercializável:** A entrega é um protótipo funcional para validação de conceito, não um software pronto para comercialização.
+
+**Coleta e Rotulagem de Dados:** O projeto assume o recebimento de um conjunto de dados já preparado para o desenvolvimento.
+
+**Disponibilidade Contínua em Nuvem:** A solução não será mantida em ambiente de produção na nuvem após a conclusão do módulo acadêmico.
+
+**Substituição Completa da Análise Humana:** A ferramenta é projetada para escalar a monitoria e direcionar a atenção dos analistas de qualidade para os casos mais críticos ou complexos, e não para eliminar 100% a necessidade de supervisão humana.
 
 ## 2.4 Personas e Jornada do Usuário
 
