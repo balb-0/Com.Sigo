@@ -100,7 +100,7 @@ _conteúdo_
 
 # 2. Entendimento do Projeto e do Negócio
 
-_conteúdo_
+&ensp; Nesta seção, é apresentado o detalhamento completo do entendimento do negócio que norteia este projeto. O objetivo é fornecer uma visão 360º do desafio proposto pela Comgás, começando pela definição clara do problema de negócio e seus impactos diretos na operação e na estratégia da companhia. Em seguida, será apresentada a visão do produto concebido para solucionar este problema, incluindo seus objetivos, funcionalidades e escopo. A análise se aprofunda ao mapear as personas que serão beneficiadas pela solução, os fluxos de negócio envolvidos, e uma matriz estratégica de riscos e oportunidades, culminando na apresentação do Canvas do MVP que guiará o desenvolvimento.
 
 ## 2.1 Contexto da Indústria do Parceiro
 
