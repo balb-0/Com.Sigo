@@ -45,6 +45,7 @@
   - [2.7 Matriz SWOT](#26-matriz-swot)
   - [ Ideação](#27-ideação)
   - [2.9 Canvas do Projeto](#28-canvas-do-projeto)
+  - [2.10 Business Drivers](#210-business-drivers)
 - [3. Requisitos do Projeto](#3-requisitos-do-projeto)
   - [3.1 Requisitos Funcionais (RFs)](#31-requisitos-funcionais-rfs)
   - [3.2 Requisitos Não Funcionais (RNFs)](#32-requisitos-não-funcionais-rnfs)
@@ -420,17 +421,17 @@ O objetivo é identificar funcionalidades que atendam ao escopo do projeto, com 
 
 Utilizamos uma matriz Impacto vs Viabilidade, considerando:
 
-- **Impacto**:  
-  1. Alinhamento com o objetivo principal: automatizar e escalar a avaliação de qualidade  
-  2. Contribuição para retenção de clientes, reputação e melhoria contínua  
-  3. Geração de insights acionáveis para gestão e treinamento  
+- **Impacto**:
+  1. Alinhamento com o objetivo principal: automatizar e escalar a avaliação de qualidade
+  2. Contribuição para retenção de clientes, reputação e melhoria contínua
+  3. Geração de insights acionáveis para gestão e treinamento
 
-- **Viabilidade**:  
-  1. Alinhamento com os requisitos funcionais e não funcionais  
+- **Viabilidade**:
+  1. Alinhamento com os requisitos funcionais e não funcionais
   2. Adequação ao MVP (protótipo funcional com score, dashboard e validação)
 
-As funcionalidades foram classificadas em:  
-- **MVP (Must Have)** – Essenciais para entrega  
+As funcionalidades foram classificadas em:
+- **MVP (Must Have)** – Essenciais para entrega
 - **Futuro (Nice to Have)** – Estratégicas, mas fora do escopo atual
 
 <div align="center">
@@ -513,6 +514,94 @@ Em conclusão, todas as funcionalidades do MVP estão diretamente vinculadas aos
 <img src="img/canvas_mvp.png"><br>
 <sup>Fonte: Material produzido pelos autores (2025) </sup>
 </div>
+
+## 2.10 Business Drivers
+
+### 1. Contexto
+A **Comgás**, maior distribuidora de gás natural canalizado da América Latina, atende mais de **2,6 milhões de clientes**, com média de **450 novos clientes por dia**.
+O atendimento ocorre por múltiplos canais, sendo **94% das interações digitais** (WhatsApp, aplicativo, site e chatbot).
+
+O monitoramento de qualidade das ligações telefônicas hoje é feito por:
+- Avaliação direta da nota atribuída pelo cliente.
+- Escuta manual de aproximadamente **1% das chamadas**, realizada por analistas de qualidade.
+
+Essa abordagem manual, embora útil, apresenta **baixa cobertura, alto custo relativo e pouca escalabilidade**.
+
+---
+
+### 2. Problema de Negócio
+- Cobertura de monitoramento limitada (apenas 1% das ligações).
+- Dependência de recursos humanos, dificultando escalabilidade.
+- Métricas pouco padronizadas e variáveis entre avaliadores.
+- Demora na detecção de problemas de atendimento.
+- Risco de queda na qualidade com a rápida expansão da base de clientes.
+
+---
+
+### 3. Necessidade de Mudança
+Para manter a qualidade do atendimento e sustentar o crescimento, é necessário **automatizar a escuta e avaliação das chamadas**.
+O uso de **Inteligência Artificial (IA)** e **Processamento de Linguagem Natural (NLP)** permitirá:
+- Aumentar a amostragem analisada de forma massiva.
+- Garantir padronização e consistência de métricas.
+- Reduzir o tempo entre a ocorrência e a correção de problemas.
+- Manter custos sob controle mesmo com aumento de volume.
+
+---
+
+### 4. Oportunidade
+O projeto prevê o desenvolvimento de uma solução **automatizada e escalável** de monitoramento de qualidade, utilizando:
+- **Speech-to-Text** para transcrição automática das ligações.
+- **NLP** para análise de intenção e cumprimento de roteiro.
+- **Análise de sentimento** para medir cordialidade e empatia.
+- **Dashboards** para visualização de métricas e alertas.
+
+---
+
+### 5. Fluxos de Negócios Automatizados com Indicadores
+
+#### **Fluxo 1 – Avaliação Automática de Qualidade de Atendimento**
+1. Chamada gravada → Transcrição via Speech-to-Text.
+2. NLP identifica **intenções**, **cumprimento de roteiro** e **expressões-chave**.
+3. Modelo de análise de sentimento classifica cordialidade e empatia.
+4. Resultado integrado ao dashboard de Qualidade.
+
+**Indicadores computacionais:**
+- Taxa de cumprimento de roteiro (%)
+- Índice de cordialidade (escala 0–1)
+- Precisão da detecção de intenção (%)
+- Tempo médio de processamento por chamada (segundos)
+
+---
+
+#### **Fluxo 2 – Classificação de Chamadas e Detecção de Problemas**
+1. Transcrição analisada por modelo de classificação por **tags temáticas** (ex.: “atraso na fatura”, “vazamento de gás”, “reclamação de tarifa”).
+2. Identificação automática de **chamadas críticas** (palavras de alto risco, tom agressivo, urgência).
+3. Geração de alertas em tempo real para supervisores.
+
+**Indicadores computacionais:**
+- Precisão na classificação por tags (%)
+- Recall na detecção de chamadas críticas (%)
+- Tempo entre detecção e alerta (segundos)
+- Redução no tempo de resposta a problemas (%)
+
+---
+
+### 6. Benefícios Estratégicos
+1. **Escalabilidade**: aumentar a amostragem analisada de 1% para ≥20% sem aumento de custo.
+2. **Eficiência**: substituição parcial do processo manual por automação.
+3. **Padronização**: métricas objetivas e consistentes.
+4. **Velocidade**: insights em tempo real para ações corretivas.
+5. **Integração Omnichannel**: mesma qualidade em interações humanas e digitais.
+6. **Conformidade**: anonimização e boas práticas de segurança de dados.
+
+---
+
+### 7. Alinhamento Estratégico
+O projeto está alinhado com os pilares corporativos da Comgás:
+- **Experiência do Cliente (CX)**: garantir excelência em todos os canais.
+- **Inovação e Digitalização**: uso de IA para ganho de eficiência.
+- **Sustentabilidade Operacional**: escalar atendimento sem aumento proporcional de custos.
+
 
 # 3. Requisitos do Projeto
 
@@ -693,7 +782,7 @@ O **Frontend** permite a interação do usuário final com a aplicação, garant
 
 ## 5.3 Diagramas de Sequência da UML
 
-&emsp; Um Diagrama de Sequência UML é essencial para entender o fluxo temporal de interações entre os componentes de um sistema durante a execução de um processo. Este tipo de diagrama permite visualizar a ordem das mensagens trocadas, os responsáveis por cada ação e como os dados são processados ao longo do fluxo.  
+&emsp; Um Diagrama de Sequência UML é essencial para entender o fluxo temporal de interações entre os componentes de um sistema durante a execução de um processo. Este tipo de diagrama permite visualizar a ordem das mensagens trocadas, os responsáveis por cada ação e como os dados são processados ao longo do fluxo.
 
 &emsp; A seguir, apresenta-se o Diagrama de Sequência para o fluxo de avaliação de chamadas.
 
@@ -840,5 +929,5 @@ _conteúdo_
 _conteúdo_
 
 # Referências
-  
+
 _conteúdo_
