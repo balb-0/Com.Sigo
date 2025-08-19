@@ -766,6 +766,20 @@ _conteúdo_
 
 ---
 
+### 4.1.3. Fluxo Geral
+
+- Um **CLIENTE** é a pessoa que entra em contato com o sistema realizando chamadas. Ele é identificado unicamente por seu `cliente_id` e pode originar diversas chamadas ao longo do tempo.  
+
+- Um **ATENDENTE** é o profissional responsável por receber e conduzir as chamadas realizadas pelos Clientes. Cada Atendente pode atender vários Clientes diferentes em momentos distintos.  
+
+- Cada **CHAMADA** é um registro histórico que descreve a interação entre Cliente e Atendente. A chamada contém a data/hora em que ocorreu (`createdAt`), a avaliação realizada (em formato JSON), a **nota de qualidade** atribuída e o **transcript** da conversa armazenado em JSON.  
+
+- O relacionamento entre as entidades garante que uma chamada sempre esteja vinculada a **um único Cliente** e a **um único Atendente**, permitindo análises posteriores sobre desempenho, qualidade do atendimento e histórico de interações.
+
+
+
+
+
 ## 4.2 Modelo Lógico de Dados
 
 _conteúdo_
