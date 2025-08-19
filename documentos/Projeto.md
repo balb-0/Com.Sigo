@@ -776,7 +776,16 @@ _conteúdo_
 
 - O relacionamento entre as entidades garante que uma chamada sempre esteja vinculada a **um único Cliente** e a **um único Atendente**, permitindo análises posteriores sobre desempenho, qualidade do atendimento e histórico de interações.
 
+---
 
+### 4.1.4. Sobre a Modelagem Lógica
+
+Embora o modelo conceitual represente três entidades distintas (**CLIENTE**, **ATENDENTE** e **CHAMADA**) para facilitar o entendimento das relações e do fluxo de dados, na implementação prática essa separação não será mantida.
+
+Devido a restrições legais e de conformidade com a **LGPD (Lei Geral de Proteção de Dados)**, o sistema **não armazenará informações de identificação pessoal de Clientes ou Atendentes**.  
+Assim, na **modelagem lógica e física** do banco de dados, todos os registros estarão consolidados em uma única tabela **CHAMADA**, contendo apenas os dados necessários para auditoria, análise de qualidade e histórico de interações (por exemplo: `chamada_id`, `createdAt`, `avaliacao_json`, `nota_qualidade`, `transcript_json`).  
+
+Dessa forma, garantimos a integridade do modelo conceitual para fins acadêmicos e de documentação, ao mesmo tempo em que respeitamos os limites legais na modelagem real do projeto.
 
 
 
