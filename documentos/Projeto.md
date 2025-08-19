@@ -729,22 +729,32 @@ _conteúdo_
 
 # 4. Modelagem de Dados
 
+## 4.1. Modelagem conceitual
+
+<div align="center">
+<sub>Figura 4.1.1 - Modelagem Conceitual</sub><br>
+<img src="img/modelagem_conceitual.png" width="80%"><br>
+<sup>Fonte: Material produzido pelos autores (2025) </sup>
+</div>
+
+### 4.1.1. Identificação das Entidades
+
+1. **CLIENTE**  
+   Representa a pessoa que realizou uma chamada no sistema. Cada cliente pode estar associado a diversas chamadas registradas.
+
+2. **ATENDENTE**  
+   Entidade que descreve o profissional responsável por atender a chamada. Um atendente pode realizar múltiplos atendimentos ao longo do tempo.
+
+3. **CHAMADA**  
+   Entidade central que registra cada ligação realizada entre um Cliente e um Atendente.  
+   Armazena a data/hora de criação, a avaliação do atendimento (em formato JSON), a nota de qualidade atribuída e a transcrição da conversa (também em JSON).  
+   Cada chamada está associada a **um único Cliente** e a **um único Atendente**, mas tanto Cliente quanto Atendente podem estar vinculados a várias chamadas diferentes.
+
+## 4.2 Modelo Lógico de Dados
+
 _conteúdo_
 
-## 4.1 Especificação da Base de Dados para Modelo de Recomendação
-
-_conteúdo_
-Obs.: Insira aqui informações sobre a construção do artefato da Sprint 1.
-
-## 4.2 Modelo Conceitual de Dados
-
-_conteúdo_
-
-## 4.3 Modelo Lógico de Dados
-
-_conteúdo_
-
-## 4.4 Modelo Físico de Dados
+## 4.3 Modelo Físico de Dados
 
 _conteúdo_
 
