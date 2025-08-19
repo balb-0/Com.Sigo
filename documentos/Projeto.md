@@ -750,6 +750,22 @@ _conteúdo_
    Armazena a data/hora de criação, a avaliação do atendimento (em formato JSON), a nota de qualidade atribuída e a transcrição da conversa (também em JSON).  
    Cada chamada está associada a **um único Cliente** e a **um único Atendente**, mas tanto Cliente quanto Atendente podem estar vinculados a várias chamadas diferentes.
 
+---
+
+### 4.1.2. Estabelecimento das Relações
+
+1. **CLIENTE** – **CHAMADA**  
+   - Relação **1:N** (um Cliente pode realizar várias chamadas).  
+   - Do ponto de vista do banco de dados, `CHAMADA` contém a chave estrangeira `cliente_id` que aponta para `CLIENTE.cliente_id`.  
+   - Exemplo: um mesmo Cliente pode ligar diversas vezes em dias diferentes, cada ligação sendo registrada como uma nova CHAMADA.
+
+2. **ATENDENTE** – **CHAMADA**  
+   - Relação **1:N** (um Atendente pode atender diversas chamadas).  
+   - `CHAMADA` contém a chave estrangeira `atendente_id` que aponta para `ATENDENTE.atendente_id`.  
+   - Exemplo: o mesmo Atendente pode atender clientes diferentes ao longo do expediente, gerando vários registros de CHAMADA.
+
+---
+
 ## 4.2 Modelo Lógico de Dados
 
 _conteúdo_
