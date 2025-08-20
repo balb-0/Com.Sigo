@@ -729,22 +729,71 @@ _conteúdo_
 
 # 4. Modelagem de Dados
 
+## 4.1. Modelagem conceitual
+
+<div align="center">
+<sub>Figura 4.1.1 - Modelagem Conceitual</sub><br>
+<img src="img/modelagem_conceitual.png" width="80%"><br>
+<sup>Fonte: Material produzido pelos autores (2025) </sup>
+</div>
+
+### 4.1.1. Identificação das Entidades
+
+1. **CLIENTE**  
+   Representa a pessoa que realizou uma chamada no sistema. Cada cliente pode estar associado a diversas chamadas registradas.
+
+2. **ATENDENTE**  
+   Entidade que descreve o profissional responsável por atender a chamada. Um atendente pode realizar múltiplos atendimentos ao longo do tempo.
+
+3. **CHAMADA**  
+   Entidade central que registra cada ligação realizada entre um Cliente e um Atendente.  
+   Armazena a data/hora de criação, a avaliação do atendimento (em formato JSON), a nota de qualidade atribuída e a transcrição da conversa (também em JSON).  
+   Cada chamada está associada a **um único Cliente** e a **um único Atendente**, mas tanto Cliente quanto Atendente podem estar vinculados a várias chamadas diferentes.
+
+---
+
+### 4.1.2. Estabelecimento das Relações
+
+1. **CLIENTE** – **CHAMADA**  
+   - Relação **1:N** (um Cliente pode realizar várias chamadas).  
+   - Do ponto de vista do banco de dados, `CHAMADA` contém a chave estrangeira `cliente_id` que aponta para `CLIENTE.cliente_id`.  
+   - Exemplo: um mesmo Cliente pode ligar diversas vezes em dias diferentes, cada ligação sendo registrada como uma nova CHAMADA.
+
+2. **ATENDENTE** – **CHAMADA**  
+   - Relação **1:N** (um Atendente pode atender diversas chamadas).  
+   - `CHAMADA` contém a chave estrangeira `atendente_id` que aponta para `ATENDENTE.atendente_id`.  
+   - Exemplo: o mesmo Atendente pode atender clientes diferentes ao longo do expediente, gerando vários registros de CHAMADA.
+
+---
+
+### 4.1.3. Fluxo Geral
+
+- Um **CLIENTE** é a pessoa que entra em contato com o sistema realizando chamadas. Ele é identificado unicamente por seu `cliente_id` e pode originar diversas chamadas ao longo do tempo.  
+
+- Um **ATENDENTE** é o profissional responsável por receber e conduzir as chamadas realizadas pelos Clientes. Cada Atendente pode atender vários Clientes diferentes em momentos distintos.  
+
+- Cada **CHAMADA** é um registro histórico que descreve a interação entre Cliente e Atendente. A chamada contém a data/hora em que ocorreu (`createdAt`), a avaliação realizada (em formato JSON), a **nota de qualidade** atribuída e o **transcript** da conversa armazenado em JSON.  
+
+- O relacionamento entre as entidades garante que uma chamada sempre esteja vinculada a **um único Cliente** e a **um único Atendente**, permitindo análises posteriores sobre desempenho, qualidade do atendimento e histórico de interações.
+
+---
+
+### 4.1.4. Sobre a Modelagem Lógica
+
+Embora o modelo conceitual represente três entidades distintas (**CLIENTE**, **ATENDENTE** e **CHAMADA**) para facilitar o entendimento das relações e do fluxo de dados, na implementação prática essa separação não será mantida.
+
+Devido a restrições legais e de conformidade com a **LGPD (Lei Geral de Proteção de Dados)**, o sistema **não armazenará informações de identificação pessoal de Clientes ou Atendentes**.  
+Assim, na **modelagem lógica e física** do banco de dados, todos os registros estarão consolidados em uma única tabela **CHAMADA**, contendo apenas os dados necessários para auditoria, análise de qualidade e histórico de interações (por exemplo: `chamada_id`, `createdAt`, `avaliacao_json`, `nota_qualidade`, `transcript_json`).  
+
+Dessa forma, garantimos a integridade do modelo conceitual para fins acadêmicos e de documentação, ao mesmo tempo em que respeitamos os limites legais na modelagem real do projeto.
+
+
+
+## 4.2 Modelo Lógico de Dados
+
 _conteúdo_
 
-## 4.1 Especificação da Base de Dados para Modelo de Recomendação
-
-_conteúdo_
-Obs.: Insira aqui informações sobre a construção do artefato da Sprint 1.
-
-## 4.2 Modelo Conceitual de Dados
-
-_conteúdo_
-
-## 4.3 Modelo Lógico de Dados
-
-_conteúdo_
-
-## 4.4 Modelo Físico de Dados
+## 4.3 Modelo Físico de Dados
 
 _conteúdo_
 
