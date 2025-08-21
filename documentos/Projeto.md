@@ -563,7 +563,79 @@ A priorização das funcionalidades foi desenvolvida com base na facilidade de i
 
 Em conclusão, todas as funcionalidades do MVP estão diretamente vinculadas aos requisitos definidos no projeto. A solução proposta permite automatizar a avaliação de qualidade com foco em escalabilidade, acurácia e custo-efetividade. Ao final da sprint 5, o protótipo entregue será capaz de processar chamadas em áudio ou texto, gerar um score de qualidade com base em três critérios, exibir métricas em um dashboard simples e destacar atendimentos abaixo do padrão, atendendo integralmente ao escopo do MVP.
 
-## 2.9 Canvas do Projeto
+## 2.9 Definição da Estratégia de Entrega para as Sprints 3, 4 e 5
+
+Esta seção detalha a estratégia de entrega das sprints 3, 4 e 5, com foco no desenvolvimento e integração do backend. A abordagem é incremental, alinhada aos requisitos funcionais e não funcionais definidos, e compatível com as exigências acadêmicas do projeto. As etapas de design, desenvolvimento, testes e implantação são estruturadas para garantir qualidade, escalabilidade e integração contínua.
+
+A estratégia foi construída com base no roadmap do MVP, nas entregas obrigatórias por sprint e na especificação técnica inicial, com evoluções documentadas conforme o avanço do projeto.
+
+### Sprint 3: Fundação do Backend e Processamento Inicial
+
+Nesta sprint, é desenvolvida a base do backend para recepção, classificação e processamento inicial de entradas em áudio e texto.
+
+São implementadas:
+- API para upload de arquivos de áudio e texto (RF01, RF04)
+- Classificação automática do tipo de entrada, com identificação precisa entre áudio e texto
+- Integração com serviço de transcrição (Speech-to-Text) para conversão de áudio em texto
+- Módulo inicial de processamento com NLP para detecção de intenções e sentimento (RNF03)
+- Geração de score preliminar com base em três critérios de qualidade (RF02)
+
+O armazenamento é temporário, com metadados registrados para suporte ao fluxo de avaliação.
+
+Paralelamente, é realizado o planejamento dos testes:
+
+- Testes funcionais baseados nos requisitos (RFs)
+- Testes não funcionais focados em desempenho (RNF02) e precisão (RNF03)
+- Testes de integração entre componentes internos e serviços externos
+- Roteiro de testes de usabilidade com 5 usuários externos, incluindo cenários, perfis e métricas (ex: SUS)
+- Definição das ferramentas e bibliotecas a serem utilizadas
+- Implementação do módulo VHS para cache de respostas da API externa
+
+As especificações técnicas da Sprint 1 são revisadas e atualizadas com base no progresso, garantindo coerência com o MVP. Alterações no modelo de dados e nos fluxos de processamento são documentadas no `Projeto.md`.
+
+### Sprint 4: Persistência, Integração e Implantação
+
+Nesta sprint, o backend é consolidado com armazenamento persistente, integração assíncrona e início da implantação em ambiente de produção.
+
+São implementadas:
+- Integração com o banco de dados definido na seção de pilha de tecnologias para armazenamento seguro de chamadas, transcrições, scores e metadados (RF07)
+- Upload em lote de chamadas (RF05)
+- Configuração de dois webhooks para notificação de eventos (ex: conclusão de transcrição e avaliação)
+- Sistema de mensageria para orquestração de processos assíncronos
+- Endpoints para consulta e exportação de dados, apoiando a geração de indicadores
+
+O backend é integrado ao frontend em desenvolvimento, permitindo a visualização de resultados.
+
+Nesta fase, são executados os testes planejados na Sprint 3:
+- Casos de teste detalhados são aplicados, com cobertura total dos requisitos funcionais
+- Registros de execução incluem logs, capturas de tela e evidências de sucesso ou falha
+- Testes de usabilidade são realizados com usuários externos, com documentação de feedback e sugestões de melhoria
+- Resultados são analisados criticamente, com identificação de problemas funcionais e oportunidades de ajuste
+
+É realizada a configuração do ambiente de produção e documentado o processo de deploy. O sistema é preparado para a validação final.
+
+### Sprint 5: Integração Completa, Validação e Entrega Final
+
+Nesta sprint, o sistema é finalizado com integração total entre frontend e backend, validação cruzada e correção de bugs.
+
+São concluídas:
+- Geração de score com base nos três critérios definidos (RF02)
+- Destaque automático de chamadas com desempenho abaixo do limite (RF06)
+- Exposição de dados agregados para o dashboard (RF03)
+- Tratamento robusto de erros e logs detalhados
+
+O frontend é totalmente integrado ao backend, com testes de integração validando todas as funcionalidades.
+
+É realizada a validação do MVP:
+- Comparação entre a análise automática e a avaliação humana de uma amostra de chamadas
+- Correção de bugs e ajustes com base em feedback de professores e parceiro
+- Revisão final das especificações técnicas, com atualização de qualquer componente que tenha evoluído
+
+O protótipo é finalizado, documentado e entregue conforme o escopo do projeto.
+
+Em conclusão, a estratégia de entrega para as sprints 3, 4 e 5 assegura o desenvolvimento progressivo e integrado do backend, alinhado ao MVP e às exigências acadêmicas. Cada sprint entrega valor funcional, com foco em qualidade, escalabilidade e integração.
+
+## 3. Canvas do Projeto
 
 &nbsp;&nbsp;&nbsp;&nbsp;Segue abaixo, o Canvas MVP da aplicação web desenvolvido a partir das atividades realizadas durante os encontros com o parceiro e as discussões em grupo.
 
@@ -1038,3 +1110,4 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
