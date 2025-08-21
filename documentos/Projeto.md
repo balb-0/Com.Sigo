@@ -1032,7 +1032,7 @@ VALUES ('12345', 'Complaint', 0.92, NOW());
 ### UML – Diagrama de Sequência
 
 <div align="center">
-  <sub>Figura 8.2.1 - </sub> <br>
+  <sub>Figura 8.2.1 - Diagrama Sequência UML - Áudio</sub> <br>
 
   <img src="img/section8/diagrama_s_uml_audio.png" alt="Diagrama Sequência UML - Áudio" border="0">
 
