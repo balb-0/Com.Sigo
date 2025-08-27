@@ -1008,10 +1008,12 @@ O **Frontend** permite a interação do usuário final com a aplicação, garant
 | :--- | :--- |
 | **Cliente** | Inicia o processo enviando uma entrada, que pode ser um áudio ou texto, para avaliação. |
 | **Frontend** | Recebe a entrada do cliente, envia os dados para o backend via HTTP/JSON e exibe o resultado final da avaliação. |
-| **Backend** | Gerencia o fluxo do processamento, encaminhando o áudio ou texto para o modelo de processamento e gerando registros no banco de dados. |
-| **Modelo de Processamento** | Processa a entrada de áudio convertendo-a em texto (quando necessário) e envia a transcrição ou texto ao backend. |
+| **Backend** | Gerencia o fluxo do processamento, coordenando chamadas para APIs externas, modelo de processamento, checklist e persistência em banco de dados. |
+| **Modelo de Processamento** | Interpreta a entrada textual (seja transcrita ou digitada), consulta o banco vetorial em busca de contexto relevante e integra essas informações antes de enviar ao LLM. |
 | **Banco de Dados (PostgreSQL)** | Persiste informações da chamada, checklist e avaliação, garantindo rastreabilidade e histórico do fluxo. |
-| **API Externa (ChatGPT/Gemini)** | Recebe a transcrição e realiza a análise de intenção do texto, retornando os resultados ao backend. |
+| **Banco Vetorial** | Armazena embeddings semânticos que permitem consultas por similaridade, possibilitando enriquecer a análise do LLM com informações relevantes. |
+| **API Externa de Transcrição** | Responsável por converter áudios enviados pelo cliente em texto, retornando a transcrição ao backend. |
+| **API Externa LLM (ChatGPT/Gemini)** | Recebe o texto (digitado ou transcrito) junto com o contexto recuperado do banco vetorial e realiza a análise de intenção, retornando os resultados ao modelo de processamento. |
 | **Checklist** | Cria um checklist da chamada baseado nos dados recebidos para auxiliar na avaliação. |
 | **Avaliação** | Gera a avaliação final com base no checklist e retorna o resultado ao backend, que envia ao frontend para exibição ao cliente. |
 
