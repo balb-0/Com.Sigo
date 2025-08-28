@@ -280,6 +280,18 @@ Para lidar com processamento textual, optamos por uma abordagem híbrida:
 
 Essa combinação garante um balanceamento entre **inteligência contextual**, **eficiência computacional** e **precisão em regras específicas**.
 
+### 9.8 API de Transcrição – GPT
+
+Para a funcionalidade de **transcrição de áudio em texto**, será utilizada a **API do GPT** com modelos especializados em reconhecimento de fala.  
+Essa escolha traz vantagens como:  
+
+- **Alta acurácia** em diferentes idiomas e sotaques.  
+- **Escalabilidade** para processar grandes volumes de áudio.  
+- **Integração simplificada** com o backend em Node.js, permitindo envio direto de arquivos ou streams de áudio.  
+- **Redução de custos de manutenção**, já que não há necessidade de treinar e manter um modelo próprio de ASR (Automatic Speech Recognition).  
+
+Com isso, garantimos maior confiabilidade nas transcrições e aceleramos o desenvolvimento de funcionalidades baseadas em voz.
+
 ---
 
 # Referências
