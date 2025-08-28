@@ -1058,9 +1058,93 @@ _conteúdo_
 
 _conteúdo_
 
-## 8.2 Modelo de Recomendação
+## 8.2 API de Áudio
 
-_conteúdo_
+### Endpoint Disponível
+
+#### **1. Receive Audio Call**
+
+* **Endpoint:** `/api/receiveAudioCall`
+* **Método HTTP:** `POST`
+* **Descrição:** Este endpoint permite que o usuário envie um arquivo de áudio contendo uma chamada de atendimento. O sistema valida o formato, armazena temporariamente o arquivo, realiza a transcrição automática e envia a consulta para o banco de dados.
+
+### Parâmetros de Entrada
+
+* **Body (form-data / multipart):**
+
+  * `audio` *(obrigatório)*: arquivo de áudio enviado pelo usuário.
+
+#### **Regras do Arquivo de Áudio**
+
+* **Formatos suportados:** `.mp3`, `.wav`
+* **Tamanho máximo:** `5 MB`
+* **Duração suportada:** até `75 minutos`
+* **Requisitos adicionais:**
+
+  * O áudio deve estar em boa qualidade.
+  * Apenas 1 arquivo por requisição.
+
+### Respostas Esperadas
+
+#### **Sucesso (200 OK)**
+
+```json
+{
+  "success": true,
+  "message": "Audio received successfully. Transcription started.",
+  "data": {
+    "audioId": "12345",
+    "status": "processing"
+  },
+  "timestamp": "2025-08-19T16:45:00Z"
+}
+```
+
+#### **Erro de Validação (400 Bad Request)**
+
+```json
+{
+  "success": false,
+  "message": "Invalid audio format. Accepted formats: .mp3, .wav"
+}
+```
+
+#### **Erro no Servidor (500 Internal Server Error)**
+
+```json
+{
+  "success": false,
+  "message": "Error while processing audio. Please try again later."
+}
+```
+
+### Integração com ChatGPT (Prompt Definido)
+
+Após o recebimento do áudio, o sistema gera a transcrição e envia o seguinte **prompt** ao ChatGPT:
+
+```text
+Você é um analizador de intenção de chamada.
+Input: Transcrição do áudio.
+Task: Identificar a intenção do cliente (reclamações, elogios, profanidades, etc.)
+Output: SQL query para inserir o resultado na tabela `call_intentions`.
+```
+
+#### Exemplo de Saída Esperada (query SQL)
+
+```sql
+INSERT INTO call_intentions (audio_id, intention, confidence, created_at)
+VALUES ('12345', 'Complaint', 0.92, NOW());
+```
+
+### UML – Diagrama de Sequência
+
+<div align="center">
+  <sub>Figura 8.2.1 - Diagrama Sequência UML - Áudio</sub> <br>
+
+  <img src="img/section8/diagrama_s_uml_audio.png" alt="Diagrama Sequência UML - Áudio" border="0">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
 
 ## 8.3 Desenvolvimento de Features
 
