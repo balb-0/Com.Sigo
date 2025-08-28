@@ -41,6 +41,7 @@
 - [6. Gestão de Arquivos Sensíveis](#6-gestao-de-arquivos-sensiveis)
 - [7. Política de Rollback](#7-política-de-rollback)
 - [8. Registro de Variáveis de Ambiente](#8-registro-de-variaveis-de-ambiente)
+- [9. Stack de Tecnologias](#9-stack-de-tecnologias)
 - [Referências](#referências)
 
 # 1. Introdução
@@ -239,6 +240,47 @@ Essa padronização contribui para a manutenção do código, facilita a revisã
   - DB_USER= # Usuário do banco
   - DB_PASS= # Senha do banco (NUNCA commitada)
   - SECRET_KEY= # Chave secreta do sistema
+
+## 9. Stack de Tecnologias
+
+A stack de tecnologias foi definida de forma a equilibrar **produtividade de desenvolvimento**, **escalabilidade** e **flexibilidade**. Cada tecnologia escolhida contribui para resolver pontos críticos do projeto, desde a experiência do usuário até o processamento de dados complexos.
+
+### 9.1 Frontend – ReactJS
+Optamos pelo **ReactJS** por sua ampla adoção na indústria e pela capacidade de criar interfaces reativas, modulares e escaláveis. A arquitetura baseada em componentes favorece a manutenção, a reutilização de código e a integração com bibliotecas modernas de UI. Além disso, a comunidade extensa garante suporte contínuo e um ecossistema rico de ferramentas.
+
+### 9.2 Backend – Node.js + ExpressJS
+No backend, utilizamos **Node.js** em conjunto com o framework **ExpressJS**. Essa combinação proporciona:
+- **Alta performance em I/O**.
+- **Simplicidade de configuração** e curva de aprendizado rápida.  
+- **Flexibilidade** para estruturar middlewares e lidar com rotas e integrações externas.  
+
+Essa escolha garante agilidade no desenvolvimento e facilidade na manutenção da aplicação.
+
+### 9.3 Banco de Dados Relacional – PostgreSQL
+O **PostgreSQL** foi escolhido como banco de dados relacional pela estabilidade, confiabilidade e recursos avançados. Ele suporta **consultas complexas, integridade transacional e extensões poderosas**. A escolha assegura consistência nos dados e escalabilidade vertical e horizontal conforme a demanda.
+
+### 9.4 Banco de Dados Vetorial – pgvector
+Para operações que envolvem **busca semântica, embeddings e similaridade textual**, adotamos o **pgvector**, uma extensão nativa do PostgreSQL para armazenamento e consulta de vetores.  
+Essa solução permite unir a **consistência do relacional** com o **poder de buscas vetoriais**, evitando a necessidade de múltiplos sistemas distintos.
+
+### 9.5 Infraestrutura – Docker
+Toda a aplicação é containerizada utilizando **Docker**, garantindo portabilidade entre ambientes de desenvolvimento, homologação e produção. Com isso, asseguramos:
+- **Padronização do ambiente** e **segurança** de ambientes.
+- **Escalabilidade** com facilidade de manutenção futura.  
+- **Rapidez no setup**.
+
+### 9.6 Controle de Versão – Git
+O **Git** é a base do versionamento de código, garantindo colaboração eficiente entre equipes, rastreabilidade de mudanças e integração com pipelines de CI/CD. O uso de **pull requests e branching strategies** fortalece a governança do código e reduz riscos de regressões.
+
+### 9.7 Algoritmos de Tokenização e NLP
+Para lidar com processamento textual, optamos por uma abordagem híbrida:
+- **BERT (Bidirectional Encoder Representations from Transformers):** para capturar contexto semântico profundo e relações bidirecionais entre palavras.  
+- **Regex (Expressões Regulares):** útil para regras mais rígidas, como padronização de formatos.
+- **TF-IDF (Term Frequency – Inverse Document Frequency):** empregado para destacar termos relevantes em coleções de documentos e dar suporte a análises mais rápidas.  
+
+Essa combinação garante um balanceamento entre **inteligência contextual**, **eficiência computacional** e **precisão em regras específicas**.
+
+---
 
 # Referências
 
