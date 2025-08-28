@@ -1028,7 +1028,141 @@ _conteúdo_
 
 ## 6.2 Justificativa das Escolhas de Implantação
 
-_conteúdo_
+### 6.2.1 Processo de Deploy do Modelo
+
+Este documento descreve o processo de deploy em produção de um algoritmo de NLP (BERT + Regex + TF-IDF) usando Google Cloud Run.  
+
+
+**1. Pré-requisitos**
+
+- Conta ativa no [Google Cloud](https://cloud.google.com/)
+- Faturamento habilitado no projeto
+- [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) instalada e configurada (`gcloud init`)
+- [Docker](https://docs.docker.com/get-docker/) instalado localmente
+
+
+**2. Criar projeto e habilitar serviços**
+
+1. Acesse o [Console do Google Cloud](https://console.cloud.google.com/)
+2. Crie um novo projeto (ex.: `nlp-deploy`)
+3. Ative o faturamento
+4. Vá em **APIs & Services → Enabled APIs** e habilite:
+   - **Cloud Run**
+   - **Artifact Registry**
+   - **Cloud Build**
+
+
+**3. Criar repositório no Artifact Registry**
+
+No terminal:
+
+```bash
+gcloud artifacts repositories create nlp-images \
+  --repository-format=docker \
+  --location=us-central1 \
+  --description="Repositório de imagens NLP"
+```
+
+Verifique se o repositório foi criado:
+
+```bash
+gcloud artifacts repositories list
+```
+
+**4. Build e Push da Imagem Docker**
+
+Autenticar o Docker para o Artifact Registry:
+
+```bash
+gcloud auth configure-docker
+```
+
+Definir variáveis:
+
+```bash
+PROJECT_ID=$(gcloud config get-value project)
+REGION=us-central1
+IMAGE=${REGION}-docker.pkg.dev/${PROJECT_ID}/nlp-images/nlp-api:1.0
+```
+
+Build e push:
+
+```bash
+docker build -t ${IMAGE} .
+docker push ${IMAGE}
+```
+
+**5. Deploy no Cloud Run**
+
+Executar o deploy:
+
+```bash
+gcloud run deploy nlp-api \
+  --image=${IMAGE} \
+  --region=${REGION} \
+  --platform=managed \
+  --allow-unauthenticated \
+  --cpu=2 \
+  --memory=4Gi \
+  --max-instances=5 \
+  --set-env-vars=BERT_MODEL=joeddav/xlm-roberta-large-xnli,W_TFIDF=0.4,W_BERT=0.6
+```
+
+Obs: Ajuste os valores de CPU, memória e variáveis de ambiente conforme sua necessidade.
+
+Ao final, será exibida uma URL pública (ex.: https://nlp-api-xxxx-uc.a.run.app).
+
+**6. Testar o serviço**
+
+Via curl:
+```curl
+curl -X POST "https://SUA-URL/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "texts": ["Exemplo de frase para análise"],
+        "candidate_labels": ["esporte", "política", "tecnologia"]
+      }'
+```
+
+**7. Monitorar logs**
+
+Verifique as chamadas e erros:
+
+```bash
+gcloud run services logs read nlp-api --region ${REGION}
+```
+
+Ou pelo Console → Cloud Run → nlp-api → Logs.
+
+**8. Checklist de Capturas de Tela (para documentação)**
+
+ Projeto criado e selecionado no Console
+
+ Billing habilitado
+
+ APIs ativadas (Cloud Run, Artifact Registry, Cloud Build)
+
+ Repositório nlp-images criado
+
+ Terminal com saída do docker push
+
+ Tela de configuração do serviço no Cloud Run
+
+ URL pública do serviço rodando
+
+ Teste com curl ou Postman retornando JSON
+
+ Logs mostrando requisições bem-sucedidas
+
+**9. Boas práticas**
+
+Configure variáveis de ambiente para pesos e modelos (ex.: W_TFIDF, W_BERT, BERT_MODEL).
+
+Habilite min-instances > 0 para reduzir cold start.
+
+Use IAM se quiser restringir o acesso (remova --allow-unauthenticated).
+
+Faça versionamento de imagens (1.0, 1.1, etc.) para rollback rápido.
 
 ## 6.3 Considerações sobre Desempenho e Segurança
 
