@@ -292,6 +292,31 @@ Como objetivos secundários, a plataforma busca:
   <sup>Fonte: Material produzido pelos autores (2025).</sup>
 </div>
 
+&ensp;A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de **"Visão Geral → Investigação → Análise Profunda → Ação"**.
+
+### Passo 1: Visão Geral (O Panorama)
+
+&ensp;Ao acessar o **Dashboard**, a primeira experiência de Carlos é obter um resumo imediato da "saúde" do atendimento através dos **KPIs**.
+
+### Passo 2: Investigação (Conversando com os Dados)
+
+&ensp;Usando a página de **Chat**, Carlos pode fazer perguntas em linguagem natural (digitando ou usando o microfone) para encontrar os casos mais relevantes, como:
+
+> "Me mostre as piores chamadas do mês de julho."
+
+&ensp;A tabela no Dashboard também permite uma investigação visual, onde ele pode ordenar as chamadas por data ou pontuação.
+
+### Passo 3: Análise Profunda (Entendendo o "Porquê")
+
+&ensp;Ao clicar em uma chamada específica (seja na tabela do Dashboard ou em um resultado do Chat), um **Modal de Detalhes** se abre.  
+&ensp;Aqui, a experiência é de clareza e insight, onde a plataforma apresenta não apenas a transcrição, mas uma análise da IA que explica o porquê da pontuação e das tags.
+
+### Passo 4: Ação (Transformando Dados em Melhoria)
+
+&ensp;Com os insights do **"Ponto de vista da IA"**, Carlos pode identificar padrões de comportamento e planejar ações de melhoria para toda a equipe, como ajustar scripts ou criar treinamentos focados.
+
+---
+
 ## 2.5 Modelagem do Fluxo de Negócio
 
 Como parte do entendimento do negócio, foi modelado o fluxo de processo atual (AS-IS) de avaliação da qualidade do atendimento prestado aos clientes da Comgás, utilizando a notação BPMN (Business Process Model and Notation). O objetivo deste mapeamento é representar de forma clara as etapas e interações entre os principais atores responsáveis pelo atendimento e pela análise de conformidade com os padrões da empresa.
