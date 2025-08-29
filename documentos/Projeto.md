@@ -292,6 +292,73 @@ Como objetivos secundários, a plataforma busca:
   <sup>Fonte: Material produzido pelos autores (2025).</sup>
 </div>
 
+### 2.4.1 Estudo sobre o Usuário do Sistema
+
+Para compreender melhor as necessidades, preferências, habilidades e limitações dos usuários os grupos se reuniram e elaboraram um conjunto de perguntas estratégicas. O objetivo foi mapear de forma estruturada os perfis dos analistas de qualidade, suas práticas atuais e suas expectativas em relação a um sistema automatizado de análise de chamadas.
+
+As perguntas foram consolidadas em um formulário google simples, que equilibra questões objetivas (de múltipla escolha) com uma pergunta aberta, permitindo coletar tanto dados quantitativos quanto qualitativos.
+
+#### 2.4.2 Questionário Elaborado
+
+| Nº | Pergunta | Opções de Resposta |
+|----|----------|---------------------|
+| 1  | Tempo de experiência na função | - Menos de 1 ano <br> - 1 a 3 anos <br> - 3 a 5 anos <br> - Mais de 5 anos |
+| 2  | Como você se considera em relação ao uso de tecnologias e ferramentas digitais? | - Iniciante (uso básico, com dificuldades) <br> - Intermediário (uso bem, mas com ajuda ocasional) <br> - Avançado (domino ferramentas e aprendo rápido) |
+| 3  | Quais são os principais pontos que você analisa em uma ligação? | - Conformidade com scripts <br> - Tom de voz/empatia <br> - Tempo de atendimento <br> - Resolução do problema do cliente <br> - Satisfação do cliente <br> - Outro (campo aberto) |
+| 4  | O que seria mais importante para você em um sistema de análise automática? | - Confiabilidade dos dados <br> - Rapidez nos resultados <br> - Facilidade de uso <br> - Visualização clara em dashboards <br> - Personalização de métricas <br> - Outro (campo aberto) |
+| 5  | Qual formato de material de apoio você acha mais útil para aprender a usar uma nova ferramenta? | - Vídeo explicativo <br> - PDF com passo a passo <br> - Somente interface intuitiva <br> - Todas as opções, se possível |
+| 6  | Em poucas palavras, o que tornaria essa ferramenta realmente útil para o seu dia a dia? | Resposta aberta |
+
+#### 2.4.3 Objetivo de Cada Pergunta
+
+- Pergunta 1 – Tempo de experiência na função  
+  Ajuda a entender o nível de senioridade dos usuários, permitindo diferenciar necessidades de novatos e veteranos.  
+
+- Pergunta 2 – Familiaridade com tecnologia  
+  Identifica o nível de domínio digital dos usuários, fundamental para ajustar a complexidade da interface e os materiais de apoio.  
+
+- Pergunta 3 – Critérios analisados em uma ligação  
+  Revela quais aspectos do atendimento são mais relevantes para os analistas e devem ser priorizados na automação.  
+
+- Pergunta 4 – Prioridades no sistema automático  
+  Permite identificar o que os usuários mais valorizam (ex.: rapidez, confiabilidade, personalização), servindo como guia para requisitos funcionais.  
+
+- Pergunta 5 – Formato de material de apoio  
+  Informa como os usuários preferem aprender a utilizar novas ferramentas, ajudando na definição da estratégia de treinamento e suporte.  
+
+- Pergunta 6 – Expectativas abertas  
+  Coleta insights qualitativos, capturando necessidades que não foram previstas nas opções anteriores.  
+
+#### 2.4.4 Respostas Recebidas e Insights
+---
+
+#### 2.4.6 Experiências que o Usuário Deverá Vivenciar
+
+Esta seção detalha a jornada interativa do usuário na plataforma, demonstrando como a interface proposta atende às suas necessidades de forma eficiente e intuitiva, em alinhamento com os requisitos do projeto. A experiência foi projetada em um fluxo de quatro etapas, guiando o usuário da visão geral à ação.
+
+#### Jornada do Usuário: Mapeamento do Fluxo Principal
+
+A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de "Visão Geral → Investigação → Análise Profunda → Ação". O fluxo começa com o usuário obtendo um resumo imediato da "saúde" do atendimento no Dashboard. Em seguida, pode investigar casos relevantes fazendo perguntas em linguagem natural na página de Chat ou ordenando a tabela de chamadas. Ao encontrar um caso específico, o usuário parte para a análise profunda, onde um modal de detalhes apresenta a transcrição e uma análise da IA que explica o porquê da pontuação. Por fim, com os insights adquiridos, o usuário pode planejar ações de melhoria, como ajustar scripts ou criar treinamentos focados, completando o ciclo.
+
+#### Passo 1: Visão Geral (O Panorama em Segundos)
+
+Ao entrar na plataforma, a primeira interação do usuário é com o Dashboard de Qualidade. A experiência é de clareza e controle imediatos. Em segundos, sem a necessidade de nenhum clique, o supervisor absorve a "saúde" da operação através dos Cards de KPI, que destacam a pontuação média geral, o volume de chamadas analisadas e, crucialmente, a quantidade de "Atendimentos Críticos". Esta visão macro instantânea é viabilizada pelos Cards de KPI e pela Tabela de Chamadas Recentes, conforme detalhado no mockup do Dashboard. A apresentação consolidada dos dados materializa o requisito RF03 (Visualizar painel com indicadores gerais), enquanto o destaque visual dos atendimentos problemáticos cumpre o RF06 (Destacar chamadas com desempenho abaixo do limite).
+
+#### Passo 2: Investigação (Conversando com os Dados)
+
+A partir da visão geral, a plataforma convida à investigação de duas formas fluidas. A primeira é visual e exploratória: o usuário pode ordenar a Tabela de Chamadas Recentes por pontuação para, com um clique, trazer os piores ou melhores atendimentos para o topo. A segunda é conversacional e direta: o usuário navega até a tela de Chat e pergunta em linguagem natural, como "quais chamadas tiveram reclamações sobre a fatura?", uma experiência que remove a complexidade de filtros tradicionais. Esta capacidade de busca é sustentada pela Página de Chat e pelo uso de Tags como filtros visuais e contextuais. A qualidade e a precisão das respostas do Chat dependem fundamentalmente do RNF03 (Precisão na Detecção de Intenção), garantindo que a IA compreenda e retorne exatamente o que foi solicitado.
+
+#### Passo 3: Análise Profunda (Entendendo o "Porquê")
+
+Ao identificar uma chamada de interesse, o usuário clica sobre ela e a plataforma abre um Modal de Detalhes, mantendo o contexto do dashboard. A experiência é de insight direcionado. Em vez de apenas ler a transcrição, o usuário é recebido com o "Ponto de vista da IA", um resumo que explica por que a chamada recebeu aquela pontuação, destacando momentos-chave. Isso acelera drasticamente a análise de causa raiz. O protagonista desta etapa é o Modal de Detalhes da Chamada, que centraliza a transcrição, a pontuação e a análise da IA. A capacidade de ver a nota dividida em critérios objetivos atende ao requisito RF02 (Receber três critérios de avaliação com notas de 0 a 5).
+
+#### Passo 4: Ação (Transformando Dados em Melhoria)
+
+A jornada culmina na capacitação para a ação. Após fechar o modal, o usuário não tem apenas dados, mas um entendimento claro do padrão de comportamento que levou a uma nota baixa, o que o torna apto a agir de forma proativa. A experiência final é de eficiência e empoderamento. O usuário pode, então, usar o botão "+ Analisar chamada(s)" para aumentar a amostragem de forma autônoma, validando se as ações de melhoria estão surtindo efeito. A funcionalidade de enviar novas chamadas para análise está diretamente ligada ao RF01 (Enviar entradas em formato de áudio ou texto) e ao RF05 (Upload de múltiplas chamadas), o que dá ao usuário a capacidade de escalar a operação de monitoria conforme o objetivo do projeto.
+
+Em suma, o fluxo de experiência foi planejado para ser mais do que uma sequência de telas. Ele representa a intersecção entre as necessidades das personas, os princípios de uma interface intuitiva definidos na proposta de UX e o cumprimento dos requisitos funcionais e não funcionais do projeto. O resultado é uma solução coesa, eficiente e genuinamente centrada no usuário.
+
+=======
 &ensp;A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de **"Visão Geral → Investigação → Análise Profunda → Ação"**.
 
 ### Passo 1: Visão Geral (O Panorama)
@@ -1698,4 +1765,5 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
