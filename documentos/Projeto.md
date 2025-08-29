@@ -358,6 +358,32 @@ A jornada culmina na capacitação para a ação. Após fechar o modal, o usuár
 
 Em suma, o fluxo de experiência foi planejado para ser mais do que uma sequência de telas. Ele representa a intersecção entre as necessidades das personas, os princípios de uma interface intuitiva definidos na proposta de UX e o cumprimento dos requisitos funcionais e não funcionais do projeto. O resultado é uma solução coesa, eficiente e genuinamente centrada no usuário.
 
+=======
+&ensp;A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de **"Visão Geral → Investigação → Análise Profunda → Ação"**.
+
+### Passo 1: Visão Geral (O Panorama)
+
+&ensp;Ao acessar o **Dashboard**, a primeira experiência de Carlos é obter um resumo imediato da "saúde" do atendimento através dos **KPIs**.
+
+### Passo 2: Investigação (Conversando com os Dados)
+
+&ensp;Usando a página de **Chat**, Carlos pode fazer perguntas em linguagem natural (digitando ou usando o microfone) para encontrar os casos mais relevantes, como:
+
+> "Me mostre as piores chamadas do mês de julho."
+
+&ensp;A tabela no Dashboard também permite uma investigação visual, onde ele pode ordenar as chamadas por data ou pontuação.
+
+### Passo 3: Análise Profunda (Entendendo o "Porquê")
+
+&ensp;Ao clicar em uma chamada específica (seja na tabela do Dashboard ou em um resultado do Chat), um **Modal de Detalhes** se abre.  
+&ensp;Aqui, a experiência é de clareza e insight, onde a plataforma apresenta não apenas a transcrição, mas uma análise da IA que explica o porquê da pontuação e das tags.
+
+### Passo 4: Ação (Transformando Dados em Melhoria)
+
+&ensp;Com os insights do **"Ponto de vista da IA"**, Carlos pode identificar padrões de comportamento e planejar ações de melhoria para toda a equipe, como ajustar scripts ou criar treinamentos focados.
+
+---
+
 ## 2.5 Modelagem do Fluxo de Negócio
 
 Como parte do entendimento do negócio, foi modelado o fluxo de processo atual (AS-IS) de avaliação da qualidade do atendimento prestado aos clientes da Comgás, utilizando a notação BPMN (Business Process Model and Notation). O objetivo deste mapeamento é representar de forma clara as etapas e interações entre os principais atores responsáveis pelo atendimento e pela análise de conformidade com os padrões da empresa.
@@ -1236,19 +1262,152 @@ _conteúdo_
 
 # 7. Projeto Visual da Solução
 
-_conteúdo_
+&ensp;Esta seção detalha a proposta de experiência do usuário (UX) e o design visual para a plataforma de automação da monitoria de qualidade.  
+&ensp;As seções a seguir representam o protótipo de alta fidelidade desenvolvido no **Figma**, que serve como um guia fiel para a implementação da interface.
 
-## 7.1 Desenvolvimento de Wireframes
+### Nossa Proposta de UX se Baseia em Quatro Pilares Fundamentais
 
-_conteúdo_
+- **Usabilidade e Eficiência:** Interface dividida em duas seções principais (Dashboard e Chat), permitindo dois modos de análise: um visual/exploratório e um conversacional/direto.  
+- **Interfaces Intuitivas:** Padrões de design universalmente reconhecidos (cartões para dados, tabelas, interface de chat).  
+- **Acessibilidade:** Uso de fontes legíveis, bom contraste entre texto e fundo, navegação via teclado e comandos de voz.  
+- **Facilidade de Aprendizado:** Curva de aprendizado mínima, permitindo que um novo usuário extraia valor desde a primeira sessão.  
 
-## 7.2 Desenvolvimento de Mockups
+---
 
-_conteúdo_
+### O Poder das Tags: Resumos Inteligentes
 
-## 7.3 Guia Visual
+&ensp;Um elemento central da proposta de UX são as **Tags**, etiquetas automáticas geradas pela IA após analisar o conteúdo da transcrição.  
+&ensp;Uma mesma chamada pode ter múltiplas tags, como:
 
-_conteúdo_
+- Sentimento Negativo  
+- Script Incompleto  
+- Elogio  
+- Resolvido  
+- Transferência Digital  
+
+---
+
+### Conectando o Design com as Personas
+
+| **Elemento da Interface**       | **Dor/Objetivo da Persona (Carlos Martins)**                                                                 | **Dor/Objetivo da Persona (Julia Souza)** |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| **Cards de KPI**                | Resolve a dor: "Dificultando a visão real do desempenho."<br>Atende ao objetivo: "Ter relatórios objetivos."   | Atende ao interesse: "Obter métricas consolidadas sobre transferências." |
+| **Tabela de Chamadas com Ordenação** | Fornece visão rápida das análises, permitindo ordenar por pontuação e encontrar os melhores/piores casos.         | Permite visualizar chamadas marcadas com a tag *Transferência Digital*. |
+| **Página de Chat**              | Resolve a dor: "Treinamentos genéricos, pouco adaptados."<br>Atende ao objetivo: "Identificar padrões rapidamente." | Atende ao interesse: "Visão clara do canal digital e seus pontos de falha." |
+| **Modal de Detalhes da Chamada**| Atende ao objetivo: "Identificar padrões para embasar treinamentos mais eficazes", com apoio do "Ponto de vista da IA". | Permite análise profunda da transcrição de chamadas de transferência. |
+| **Botão "+ Analisar chamada"**  | Oferece a possibilidade de aumentar a amostragem de monitoria, saindo do 1% manual.                             | N/A |
+
+---
+
+## 7.1 e 7.2 Do Wireframe ao Mockup: A Evolução Visual
+
+&ensp;A seguir, apresentamos a evolução do design, desde a estrutura básica do **wireframe** até o resultado final em **alta fidelidade**.  
+&ensp;O formato lado a lado demonstra como as diretrizes do **Guia Visual** foram aplicadas para transformar o esqueleto funcional em uma interface coesa e polida. Para uma melhor experiencia, veja pelo link do figma [Aqui!](https://www.figma.com/design/5TtflqiZYoHFqskrUrC7hC/Wireframe-e-prot%C3%B3tipo-de-alta-fidelidade-Gas-Protect-Team?node-id=42-900&t=jBWobfOyOwWMA5ju-1)
+
+
+### Tela Principal (Dashboard)
+
+&ensp;Primeira tela visualizada pelo usuário, projetada para fornecer visão geral e rápida da qualidade do atendimento.
+
+**Wireframe (Estrutura)**  
+**Resultado Final (Mockup)**  
+
+<div align="center"><sub>Figura 1 - Estrutura do Dashboard</sub> <br> <img src="img/wireframe-dashboard.png" alt="Wireframe da tela principal do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 2 - Mockup do Dashboard</sub> <br> <img src="img/mockup-dashboard.png" alt="Mockup final do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
+
+---
+
+### Análise Interativa (Chat)
+
+&ensp;A tela de **Chat** é a principal ferramenta para investigações aprofundadas, usando interface conversacional para obter respostas diretas da IA.
+
+**Wireframe (Estrutura)**  
+**Resultado Final (Mockup)**  
+
+<div align="center"><sub>Figura 3 - Estrutura do Chat</sub> <br> <img src="img/wireframe-chat.png" alt="Wireframe do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 4 - Mockup do Chat</sub> <br> <img src="img/mockup-chat.png" alt="Mockup final do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
+
+---
+
+### Fluxo de Análise e Detalhes (Modais)
+
+&ensp;O fluxo de análise de uma nova chamada e a visualização de detalhes de uma chamada existente ocorrem em **modais**, mantendo o usuário no contexto do dashboard.
+
+**Wireframe (Estrutura)**  
+**Resultado Final (Mockup)**  
+
+<div align="center"><sub>Figura 5 - Estrutura do Modal de Input</sub> <br> <img src="img/wireframe-modal-input.png" alt="Wireframe do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 6 - Mockup do Modal de Input</sub> <br> <img src="img/mockup-modal-input.jpg" alt="Mockup final do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 7 - Estrutura do Modal de Detalhes</sub> <br> <img src="img/wireframe-modal-detalhes.png" alt="Wireframe do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 8 - Mockup do Modal de Detalhes</sub> <br> <img src="img/mockup-modal-detalhes.jpg" alt="Mockup final do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
+
+---
+
+## 7.3 Guia Visual (Style Guide)
+
+&ensp;Este guia define os padrões visuais da aplicação para garantir consistência, clareza e identidade coesa.
+
+### Paleta de Cores (Dark Mode)
+
+- **Fundo Principal:** Azul escuro (#1e3350)  
+- **Fundo de Elementos:**  
+  - Translúcido (#2a4a6e, 60% opacidade) – usado em cards e tabelas  
+  - Sólido (#254062) – usado em modais  
+- **Cor de Destaque:** Vermelho (#ff353f)  
+- **Texto Principal:** Branco (#f4f4f4)  
+- **Texto Secundário:** Cinza azulado (#A8B2C3)  
+- **Cores de Status:**  
+  - Verde (#28a745)  
+  - Amarelo (#ffc107)  
+  - Vermelho (#ff353f)  
+
+### Tipografia
+
+- **Fonte:** Inter  
+- **Pesos:**  
+  - Extra Light: Títulos principais  
+  - Regular: Corpo de texto  
+  - Semibold: Destaques (KPIs, etc.)  
+
+### Layout e Estrutura
+
+- Uso de **CSS Flexbox** para garantir responsividade e alinhamento.  
+- **Espaçamento:** Sistema baseado em múltiplos de 4px.  
+
+### Arredondamento (Border Radius)
+
+- **4px e 6px:** Elementos pequenos e interativos (botões, inputs).  
+- **8px e 12px:** Contêineres maiores (cards, modais).  
+
+### Profundidade e Sombras
+
+- **Borda Sutil:** 1px com cor do texto (#f4f4f4), baixa opacidade (5%–10%).  
+- **Sombra Difusa:** #000000 com 20% de opacidade, para efeito de flutuação.  
+
+### Iconografia
+
+- Biblioteca: **Phosphor Icons**.  
+
+---
+
+### O que NÃO Fazer (Antipadrões)
+
+- ❌ Usar cores fora da paleta definida.  
+- ❌ Ignorar a hierarquia de fontes.  
+- ❌ Usar valores de espaçamento "mágicos".  
+- ❌ Misturar estilos de arredondamento.  
+- ❌ Aplicar sombras pretas e duras em fundos escuros.  
 
 # 8. Desenvolvimento do Projeto
 
@@ -1346,30 +1505,207 @@ VALUES ('12345', 'Complaint', 0.92, NOW());
   <sup>Fonte: Material produzido pelos autores (2025).</sup>
 </div>
 
-## 8.3 Desenvolvimento de Features
+## 8.3 Algoritmo de NLP Utilizado e sua Implementação
+
+### Visão Geral do Algoritmo
+
+Nosso sistema de análise de qualidade de atendimento da Comgás implementará uma **arquitetura híbrida** que combina três técnicas complementares de Processamento de Linguagem Natural: **BERT** para análise contextual, **Expressões Regulares (Regex)** para detecção de padrões específicos, e **TF-IDF** para identificação de termos relevantes.
+
+Esta abordagem foi escolhida para atender ao objetivo de escalar a análise de qualidade de 1% para 20% das ligações telefônicas, mantendo precisão analítica enquanto usa recursos computacionais de forma eficiente. Cada componente é aplicado aos aspectos para os quais é mais adequado: BERT para análise semântica complexa, regex para critérios objetivos, e TF-IDF para importância estatística de termos.
+
+### Finalidade e Princípios Fundamentais
+
+A **finalidade** do algoritmo é automatizar a avaliação de qualidade de atendimento telefônico, transformando transcrições de áudio em análises estruturadas que permitam identificação proativa de problemas e melhoria contínua dos padrões de atendimento.
+
+Os **princípios fundamentais** que norteiam a implementação são:
+
+**Complementaridade Técnica:** Diferentes abordagens de NLP são aplicadas conforme sua adequação específica. BERT analisa aspectos subjetivos como cordialidade e eficácia na comunicação, aproveitando sua capacidade de compreensão contextual bidirecional. Regex detecta elementos objetivos como números de protocolo e cumprimento de scripts obrigatórios, garantindo alta precisão para padrões bem definidos.
+
+**Customização para Domínio Específico:** Todos os componentes são adaptados para o vocabulário e procedimentos típicos das interações Comgás-cliente, incluindo fine-tuning de BERT com datasets de atendimento, padrões regex adaptados para protocolos da Comgás, e vocabulários TF-IDF específicos do domínio de gás natural.
+
+**Interpretabilidade:** O sistema fornece informações detalhadas sobre os fatores que contribuíram para cada avaliação, permitindo que supervisores compreendam não apenas o score final, mas também os elementos específicos que influenciaram a análise.
+
+### Benefícios da Abordagem Escolhida
+
+A arquitetura híbrida oferece **melhor performance** através da aplicação de técnicas conforme sua adequação. Enquanto BERT requer recursos computacionais significativos para análise contextual profunda, regex opera com velocidade extremamente alta para detecção de padrões específicos, permitindo processamento eficiente de grandes volumes.
+
+A **confiabilidade** é obtida através de redundância analítica inteligente, onde aspectos importantes são avaliados por múltiplos componentes, permitindo validação cruzada e redução de falsos positivos. A **flexibilidade** permite evolução contínua: novos padrões regex podem ser facilmente adicionados, modelos BERT podem ser retreinados, e vocabulários TF-IDF atualizados conforme mudanças nos procedimentos.
+
+### Fusão de Resultados e Ponderação
+
+Os pesos foram definidos para equilibrar compliance objetiva e análise qualitativa: Regex (40%) para garantir conformidade com scripts obrigatórios, protocolos e procedimentos da Comgás; BERT (40%) para capturar aspectos subjetivos como cordialidade, eficácia na comunicação e satisfação do cliente; e TF-IDF (20%) para fornecer contexto estatístico sobre a relevância de termos-chave. Esta distribuição equilibrada reconhece que tanto compliance quanto qualidade de interação são igualmente importantes para o atendimento da Comgás. Estes pesos podem ser ajustados dinamicamente após a validação com dados reais e feedback do parceiro.
+
+### Desafios e Mitigações
+
+**Qualidade das Transcrições:** Um desafio potencial é a variabilidade na qualidade das transcrições de áudio. Para mitigar isso, planejamos incluir uma etapa de pré-processamento para normalizar o texto, corrigir erros comuns de transcrição (como "protocolo" transcrito como "protocólo"), e implementar verificação de confiança baseada nos scores de transcrição fornecidos pela API.
+
+**Manutenção de Padrões Regex:** A complexidade de manter os padrões de Regex atualizados conforme mudanças nos procedimentos da Comgás será mitigada através de um sistema de configuração externa que permite atualização de padrões sem modificação de código, além de logs detalhados para identificar padrões que precisam de refinamento.
+
+**Fine-tuning do BERT:** A necessidade de dados de alta qualidade para o fine-tuning do BERT será atendida através de um processo iterativo de coleta e anotação de dados, começando com um conjunto inicial de transcrições já avaliadas manualmente e expandindo gradualmente conforme o sistema demonstra eficácia.
+
+## Implementação Específica
+
+### Bibliotecas e Frameworks Utilizados
+
+**Para BERT:** Transformers (Hugging Face) com modelo 'neuralmind/bert-base-portuguese-cased', PyTorch para operações de deep learning, e tokenizers adaptados para português brasileiro.
+
+**Para Processamento de Texto:** NLTK para pré-processamento (tokenização, remoção de stopwords, normalização), biblioteca padrão `re` do Python para expressões regulares.
+
+**Para TF-IDF:** Scikit-learn com TfidfVectorizer customizado, pandas para manipulação de dados, numpy para operações matemáticas.
+
+**Para Gerenciamento:** Logging para monitoramento, psutil para métricas de performance, matplotlib para visualizações.
+
+### Fluxo de Processamento
+
+O fluxo de processamento segue a seguinte arquitetura:
+
+```
+Transcrição de Áudio
+        ↓
+   Pré-processamento
+   (Normalização, Limpeza)
+        ↓
+    ┌─────────────────┐
+    │   Processamento │
+    │    Paralelo     │
+    └─────────────────┘
+    ↓        ↓        ↓
+  BERT     Regex    TF-IDF
+(Semântica) (Padrões) (Termos)
+    ↓        ↓        ↓
+    └─────────────────┘
+           ↓
+    Fusão Ponderada
+    (40% + 40% + 20%)
+           ↓
+    Score Final de Qualidade
+```
+
+### Passos de Configuração
+
+**1. Instalação de Dependências:**
+```bash
+pip install transformers torch nltk scikit-learn pandas numpy
+```
+
+**2. Configuração do BERT:**
+```python
+from transformers import BertTokenizer, BertForSequenceClassification
+
+tokenizer = BertTokenizer.from_pretrained('neuralmind/bert-base-portuguese-cased')
+model = BertForSequenceClassification.from_pretrained(
+    'neuralmind/bert-base-portuguese-cased',
+    num_labels=5  # 5 níveis de qualidade
+)
+```
+
+**3. Configuração de Padrões Regex:**
+```python
+patterns = {
+    'protocolo': [r'protocolo\s*:?\s*(\d{4,8})'],
+    'identificacao': [r'cpf\s*:?\s*(\d{3}\.?\d{3}\.?\d{3}-?\d{2})'],
+    'scripts_obrigatorios': [r'\b(bom\s+dia|boa\s+tarde)\b']
+}
+```
+
+### Exemplo de Código Demonstrativo
+
+```python
+class CallQualityAnalyzer:
+    def __init__(self):
+        # Inicializa componentes BERT, Regex e TF-IDF
+        self.bert_analyzer = BERTQualityAnalyzer()
+        self.regex_matcher = RegexPatternMatcher()
+        self.tfidf_analyzer = TFIDFAnalyzer()
+        
+        # Pesos para fusão de resultados (ajustáveis dinamicamente)
+        self.weights = {'bert': 0.4, 'regex': 0.4, 'tfidf': 0.2}
+    
+    def analyze_call(self, transcript, call_id):
+        # Pré-processamento da transcrição
+        cleaned_transcript = self.preprocess_transcript(transcript)
+        
+        # Análise BERT para contexto semântico
+        bert_score, quality_aspects = self.bert_analyzer.analyze_quality(cleaned_transcript)
+        
+        # Análise Regex para compliance
+        detected_patterns = self.regex_matcher.detect_patterns(transcript)
+        regex_score = self.regex_matcher.calculate_compliance_score(detected_patterns)
+        
+        # Análise TF-IDF para relevância de termos
+        key_terms = self.tfidf_analyzer.get_key_terms(cleaned_transcript)
+        tfidf_score = self.tfidf_analyzer.calculate_relevance_score(cleaned_transcript)
+        
+        # Fusão ponderada de resultados
+        overall_score = (
+            bert_score * self.weights['bert'] +
+            regex_score * self.weights['regex'] +
+            tfidf_score * self.weights['tfidf']
+        )
+        
+        return {
+            'call_id': call_id,
+            'overall_score': overall_score,
+            'component_scores': {
+                'bert': bert_score,
+                'regex': regex_score,
+                'tfidf': tfidf_score
+            },
+            'detected_patterns': detected_patterns,
+            'key_terms': key_terms,
+            'quality_aspects': quality_aspects
+        }
+    
+    def preprocess_transcript(self, transcript):
+        """Normaliza e limpa transcrição para análise"""
+        # Remove caracteres especiais e normaliza espaçamento
+        cleaned = re.sub(r'[^\w\s\.\!\?\,\:\;]', ' ', transcript)
+        cleaned = re.sub(r'\s+', ' ', cleaned).strip().lower()
+        return cleaned
+
+# Exemplo de uso
+analyzer = CallQualityAnalyzer()
+
+transcript = """
+Atendente: Bom dia! Comgás, como posso ajudá-lo?
+Cliente: Preciso de ajuda com minha conta.
+Atendente: Claro! Seu CPF 123.456.789-00? Vou gerar protocolo 12345.
+Cliente: Muito obrigado pela eficiência!
+"""
+
+result = analyzer.analyze_call(transcript, "DEMO_001")
+print(f"Score de Qualidade: {result['overall_score']:.3f}")
+print(f"Componentes: BERT={result['component_scores']['bert']:.3f}, "
+      f"Regex={result['component_scores']['regex']:.3f}, "
+      f"TF-IDF={result['component_scores']['tfidf']:.3f}")
+```
+
+Esta implementação demonstra como a arquitetura híbrida processa transcrições de forma eficiente, combinando a capacidade analítica do BERT com a precisão do regex e a relevância estatística do TF-IDF para produzir avaliações completas e confiáveis de qualidade de atendimento.
+
+## 8.4 Desenvolvimento de Features
 
 _conteúdo_
 
 **Nota:** Insira uma explicação de entregas em cada Sprint.
 
-## 8.3.1 Sprint 3
+## 8.4.1 Sprint 3
 
 _conteúdo_
 
-## 8.3.2 Sprint 4
+## 8.4.2 Sprint 4
 
 _conteúdo_
 
-## 8.3.3 Sprint 5
+## 8.4.3 Sprint 5
 
 _conteúdo_
 
-## 8.4 Testes Unitários e de Integração
+## 8.5 Testes Unitários e de Integração
 
 _conteúdo_
 Obs.: Insira informações sobre estratégias para realização dos testes
 
-## 8.5 Documentações automáticas
+## 8.6 Documentações automáticas
 
 _conteúdo_
 Obs.: Insira informações sobre quais frameworks foram usados e como acessar.
