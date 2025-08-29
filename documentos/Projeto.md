@@ -292,6 +292,31 @@ Como objetivos secundários, a plataforma busca:
   <sup>Fonte: Material produzido pelos autores (2025).</sup>
 </div>
 
+&ensp;A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de **"Visão Geral → Investigação → Análise Profunda → Ação"**.
+
+### Passo 1: Visão Geral (O Panorama)
+
+&ensp;Ao acessar o **Dashboard**, a primeira experiência de Carlos é obter um resumo imediato da "saúde" do atendimento através dos **KPIs**.
+
+### Passo 2: Investigação (Conversando com os Dados)
+
+&ensp;Usando a página de **Chat**, Carlos pode fazer perguntas em linguagem natural (digitando ou usando o microfone) para encontrar os casos mais relevantes, como:
+
+> "Me mostre as piores chamadas do mês de julho."
+
+&ensp;A tabela no Dashboard também permite uma investigação visual, onde ele pode ordenar as chamadas por data ou pontuação.
+
+### Passo 3: Análise Profunda (Entendendo o "Porquê")
+
+&ensp;Ao clicar em uma chamada específica (seja na tabela do Dashboard ou em um resultado do Chat), um **Modal de Detalhes** se abre.  
+&ensp;Aqui, a experiência é de clareza e insight, onde a plataforma apresenta não apenas a transcrição, mas uma análise da IA que explica o porquê da pontuação e das tags.
+
+### Passo 4: Ação (Transformando Dados em Melhoria)
+
+&ensp;Com os insights do **"Ponto de vista da IA"**, Carlos pode identificar padrões de comportamento e planejar ações de melhoria para toda a equipe, como ajustar scripts ou criar treinamentos focados.
+
+---
+
 ## 2.5 Modelagem do Fluxo de Negócio
 
 Como parte do entendimento do negócio, foi modelado o fluxo de processo atual (AS-IS) de avaliação da qualidade do atendimento prestado aos clientes da Comgás, utilizando a notação BPMN (Business Process Model and Notation). O objetivo deste mapeamento é representar de forma clara as etapas e interações entre os principais atores responsáveis pelo atendimento e pela análise de conformidade com os padrões da empresa.
@@ -1170,19 +1195,152 @@ _conteúdo_
 
 # 7. Projeto Visual da Solução
 
-_conteúdo_
+&ensp;Esta seção detalha a proposta de experiência do usuário (UX) e o design visual para a plataforma de automação da monitoria de qualidade.  
+&ensp;As seções a seguir representam o protótipo de alta fidelidade desenvolvido no **Figma**, que serve como um guia fiel para a implementação da interface.
 
-## 7.1 Desenvolvimento de Wireframes
+### Nossa Proposta de UX se Baseia em Quatro Pilares Fundamentais
 
-_conteúdo_
+- **Usabilidade e Eficiência:** Interface dividida em duas seções principais (Dashboard e Chat), permitindo dois modos de análise: um visual/exploratório e um conversacional/direto.  
+- **Interfaces Intuitivas:** Padrões de design universalmente reconhecidos (cartões para dados, tabelas, interface de chat).  
+- **Acessibilidade:** Uso de fontes legíveis, bom contraste entre texto e fundo, navegação via teclado e comandos de voz.  
+- **Facilidade de Aprendizado:** Curva de aprendizado mínima, permitindo que um novo usuário extraia valor desde a primeira sessão.  
 
-## 7.2 Desenvolvimento de Mockups
+---
 
-_conteúdo_
+### O Poder das Tags: Resumos Inteligentes
 
-## 7.3 Guia Visual
+&ensp;Um elemento central da proposta de UX são as **Tags**, etiquetas automáticas geradas pela IA após analisar o conteúdo da transcrição.  
+&ensp;Uma mesma chamada pode ter múltiplas tags, como:
 
-_conteúdo_
+- Sentimento Negativo  
+- Script Incompleto  
+- Elogio  
+- Resolvido  
+- Transferência Digital  
+
+---
+
+### Conectando o Design com as Personas
+
+| **Elemento da Interface**       | **Dor/Objetivo da Persona (Carlos Martins)**                                                                 | **Dor/Objetivo da Persona (Julia Souza)** |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| **Cards de KPI**                | Resolve a dor: "Dificultando a visão real do desempenho."<br>Atende ao objetivo: "Ter relatórios objetivos."   | Atende ao interesse: "Obter métricas consolidadas sobre transferências." |
+| **Tabela de Chamadas com Ordenação** | Fornece visão rápida das análises, permitindo ordenar por pontuação e encontrar os melhores/piores casos.         | Permite visualizar chamadas marcadas com a tag *Transferência Digital*. |
+| **Página de Chat**              | Resolve a dor: "Treinamentos genéricos, pouco adaptados."<br>Atende ao objetivo: "Identificar padrões rapidamente." | Atende ao interesse: "Visão clara do canal digital e seus pontos de falha." |
+| **Modal de Detalhes da Chamada**| Atende ao objetivo: "Identificar padrões para embasar treinamentos mais eficazes", com apoio do "Ponto de vista da IA". | Permite análise profunda da transcrição de chamadas de transferência. |
+| **Botão "+ Analisar chamada"**  | Oferece a possibilidade de aumentar a amostragem de monitoria, saindo do 1% manual.                             | N/A |
+
+---
+
+## 7.1 e 7.2 Do Wireframe ao Mockup: A Evolução Visual
+
+&ensp;A seguir, apresentamos a evolução do design, desde a estrutura básica do **wireframe** até o resultado final em **alta fidelidade**.  
+&ensp;O formato lado a lado demonstra como as diretrizes do **Guia Visual** foram aplicadas para transformar o esqueleto funcional em uma interface coesa e polida. Para uma melhor experiencia, veja pelo link do figma [Aqui!](https://www.figma.com/design/5TtflqiZYoHFqskrUrC7hC/Wireframe-e-prot%C3%B3tipo-de-alta-fidelidade-Gas-Protect-Team?node-id=42-900&t=jBWobfOyOwWMA5ju-1)
+
+
+### Tela Principal (Dashboard)
+
+&ensp;Primeira tela visualizada pelo usuário, projetada para fornecer visão geral e rápida da qualidade do atendimento.
+
+**Wireframe (Estrutura)**  
+**Resultado Final (Mockup)**  
+
+<div align="center"><sub>Figura 1 - Estrutura do Dashboard</sub> <br> <img src="img/wireframe-dashboard.png" alt="Wireframe da tela principal do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 2 - Mockup do Dashboard</sub> <br> <img src="img/mockup-dashboard.png" alt="Mockup final do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
+
+---
+
+### Análise Interativa (Chat)
+
+&ensp;A tela de **Chat** é a principal ferramenta para investigações aprofundadas, usando interface conversacional para obter respostas diretas da IA.
+
+**Wireframe (Estrutura)**  
+**Resultado Final (Mockup)**  
+
+<div align="center"><sub>Figura 3 - Estrutura do Chat</sub> <br> <img src="img/wireframe-chat.png" alt="Wireframe do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 4 - Mockup do Chat</sub> <br> <img src="img/mockup-chat.png" alt="Mockup final do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
+
+---
+
+### Fluxo de Análise e Detalhes (Modais)
+
+&ensp;O fluxo de análise de uma nova chamada e a visualização de detalhes de uma chamada existente ocorrem em **modais**, mantendo o usuário no contexto do dashboard.
+
+**Wireframe (Estrutura)**  
+**Resultado Final (Mockup)**  
+
+<div align="center"><sub>Figura 5 - Estrutura do Modal de Input</sub> <br> <img src="img/wireframe-modal-input.png" alt="Wireframe do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 6 - Mockup do Modal de Input</sub> <br> <img src="img/mockup-modal-input.jpg" alt="Mockup final do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 7 - Estrutura do Modal de Detalhes</sub> <br> <img src="img/wireframe-modal-detalhes.png" alt="Wireframe do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<div align="center"><sub>Figura 8 - Mockup do Modal de Detalhes</sub> <br> <img src="img/mockup-modal-detalhes.jpg" alt="Mockup final do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
+
+<sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
+
+---
+
+## 7.3 Guia Visual (Style Guide)
+
+&ensp;Este guia define os padrões visuais da aplicação para garantir consistência, clareza e identidade coesa.
+
+### Paleta de Cores (Dark Mode)
+
+- **Fundo Principal:** Azul escuro (#1e3350)  
+- **Fundo de Elementos:**  
+  - Translúcido (#2a4a6e, 60% opacidade) – usado em cards e tabelas  
+  - Sólido (#254062) – usado em modais  
+- **Cor de Destaque:** Vermelho (#ff353f)  
+- **Texto Principal:** Branco (#f4f4f4)  
+- **Texto Secundário:** Cinza azulado (#A8B2C3)  
+- **Cores de Status:**  
+  - Verde (#28a745)  
+  - Amarelo (#ffc107)  
+  - Vermelho (#ff353f)  
+
+### Tipografia
+
+- **Fonte:** Inter  
+- **Pesos:**  
+  - Extra Light: Títulos principais  
+  - Regular: Corpo de texto  
+  - Semibold: Destaques (KPIs, etc.)  
+
+### Layout e Estrutura
+
+- Uso de **CSS Flexbox** para garantir responsividade e alinhamento.  
+- **Espaçamento:** Sistema baseado em múltiplos de 4px.  
+
+### Arredondamento (Border Radius)
+
+- **4px e 6px:** Elementos pequenos e interativos (botões, inputs).  
+- **8px e 12px:** Contêineres maiores (cards, modais).  
+
+### Profundidade e Sombras
+
+- **Borda Sutil:** 1px com cor do texto (#f4f4f4), baixa opacidade (5%–10%).  
+- **Sombra Difusa:** #000000 com 20% de opacidade, para efeito de flutuação.  
+
+### Iconografia
+
+- Biblioteca: **Phosphor Icons**.  
+
+---
+
+### O que NÃO Fazer (Antipadrões)
+
+- ❌ Usar cores fora da paleta definida.  
+- ❌ Ignorar a hierarquia de fontes.  
+- ❌ Usar valores de espaçamento "mágicos".  
+- ❌ Misturar estilos de arredondamento.  
+- ❌ Aplicar sombras pretas e duras em fundos escuros.  
 
 # 8. Desenvolvimento do Projeto
 
