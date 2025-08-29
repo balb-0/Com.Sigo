@@ -292,6 +292,45 @@ Como objetivos secundários, a plataforma busca:
   <sup>Fonte: Material produzido pelos autores (2025).</sup>
 </div>
 
+### 2.4.1 Estudo sobre o Usuário do Sistema
+
+Para compreender melhor as necessidades, preferências, habilidades e limitações dos usuários os grupos se reuniram e elaboraram um conjunto de perguntas estratégicas. O objetivo foi mapear de forma estruturada os perfis dos analistas de qualidade, suas práticas atuais e suas expectativas em relação a um sistema automatizado de análise de chamadas.
+
+As perguntas foram consolidadas em um formulário google simples, que equilibra questões objetivas (de múltipla escolha) com uma pergunta aberta, permitindo coletar tanto dados quantitativos quanto qualitativos.
+
+#### 2.4.2 Questionário Elaborado
+
+| Nº | Pergunta | Opções de Resposta |
+|----|----------|---------------------|
+| 1  | Tempo de experiência na função | - Menos de 1 ano <br> - 1 a 3 anos <br> - 3 a 5 anos <br> - Mais de 5 anos |
+| 2  | Como você se considera em relação ao uso de tecnologias e ferramentas digitais? | - Iniciante (uso básico, com dificuldades) <br> - Intermediário (uso bem, mas com ajuda ocasional) <br> - Avançado (domino ferramentas e aprendo rápido) |
+| 3  | Quais são os principais pontos que você analisa em uma ligação? | - Conformidade com scripts <br> - Tom de voz/empatia <br> - Tempo de atendimento <br> - Resolução do problema do cliente <br> - Satisfação do cliente <br> - Outro (campo aberto) |
+| 4  | O que seria mais importante para você em um sistema de análise automática? | - Confiabilidade dos dados <br> - Rapidez nos resultados <br> - Facilidade de uso <br> - Visualização clara em dashboards <br> - Personalização de métricas <br> - Outro (campo aberto) |
+| 5  | Qual formato de material de apoio você acha mais útil para aprender a usar uma nova ferramenta? | - Vídeo explicativo <br> - PDF com passo a passo <br> - Somente interface intuitiva <br> - Todas as opções, se possível |
+| 6  | Em poucas palavras, o que tornaria essa ferramenta realmente útil para o seu dia a dia? | Resposta aberta |
+
+#### 2.4.3 Objetivo de Cada Pergunta
+
+- Pergunta 1 – Tempo de experiência na função  
+  Ajuda a entender o nível de senioridade dos usuários, permitindo diferenciar necessidades de novatos e veteranos.  
+
+- Pergunta 2 – Familiaridade com tecnologia  
+  Identifica o nível de domínio digital dos usuários, fundamental para ajustar a complexidade da interface e os materiais de apoio.  
+
+- Pergunta 3 – Critérios analisados em uma ligação  
+  Revela quais aspectos do atendimento são mais relevantes para os analistas e devem ser priorizados na automação.  
+
+- Pergunta 4 – Prioridades no sistema automático  
+  Permite identificar o que os usuários mais valorizam (ex.: rapidez, confiabilidade, personalização), servindo como guia para requisitos funcionais.  
+
+- Pergunta 5 – Formato de material de apoio  
+  Informa como os usuários preferem aprender a utilizar novas ferramentas, ajudando na definição da estratégia de treinamento e suporte.  
+
+- Pergunta 6 – Expectativas abertas  
+  Coleta insights qualitativos, capturando necessidades que não foram previstas nas opções anteriores.  
+
+#### 2.4.4 Respostas Recebidas e Insights
+
 ## 2.5 Modelagem do Fluxo de Negócio
 
 Como parte do entendimento do negócio, foi modelado o fluxo de processo atual (AS-IS) de avaliação da qualidade do atendimento prestado aos clientes da Comgás, utilizando a notação BPMN (Business Process Model and Notation). O objetivo deste mapeamento é representar de forma clara as etapas e interações entre os principais atores responsáveis pelo atendimento e pela análise de conformidade com os padrões da empresa.
