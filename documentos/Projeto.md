@@ -1419,6 +1419,8 @@ _conteúdo_
 
 ## 8.2 API de Áudio
 
+### 8.2.1 API para Receber os Áudios Enviados pelo Usuário
+
 ### Endpoint Disponível
 
 #### **1. Receive Audio Call**
@@ -1504,6 +1506,244 @@ VALUES ('12345', 'Complaint', 0.92, NOW());
 
   <sup>Fonte: Material produzido pelos autores (2025).</sup>
 </div>
+
+### Exemplos de Uso
+
+#### **Exemplo 1: cURL**
+
+```bash
+curl -X POST http://api.comgas.com/api/receiveAudioCall \
+  -H "Content-Type: multipart/form-data" \
+  -F "audio=@ligacao_cliente_vazamento.mp3"
+```
+
+#### **Exemplo 2: JavaScript (Frontend)**
+
+```javascript
+// Quando usuário seleciona arquivo de áudio no sistema da Comgás
+const audioFile = document.getElementById('audioUpload').files[0];
+const formData = new FormData();
+formData.append('audio', audioFile);
+
+fetch('/api/receiveAudioCall', {
+  method: 'POST',
+  body: formData
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Áudio enviado:', data.audioId);
+  // Mostra para usuário que análise de qualidade começou
+});
+```
+
+#### **Exemplo 3: Python (Backend)**
+
+```python
+import requests
+
+def processar_audio_comgas(caminho_audio):
+    url = "http://api.comgas.com/api/receiveAudioCall"
+    files = {'audio': open(caminho_audio, 'rb')}
+    
+    response = requests.post(url, files=files)
+    return response.json()
+
+# Exemplo de uso no sistema interno
+resultado = processar_audio_comgas('chamada_atendimento_gas.wav')
+print(f"Audio ID: {resultado['data']['audioId']}")
+print(f"Status: {resultado['data']['status']}")
+```
+
+### 8.2.2 API para Implementar a Etapa de Speech to Text e Text to Speech
+
+#### Endpoints Disponíveis
+
+##### **1. Speech to Text (Whisper API)**
+
+* **Endpoint:** `https://api.openai.com/v1/audio/transcriptions`
+* **Método HTTP:** `POST`
+* **Descrição:** Este endpoint da OpenAI permite converter arquivos de áudio em texto utilizando o modelo Whisper. O sistema envia o arquivo de áudio recebido e obtém a transcrição completa com identificação de falantes e timestamps.
+
+##### **2. Text to Speech (TTS API)**
+
+* **Endpoint:** `https://api.openai.com/v1/audio/speech`
+* **Método HTTP:** `POST`
+* **Descrição:** Este endpoint da OpenAI permite converter texto em áudio sintetizado. Utilizado para gerar respostas automáticas ou feedback de qualidade em formato de áudio para o usuário.
+
+#### Parâmetros de Entrada
+
+##### **Speech to Text**
+
+* **Headers:**
+  * `Authorization: Bearer {OPENAI_API_KEY}` *(obrigatório)*
+  * `Content-Type: multipart/form-data` *(obrigatório)*
+
+* **Body (form-data / multipart):**
+  * `file` *(obrigatório)*: arquivo de áudio para transcrição
+  * `model` *(obrigatório)*: modelo a ser utilizado (whisper-1)
+  * `language` *(opcional)*: idioma do áudio (pt)
+  * `response_format` *(opcional)*: formato da resposta (json, text, srt, verbose_json, vtt)
+
+##### **Text to Speech**
+
+* **Headers:**
+  * `Authorization: Bearer {OPENAI_API_KEY}` *(obrigatório)*
+  * `Content-Type: application/json` *(obrigatório)*
+
+* **Body (JSON):**
+  * `model` *(obrigatório)*: modelo TTS a ser utilizado (tts-1, tts-1-hd)
+  * `input` *(obrigatório)*: texto para conversão em áudio
+  * `voice` *(obrigatório)*: tipo de voz (alloy, echo, fable, onyx, nova, shimmer)
+  * `response_format` *(opcional)*: formato de áudio (mp3, opus, aac, flac)
+  * `speed` *(opcional)*: velocidade da fala (0.25 a 4.0)
+
+#### Regras dos Arquivos
+
+##### **Speech to Text**
+
+* **Formatos suportados:** `.mp3`, `.mp4`, `.mpeg`, `.mpga`, `.m4a`, `.wav`, `.webm`
+* **Tamanho máximo:** `25 MB`
+* **Duração suportada:** sem limite específico
+* **Requisitos adicionais:**
+  * O áudio deve estar em qualidade adequada para transcrição
+  * Suporte a múltiplos idiomas
+
+##### **Text to Speech**
+
+* **Tamanho máximo do texto:** `4096 caracteres`
+* **Formatos de saída:** `.mp3`, `.opus`, `.aac`, `.flac`
+* **Requisitos adicionais:**
+  * Texto deve estar em formato UTF-8
+  * Suporte a múltiplas vozes e velocidades
+
+#### Respostas Esperadas
+
+##### **Speech to Text - Sucesso (200 OK)**
+
+```json
+{
+  "text": "Alô, Comgás, bom dia. Como posso ajudá-lo? Bom dia, eu gostaria de relatar um vazamento de gás na minha rua."
+}
+```
+
+##### **Speech to Text - Formato Verbose (200 OK)**
+
+```json
+{
+  "task": "transcribe",
+  "language": "portuguese",
+  "duration": 45.2,
+  "text": "Alô, Comgás, bom dia. Como posso ajudá-lo? Bom dia, eu gostaria de relatar um vazamento de gás na minha rua.",
+  "words": [
+    {
+      "word": "Alô",
+      "start": 0.0,
+      "end": 0.5
+    },
+    {
+      "word": "Comgás",
+      "start": 0.6,
+      "end": 1.2
+    }
+  ]
+}
+```
+
+##### **Text to Speech - Sucesso (200 OK)**
+
+```
+Retorna arquivo de áudio binário no formato especificado
+Content-Type: audio/mpeg (para MP3)
+```
+
+##### **Erro de Autenticação (401 Unauthorized)**
+
+```json
+{
+  "error": {
+    "message": "Incorrect API key provided",
+    "type": "invalid_request_error",
+    "code": "invalid_api_key"
+  }
+}
+```
+
+##### **Erro de Validação (400 Bad Request)**
+
+```json
+{
+  "error": {
+    "message": "Invalid file format. Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, webm",
+    "type": "invalid_request_error"
+  }
+}
+```
+
+#### Integração com Sistema Interno
+
+Após receber o áudio pelo endpoint `/api/receiveAudioCall`, o sistema realiza as seguintes integrações:
+
+##### **1. Transcrição do Áudio**
+
+```python
+import openai
+
+# Configuração da API
+openai.api_key = "sua_chave_api_aqui"
+
+# Envio para transcrição
+with open("audio_file.mp3", "rb") as audio_file:
+    transcript = openai.Audio.transcribe(
+        model="whisper-1",
+        file=audio_file,
+        language="pt",
+        response_format="verbose_json"
+    )
+```
+
+##### **2. Análise da Transcrição**
+
+```python
+# Prompt para análise de intenção
+prompt = f"""
+Você é um analizador de intenção de chamada.
+Input: {transcript['text']}
+Task: Identificar a intenção do cliente (reclamações, elogios, profanidades, etc.)
+Output: SQL query para inserir o resultado na tabela `call_intentions`.
+"""
+
+# Envio para ChatGPT
+response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": prompt}]
+)
+```
+
+##### **3. Geração de Resposta em Áudio (Opcional)**
+
+```python
+# Conversão de texto para áudio
+response_audio = openai.Audio.create_speech(
+    model="tts-1",
+    voice="nova",
+    input="Obrigado pelo seu contato. Sua solicitação foi registrada com sucesso."
+)
+```
+
+#### Exemplo de Saída Esperada (Análise)
+
+```sql
+INSERT INTO call_intentions (audio_id, intention, confidence, created_at)
+VALUES ('12345', 'Gas_Leak_Report', 0.95, NOW());
+```
+
+#### Fluxo de Processamento
+
+1. **Recebimento:** Sistema recebe áudio via `/api/receiveAudioCall`
+2. **Transcrição:** Áudio é enviado para Whisper API da OpenAI
+3. **Análise:** Transcrição é processada pelo ChatGPT para identificar intenção
+4. **Armazenamento:** Resultado é salvo no banco de dados
+5. **Resposta:** Sistema pode gerar feedback em áudio via TTS API (opcional)
 
 ## 8.3 Algoritmo de NLP Utilizado e sua Implementação
 
