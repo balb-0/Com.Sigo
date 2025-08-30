@@ -74,8 +74,23 @@ Esta seção mostra como foi a gestão de projetos em cada uma das sprints.
 
 
 ## 2.2 Sprint 2
-_conteúdo_
- **Nota:** Insira informações sobre mudanças realizadas.
+## Pontos Fortes
+
+&nbsp;&nbsp;&nbsp;&nbsp;A Sprint 2 destacou-se pela excelente colaboração e comunicação entre os membros da equipe. Os integrantes demonstraram maior proatividade em se ajudar mutuamente, compartilhando conhecimentos e solucionando dúvidas de forma coletiva. Essa melhoria na comunicação facilitou a resolução de problemas técnicos e contribuiu para um ambiente de trabalho mais integrado e produtivo.
+
+## Pontos Fracos
+
+&nbsp;&nbsp;&nbsp;&nbsp;Durante esta sprint, identificou-se que a organização do Trello e das tarefas necessita de aprimoramento. A falta de padronização na criação e atualização dos cards gerou confusão sobre o status real das atividades, dificultando o acompanhamento do progresso. Além disso, a equipe poderia ter aproveitado melhor sua capacidade produtiva, puxando algumas tarefas da sprint seguinte para execução antecipada, otimizando assim o cronograma geral do projeto.
+
+## Sugestões de Melhorias
+
+&nbsp;&nbsp;&nbsp;&nbsp;Para a próxima sprint, recomenda-se a implementação das seguintes ações:
+
+- **Padronização do Trello**: Estabelecer um formato padrão para criação de cards e manter o board sempre atualizado.
+- **Aproveitamento da capacidade produtiva**: Avaliar a possibilidade de puxar tarefas da sprint seguinte quando há disponibilidade da equipe.
+- **Preparo mais organizado pré-sprint**: Dedicar mais tempo ao planejamento e organização das atividades antes do início da sprint para garantir maior clareza e eficiência na execução.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Com essas melhorias, a equipe poderá aproveitar ainda melhor a boa comunicação estabelecida e garantir maior clareza na execução das tarefas.
 
 ## 2.3 Sprint 3
 _conteúdo_
