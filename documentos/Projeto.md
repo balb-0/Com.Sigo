@@ -1284,51 +1284,53 @@ VALUES ('12345', 'Complaint', 0.92, NOW());
 
 ### Visão Geral do Algoritmo
 
-Nosso sistema de análise de qualidade de atendimento da Comgás implementará uma **arquitetura híbrida** que combina três técnicas complementares de Processamento de Linguagem Natural: **BERT** para análise contextual, **Expressões Regulares (Regex)** para detecção de padrões específicos, e **TF-IDF** para identificação de termos relevantes.
+Nosso sistema de análise de qualidade de atendimento da Comgás vai usar uma arquitetura híbrida que combina três técnicas de Processamento de Linguagem Natural: BERT para análise contextual, Expressões Regulares (Regex) para detecção de padrões específicos, e TF-IDF para identificação de termos relevantes.
 
-Esta abordagem foi escolhida para atender ao objetivo de escalar a análise de qualidade de 1% para 20% das ligações telefônicas, mantendo precisão analítica enquanto usa recursos computacionais de forma eficiente. Cada componente é aplicado aos aspectos para os quais é mais adequado: BERT para análise semântica complexa, regex para critérios objetivos, e TF-IDF para importância estatística de termos.
+Escolhemos essa abordagem para conseguir analisar 20% das ligações (ao invés de apenas 1% atual) mantendo a qualidade da análise e usando os recursos computacionais de forma eficiente. Cada técnica é aplicada onde funciona melhor: BERT para entender o contexto e aspectos subjetivos, regex para encontrar informações objetivas como protocolos e CPFs, e TF-IDF para identificar palavras importantes estatisticamente.
 
 ### Finalidade e Princípios Fundamentais
 
-A **finalidade** do algoritmo é automatizar a avaliação de qualidade de atendimento telefônico, transformando transcrições de áudio em análises estruturadas que permitam identificação proativa de problemas e melhoria contínua dos padrões de atendimento.
+O objetivo do algoritmo é automatizar a avaliação de qualidade do atendimento telefônico, transformando as transcrições de áudio em análises organizadas que ajudem a identificar problemas antes que se tornem reclamações e melhorar continuamente os padrões de atendimento.
 
-Os **princípios fundamentais** que norteiam a implementação são:
+Os princípios que guiam nossa implementação são:
 
-**Complementaridade Técnica:** Diferentes abordagens de NLP são aplicadas conforme sua adequação específica. BERT analisa aspectos subjetivos como cordialidade e eficácia na comunicação, aproveitando sua capacidade de compreensão contextual bidirecional. Regex detecta elementos objetivos como números de protocolo e cumprimento de scripts obrigatórios, garantindo alta precisão para padrões bem definidos.
+Complementaridade Técnica: Usamos diferentes abordagens de NLP conforme cada uma funciona melhor. BERT analisa aspectos subjetivos como cordialidade e eficácia na comunicação, aproveitando sua capacidade de entender o contexto da conversa. Regex detecta elementos objetivos como números de protocolo e cumprimento de scripts obrigatórios, garantindo alta precisão para padrões bem definidos.
 
-**Customização para Domínio Específico:** Todos os componentes são adaptados para o vocabulário e procedimentos típicos das interações Comgás-cliente, incluindo fine-tuning de BERT com datasets de atendimento, padrões regex adaptados para protocolos da Comgás, e vocabulários TF-IDF específicos do domínio de gás natural.
+Adaptação para o Domínio da Comgás: Todos os componentes são customizados para o vocabulário e procedimentos típicos das conversas entre Comgás e clientes. Isso inclui treinar o BERT com dados específicos de atendimento, criar padrões regex adaptados para os protocolos da Comgás, e desenvolver vocabulários TF-IDF específicos do setor de gás natural.
 
-**Interpretabilidade:** O sistema fornece informações detalhadas sobre os fatores que contribuíram para cada avaliação, permitindo que supervisores compreendam não apenas o score final, mas também os elementos específicos que influenciaram a análise.
+Transparência nos Resultados: O sistema fornece informações detalhadas sobre os fatores que contribuíram para cada avaliação, permitindo que supervisores entendam não apenas a nota final, mas também quais elementos específicos influenciaram a análise.
 
 ### Benefícios da Abordagem Escolhida
 
-A arquitetura híbrida oferece **melhor performance** através da aplicação de técnicas conforme sua adequação. Enquanto BERT requer recursos computacionais significativos para análise contextual profunda, regex opera com velocidade extremamente alta para detecção de padrões específicos, permitindo processamento eficiente de grandes volumes.
+A arquitetura híbrida oferece melhor performance através do uso adequado de cada técnica. Enquanto BERT precisa de mais recursos computacionais para análise contextual profunda, regex funciona muito rapidamente para detectar padrões específicos, permitindo processar grandes volumes de forma eficiente.
 
-A **confiabilidade** é obtida através de redundância analítica inteligente, onde aspectos importantes são avaliados por múltiplos componentes, permitindo validação cruzada e redução de falsos positivos. A **flexibilidade** permite evolução contínua: novos padrões regex podem ser facilmente adicionados, modelos BERT podem ser retreinados, e vocabulários TF-IDF atualizados conforme mudanças nos procedimentos.
+A confiabilidade é obtida através de análise redundante, onde aspectos importantes são avaliados por múltiplos componentes, permitindo validação cruzada e redução de erros. A flexibilidade permite evolução contínua: novos padrões regex podem ser facilmente adicionados, modelos BERT podem ser retreinados, e vocabulários TF-IDF atualizados conforme mudanças nos procedimentos.
 
 ### Fusão de Resultados e Ponderação
 
-Os pesos foram definidos para equilibrar compliance objetiva e análise qualitativa: Regex (40%) para garantir conformidade com scripts obrigatórios, protocolos e procedimentos da Comgás; BERT (40%) para capturar aspectos subjetivos como cordialidade, eficácia na comunicação e satisfação do cliente; e TF-IDF (20%) para fornecer contexto estatístico sobre a relevância de termos-chave. Esta distribuição equilibrada reconhece que tanto compliance quanto qualidade de interação são igualmente importantes para o atendimento da Comgás. Estes pesos podem ser ajustados dinamicamente após a validação com dados reais e feedback do parceiro.
+Os pesos foram definidos para equilibrar compliance objetiva e análise qualitativa: Regex (40%) para garantir conformidade com scripts obrigatórios, protocolos e procedimentos da Comgás; BERT (40%) para capturar aspectos subjetivos como cordialidade, eficácia na comunicação e satisfação do cliente; e TF-IDF (20%) para fornecer contexto estatístico sobre a relevância de termos-chave. 
+
+Esta distribuição equilibrada reconhece que tanto compliance quanto qualidade de interação são igualmente importantes para o atendimento da Comgás. Estes pesos podem ser ajustados dinamicamente após a validação com dados reais e feedback do parceiro.
 
 ### Desafios e Mitigações
 
-**Qualidade das Transcrições:** Um desafio potencial é a variabilidade na qualidade das transcrições de áudio. Para mitigar isso, planejamos incluir uma etapa de pré-processamento para normalizar o texto, corrigir erros comuns de transcrição (como "protocolo" transcrito como "protocólo"), e implementar verificação de confiança baseada nos scores de transcrição fornecidos pela API.
+Qualidade das Transcrições: Um desafio é a variabilidade na qualidade das transcrições de áudio. Para resolver isso, incluímos uma etapa de pré-processamento para normalizar o texto, corrigir erros comuns de transcrição, e implementar verificação de confiança baseada nos scores de transcrição fornecidos pela API.
 
-**Manutenção de Padrões Regex:** A complexidade de manter os padrões de Regex atualizados conforme mudanças nos procedimentos da Comgás será mitigada através de um sistema de configuração externa que permite atualização de padrões sem modificação de código, além de logs detalhados para identificar padrões que precisam de refinamento.
+Manutenção de Padrões Regex: A complexidade de manter os padrões de Regex atualizados conforme mudanças nos procedimentos da Comgás será resolvida através de um sistema de configuração externa que permite atualizar padrões sem modificar código, além de logs detalhados para identificar padrões que precisam de ajustes.
 
-**Fine-tuning do BERT:** A necessidade de dados de alta qualidade para o fine-tuning do BERT será atendida através de um processo iterativo de coleta e anotação de dados, começando com um conjunto inicial de transcrições já avaliadas manualmente e expandindo gradualmente conforme o sistema demonstra eficácia.
+Fine-tuning do BERT: A necessidade de dados de alta qualidade para treinar o BERT será atendida através de um processo gradual de coleta e anotação de dados, começando com transcrições já avaliadas manualmente e expandindo conforme o sistema demonstra eficácia.
 
 ## Implementação Específica
 
 ### Bibliotecas e Frameworks Utilizados
 
-**Para BERT:** Transformers (Hugging Face) com modelo 'neuralmind/bert-base-portuguese-cased', PyTorch para operações de deep learning, e tokenizers adaptados para português brasileiro.
+Para BERT: Transformers (Hugging Face) com modelo 'neuralmind/bert-base-portuguese-cased', PyTorch para operações de deep learning, e tokenizers adaptados para português brasileiro.
 
-**Para Processamento de Texto:** NLTK para pré-processamento (tokenização, remoção de stopwords, normalização), biblioteca padrão `re` do Python para expressões regulares.
+Para Processamento de Texto: NLTK para pré-processamento (tokenização, remoção de stopwords, normalização), biblioteca padrão 're' do Python para expressões regulares.
 
-**Para TF-IDF:** Scikit-learn com TfidfVectorizer customizado, pandas para manipulação de dados, numpy para operações matemáticas.
+Para TF-IDF: Scikit-learn com TfidfVectorizer customizado, pandas para manipulação de dados, numpy para operações matemáticas.
 
-**Para Gerenciamento:** Logging para monitoramento, psutil para métricas de performance, matplotlib para visualizações.
+Para Gerenciamento: Logging para monitoramento, psutil para métricas de performance, matplotlib para visualizações.
 
 ### Fluxo de Processamento
 
@@ -1346,7 +1348,7 @@ Transcrição de Áudio
     └─────────────────┘
     ↓        ↓        ↓
   BERT     Regex    TF-IDF
-(Semântica) (Padrões) (Termos)
+(Contexto) (Padrões) (Termos)
     ↓        ↓        ↓
     └─────────────────┘
            ↓
@@ -1358,12 +1360,12 @@ Transcrição de Áudio
 
 ### Passos de Configuração
 
-**1. Instalação de Dependências:**
+1. Instalação de Dependências:
 ```bash
 pip install transformers torch nltk scikit-learn pandas numpy
 ```
 
-**2. Configuração do BERT:**
+2. Configuração do BERT:
 ```python
 from transformers import BertTokenizer, BertForSequenceClassification
 
@@ -1374,7 +1376,7 @@ model = BertForSequenceClassification.from_pretrained(
 )
 ```
 
-**3. Configuração de Padrões Regex:**
+3. Configuração de Padrões Regex:
 ```python
 patterns = {
     'protocolo': [r'protocolo\s*:?\s*(\d{4,8})'],
@@ -1393,14 +1395,14 @@ class CallQualityAnalyzer:
         self.regex_matcher = RegexPatternMatcher()
         self.tfidf_analyzer = TFIDFAnalyzer()
         
-        # Pesos para fusão de resultados (ajustáveis dinamicamente)
+        # Pesos para fusão de resultados
         self.weights = {'bert': 0.4, 'regex': 0.4, 'tfidf': 0.2}
     
     def analyze_call(self, transcript, call_id):
         # Pré-processamento da transcrição
         cleaned_transcript = self.preprocess_transcript(transcript)
         
-        # Análise BERT para contexto semântico
+        # Análise BERT para contexto
         bert_score, quality_aspects = self.bert_analyzer.analyze_quality(cleaned_transcript)
         
         # Análise Regex para compliance
@@ -1411,7 +1413,7 @@ class CallQualityAnalyzer:
         key_terms = self.tfidf_analyzer.get_key_terms(cleaned_transcript)
         tfidf_score = self.tfidf_analyzer.calculate_relevance_score(cleaned_transcript)
         
-        # Fusão ponderada de resultados
+        # Combina resultados com pesos
         overall_score = (
             bert_score * self.weights['bert'] +
             regex_score * self.weights['regex'] +
@@ -1455,7 +1457,7 @@ print(f"Componentes: BERT={result['component_scores']['bert']:.3f}, "
       f"TF-IDF={result['component_scores']['tfidf']:.3f}")
 ```
 
-Esta implementação demonstra como a arquitetura híbrida processa transcrições de forma eficiente, combinando a capacidade analítica do BERT com a precisão do regex e a relevância estatística do TF-IDF para produzir avaliações completas e confiáveis de qualidade de atendimento.
+Esta implementação mostra como a arquitetura híbrida processa transcrições de forma eficiente, combinando a capacidade de análise contextual do BERT com a precisão do regex e a relevância estatística do TF-IDF para produzir avaliações completas de qualidade de atendimento.
 
 ## 8.4 Desenvolvimento de Features
 
