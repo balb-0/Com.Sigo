@@ -1,0 +1,1 @@
+-- Utility SQL kept intentionally empty
