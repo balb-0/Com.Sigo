@@ -6,7 +6,8 @@
     "dev": "ts-node-dev --respawn --transpile-only src/app/server.ts",
     "build": "tsc",
     "start": "node dist/app/server.js",
-    "migrate": "ts-node-dev --transpile-only src/migrations/runMigrations.ts"
+    "migrate": "ts-node-dev --transpile-only src/migrations/runMigrations.ts",
+    "test-db": "ts-node-dev --transpile-only src/scripts/test-db-setup.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "express": "^5.1.0",
     "multer": "^2.0.2",
     "pg": "^8.16.3",
+    "pgvector": "^0.2.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
