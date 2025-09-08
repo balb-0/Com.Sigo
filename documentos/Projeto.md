@@ -1952,21 +1952,62 @@ Obs.: Insira informações sobre estratégias para realização dos testes
 _conteúdo_
 Obs.: Insira informações sobre quais frameworks foram usados e como acessar.
 
-# 9. Planejamento e Execução de Testes
+# 9\. Planejamento e Execução de Testes
 
-_conteúdo_
+Esta seção é dedicada ao plano de validação e verificação do projeto. O objetivo é garantir que a solução atenda integralmente aos requisitos de negócio e de projeto definidos. Para isso, o plano está dividido em quatro áreas principais de teste:
+
+1.  **Testes Funcionais:** Verificam se cada função do sistema se comporta conforme especificado nos requisitos funcionais.
+
+2.  **Testes de Requisitos Não Funcionais:** Avaliam o desempenho, a precisão e a capacidade do sistema sob condições específicas, como o processamento de áudios longos.
+
+3.  **Testes de Integração:** Garantem que os diferentes componentes da aplicação (backend, frontend, banco de dados) e os serviços externos (APIs da OpenAI, LLMs) se comunicam de forma correta e resiliente.
+
+4.  **Testes de Usabilidade:** Validam a experiência do usuário final, assegurando que a interface do dashboard seja intuitiva, eficiente e útil para os gestores de qualidade.
+
+Em cada subseção, serão detalhados o propósito, a abrangência, as ferramentas escolhidas, os cenários de teste (positivos e negativos) e as instruções para execução.
 
 ## 9.1 Testes Funcionais
 
-_conteúdo_
+O objetivo dos testes funcionais é validar sistematicamente cada um dos requisitos funcionais (RF01 a RF07), garantindo que o núcleo da aplicação execute as tarefas para as quais foi projetado.
 
-## 9.1.1 Planejamento
+### 9.1.1 Planejamento
 
-_conteúdo_
+O planejamento abaixo descreve a estratégia, as ferramentas e os casos de teste que serão utilizados para a validação funcional do sistema.
 
-## 9.1.2 Resultados
+#### **Estratégia, Ferramentas e Automação**
 
-_conteúdo_
+Para garantir consistência, eficiência e portabilidade, será adotada uma abordagem de testes automatizada e containerizada.
+
+  * **Ambiente de Testes em Contêiner (Docker):** Todos os testes serão executados dentro de um contêiner Docker. Isso garante um ambiente padronizado e isolado para todos os desenvolvedores e para o pipeline de integração contínua (CI/CD), eliminando inconsistências entre diferentes máquinas. A configuração será gerenciada através de um arquivo `docker-compose.yml`.
+  * **Testes de Backend (API e Lógica de Negócio - Python):** Será utilizado o framework **Pytest**. Ele foi escolhido por sua sintaxe simples, ecossistema robusto de plugins (como o `pytest-cov` para análise de cobertura de código) e o poderoso sistema de *fixtures*, que facilita a configuração e o reuso de estados de teste.
+  * **Testes de Frontend (Dashboard - JavaScript/React):**
+      * **Jest:** Para testes unitários e de componentes. A lógica interna de componentes da interface será validada de forma rápida e isolada.
+      * **Cypress:** Para testes End-to-End (E2E). A jornada completa do usuário no navegador será simulada, desde o login, passando pelo upload de um arquivo, até a visualização do resultado no painel, garantindo que a integração entre as camadas do sistema funcione como esperado.
+  * **Abordagem BDD com Gherkin:** Para garantir que os testes estejam alinhados às regras de negócio e sejam compreensíveis por todos os membros da equipe, serão adotados os princípios do BDD (*Behavior-Driven Development*). Os casos de teste serão descritos usando uma linguagem inspirada na sintaxe Gherkin (`Dado`, `Quando`, `Então`), o que torna o comportamento esperado do sistema explícito e inequívoco.
+
+#### **Abrangência dos Testes**
+
+A estratégia visa alcançar uma **cobertura de requisitos de 100%**, onde cada requisito funcional terá, no mínimo, um caso de teste positivo e um negativo associado. Adicionalmente, busca-se uma **cobertura de código superior a 80%** para os módulos críticos do backend (processamento de NLP, regras de score, endpoints da API), medida com a ferramenta `pytest-cov`. Isso garante que a maior parte do código implementado seja testada, reduzindo a probabilidade de bugs.
+
+#### **Casos de Teste Funcionais**
+
+A seguir, a lista detalhada dos casos de teste planejados, mapeados para cada requisito funcional.
+
+| ID | Título do Caso de Teste | Requisito(s) Associado(s) | Pré-condições | Passos para Execução | Dados de Entrada | Resultado(s) Esperado(s) |
+| :-- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CT-FUNC-001** | **(Positivo)** Envio de um arquivo de áudio válido | RF01, RF04 | O usuário está autenticado no sistema. | 1. **Dado** que o usuário está na página do dashboard. 2. **Quando** ele clica em "Analisar Chamada" e seleciona um arquivo de áudio (`.wav`, `.mp3`). 3. **E** submete o arquivo. | `chamada_valida.mp3` | 1. **Então** o sistema deve identificar a entrada como "áudio". 2. **E** iniciar o fluxo de transcrição. 3. **E** exibir uma notificação de "Processando áudio...". |
+| **CT-FUNC-002** | **(Positivo)** Envio de um arquivo de texto válido | RF01, RF04 | O usuário está autenticado no sistema. | 1. **Dado** que o usuário está na página do dashboard. 2. **Quando** ele clica em "Analisar Chamada" e seleciona um arquivo de texto (`.txt`). 3. **E** submete o arquivo. | `transcricao_valida.txt` | 1. **Então** o sistema deve identificar a entrada como "texto". 2. **E** iniciar o fluxo de análise de NLP diretamente. 3. **E** exibir uma notificação de "Analisando transcrição...". |
+| **CT-FUNC-003** | **(Negativo)** Tentativa de envio de arquivo com formato não suportado | RF01 | O usuário está autenticado no sistema. | 1. **Dado** que o usuário está na página de upload. 2. **Quando** ele tenta submeter um arquivo com formato inválido (ex: `.docx`, `.png`). | `documento.docx` | 1. **Então** a interface deve exibir uma mensagem de erro clara: "Formato de arquivo inválido. Suportados: .mp3, .wav, .txt". 2. **E** a requisição de upload não deve ser enviada ao servidor. |
+| **CT-FUNC-004** | **(Positivo)** Geração e armazenamento corretos da avaliação | RF02, RF07 | Uma chamada (áudio ou texto) foi submetida e processada com sucesso. | 1. **Dado** que uma chamada foi processada. 2. **Quando** o processo de análise é concluído. | `transcricao_qualquer.txt` | 1. **Então** o sistema deve gerar 3 critérios de avaliação. 2. **E** cada critério deve ter uma nota numérica entre 0 e 5. 3. **E** os dados da chamada (metadados, entrada, notas) devem ser persistidos corretamente no banco de dados. |
+| **CT-FUNC-005** | **(Positivo)** Visualização de indicadores consolidados no painel | RF03 | Múltiplas chamadas já foram processadas e armazenadas. | 1. **Dado** que existem 10 chamadas processadas no banco de dados. 2. **Quando** o usuário acessa o dashboard. | N/A | 1. **Então** o painel deve exibir os indicadores gerais (ex: média de score geral). 2. **E** os gráficos devem ser renderizados com os dados consolidados. |
+| **CT-FUNC-006** | **(Negativo)** Painel sem dados | RF03 | Nenhuma chamada foi processada ainda. | 1. **Dado** que o banco de dados de chamadas está vazio. 2. **Quando** o usuário acessa o dashboard. | N/A | 1. **Então** o painel deve exibir uma mensagem informativa (ex: "Nenhuma chamada analisada ainda"). 2. **E** os gráficos e indicadores devem aparecer em um estado vazio, sem erros. |
+| **CT-FUNC-007** | **(Positivo)** Upload de múltiplos arquivos simultaneamente | RF05 | O usuário está autenticado no sistema. | 1. **Dado** que o usuário está na página de upload. 2. **Quando** ele seleciona 3 arquivos válidos (ex: 2 áudios, 1 texto) de uma vez. 3. **E** submete o lote. | `chamada1.mp3`, `chamada2.txt`, `chamada3.wav` | 1. **Então** o sistema deve criar 3 jobs de análise separados. 2. **E** a interface deve mostrar o progresso individual de cada arquivo. 3. **E** todas as chamadas devem ser processadas e registradas com sucesso. |
+| **CT-FUNC-008** | **(Positivo)** Destaque visual de chamada com score baixo | RF06 | Uma chamada foi processada e recebeu um score abaixo do limite. O limite está definido em 2.0. | 1. **Dado** que uma chamada foi analisada e recebeu score final de 1.5. 2. **Quando** o usuário visualiza a lista de chamadas analisadas no dashboard. | Score da chamada = 1.5 | 1. **Então** a linha ou card correspondente a essa chamada deve ter um destaque visual claro (ex: fundo vermelho ou um ícone de alerta). |
+| **CT-FUNC-009** | **(Negativo)** Chamada com score alto não é destacada | RF06 | Uma chamada foi processada e recebeu um score acima do limite. O limite está definido em 2.0. | 1. **Dado** que uma chamada foi analisada e recebeu score final de 4.5. 2. **Quando** o usuário visualiza a lista de chamadas analisadas no dashboard. | Score da chamada = 4.5 | 1. **Então** a linha ou card correspondente a essa chamada **não** deve possuir qualquer destaque visual de alerta. |
+
+### 9.1.2 Resultados
+
+####################
 
 ## 9.2 Testes de RNFs
 
@@ -2007,5 +2048,6 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
 
