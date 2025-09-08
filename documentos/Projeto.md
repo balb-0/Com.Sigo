@@ -2009,17 +2009,47 @@ A seguir, a lista detalhada dos casos de teste planejados, mapeados para cada re
 
 ####################
 
-## 9.2 Testes de RNFs
+## 9.2 Testes de Requisitos Não Funcionais (RNFs)
 
-_conteúdo_
+O propósito desta fase de testes é avaliar os aspectos de qualidade do sistema que não estão relacionados a funcionalidades específicas, mas sim a como o sistema se comporta sob determinadas condições. Serão validados atributos críticos como desempenho, capacidade de carga e precisão da análise, garantindo que a solução seja não apenas funcional, mas também eficiente, robusta e confiável, conforme especificado nos RNFs.
 
-## 9.2.1 Planejamento
+### 9.2.1 Planejamento
 
-_conteúdo_
+Abaixo são detalhadas a estratégia, as ferramentas e os casos de teste planejados para validar os requisitos não funcionais do projeto.
 
-## 9.2.2 Resultados
+#### **Estratégia e Ferramentas**
 
-_conteúdo_
+Para a execução dos testes de RNF, será utilizado um conjunto de ferramentas e abordagens específicas para cada tipo de requisito. Os testes serão executados em um ambiente de homologação, com configuração de hardware similar ao de produção, para garantir que os resultados sejam os mais realistas possíveis.
+
+* **Testes de Desempenho e Carga (RNF01, RNF02):**
+    * **Ferramenta:** **k6 (Grafana k6)**. Foi escolhida por ser uma ferramenta moderna, de código aberto, focada em performance e projetada para ser amigável para desenvolvedores. Os scripts de teste são escritos em JavaScript, o que facilita a criação de cenários complexos de carga e a integração com o ecossistema de desenvolvimento.
+
+    * **Alternativa:** **Locust**. Sendo uma ferramenta baseada em Python, o Locust se apresenta como uma excelente alternativa para o projeto. Ele permite que os testes de performance sejam escritos em código Python puro.
+
+* **Testes de Precisão do Modelo (RNF03):**
+    * **Ferramenta:** Scripts customizados em **Python** utilizando bibliotecas como `scikit-learn` e `pandas`.
+    
+    * **Estratégia:** Este teste não mede o desempenho em termos de velocidade, mas sim a **qualidade e a acurácia** da análise de NLP. Será criado um conjunto de dados de validação ("golden dataset") com amostras de transcrições previamente rotuladas por humanos com as intenções corretas. O teste consistirá em submeter essas amostras ao sistema, coletar os resultados e compará-los com o gabarito, calculando a métrica de acurácia.
+
+#### **Abrangência e Justificativa**
+
+A abrangência dos testes de RNF está focada em garantir que o sistema atenda aos critérios de aceitação que definem sua viabilidade técnica e operacional.
+
+* **Justificativa:** A validação desses requisitos é crucial. Um sistema que não consegue processar áudios longos (RNF01) ou que demora excessivamente para entregar um resultado (RNF02) pode ser funcionalmente correto, mas operacionalmente inútil. Da mesma forma, se a precisão da análise for baixa (RNF03), toda a informação gerada pelo sistema perde a credibilidade, invalidando seu propósito de negócio.
+* **Abrangência:** O plano cobre **100% dos RNFs definidos**. Para cada requisito, foi criado pelo menos um cenário de teste positivo para validar o critério de aceite. Foram incluídos também cenários de estresse (negativos) para entender os limites do sistema, como o comportamento sob carga simultânea, mesmo que não haja um RNF específico para isso.
+
+#### **Casos de Teste de RNFs**
+
+| ID           | Título do Caso de Teste                                             | Requisito(s) Associado(s) | Pré-condições                                                                                | Instruções Detalhadas para Execução                                                                                                                                                             | Dados de Entrada                                | Critério de Aceite (Resultado Esperado)                                                                                                                            |
+| :----------- | :------------------------------------------------------------------ | :------------------------ | :------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **CT-RNF-001** | **(Positivo)** Teste de estresse com arquivo de áudio de longa duração | RNF01                     | O sistema está operando em ambiente de homologação.                                          | 1. Preparar um único arquivo de áudio com duração próxima ao limite de 75 minutos. 2. Submeter o arquivo para análise através da interface ou API. 3. Monitorar o consumo de CPU e memória do serviço durante todo o processamento. | Arquivo `audio_longo_75min.mp3`                 | O sistema deve processar o arquivo completamente, sem travar, estourar o limite de memória ou sofrer timeout. O resultado da análise deve ser gerado e armazenado com sucesso. |
+| **CT-RNF-002** | **(Positivo)** Teste de desempenho de transcrição para arquivos padrão | RNF02                     | O ambiente de testes está estável e sem outras cargas concorrentes.                           | 1. Criar um script com o k6 para submeter um arquivo de áudio de 15 minutos. 2. Executar o script 20 vezes em sequência, com um intervalo entre as execuções. 3. Para cada execução, registrar o tempo total decorrido entre o fim do upload e a disponibilização do resultado. | Arquivo `audio_padrao_15min.mp3` (20 execuções) | Pelo menos 90% das execuções (18 de 20) devem ter o tempo de processamento total entre 2 e 5 minutos.                                                                 |
+| **CT-RNF-003** | **(Negativo)** Teste de desempenho sob carga simultânea               | RNF02                     | O ambiente de testes está estável.                                                           | 1. Configurar um script no k6 para simular 5 usuários virtuais (VUs). 2. Cada VU deve submeter um arquivo de áudio de 10 minutos simultaneamente. 3. Monitorar a taxa de erros e a estabilidade do sistema. | 5 arquivos `audio_medio_10min.mp3`              | O sistema deve processar todas as requisições sem retornar erros HTTP da série 5xx. É aceitável que o tempo de processamento individual aumente, mas o sistema deve permanecer estável e responsivo. |
+| **CT-RNF-004** | **(Positivo)** Teste de acurácia da detecção de intenção              | RNF03                     | Um conjunto de dados de validação com 50 amostras e seus respectivos rótulos corretos foi preparado. | 1. Submeter cada uma das 50 amostras do conjunto de dados para o módulo de análise de NLP. 2. Coletar a intenção predita pelo sistema para cada amostra. 3. Executar um script de validação que compara as predições com os rótulos corretos e calcula a acurácia geral. | `dataset_validacao.csv` (50 amostras)           | A acurácia do modelo, calculada pela fórmula (Previsões Corretas / Total de Amostras), deve ser maior ou igual a 90%.                                                         |
+
+### 9.2.2 Resultados
+
+#####################
 
 ## 9.3 Testes de Usabilidade
 
@@ -2048,6 +2078,7 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
 
 
