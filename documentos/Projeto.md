@@ -90,6 +90,7 @@
 - [10. Procedimentos de Implantação](#10-procedimentos-de-implantação)
   - [10.1 Implantação e Configuração do Banco de Dados](#101-implantação-e-configuração-do-banco-de-dados)
   - [10.2 Implantação do Protótipo para uso por equipe de desenvolvimento](#102-implantação-do-protótipo-para-uso-por-equipe-de-desenvolvimento)
+- [11. Webhooks](#11-webhooks)
 - [Referências](#referências)
 
 # 1. Introdução
@@ -2173,6 +2174,14 @@ _conteúdo_
 ## 10.2 Implantação do Protótipo para uso por equipe de desenvolvimento
 
 _conteúdo_
+
+# 11. Webhooks
+
+Pensamos no uso de **webhooks** para simplificar a comunicação entre os serviços. Vamos utilizar o Express para essa função.
+
+A ideia geral é que, quando o usuário envia um áudio para o sistema, o processo de transcrição e análise não acontece de forma imediata no mesmo fluxo. Em vez disso, o sistema retorna logo uma mensagem de que o áudio está **em processamento**.
+
+Depois, quando o processamento termina (transcrição completa ou falha detectada), o próprio sistema envia uma notificação automática para um endereço definido (o webhook). Essa notificação funciona como um “aviso pronto” de que o resultado já está disponível, sem que o usuário ou outro sistema precise ficar perguntando várias vezes.
 
 # Referências
 
