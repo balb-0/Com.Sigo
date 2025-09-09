@@ -53,10 +53,9 @@
   - [3.4 Casos de Uso](#34-casos-de-uso)
   - [3.5 Casos de Uso x Requisitos Funcionais](#35-casos-de-uso-x-requisitos-funcionais)
 - [4. Modelagem de Dados](#4-modelagem-de-dados)
-  - [4.1 Especificação da Base de Dados para Modelo de Recomendação](#41-especificação-da-base-de-dados-para-modelo-de-recomendação)
-  - [4.2 Modelo Conceitual de Dados](#42-modelo-conceitual-de-dados)
-  - [4.3 Modelo Lógico de Dados](#43-modelo-lógico-de-dados)
-  - [4.4 Modelo Físico de Dados](#44-modelo-físico-de-dados)
+  - [4.1 Modelo Conceitual de Dados](#42-modelo-conceitual-de-dados)
+  - [4.2 Modelo Lógico de Dados](#43-modelo-lógico-de-dados)
+  - [4.3 Modelo Físico de Dados](#44-modelo-físico-de-dados)
 - [5. Solução Técnica (Design)](#5-solução-técnica-design)
   - [5.1 Diagrama de Classes](#51-diagrama-de-classes)
   - [5.2 Diagrama de Componentes da UML](#52-diagrama-de-componentes-da-uml)
@@ -991,7 +990,7 @@ Como supracitado na seção anterior, o banco de dados será formado por apenas 
 O banco vetorial será utilizado para consultas dos usuários, ele será uma unica tabela com todos os dados da chamada armazenados.
 
 
-## 4.4 Modelo Físico de Dados
+## 4.3 Modelo Físico de Dados
 
 &emsp;O modelo físico de dados do projeto **Com.Sigo** foi implementado em **PostgreSQL**, com foco em **robustez**, **integridade dos dados** e **suporte a buscas semânticas** utilizando a extensão **pgvector**.  
 A estrutura contempla a criação da tabela principal de chamadas, índices otimizados e um campo especializado para armazenamento de vetores de embeddings, fundamentais para a análise e recuperação de transcrições de ligações.
