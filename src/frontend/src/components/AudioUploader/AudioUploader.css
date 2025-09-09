@@ -1,0 +1,19 @@
+.audio-uploader-label {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--color-azul-claro);
+    color: var(--color-branco);
+    border-radius: 0.5rem;
+    border: none;
+    font-family: inherit;
+    transition: background-color 0.25s;
+}
+
+.audio-uploader-label:hover {
+    background: var(--color-azul-escuro);
+}
+
+.audio-uploader-input {
+    display: none;
+}

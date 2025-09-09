@@ -1,19 +1,27 @@
 import NavigationTabs from "../NavigationTabs/NavigationTabs";
 import Button from "../Button/Button";
 import "./Header.css";
+import logoHorizontal from "../../assets/images/logo_horizontal.svg";
 
-export default function Header() {
+interface HeaderProps {
+    currentPage?: string;
+    onNavigate?: (page: string) => void;
+}
+
+export default function Header({ currentPage = '/', onNavigate }: HeaderProps) {
     return (
         <header className="header">
             <div className="logo-container">
                 <img
-                    src="/images/logo_horizontal.svg"
+                    src={logoHorizontal}
                     alt="Logo"
                     width={135}
                     height={135}
                 />
             </div>
             <NavigationTabs
+                currentPage={currentPage}
+                onNavigate={onNavigate}
                 tabs={[
                     {
                         href: "/", label: "Dashboard",

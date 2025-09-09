@@ -1,4 +1,5 @@
-import { uploadAudioFile } from '../lib/api';
+import { uploadAudioFile } from '../../lib/api';
+import './AudioUploader.css';
 
 export function AudioUploader({ onUploaded }: { onUploaded: (url: string) => void }) {
   async function onFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -11,8 +12,8 @@ export function AudioUploader({ onUploaded }: { onUploaded: (url: string) => voi
   }
 
   return (
-    <label style={{ cursor: 'pointer' }}>
-      <input type="file" accept="audio/*" onChange={onFileChange} style={{ display: 'none' }} />
+    <label className="audio-uploader-label">
+      <input type="file" accept="audio/*" onChange={onFileChange} className="audio-uploader-input" />
       Upload
     </label>
   );
