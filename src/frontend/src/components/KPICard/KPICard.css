@@ -1,0 +1,18 @@
+.kpi-card {
+    background-color: var(--color-branco);
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+    padding: 1rem; /* p-4 */
+}
+
+.kpi-title {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    color: var(--color-azul-escuro);
+    margin: 0 0 0.5rem 0;
+}
+
+.kpi-description {
+    color: var(--color-cinza);
+    margin: 0;
+}

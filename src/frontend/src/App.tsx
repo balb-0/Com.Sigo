@@ -1,9 +1,10 @@
 
 import './App.css'
-import { ChatPage } from './pages/ChatPage'
+// import { ChatPage } from './pages/ChatPage'
+import Dashboard from './pages/Dashboard/Dashboard'
 
 function App() {
-  return <ChatPage />
+  return <Dashboard />
 }
 
 export default App

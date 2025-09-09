@@ -1,0 +1,20 @@
+.dashboard-container {
+    height: 100%; /* h-full */
+    width: 100%; /* w-full */
+    padding: 1.5rem; /* p-6 */
+}
+
+.main-content {
+    margin-top: 5rem; /* mt-20 */
+}
+
+.title-section {
+    /* Div vazia no original, mantida para estrutura */
+}
+
+.page-title {
+    font-size: 1.5rem; /* text-2xl */
+    color: var(--color-branco);
+    font-weight: 200; /* font-extralight */
+    margin: 0;
+}

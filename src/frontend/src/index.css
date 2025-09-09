@@ -11,6 +11,21 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @import "tailwindcss";
+
+  /* cores */
+  --color-branco: #F4F4F4;
+  --color-azul-escuro: #1E3350;
+  --color-azul-claro: #254062;
+  --color-azul-claro-opacidade: #25406299;
+  --color-vermelho: #FF353F;
+  --color-verde: #28A745;
+  --color-amarelo: #FFC107;
+  --color-cinza: #A8B2C3;
+  --color-borda: #F4F4F41A; /* Removido o # duplo */
+
+  /* sombra */
+  --shadow-customizada: 0 0 24px 0 rgba(0, 0, 0, 0.2);
 }
 
 a {
