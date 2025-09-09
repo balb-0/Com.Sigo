@@ -2053,15 +2053,109 @@ A abrangência dos testes de RNF está focada em garantir que o sistema atenda a
 
 ## 9.3 Testes de Usabilidade
 
-_conteúdo_
+O objetivo dos testes de usabilidade é avaliar a experiência do usuário (UX) ao interagir com a plataforma. O foco não é encontrar bugs, mas sim identificar pontos de fricção, medir a facilidade de aprendizado e aferir a satisfação geral do usuário final ao realizar tarefas-chave no sistema. Os resultados coletados servirão como base para melhorias no design da interface e no fluxo de interação.
 
-## 9.3.1 Planejamento
+### 9.3.1 Planejamento
 
-_conteúdo_
+A seguir, são detalhados o objetivo, a metodologia, os participantes, os cenários e o roteiro para a execução dos testes de usabilidade.
 
-## 9.3.2 Resultados
+#### **Objetivo do Teste**
+Avaliar a facilidade de uso, a clareza da informação e a satisfação geral dos usuários finais, tanto analistas de qualidade quanto supervisores, ao interagir com o dashboard de análise de chamadas. O objetivo secundário é identificar os principais problemas de usabilidade e coletar feedback qualitativo para refinar a interface do protótipo.
 
-_conteúdo_
+#### **Estratégia e Metodologia**
+
+* **Formato do Teste:** Será conduzido um teste de usabilidade moderado. Um moderador guiará cada participante através de um roteiro de tarefas, fará perguntas e observará a interação do usuário com a plataforma. As sessões serão gravadas, mediante consentimento do participante, para posterior análise da equipe.
+
+* **Metodologias:**
+    * **Protocolo Think-Aloud (Pense Alto):** Os participantes serão instruídos a verbalizar seus pensamentos, dúvidas e impressões enquanto realizam as tarefas. Isso fornecerá insights sobre seu modelo mental e suas expectativas em relação ao sistema.
+
+    * **System Usability Scale (SUS):** Ao final da sessão, o moderador aplicará verbalmente o questionário SUS. Ele fará as 10 perguntas do questionário e anotará as respostas do participante em uma escala de 1 a 5. Este método gera uma pontuação quantitativa da usabilidade percebida do sistema.
+
+#### **Perfil dos Participantes**
+Serão recrutados **no mínimo 5 participantes** externos à equipe de desenvolvimento do projeto. O critério de recrutamento buscará pessoas com perfis que se assemelhem às duas personas mapeadas, garantindo que a solução seja validada sob as duas perspectivas de uso.
+
+* **Perfil 1: Analista de Qualidade (baseado em Julia Souza)**
+
+    * **Descrição:** Profissionais com experiência em análise e monitoramento de qualidade de atendimento. Seu trabalho é focado na escuta e avaliação detalhada de ligações para garantir a conformidade com os scripts e os padrões de excelência. Buscam ferramentas que automatizem a análise para aumentar a amostragem e identificar padrões ou chamadas críticas com mais rapidez.
+
+    * **Quantidade:** 2 a 3 participantes.
+
+* **Perfil 2: Supervisor de Operações (baseado em Carlos Martins)**
+
+    * **Descrição:** Líderes de equipes de call center, responsáveis pelo desempenho geral do time e pela garantia de que os operadores sigam os scripts e mantenham a cordialidade. Necessitam de dados objetivos e consolidados para direcionar treinamentos, corrigir falhas rapidamente e fornecer feedbacks assertivos aos atendentes.
+
+    * **Quantidade:** 2 a 3 participantes.
+
+#### **Roteiro e Cenários do Teste**
+
+O teste terá uma duração estimada de 30-40 minutos por participante.
+
+**Parte 1: Introdução e Contextualização (5 min)**
+
+1.  Apresentação do moderador e agradecimento.
+2.  Explicação do objetivo: "Estamos testando o sistema, não você. Não existem respostas certas ou erradas."
+3.  Solicitação de permissão para gravar a sessão para fins de análise.
+4.  Explicação do protocolo *Think-Aloud*.
+5.  Contextualização inicial: "Imagine que você é um(a) [Analista de Qualidade / Supervisor de Operações] e recebeu acesso a uma nova ferramenta para ajudar a analisar as chamadas de atendimento."
+
+**Parte 2: Tarefas de Usabilidade (20-25 min)**
+
+As tarefas serão adaptadas conforme o perfil do participante.
+
+**Roteiro para o Perfil "Analista de Qualidade":**
+
+* **Cenário 1: Investigação de Chamadas Críticas.**
+
+    * **Tarefa:** "O painel inicial está mostrando um ranking com as ligações mais críticas. Sua tarefa é investigar uma dessas chamadas com nota baixa para entender por que ela foi mal avaliada e encontrar os trechos que justificam essa pontuação." 
+
+    * **Objetivo de observação:** Avaliar a facilidade de navegar do dashboard geral para a análise detalhada de uma chamada e a clareza na apresentação dos pontos críticos.
+
+* **Cenário 2: Geração de Relatório para Supervisão.**
+
+    * **Tarefa:** "Com base na sua análise, prepare um resumo dos problemas encontrados nesta chamada. O que você destacaria em um relatório para o supervisor da equipe?"
+
+    * **Objetivo de observação:** Verificar se as informações apresentadas são suficientes e claras para que a analista possa cumprir sua responsabilidade de gerar relatórios para supervisores.
+
+**Roteiro para o Perfil "Supervisor de Operações":**
+
+* **Cenário 1: Análise da Performance da Equipe.**
+
+    * **Tarefa:** "Você acabou de iniciar seu dia e quer uma visão geral do desempenho da sua equipe. Olhando o painel, qual é a pontuação média? Há algum caso crítico que exige sua atenção imediata?" 
+
+    * **Objetivo de observação:** Avaliar a eficácia do dashboard em comunicar métricas consolidadas e alertas importantes para a gestão da equipe.
+
+* **Cenário 2: Preparação para um Feedback Individual.**
+
+    * **Tarefa:** "Você notou um atendente com desempenho abaixo do esperado. Investigue as chamadas desse atendente para identificar um padrão de comportamento, seja um ponto forte ou uma falha recorrente, para que você possa agendar um feedback individual com ele."
+
+    * **Objetivo de observação:** Medir a facilidade de filtrar informações por atendente e obter insights que possam guiar treinamentos e feedbacks, um dos principais interesses de Carlos.
+
+**Parte 3: Pós-Teste e Aplicação do SUS (5 min)**
+
+1.  Perguntas abertas para coletar impressões gerais:
+    * "Qual foi sua primeira impressão sobre a ferramenta?"
+    * "As informações apresentadas são confiáveis para o seu trabalho?"
+    * "Houve algo que você achou particularmente fácil ou difícil?"
+2.  Aplicação verbal do Questionário SUS pelo moderador.
+
+#### **Questionário System Usability Scale (SUS)**
+
+O moderador lerá cada uma das 10 afirmações abaixo e registrará a resposta do participante em uma escala de 1 a 5 (onde 1 = Discordo Totalmente e 5 = Concordo Totalmente).
+
+1.  Acho que usaria este sistema com frequência.
+2.  Acho o sistema desnecessariamente complexo.
+3.  Achei o sistema fácil de usar.
+4.  Acho que precisaria do apoio de uma pessoa com conhecimentos técnicos para poder usar este sistema.
+5.  Achei que as várias funções deste sistema estavam bem integradas.
+6.  Achei que havia muita inconsistência no sistema.
+7.  Imagino que a maioria das pessoas aprenderia a usar este sistema muito rapidamente.
+8.  Achei o sistema muito complicado de usar.
+9.  Me senti muito confiante ao usar o sistema.
+10. Precisei aprender muitas coisas novas antes de conseguir usar o sistema.
+
+### 9.3.2 Resultados
+
+########################
 
 # 10. Procedimentos de Implantação
 
@@ -2078,6 +2172,7 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
 
 
