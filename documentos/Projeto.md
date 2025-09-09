@@ -2157,6 +2157,47 @@ O moderador lerá cada uma das 10 afirmações abaixo e registrará a resposta d
 
 ########################
 
+## 9.4 Testes de Integração
+
+O objetivo dos testes de integração é verificar se os diferentes módulos e componentes do sistema, incluindo serviços externos, funcionam corretamente quando combinados. Esta fase de testes foca em validar o fluxo de dados e as interações entre o backend, o banco de dados, o módulo de cache e as APIs externas, garantindo que a comunicação seja robusta e que os erros sejam tratados de forma apropriada.
+
+### 9.4.1 Planejamento
+
+A seguir, são detalhados a estratégia, as ferramentas e os casos de teste planejados para validar as integrações da aplicação.
+
+#### **Estratégia e Ferramentas**
+
+A estratégia consiste em testar cada ponto de integração de forma isolada, mas completa, focando na lógica de comunicação entre os componentes.
+
+* **Ferramentas:**
+
+    * **Pytest:** Será o framework principal para a escrita e execução dos testes de integração do backend. Sua estrutura flexível permite interagir com os diferentes componentes da aplicação (serviços, endpoints de API, banco de dados) de forma controlada.
+
+    * **VCR.py:** Para atender ao requisito do "módulo VHS" e testar a integração com a API externa da OpenAI, será utilizada a biblioteca `VCR.py`. Ela funciona como um "gravador" para as requisições HTTP. Na primeira execução de um teste, ela grava a interação real com a API da OpenAI em um arquivo (chamado "cassete"). Nas execuções futuras, a biblioteca intercepta a chamada e "reproduz" a resposta gravada, sem se conectar à internet. Isso permite testar a lógica de integração de forma rápida, determinística e sem custos, além de ser o mecanismo ideal para validar o funcionamento do sistema de cache.
+
+#### **Abrangência e Justificativa**
+
+* **Abrangência:** Os testes cobrirão os três pontos de integração mais críticos da arquitetura:
+    1.  A comunicação do backend com a API externa da OpenAI para transcrição.
+    2.  A lógica do módulo de cache ("VHS") para evitar requisições repetidas.
+    3.  A persistência dos dados analisados no banco de dados PostgreSQL.
+    
+* **Justificativa:** A falha em qualquer um desses pontos compromete o sistema inteiro. Se a comunicação com a API externa falhar, a funcionalidade principal do sistema é bloqueada. Se o cache não funcionar corretamente, o projeto pode incorrer em custos elevados e lentidão, violando seus objetivos centrais. Se a persistência de dados falhar, os resultados das análises são perdidos. Portanto, a validação dessas integrações é fundamental para a estabilidade e viabilidade da solução.
+
+#### **Casos de Teste de Integração**
+
+| ID | Título do Caso de Teste | Componentes Integrados | Pré-condições | Instruções Detalhadas para Execução | Validação dos Resultados |
+| :-- | :--- | :--- | :--- | :--- | :--- |
+| **CT-INT-001** | **(Positivo)** Comunicação bem-sucedida e gravação da resposta da API externa | Backend ↔ API OpenAI | O teste está configurado com uma chave de API válida. `VCR.py` está em modo de gravação. | 1. **Dado** um arquivo de áudio válido. 2. **Quando** o serviço de análise é invocado pela primeira vez com este arquivo. | 1. **Então** a API da OpenAI deve retornar um status de sucesso (200 OK) com a transcrição. 2. **E** um arquivo "cassete" (.yaml) deve ser criado pelo `VCR.py` contendo a requisição e a resposta exatas. |
+| **CT-INT-002** | **(Negativo)** Tratamento de erro de indisponibilidade da API externa | Backend ↔ API OpenAI | O "cassete" gerado no teste anterior foi modificado para retornar um erro (ex: 503 Service Unavailable). | 1. **Dado** o mesmo arquivo de áudio do teste anterior. 2. **Quando** o serviço de análise é invocado. 3. **E** `VCR.py` reproduz a resposta de erro 503. | 1. **Então** o sistema não deve travar. 2. **E** uma exceção apropriada deve ser capturada. 3. **E** um log de erro detalhado deve ser registrado, indicando a falha na comunicação com o serviço externo. |
+| **CT-INT-003** | **(Positivo - Cache)** Armazenamento em cache da resposta na primeira chamada | Backend ↔ Módulo de Cache | O cache da aplicação está vazio para o dado de entrada. | 1. **Dado** um novo arquivo de áudio nunca antes analisado. 2. **Quando** o serviço de análise é invocado. | 1. **Então** uma requisição real é feita à API da OpenAI. 2. **E** o resultado (transcrição) é armazenado com sucesso no mecanismo de cache interno da aplicação. |
+| **CT-INT-004**| **(Positivo - Cache)** Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente com o mesmo arquivo de áudio. | 1. **Dado** o mesmo arquivo de áudio do teste anterior. 2. **E** a conexão com a API externa está desabilitada (simulado via mock ou `VCR.py` em modo de bloqueio). 3. **Quando** o serviço de análise é invocado novamente. | 1. **Então** o resultado da análise deve ser retornado com sucesso. 2. **E** o resultado deve ser idêntico ao da primeira chamada. 3. **E** NENHUMA requisição HTTP para a API da OpenAI deve ter sido realizada, provando que o dado veio do cache. |
+| **CT-INT-005** | **(Positivo)** Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise (real ou via cache) foi concluída com sucesso. | 1. **Dado** um objeto de resultado de análise válido. 2. **Quando** a função de persistência é chamada com este objeto. 3. **E** uma consulta é feita diretamente ao banco de dados PostgreSQL. | 1. **Então** um novo registro correspondente à chamada analisada deve existir na tabela apropriada. 2. **E** todos os campos (notas, metadados, etc.) devem estar consistentes com o objeto de resultado. |
+
+### 9.4.2 Resultados
+
+########################
+
 # 10. Procedimentos de Implantação
 
 _conteúdo_
@@ -2172,6 +2213,7 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
 
 
