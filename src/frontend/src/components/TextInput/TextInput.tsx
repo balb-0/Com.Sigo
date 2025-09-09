@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './TextInput.css';
 
 export function TextInput({ onSend }: { onSend: (text: string) => void }) {
   const [input, setInput] = useState('');
@@ -15,7 +16,7 @@ export function TextInput({ onSend }: { onSend: (text: string) => void }) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Type a message..."
-        style={{ flex: 1, padding: 10, borderRadius: 8, border: '1px solid #ddd' }}
+        className="text-input"
       />
       <button onClick={send}>Send</button>
     </>

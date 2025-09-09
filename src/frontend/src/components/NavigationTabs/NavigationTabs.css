@@ -1,0 +1,51 @@
+/* Navigation tabs styles */
+.navigation-tabs {
+    display: flex;
+    gap: 2rem; /* space-x-8 (8 * 0.25rem = 2rem) */
+    position: relative;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    transition: color 0.25s; /* transition-colors */
+    font-size: 1.5rem; /* text-2xl */
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* gap-2 */
+}
+
+/* Estados dos links */
+.nav-content.active {
+    color: var(--color-branco);
+    font-weight: 600; /* font-semibold */
+}
+
+.nav-content.inactive {
+    color: var(--color-cinza);
+    transition: color 0.25s; /* duration-250 */
+}
+
+.nav-content.inactive:hover {
+    color: var(--color-branco);
+}
+
+/* Indicador de aba ativa */
+.active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.125rem; /* h-0.5 */
+    background-color: var(--color-branco);
+    border-radius: 9999px; /* rounded-full */
+}
+

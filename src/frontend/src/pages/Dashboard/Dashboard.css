@@ -1,0 +1,20 @@
+.dashboard-container {
+    padding: 0 2.75rem; /* p-6 */
+    position: relative;
+    z-index: 1; /* Garantir que fique acima do background */
+}
+
+.main-content {
+    margin-top: 5rem; /* mt-20 */
+}
+
+.title-section {
+    /* Div vazia no original, mantida para estrutura */
+}
+
+.page-title {
+    font-size: 1.5rem; /* text-2xl */
+    color: var(--color-cinza);
+    font-weight: 200; /* font-extralight */
+    margin: 0;
+}

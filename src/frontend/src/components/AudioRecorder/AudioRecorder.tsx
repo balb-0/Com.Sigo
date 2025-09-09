@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { uploadAudioFile } from '../lib/api';
+import { uploadAudioFile } from '../../lib/api';
+import './AudioRecorder.css';
 
 export function AudioRecorder({ onUploaded }: { onUploaded: (url: string) => void }) {
   const [recording, setRecording] = useState<MediaRecorder | null>(null);
@@ -26,8 +27,8 @@ export function AudioRecorder({ onUploaded }: { onUploaded: (url: string) => voi
   }
 
   return recording ? (
-    <button onClick={stopRecording} style={{ background: '#ef4444', color: 'white' }}>Stop</button>
+    <button onClick={stopRecording} className="audio-recorder-button">Stop</button>
   ) : (
-    <button onClick={startRecording}>Record</button>
+    <button onClick={startRecording} className="audio-recorder-button">Record</button>
   );
 }

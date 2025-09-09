@@ -1,16 +1,22 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* cores */
+  --color-branco: #F4F4F4;
+  --color-azul-escuro: #1E3350;
+  --color-azul-claro: #254062;
+  --color-azul-claro-opacidade: #25406299;
+  --color-vermelho: #FF353F;
+  --color-verde: #28A745;
+  --color-amarelo: #FFC107;
+  --color-cinza: #A8B2C3;
+  --color-borda: #F4F4F41A; /* Removido o # duplo */
+
+  /* sombra */
+  --shadow-customizada: 0 0 24px 0 rgba(0, 0, 0, 0.2);
 }
 
 a {
@@ -24,10 +30,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 h1 {

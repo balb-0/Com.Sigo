@@ -1,0 +1,14 @@
+.audio-recorder-button {
+    background: var(--color-vermelho);
+    color: var(--color-branco);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.25s;
+}
+
+.audio-recorder-button:hover {
+    opacity: 0.9;
+}
