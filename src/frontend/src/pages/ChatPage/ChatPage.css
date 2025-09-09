@@ -1,5 +1,5 @@
 .chat-container {
-    padding: 1.5rem; /* p-6 - mesmo da dashboard */
+    padding: 0 2.75rem; /* p-6 - mesmo da dashboard */
     position: relative;
     z-index: 1; /* Garantir que fique acima do background */
     display: flex;

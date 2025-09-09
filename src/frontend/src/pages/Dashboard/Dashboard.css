@@ -1,6 +1,5 @@
 .dashboard-container {
-    
-    padding: 1.5rem; /* p-6 */
+    padding: 0 2.75rem; /* p-6 */
     position: relative;
     z-index: 1; /* Garantir que fique acima do background */
 }

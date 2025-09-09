@@ -3,7 +3,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @import "tailwindcss";
 
   /* cores */
   --color-branco: #F4F4F4;
