@@ -53,10 +53,9 @@
   - [3.4 Casos de Uso](#34-casos-de-uso)
   - [3.5 Casos de Uso x Requisitos Funcionais](#35-casos-de-uso-x-requisitos-funcionais)
 - [4. Modelagem de Dados](#4-modelagem-de-dados)
-  - [4.1 Especificação da Base de Dados para Modelo de Recomendação](#41-especificação-da-base-de-dados-para-modelo-de-recomendação)
-  - [4.2 Modelo Conceitual de Dados](#42-modelo-conceitual-de-dados)
-  - [4.3 Modelo Lógico de Dados](#43-modelo-lógico-de-dados)
-  - [4.4 Modelo Físico de Dados](#44-modelo-físico-de-dados)
+  - [4.1 Modelo Conceitual de Dados](#42-modelo-conceitual-de-dados)
+  - [4.2 Modelo Lógico de Dados](#43-modelo-lógico-de-dados)
+  - [4.3 Modelo Físico de Dados](#44-modelo-físico-de-dados)
 - [5. Solução Técnica (Design)](#5-solução-técnica-design)
   - [5.1 Diagrama de Classes](#51-diagrama-de-classes)
   - [5.2 Diagrama de Componentes da UML](#52-diagrama-de-componentes-da-uml)
@@ -990,9 +989,149 @@ Como supracitado na seção anterior, o banco de dados será formado por apenas 
 
 O banco vetorial será utilizado para consultas dos usuários, ele será uma unica tabela com todos os dados da chamada armazenados.
 
+
 ## 4.3 Modelo Físico de Dados
 
-_conteúdo_
+&emsp;O modelo físico de dados do projeto **Com.Sigo** foi implementado em **PostgreSQL**, com foco em **robustez**, **integridade dos dados** e **suporte a buscas semânticas** utilizando a extensão **pgvector**.  
+A estrutura contempla a criação da tabela principal de chamadas, índices otimizados e um campo especializado para armazenamento de vetores de embeddings, fundamentais para a análise e recuperação de transcrições de ligações.
+
+---
+
+### **Extensões Utilizadas**
+
+- **pgvector**: Permite operações com vetores diretamente no PostgreSQL, sendo utilizado para **armazenamento e busca semântica** das transcrições das ligações.
+
+```sql
+-- Habilitar pgvector
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+---
+
+### **Tabela Principal: `chamada`**
+
+&emsp;A tabela `chamada` é o núcleo do modelo físico, sendo responsável por armazenar todas as informações referentes às ligações, incluindo **dados básicos**, **transcrições em JSON**, **avaliações de qualidade** e **embeddings**.
+
+```sql
+CREATE TABLE IF NOT EXISTS chamada (
+    chamada_id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cliente_id VARCHAR(255),
+    atendente_id VARCHAR(255),
+    avaliacao_json JSONB,
+    nota_qualidade INTEGER CHECK (nota_qualidade >= 1 AND nota_qualidade <= 5),
+    transcript_json JSONB,
+    embedding vector(1536) -- Campo vetorial para busca semântica
+);
+```
+
+#### **Descrição dos Campos**
+
+| Coluna           | Tipo          | Descrição |
+|------------------|---------------|-----------|
+| `chamada_id`     | SERIAL PK     | Identificador único da chamada |
+| `created_at`     | TIMESTAMP     | Data/hora de criação (default = `CURRENT_TIMESTAMP`) |
+| `cliente_id`     | VARCHAR(255)  | Identificação do cliente vinculado à chamada |
+| `atendente_id`   | VARCHAR(255)  | Identificação do atendente responsável |
+| `avaliacao_json` | JSONB         | Estrutura com os critérios e resultados da avaliação |
+| `nota_qualidade` | INTEGER       | Nota de 1 a 5 (calculada via critérios do TAPI) |
+| `transcript_json`| JSONB         | Transcrição completa, incluindo texto e metadados |
+| `embedding`      | VECTOR(1536)  | Vetor usado para busca semântica |
+
+---
+
+### **Estrutura do JSON de Transcrição**
+
+Exemplo de estrutura salva no campo `transcript_json`:
+
+```json
+{
+  "alternatives": [
+    {
+      "transcript": "Alô, tudo bem? Tô ligando porque tá vazando gás aqui em casa, tá um cheiro insuportável...",
+      "confidence": 0.90,
+      "words": [
+        {
+          "word": "Alô,",
+          "startTime": "0s",
+          "endTime": "0.163s",
+          "speakerTag": 2
+        },
+        {
+          "word": "tudo",
+          "startTime": "0.163s",
+          "endTime": "0.304s",
+          "speakerTag": 2
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "scenario": "Vazamento mas cliente fica satisfeito com atendimento e prazos",
+    "persona": "neutro",
+    "complyCriteriaIds": ["4.1", "2.2", "3.4"],
+    "violateCriteriaIds": ["2.1", "3.0"],
+    "seed": 444968827
+  }
+}
+```
+
+**Campos obrigatórios:**
+- `alternatives.transcript`: Texto consolidado da transcrição.
+- `alternatives.confidence`: Nível de confiança da transcrição.
+- `alternatives.words`: Lista com palavras, tempos de início/fim e identificação do falante.
+- `meta`: Dados contextuais da chamada.
+
+---
+
+### **Regras de Negócio**
+
+- **Nota de qualidade (`nota_qualidade`)**  
+  Determinada com base nos critérios definidos no **TAPI**, variando de **1 a 5**:
+  - **1:** Péssima qualidade
+  - **5:** Excelente qualidade
+
+- **Atualização de embeddings**  
+  O campo `embedding` deve ser **gerado ou atualizado sempre que o `transcript_json` for inserido ou modificado**, garantindo que a busca semântica utilize a transcrição mais recente.
+
+- **Fluxo de entrada de dados**  
+  - O usuário realiza **upload de um arquivo CSV** com os registros das chamadas.
+  - Cada linha do CSV é processada e transformada em um registro na tabela `chamada`.
+  - Caso o transcript seja válido, o embedding é gerado automaticamente.
+
+---
+
+### **Índices Criados**
+
+```sql
+-- Índices tradicionais
+CREATE INDEX IF NOT EXISTS idx_chamada_created_at ON chamada(created_at);
+CREATE INDEX IF NOT EXISTS idx_chamada_cliente_id ON chamada(cliente_id);
+CREATE INDEX IF NOT EXISTS idx_chamada_atendente_id ON chamada(atendente_id);
+CREATE INDEX IF NOT EXISTS idx_chamada_nota_qualidade ON chamada(nota_qualidade);
+
+-- Índice para busca semântica usando HNSW
+CREATE INDEX IF NOT EXISTS idx_chamada_embedding_cosine 
+ON chamada USING hnsw (embedding vector_cosine_ops) 
+WHERE embedding IS NOT NULL;
+```
+
+---
+
+### **Resumo da Implementação**
+
+- **1 Tabela principal** (`chamada`).
+- **1 Extensão habilitada** (`pgvector`).
+- **5 Índices**, incluindo suporte a **busca semântica**.
+- **Campos JSON** para máxima flexibilidade no armazenamento das transcrições e avaliações.
+- **Integração com embeddings**, permitindo consultas avançadas diretamente no banco.
+
+---
+
+**Nota:**  
+Scripts SQL e dados de exemplo estão disponíveis na pasta `/backend/migrations` do projeto.  
+Eles incluem exemplos de inserção, geração de embeddings e consultas para busca semântica.
+
 
 **Nota:** Insira uma explicação e direcionamento para o readme.md da pasta database.
 
