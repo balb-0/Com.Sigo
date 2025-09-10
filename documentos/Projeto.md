@@ -329,8 +329,33 @@ As perguntas foram consolidadas em um formulário google simples, que equilibra 
 - Pergunta 6 – Expectativas abertas  
   Coleta insights qualitativos, capturando necessidades que não foram previstas nas opções anteriores.  
 
-#### 2.4.4 Respostas Recebidas e Insights
----
+### 2.4.4 Resultados do Estudo sobre o Usuário do Sistema
+
+Em conformidade com o objetivo de realizar um estudo aprofundado sobre o usuário, a fase inicial da pesquisa consistiu na aplicação de um questionário estruturado. O método visou mapear as necessidades, preferências, habilidades e limitações dos analistas de qualidade que interagirão com o sistema. As respostas coletadas, embora de uma amostra inicial, já fornecem direcionamentos claros para o desenvolvimento.
+
+**Habilidades Confirmadas e a Principal Necessidade do Negócio**
+
+O estudo identificou um perfil de usuário com habilidades digitais de nível intermediário a avançado, combinado com senioridade na função (todos com mais de 3 anos de experiência). Essa proficiência indica que os usuários estão aptos a interagir com uma ferramenta robusta, que ofereça personalização e análise detalhada.
+
+Essa experiência se reflete diretamente na sua principal necessidade: garantir a resolução do problema do cliente. Este foi o critério de sucesso mais valorizado, mostrando que a ferramenta deve, acima de tudo, ajudar o analista a responder à pergunta: "O problema do cliente foi resolvido?".
+
+**Preferências de Usabilidade e Requisitos de Confiança**
+
+No que tange às preferências de interface, a exigência por visualização clara em dashboards foi unânime. Os usuários não querem apenas ter acesso aos dados, eles precisam que a informação seja apresentada de forma visual, intuitiva e rápida.
+
+Contudo, a melhor interface não tem valor sem confiança. A confiabilidade dos dados foi citada como um requisito fundamental. A clareza visual, somada à precisão dos dados, constitui a base para que os analistas confiem na ferramenta e a incorporem em seu fluxo de trabalho diário.
+
+**Superando Limitações com uma Visão Estratégica**
+
+As respostas mais detalhadas revelaram as limitações do processo de análise atual, que é manual e focado em amostras. Os analistas expressaram o desejo de superar essa limitação, transformando a ferramenta em uma plataforma de inteligência. A visão deles para o sistema vai muito além da simples auditoria, englobando funcionalidades estratégicas como:
+
+* **Análise de Causa Raiz:** Identificar e categorizar os principais motivos que levam os clientes a ligar.
+
+* **Monitoramento de Tendências:** Acompanhar em tempo real o surgimento ou aumento de reclamações específicas (ex: "conta alta").
+
+* **Inteligência Geográfica:** Mapear a origem das chamadas para identificar problemas concentrados em regiões específicas.
+
+Esses pontos demonstram que a maior expectativa é por uma ferramenta que não apenas otimize a tarefa atual, mas que forneça uma nova camada de inteligência sobre a operação.
 
 #### 2.4.6 Experiências que o Usuário Deverá Vivenciar
 
@@ -2213,6 +2238,7 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
 
 
