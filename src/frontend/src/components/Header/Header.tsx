@@ -15,8 +15,8 @@ export default function Header({ currentPage = '/', onNavigate }: HeaderProps) {
                 <img
                     src={logoHorizontal}
                     alt="Logo"
-                    width={135}
-                    height={135}
+                    width={110}
+                    height={110}
                 />
             </div>
             <NavigationTabs

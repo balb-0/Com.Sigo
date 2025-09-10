@@ -68,7 +68,8 @@ const columns = [
         header: () => <span>Pontuação</span>,
         cell: info => (
             <span className={`pontuacao ${getPontuacaoClass(info.getValue())}`}>
-                {info.getValue()}/10
+                {info.getValue()}
+                <span className='pontuacaoTotal'>/10</span>
             </span>
         ),
     }),

@@ -9,17 +9,19 @@
 .searchContainer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
 }
 
 .searchInput {
-    padding: 0.75rem 1rem; /* 12px 16px */
-    border-radius: 0.75rem; /* 12px */
+    padding: 1rem 1rem; /* 12px 16px */
+    width: 40%;
+    border-radius: 0.5rem; /* 12px */
     border: 1px solid var(--color-borda);
-    background-color: var(--color-azul-claro);
+    background-color: rgba(var(--color-azul-claro-rgb), 0.5);
     color: var(--color-branco);
     font-family: 'Inter', sans-serif;
     font-size: 0.875rem; /* 14px */
+    shadow: var(--shadow-customizada);
 }
 
 .searchInput::placeholder {
@@ -59,7 +61,7 @@
 
 .headerCell, .bodyCell {
     flex: 1; /* Distribui o espaço igualmente */
-    padding: 1rem; /* 16px */
+    padding: 0.75rem; 
     text-align: left;
     display: flex;
     align-items: center;
@@ -79,6 +81,13 @@
 
 .pontuacao {
     font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.pontuacaoTotal {
+    font-weight: 300;
+    font-size: 0.875rem;
+    color: var(--color-cinza);
 }
 
 .pontuacaoAlta {
@@ -101,8 +110,8 @@
 
 .tag {
     padding: 0.25rem 0.75rem; /* 4px 12px */
-    border-radius: 9999px; /* Pílula */
-    font-size: 0.75rem; /* 12px */
+    border-radius: 0.2rem;
+    font-size: 1rem; /* 12px */
     font-weight: 600;
 }
 
@@ -127,6 +136,7 @@
     align-items: center;
     gap: 1rem;
     color: var(--color-cinza);
+    font-weight: 400;
 }
 
 .pagination button {
@@ -134,7 +144,7 @@
     border: 1px solid var(--color-borda);
     background-color: var(--color-cinza);
     color: var(--color-azul-escuro);
-    border-radius: 6px;
+    border-radius: 0.3rem;
     cursor: pointer;
     transition: background-color 0.2s;
 }

@@ -10,8 +10,11 @@
   --color-azul-claro: #254062;
   --color-azul-claro-rgb: 37, 64, 98;
   --color-vermelho: #FF353F;
+  --color-vermelho-rgb: 255, 53, 63;
   --color-verde: #28A745;
+  --color-verde-rgb: 40, 167, 69;
   --color-amarelo: #FFC107;
+  --color-amarelo-rgb: 255, 193, 7;
   --color-cinza: #A8B2C3;
   --color-borda: #F4F4F41A; /* Removido o # duplo */
 
