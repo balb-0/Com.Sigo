@@ -1,7 +1,6 @@
 .root-body {
-    background-color: var(--color-azul-escuro);
     position: relative;
-    min-height: 100vh; /* Garantir altura mínima da viewport */
+    height: 100%;
     width: 100%; /* w-full */
     padding: 0; /* p-0 */
     margin: 0; /* m-0 */
@@ -10,10 +9,11 @@
 .background-image {
     pointer-events: none;
     position: absolute;
-    height: 100vh; /* h-screen */
-    width: 100vw; /* w-screen */
+    height: 100%; 
+    width: 100%; 
     object-fit: cover; /* object-cover */
     top: 0;
     left: 0;
     opacity: 0.3; 
+    overflow: hidden;
 }

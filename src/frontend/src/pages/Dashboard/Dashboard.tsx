@@ -1,6 +1,7 @@
 import './Dashboard.css';
 import Header from "../../components/Header/Header";
 import KpiCard from '../../components/KPICard/KPICard';
+import { ChamadasTable } from '../../components/Table/Table.tsx';
 
 interface DashboardProps {
     currentPage?: string;
@@ -16,19 +17,22 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     }
 
     const overallScore = 8;
+    const criticalAttendances = 2;
+    const callsAnalyzed = 5;
+    const digitalTransfers = 5;
+    
     const scoreColor = getScoreColor(overallScore);
-
+    
     return (
         <div className="dashboard-container">
             <Header currentPage={currentPage} onNavigate={onNavigate} />
-            <main className="main-content">
-                <div className="title-section">
-                    <h1 className="page-title">Dashboard de Qualidade</h1>
+            <main>
+                <div>
+                    <h1 className="page-titles">Dashboard de Qualidade</h1>
                     <div id="kpi-cards">
                         <KpiCard
                             showSubvalue={true}
                             id="overall-score"
-                            valueId="overall-score-value"
                             title="Pontuação"
                             subtitle="Média Geral"
                             value={overallScore.toString()}
@@ -36,21 +40,26 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
                             style={{ "--kpi-radial-color": scoreColor } as React.CSSProperties}
                         />
                         <KpiCard
+                            id="critical-attendances"
                             title="Atendimentos"
                             subtitle="Críticos"
-                            value="5"
+                            value={criticalAttendances.toString()}
+                            valueId='critical-value'
                         />
                         <KpiCard
                             title="Chamadas"
                             subtitle="Analisadas"
-                            value="5"
+                            value={callsAnalyzed.toString()}
                         />
                         <KpiCard
                             title="Transferências"
                             subtitle="Digital"
-                            value="5"
+                            value={digitalTransfers.toString()}
                         />
                     </div>
+                </div>
+                <div>
+                    <ChamadasTable />
                 </div>
             </main>
         </div>
