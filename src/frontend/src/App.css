@@ -15,5 +15,5 @@
     object-fit: cover; /* object-cover */
     top: 0;
     left: 0;
-    z-index: -1; /* Para ficar atrás do conteúdo */
+    opacity: 0.3; 
 }
