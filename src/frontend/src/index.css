@@ -4,7 +4,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* cores */
   --color-branco: #F4F4F4;
   --color-azul-escuro: #1E3350;
   --color-azul-claro: #254062;
@@ -16,9 +15,8 @@
   --color-amarelo: #FFC107;
   --color-amarelo-rgb: 255, 193, 7;
   --color-cinza: #A8B2C3;
-  --color-borda: #F4F4F41A; /* Removido o # duplo */
+  --color-borda: #F4F4F41A;
 
-  /* sombra */
   --shadow-customizada: 0 0 24px 0 rgba(0, 0, 0, 0.2);
 }
 

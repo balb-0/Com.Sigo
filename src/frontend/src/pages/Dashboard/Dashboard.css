@@ -24,7 +24,7 @@ main {
 }
 
 .page-titles {
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     color: var(--color-cinza);
     font-weight: 200;
     margin: 0;
@@ -32,8 +32,8 @@ main {
 
 #kpi-cards {
     display: flex;
-    gap: 2.75rem; 
-    margin-top: 1.5rem; /* mt-6 */
+    gap: 2.75rem;
+    margin-top: 1.5rem;
 }
 
 #overall-score {

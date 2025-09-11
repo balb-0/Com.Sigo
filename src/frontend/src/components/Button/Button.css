@@ -1,15 +1,14 @@
-/* Button styles */
 .button {
     display: flex;
-    gap: 1rem; /* gap-4 */
+    gap: 1rem;
     align-items: center;
-    padding: 1rem; /* p-4 */
-    font-weight: 600; /* font-semibold */
+    padding: 1rem;
+    font-weight: 600;
     color: var(--color-azul-escuro);
     background-color: var(--color-cinza);
-    border-radius: 0.375rem; /* rounded */
+    border-radius: 0.375rem;
     box-shadow: var(--shadow-customizada);
-    transition: background-color 0.3s; /* duration-300 */
+    transition: background-color 0.3s;
     border: none;
     cursor: pointer;
 }
@@ -20,6 +19,6 @@
 
 .button:disabled {
     background-color: var(--color-cinza);
-    opacity: 0.4; /* disabled:bg-cinza/40 equivale a opacity */
+    opacity: 0.4;
     cursor: not-allowed;
 }
