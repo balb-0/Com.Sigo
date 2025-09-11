@@ -1,6 +1,6 @@
 .date-filter-container {
     background-color: rgba(var(--color-azul-claro-rgb), 0.3);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     padding: 0rem 0.5rem;
     border: 1px solid var(--color-borda);
     display: flex;
@@ -9,9 +9,9 @@
 }
 
 .filter-title {
-    color: var(--color-branco);
+    color: var(--color-cinza);
     font-size: 1.125rem;
-    font-weight: 300;
+    font-weight: 400;
     padding-left: 1rem;
 }
 
@@ -26,10 +26,10 @@
     border: 1px solid var(--color-borda);
     background-color: rgba(var(--color-azul-claro-rgb), 0.5);
     color: var(--color-branco);
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .filter-btn:hover {
