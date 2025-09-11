@@ -2177,11 +2177,602 @@ _conteúdo_
 
 # 11. Webhooks
 
-Pensamos no uso de **webhooks** para simplificar a comunicação entre os serviços. Vamos utilizar o Express para essa função.
+## Visão Geral
 
-A ideia geral é que, quando o usuário envia um áudio para o sistema, o processo de transcrição e análise não acontece de forma imediata no mesmo fluxo. Em vez disso, o sistema retorna logo uma mensagem de que o áudio está **em processamento**.
+Registrar o envio de áudios pelo usuário e informar imediatamente se a transcrição foi bem-sucedida ou se houve falha no processamento.
 
-Depois, quando o processamento termina (transcrição completa ou falha detectada), o próprio sistema envia uma notificação automática para um endereço definido (o webhook). Essa notificação funciona como um “aviso pronto” de que o resultado já está disponível, sem que o usuário ou outro sistema precise ficar perguntando várias vezes.
+## Funcionamento
+
+1. O usuário envia um arquivo de áudio para o sistema.
+2. O sistema processa o áudio.
+3. Dois webhooks distintos recebem notificações:
+
+   * **Webhook de sucesso:** Notifica que a transcrição foi concluída corretamente.
+   * **Webhook de falha:** Notifica que houve erro no processamento da transcrição.
+
+## Configuração e Dependências
+
+### Dependências Mínimas
+
+```json
+{
+  "dependencies": {
+    "express": "^4.18.0",
+    "cors": "^2.8.5"
+  }
+}
+```
+
+### Estrutura do Projeto
+
+```
+webhook-system/
+├── server.js              # Servidor principal com os dois webhooks
+├── webhook-handlers.js    # Lógica de processamento dos webhooks
+└── package.json           # Dependências
+```
+
+## Implementação dos Webhooks
+
+### Servidor Principal (server.js)
+
+```javascript
+const express = require('express');
+const cors = require('cors');
+const { handleProcessingSuccess, handleProcessingFailure } = require('./webhook-handlers');
+
+const app = express();
+
+// Middlewares básicos
+app.use(cors());
+app.use(express.json());
+
+// Webhook 1: Processamento de Sucesso
+app.post('/webhook/processing-success', (req, res) => {
+    try {
+        console.log('Webhook de sucesso recebido:', new Date().toISOString());
+        console.log('Payload:', JSON.stringify(req.body, null, 2));
+        
+        // Processa a notificação de sucesso
+        const result = handleProcessingSuccess(req.body);
+        
+        // Resposta ao provedor do webhook
+        res.status(200).json({
+            status: 'success',
+            message: 'Notificação de sucesso processada',
+            processedAt: new Date().toISOString(),
+            data: result
+        });
+        
+    } catch (error) {
+        console.error('Erro no webhook de sucesso:', error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Erro interno no processamento',
+            error: error.message
+        });
+    }
+});
+
+// Webhook 2: Processamento de Falha
+app.post('/webhook/processing-failure', (req, res) => {
+    try {
+        console.log('Webhook de falha recebido:', new Date().toISOString());
+        console.log('Payload:', JSON.stringify(req.body, null, 2));
+        
+        // Processa a notificação de falha
+        const result = handleProcessingFailure(req.body);
+        
+        // Resposta ao provedor do webhook
+        res.status(200).json({
+            status: 'success',
+            message: 'Notificação de falha processada',
+            processedAt: new Date().toISOString(),
+            data: result
+        });
+        
+    } catch (error) {
+        console.error('Erro no webhook de falha:', error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Erro interno no processamento',
+            error: error.message
+        });
+    }
+});
+
+// Endpoint de status para verificar se o servidor está funcionando
+app.get('/webhook/status', (req, res) => {
+    res.json({
+        status: 'active',
+        webhooks: [
+            '/webhook/processing-success',
+            '/webhook/processing-failure'
+        ],
+        timestamp: new Date().toISOString()
+    });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor de webhooks rodando na porta ${PORT}`);
+    console.log(`Webhook de sucesso: http://localhost:${PORT}/webhook/processing-success`);
+    console.log(`Webhook de falha: http://localhost:${PORT}/webhook/processing-failure`);
+});
+
+module.exports = app;
+```
+
+### Lógica de Processamento (webhook-handlers.js)
+
+```javascript
+// Armazenamento simples em memória (substituir por banco de dados em produção)
+const processedEvents = [];
+const failedEvents = [];
+
+/**
+ * Processa notificações de sucesso do processamento de áudio
+ * @param {Object} payload - Dados recebidos do webhook
+ * @returns {Object} - Resultado do processamento
+ */
+function handleProcessingSuccess(payload) {
+    // Extrai informações relevantes do payload
+    const {
+        jobId,
+        filename,
+        transcription,
+        qualityScore,
+        sentiment,
+        compliance,
+        processedAt
+    } = payload;
+    
+    // Valida dados obrigatórios
+    if (!jobId) {
+        throw new Error('jobId é obrigatório no payload');
+    }
+    
+    // Cria registro do evento processado
+    const processedEvent = {
+        id: generateEventId(),
+        jobId,
+        filename: filename || 'unknown',
+        transcription: transcription || '',
+        qualityScore: qualityScore || 0,
+        sentiment: sentiment || 'neutro',
+        compliance: compliance || {},
+        processedAt: processedAt || new Date().toISOString(),
+        webhookReceivedAt: new Date().toISOString(),
+        status: 'success'
+    };
+    
+    // Armazena o evento
+    processedEvents.push(processedEvent);
+    
+    // Log do processamento
+    console.log(`✅ Processamento bem-sucedido registrado para job ${jobId}`);
+    console.log(`   Arquivo: ${processedEvent.filename}`);
+    console.log(`   Score de qualidade: ${processedEvent.qualityScore}`);
+    console.log(`   Sentimento: ${processedEvent.sentiment}`);
+    
+    // Aqui você pode adicionar lógica adicional como:
+    // - Enviar notificação para o usuário
+    // - Atualizar status no banco de dados
+    // - Disparar outros processos
+    
+    return {
+        eventId: processedEvent.id,
+        jobId: processedEvent.jobId,
+        message: 'Evento de sucesso processado e armazenado',
+        totalSuccessEvents: processedEvents.length
+    };
+}
+
+/**
+ * Processa notificações de falha do processamento de áudio
+ * @param {Object} payload - Dados recebidos do webhook
+ * @returns {Object} - Resultado do processamento
+ */
+function handleProcessingFailure(payload) {
+    // Extrai informações relevantes do payload
+    const {
+        jobId,
+        filename,
+        error,
+        errorCode,
+        failedAt,
+        retryCount
+    } = payload;
+    
+    // Valida dados obrigatórios
+    if (!jobId) {
+        throw new Error('jobId é obrigatório no payload');
+    }
+    
+    if (!error) {
+        throw new Error('error é obrigatório no payload de falha');
+    }
+    
+    // Cria registro do evento de falha
+    const failedEvent = {
+        id: generateEventId(),
+        jobId,
+        filename: filename || 'unknown',
+        error: error,
+        errorCode: errorCode || 'UNKNOWN_ERROR',
+        failedAt: failedAt || new Date().toISOString(),
+        webhookReceivedAt: new Date().toISOString(),
+        retryCount: retryCount || 0,
+        status: 'failed'
+    };
+    
+    // Armazena o evento
+    failedEvents.push(failedEvent);
+    
+    // Log da falha
+    console.log(`❌ Falha no processamento registrada para job ${jobId}`);
+    console.log(`   Arquivo: ${failedEvent.filename}`);
+    console.log(`   Erro: ${failedEvent.error}`);
+    console.log(`   Código do erro: ${failedEvent.errorCode}`);
+    console.log(`   Tentativas: ${failedEvent.retryCount}`);
+    
+    // Aqui você pode adicionar lógica adicional como:
+    // - Enviar alerta para administradores
+    // - Agendar nova tentativa de processamento
+    // - Notificar o usuário sobre a falha
+    
+    return {
+        eventId: failedEvent.id,
+        jobId: failedEvent.jobId,
+        message: 'Evento de falha processado e armazenado',
+        totalFailedEvents: failedEvents.length,
+        shouldRetry: failedEvent.retryCount < 3 // Exemplo de lógica de retry
+    };
+}
+
+/**
+ * Gera ID único para eventos
+ * @returns {string} - ID único
+ */
+function generateEventId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+/**
+ * Retorna estatísticas dos eventos processados
+ * @returns {Object} - Estatísticas
+ */
+function getEventStatistics() {
+    return {
+        totalSuccess: processedEvents.length,
+        totalFailures: failedEvents.length,
+        successRate: processedEvents.length / (processedEvents.length + failedEvents.length) * 100 || 0,
+        lastSuccessEvent: processedEvents[processedEvents.length - 1] || null,
+        lastFailureEvent: failedEvents[failedEvents.length - 1] || null
+    };
+}
+
+/**
+ * Busca eventos por jobId
+ * @param {string} jobId - ID do job
+ * @returns {Object} - Eventos encontrados
+ */
+function getEventsByJobId(jobId) {
+    const successEvents = processedEvents.filter(event => event.jobId === jobId);
+    const failureEvents = failedEvents.filter(event => event.jobId === jobId);
+    
+    return {
+        jobId,
+        successEvents,
+        failureEvents,
+        totalEvents: successEvents.length + failureEvents.length
+    };
+}
+
+module.exports = {
+    handleProcessingSuccess,
+    handleProcessingFailure,
+    getEventStatistics,
+    getEventsByJobId
+};
+```
+
+## Endpoints Adicionais para Monitoramento
+
+### Adicionando ao server.js
+
+```javascript
+// Adicionar estas rotas ao server.js após os webhooks principais
+
+const { getEventStatistics, getEventsByJobId } = require('./webhook-handlers');
+
+// Endpoint para consultar estatísticas
+app.get('/webhook/statistics', (req, res) => {
+    try {
+        const stats = getEventStatistics();
+        res.json({
+            status: 'success',
+            data: stats,
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: error.message
+        });
+    }
+});
+
+// Endpoint para consultar eventos por jobId
+app.get('/webhook/events/:jobId', (req, res) => {
+    try {
+        const { jobId } = req.params;
+        const events = getEventsByJobId(jobId);
+        
+        res.json({
+            status: 'success',
+            data: events,
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: error.message
+        });
+    }
+});
+```
+
+## Exemplos de Payload
+
+### Payload para Webhook de Sucesso
+
+```json
+{
+    "jobId": "job_12345",
+    "filename": "atendimento_cliente_001.wav",
+    "transcription": "Olá, como posso ajudá-lo hoje? O cliente respondeu que gostaria de saber sobre sua conta.",
+    "qualityScore": 85,
+    "sentiment": "positivo",
+    "compliance": {
+        "score": 90,
+        "requiredPhrases": ["posso confirmar seu cpf", "obrigado por entrar em contato"],
+        "foundPhrases": ["obrigado por entrar em contato"],
+        "missingPhrases": ["posso confirmar seu cpf"]
+    },
+    "processedAt": "2024-09-11T10:30:00Z"
+}
+```
+
+### Payload para Webhook de Falha
+
+```json
+{
+    "jobId": "job_12346",
+    "filename": "atendimento_cliente_002.wav",
+    "error": "Falha na transcrição: áudio com qualidade muito baixa",
+    "errorCode": "TRANSCRIPTION_FAILED",
+    "failedAt": "2024-09-11T10:35:00Z",
+    "retryCount": 1
+}
+```
+
+## Testando os Webhooks
+
+### Script de Teste (test-webhooks.js)
+
+```javascript
+const axios = require('axios');
+
+const BASE_URL = 'http://localhost:3000';
+
+async function testWebhooks() {
+    console.log('🧪 Iniciando testes dos webhooks...\n');
+    
+    // Teste 1: Webhook de sucesso
+    console.log('1️⃣ Testando webhook de sucesso...');
+    try {
+        const successPayload = {
+            jobId: "test_job_001",
+            filename: "teste_sucesso.wav",
+            transcription: "Este é um teste de transcrição bem-sucedida",
+            qualityScore: 92,
+            sentiment: "positivo",
+            compliance: {
+                score: 88,
+                requiredPhrases: ["teste"],
+                foundPhrases: ["teste"],
+                missingPhrases: []
+            },
+            processedAt: new Date().toISOString()
+        };
+        
+        const response = await axios.post(`${BASE_URL}/webhook/processing-success`, successPayload);
+        console.log('✅ Sucesso:', response.data);
+        
+    } catch (error) {
+        console.log('❌ Erro:', error.response?.data || error.message);
+    }
+    
+    console.log('\n');
+    
+    // Teste 2: Webhook de falha
+    console.log('2️⃣ Testando webhook de falha...');
+    try {
+        const failurePayload = {
+            jobId: "test_job_002",
+            filename: "teste_falha.wav",
+            error: "Arquivo de áudio corrompido",
+            errorCode: "CORRUPTED_FILE",
+            failedAt: new Date().toISOString(),
+            retryCount: 0
+        };
+        
+        const response = await axios.post(`${BASE_URL}/webhook/processing-failure`, failurePayload);
+        console.log('✅ Sucesso:', response.data);
+        
+    } catch (error) {
+        console.log('❌ Erro:', error.response?.data || error.message);
+    }
+    
+    console.log('\n');
+    
+    // Teste 3: Consultar estatísticas
+    console.log('3️⃣ Consultando estatísticas...');
+    try {
+        const response = await axios.get(`${BASE_URL}/webhook/statistics`);
+        console.log('📊 Estatísticas:', response.data);
+        
+    } catch (error) {
+        console.log('❌ Erro:', error.response?.data || error.message);
+    }
+}
+
+// Executa os testes
+testWebhooks();
+```
+
+## Integração com o Sistema Existente
+
+### Exemplo de Como Disparar os Webhooks
+
+```javascript
+// Exemplo de como integrar com o processamento de áudio existente
+
+const axios = require('axios');
+
+const WEBHOOK_BASE_URL = 'http://localhost:3000';
+
+/**
+ * Dispara webhook de sucesso após processamento bem-sucedido
+ */
+async function notifyProcessingSuccess(jobData) {
+    try {
+        const payload = {
+            jobId: jobData.id,
+            filename: jobData.filename,
+            transcription: jobData.transcription,
+            qualityScore: jobData.qualityScore,
+            sentiment: jobData.sentiment,
+            compliance: jobData.compliance,
+            processedAt: new Date().toISOString()
+        };
+        
+        await axios.post(`${WEBHOOK_BASE_URL}/webhook/processing-success`, payload);
+        console.log(`Webhook de sucesso enviado para job ${jobData.id}`);
+        
+    } catch (error) {
+        console.error(`Erro ao enviar webhook de sucesso: ${error.message}`);
+    }
+}
+
+/**
+ * Dispara webhook de falha após erro no processamento
+ */
+async function notifyProcessingFailure(jobId, filename, error, errorCode = 'UNKNOWN_ERROR', retryCount = 0) {
+    try {
+        const payload = {
+            jobId,
+            filename,
+            error: error.message || error,
+            errorCode,
+            failedAt: new Date().toISOString(),
+            retryCount
+        };
+        
+        await axios.post(`${WEBHOOK_BASE_URL}/webhook/processing-failure`, payload);
+        console.log(`Webhook de falha enviado para job ${jobId}`);
+        
+    } catch (webhookError) {
+        console.error(`Erro ao enviar webhook de falha: ${webhookError.message}`);
+    }
+}
+
+// Exemplo de uso no processamento de áudio
+async function processAudio(jobId, audioFile) {
+    try {
+        // Simula processamento de áudio
+        console.log(`Iniciando processamento do job ${jobId}`);
+        
+        // ... lógica de processamento ...
+        
+        // Se sucesso, dispara webhook de sucesso
+        const result = {
+            id: jobId,
+            filename: audioFile.name,
+            transcription: "Texto transcrito...",
+            qualityScore: 85,
+            sentiment: "positivo",
+            compliance: { score: 90 }
+        };
+        
+        await notifyProcessingSuccess(result);
+        
+    } catch (error) {
+        // Se falha, dispara webhook de falha
+        await notifyProcessingFailure(jobId, audioFile.name, error, 'PROCESSING_ERROR');
+    }
+}
+
+module.exports = {
+    notifyProcessingSuccess,
+    notifyProcessingFailure,
+    processAudio
+};
+```
+
+## Configuração para Produção
+
+### Variáveis de Ambiente (.env)
+
+```bash
+PORT=3000
+NODE_ENV=production
+WEBHOOK_SECRET=your-secret-key-here
+LOG_LEVEL=info
+```
+
+### Melhorias de Segurança (Opcional)
+
+```javascript
+// Adicionar ao server.js para validação básica
+
+// Middleware para validar origem (opcional)
+function validateWebhookOrigin(req, res, next) {
+    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['localhost'];
+    const origin = req.get('origin') || req.get('host');
+    
+    // Em desenvolvimento, permite qualquer origem
+    if (process.env.NODE_ENV !== 'production') {
+        return next();
+    }
+    
+    if (allowedOrigins.some(allowed => origin.includes(allowed))) {
+        next();
+    } else {
+        res.status(403).json({ error: 'Origem não autorizada' });
+    }
+}
+
+// Aplicar middleware aos webhooks
+app.post('/webhook/processing-success', validateWebhookOrigin, (req, res) => {
+    // ... código do webhook
+});
+
+app.post('/webhook/processing-failure', validateWebhookOrigin, (req, res) => {
+    // ... código do webhook
+});
+```
+
+## Resumo da Implementação
+
+**Configuração de rotas e endpoints**: Dois endpoints definidos (`/webhook/processing-success` e `/webhook/processing-failure`)
+
+**Lógica de processamento**: Implementada em `webhook-handlers.js` com extração de informações relevantes, processamento e armazenamento
+
+**Resposta ao provedor**: Retorna códigos HTTP apropriados (200 OK para sucesso, 500 para erro interno)
+
+**Mínimo de bibliotecas**: Apenas Express.js e CORS
 
 # Referências
 
