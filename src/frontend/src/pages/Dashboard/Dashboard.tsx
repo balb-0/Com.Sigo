@@ -1,7 +1,7 @@
 import './Dashboard.css';
 import Header from "../../components/Header/Header";
 import KpiCard from '../../components/KPICard/KPICard';
-import { ChamadasTable } from '../../components/Table/Table.tsx';
+import { ChamadasTable, type Chamada } from '../../components/Table/Table.tsx';
 
 interface DashboardProps {
     currentPage?: string;
@@ -16,13 +16,29 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
         return 'var(--color-verde)';
     }
 
-    const overallScore = 8;
-    const criticalAttendances = 2;
-    const callsAnalyzed = 5;
-    const digitalTransfers = 5;
-    
+    const mockChamadas: Chamada[] = [
+        { id: '1234', dataHora: '10/09/25 14:30', pontuacao: 8, tags: [{ name: 'Resolvido', type: 'positivo' }, { name: 'Elogio', type: 'positivo' }] },
+        { id: '1235', dataHora: '10/09/25 14:25', pontuacao: 3, tags: [{ name: 'Sentimento Negativo', type: 'negativo' }, { name: 'Script Incompleto', type: 'negativo' }] },
+        { id: '1236', dataHora: '10/09/25 14:20', pontuacao: 6, tags: [{ name: 'Transferência', type: 'neutro' }, { name: 'Resolvido', type: 'positivo' }] },
+        { id: '1237', dataHora: '10/09/25 14:15', pontuacao: 9, tags: [{ name: 'Elogio', type: 'positivo' }] },
+        { id: '1238', dataHora: '10/09/25 14:10', pontuacao: 2, tags: [{ name: 'Reclamação Formal', type: 'negativo' }] },
+        { id: '1239', dataHora: '10/09/25 14:05', pontuacao: 5, tags: [{ name: 'Transferência', type: 'neutro' }] },
+    ];
+
+    const overallScore = Math.round(
+        mockChamadas.reduce((acc, chamada) => acc + chamada.pontuacao, 0) / mockChamadas.length
+    );
+
+    const criticalAttendances = mockChamadas.filter(chamada => chamada.pontuacao < 4).length;
+
+    const callsAnalyzed = mockChamadas.length;
+
+    const digitalTransfers = mockChamadas.filter(chamada =>
+        chamada.tags.some(tag => tag.name.toLowerCase().includes('transferência'))
+    ).length;
+
     const scoreColor = getScoreColor(overallScore);
-    
+
     return (
         <div className="dashboard-container">
             <Header currentPage={currentPage} onNavigate={onNavigate} />
@@ -59,7 +75,7 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
                     </div>
                 </div>
                 <div>
-                    <ChamadasTable />
+                    <ChamadasTable data={mockChamadas} />
                 </div>
             </main>
         </div>

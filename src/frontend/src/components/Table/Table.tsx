@@ -25,15 +25,6 @@ export interface Chamada {
     tags: Tag[];
 }
 
-const mockData: Chamada[] = [
-    { id: '1234', dataHora: '10/09/25 14:30', pontuacao: 8, tags: [{ name: 'Resolvido', type: 'positivo' }, { name: 'Elogio', type: 'positivo' }] },
-    { id: '1235', dataHora: '10/09/25 14:25', pontuacao: 3, tags: [{ name: 'Sentimento Negativo', type: 'negativo' }, { name: 'Script Incompleto', type: 'negativo' }] },
-    { id: '1236', dataHora: '10/09/25 14:20', pontuacao: 6, tags: [{ name: 'Transferência', type: 'neutro' }, { name: 'Resolvido', type: 'positivo' }] },
-    { id: '1237', dataHora: '10/09/25 14:15', pontuacao: 9, tags: [{ name: 'Elogio', type: 'positivo' }] },
-    { id: '1238', dataHora: '10/09/25 14:10', pontuacao: 2, tags: [{ name: 'Reclamação Formal', type: 'negativo' }] },
-    { id: '1239', dataHora: '10/09/25 14:05', pontuacao: 5, tags: [{ name: 'Transferência', type: 'neutro' }] },
-];
-
 const columnHelper = createColumnHelper<Chamada>();
 
 const getPontuacaoClass = (pontuacao: number) => {
@@ -88,8 +79,11 @@ const columns = [
     }),
 ];
 
-export function ChamadasTable() {
-    const [data] = useState(() => [...mockData]);
+interface ChamadasTableProps {
+    data: Chamada[];
+}
+
+export function ChamadasTable({ data }: ChamadasTableProps) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = useState('');
 
