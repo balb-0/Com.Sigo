@@ -23,6 +23,15 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
         { id: '1237', dataHora: '10/09/25 14:15', pontuacao: 9, tags: [{ name: 'Elogio', type: 'positivo' }] },
         { id: '1238', dataHora: '10/09/25 14:10', pontuacao: 2, tags: [{ name: 'Reclamação Formal', type: 'negativo' }] },
         { id: '1239', dataHora: '10/09/25 14:05', pontuacao: 5, tags: [{ name: 'Transferência', type: 'neutro' }] },
+        { id: '1240', dataHora: '10/09/25 14:00', pontuacao: 7, tags: [{ name: 'Resolvido', type: 'positivo' }, { name: 'Cortesia', type: 'positivo' }] },
+        { id: '1241', dataHora: '10/09/25 13:55', pontuacao: 4, tags: [{ name: 'Dúvidas Técnicas', type: 'neutro' }] },
+        { id: '1242', dataHora: '10/09/25 13:50', pontuacao: 10, tags: [{ name: 'Excelente Atendimento', type: 'positivo' }, { name: 'Elogio', type: 'positivo' }] },
+        { id: '1243', dataHora: '10/09/25 13:45', pontuacao: 1, tags: [{ name: 'Cliente Insatisfeito', type: 'negativo' }, { name: 'Demora', type: 'negativo' }] },
+        { id: '1244', dataHora: '10/09/25 13:40', pontuacao: 8, tags: [{ name: 'Transferência', type: 'neutro' }, { name: 'Resolvido', type: 'positivo' }] },
+        { id: '1245', dataHora: '10/09/25 13:35', pontuacao: 6, tags: [{ name: 'Informações Claras', type: 'positivo' }] },
+        { id: '1246', dataHora: '10/09/25 13:30', pontuacao: 3, tags: [{ name: 'Script Incompleto', type: 'negativo' }, { name: 'Transferência', type: 'neutro' }] },
+        { id: '1247', dataHora: '10/09/25 13:25', pontuacao: 9, tags: [{ name: 'Problema Resolvido', type: 'positivo' }, { name: 'Rapidez', type: 'positivo' }] },
+        { id: '1248', dataHora: '10/09/25 13:20', pontuacao: 5, tags: [{ name: 'Aguardando Retorno', type: 'neutro' }] }
     ];
 
     const overallScore = Math.round(

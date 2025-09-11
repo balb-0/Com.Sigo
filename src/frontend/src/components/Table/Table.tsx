@@ -96,6 +96,11 @@ export function ChamadasTable({ data }: ChamadasTableProps) {
             sorting,
             globalFilter,
         },
+        initialState: {
+            pagination: {
+                pageSize: 6, 
+            },
+        },
         onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
         getCoreRowModel: getCoreRowModel(),
