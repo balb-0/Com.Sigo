@@ -40,16 +40,16 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
         { id: '1246', dataHora: '08/03/23 13:30', pontuacao: 3, tags: [{ name: 'Script Incompleto', type: 'negativo' }, { name: 'Transferência', type: 'neutro' }] },
         { id: '1247', dataHora: '22/03/23 13:25', pontuacao: 9, tags: [{ name: 'Problema Resolvido', type: 'positivo' }, { name: 'Rapidez', type: 'positivo' }] },
         { id: '1248', dataHora: '14/11/23 13:20', pontuacao: 5, tags: [{ name: 'Aguardando Retorno', type: 'neutro' }] },
-        { id: '1249', dataHora: '11/09/25 08:15', pontuacao: 7, tags: [{ name: 'Resolvido', type: 'positivo' }, { name: 'Manhã', type: 'neutro' }] },
+        { id: '1249', dataHora: '11/09/25 08:15', pontuacao: 7, tags: [{ name: 'Resolvido', type: 'positivo' }, { name: 'Rapidez', type: 'positivo' }] },
         { id: '1250', dataHora: '11/09/25 09:45', pontuacao: 6, tags: [{ name: 'Informações Claras', type: 'positivo' }] },
         { id: '1251', dataHora: '11/09/25 11:30', pontuacao: 4, tags: [{ name: 'Dúvidas Técnicas', type: 'neutro' }] },
         { id: '1252', dataHora: '11/09/25 16:20', pontuacao: 9, tags: [{ name: 'Excelente Atendimento', type: 'positivo' }] },
         { id: '1253', dataHora: '11/09/25 18:50', pontuacao: 5, tags: [{ name: 'Transferência', type: 'neutro' }] },
-        { id: '1254', dataHora: '11/09/25 20:35', pontuacao: 8, tags: [{ name: 'Cortesia', type: 'positivo' }, { name: 'Noite', type: 'neutro' }] },
+        { id: '1254', dataHora: '11/09/25 20:35', pontuacao: 8, tags: [{ name: 'Cortesia', type: 'positivo' }, { name: 'Resolvido', type: 'positivo' }] },
         { id: '1255', dataHora: '11/09/25 22:10', pontuacao: 3, tags: [{ name: 'Script Incompleto', type: 'negativo' }] },
-        { id: '1256', dataHora: '10/09/25 07:30', pontuacao: 6, tags: [{ name: 'Madrugada', type: 'neutro' }] },
-        { id: '1257', dataHora: '10/09/25 23:45', pontuacao: 2, tags: [{ name: 'Cliente Insatisfeito', type: 'negativo' }, { name: 'Noite Tardia', type: 'neutro' }] },
-        { id: '1258', dataHora: '09/09/25 12:00', pontuacao: 10, tags: [{ name: 'Elogio', type: 'positivo' }, { name: 'Almoço', type: 'neutro' }] }
+        { id: '1256', dataHora: '10/09/25 07:30', pontuacao: 6, tags: [{ name: 'Informações Claras', type: 'positivo' }] },
+        { id: '1257', dataHora: '10/09/25 23:45', pontuacao: 2, tags: [{ name: 'Cliente Insatisfeito', type: 'negativo' }, { name: 'Demora', type: 'negativo' }] },
+        { id: '1258', dataHora: '09/09/25 12:00', pontuacao: 10, tags: [{ name: 'Elogio', type: 'positivo' }, { name: 'Problema Resolvido', type: 'positivo' }] }
     ];
 
     const filteredChamadas = useMemo(() => {
