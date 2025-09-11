@@ -1,5 +1,6 @@
 import './DateFilter.css';
 import { useState, useEffect } from 'react';
+import backgroundImage from '../../assets/images/background.svg';
 
 export type FilterType = 'all' | 'thisYear' | 'thisMonth' | 'custom';
 
@@ -164,6 +165,7 @@ export function DateFilter({ onFilterChange }: DateFilterProps) {
                             </div>
 
                             <div className="date-time-section">
+                                <img src={backgroundImage} alt="Background" className="background-image-modal" />
                                 <h4 className="section-title">🕒 Filtro por Horário (Opcional)</h4>
                                 <div className="date-inputs-row">
                                     <div className="date-input-group">

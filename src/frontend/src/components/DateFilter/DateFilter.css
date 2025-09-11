@@ -96,15 +96,13 @@
     color: var(--color-cinza);
     font-size: 1.5rem;
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
     transition: all 0.2s ease;
     outline: none;
+    font-weight: 900;
 }
 
 .modal-close-btn:hover {
-    color: var(--color-branco);
-    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-vermelho);
 }
 
 .modal-content {
@@ -225,6 +223,18 @@
     color: var(--color-branco);
     background-color: rgba(255, 255, 255, 0.1);
     transform: translateY(-1px);
+}
+
+.background-image-modal {
+    pointer-events: none;
+    position: absolute;
+    height: 100%; 
+    width: 100%; 
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    opacity: 0.20; 
+    overflow: hidden;
 }
 
 .modal-hint {
