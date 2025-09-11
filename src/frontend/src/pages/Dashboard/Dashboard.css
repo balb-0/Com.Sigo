@@ -12,8 +12,15 @@ main {
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    gap: 3rem;
     padding-top: 1.25rem;
+}
+
+.head-main {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
 }
 
 .page-titles {
