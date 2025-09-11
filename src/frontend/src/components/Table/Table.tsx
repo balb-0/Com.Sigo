@@ -48,15 +48,36 @@ const getTagClass = (type: Tag['type']) => {
 
 const columns = [
     columnHelper.accessor('id', {
-        header: () => <span>ID da Chamada</span>,
+        header: () =>
+            <span className='headerWithIcon'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z">
+                    </path>
+                </svg>
+                ID da Chamada
+            </span>,
         cell: info => info.getValue(),
     }),
     columnHelper.accessor('dataHora', {
-        header: () => <span>Data/Hora</span>,
+        header: () =>
+            <span className='headerWithIcon'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM128,168a16,16,0,1,1,16-16A16,16,0,0,1,128,168Zm80-88H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24Z">
+                    </path>
+                </svg>
+                Data/Hora
+            </span>,
         cell: info => info.getValue(),
     }),
     columnHelper.accessor('pontuacao', {
-        header: () => <span>Pontuação</span>,
+        header: () =>
+            <span className='headerWithIcon'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M221.87,90.86a4,4,0,0,0-6.17-.62l-75.42,75.42A8,8,0,0,1,129,154.35l92.7-92.69a8,8,0,0,0-11.32-11.32L197,63.73A112.05,112.05,0,0,0,22.34,189.25,16.09,16.09,0,0,0,37.46,200H218.53a16,16,0,0,0,15.11-10.71,112.28,112.28,0,0,0-11.77-98.43ZM57.44,166.41a8,8,0,0,1-6.25,9.43,7.89,7.89,0,0,1-1.6.16,8,8,0,0,1-7.83-6.41A88.06,88.06,0,0,1,143.59,65.38a8,8,0,0,1-2.82,15.75,72.07,72.07,0,0,0-83.33,85.28Z">
+                    </path>
+                </svg>
+                Pontuação
+            </span>,
         cell: info => (
             <span className={`pontuacao ${getPontuacaoClass(info.getValue())}`}>
                 {info.getValue()}
@@ -65,7 +86,14 @@ const columns = [
         ),
     }),
     columnHelper.accessor('tags', {
-        header: () => <span>Tags</span>,
+        header: () =>
+            <span className='headerWithIcon'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M243.31,136,144,36.69A15.86,15.86,0,0,0,132.69,32H40a8,8,0,0,0-8,8v92.69A15.86,15.86,0,0,0,36.69,144L136,243.31a16,16,0,0,0,22.63,0l84.68-84.68a16,16,0,0,0,0-22.63ZM84,96A12,12,0,1,1,96,84,12,12,0,0,1,84,96Z">
+                    </path>
+                </svg>
+                Tags
+            </span>,
         cell: info => (
             <div className="tagsContainer">
                 {info.getValue().map((tag, index) => (
@@ -98,7 +126,7 @@ export function ChamadasTable({ data }: ChamadasTableProps) {
         },
         initialState: {
             pagination: {
-                pageSize: 6, 
+                pageSize: 6,
             },
         },
         onSortingChange: setSorting,
@@ -119,13 +147,15 @@ export function ChamadasTable({ data }: ChamadasTableProps) {
             <div className="tableContainer">
                 <div className="searchContainer">
                     <h3 className="page-titles">Análise de Chamadas Recentes</h3>
-                    <input
-                        type="text"
-                        value={globalFilter ?? ''}
-                        onChange={e => setGlobalFilter(e.target.value)}
-                        placeholder="Buscar por ID da chamada..."
-                        className="searchInput"
-                    />
+                    <div className="searchInputWrapper">
+                        <input
+                            type="text"
+                            value={globalFilter ?? ''}
+                            onChange={e => setGlobalFilter(e.target.value)}
+                            placeholder="Buscar por ID da chamada..."
+                            className="searchInput"
+                        />
+                    </div>
                 </div>
 
                 <div className="table">
@@ -140,8 +170,8 @@ export function ChamadasTable({ data }: ChamadasTableProps) {
                                     >
                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                         {{
-                                            asc: ' ▲',
-                                            desc: ' ▼',
+                                            asc: '▲',
+                                            desc: '▼',
                                         }[header.column.getIsSorted() as string] ?? null}
                                     </div>
                                 ))}
