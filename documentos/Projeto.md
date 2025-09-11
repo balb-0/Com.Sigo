@@ -2071,7 +2071,38 @@ _conteúdo_
 
 ## 8.4.1 Sprint 3
 
-_conteúdo_
+#### Tecnologias Utilizadas na Análise
+
+O modelo faz uso de diferentes abordagens para enriquecer a análise das transcrições:
+
+- **Regex (Expressões Regulares):** Utilizado para identificar padrões específicos de texto nas transcrições, como frases de identificação positiva ou abertura de ordem de serviço. O uso de regex permite encontrar variações de frases e garantir que critérios sejam avaliados mesmo quando o atendente utiliza diferentes formas de expressão.
+
+- **BERT:** O modelo de análise de sentimento utiliza o BERT (Bidirectional Encoder Representations from Transformers), que já é pré-treinado em múltiplos idiomas e tarefas de classificação de sentimento. Isso permite avaliar o tom emocional das frases de forma robusta, sem necessidade de treinamento adicional para o contexto inicial do projeto.
+
+
+### Foco da Sprint 3: Início do Modelo NLP para Qualidade de Atendimento
+
+Um dos principais focos da Sprint 3 foi o início do desenvolvimento do modelo de NLP para avaliação da qualidade do atendimento. O modelo foi criado e está disponível em [`documentos/modelo_nlp_qualidade_atendimento.ipynb`](../src/modelo/algoritmos_projeto.ipynb), onde toda a lógica e testes iniciais foram implementados. Este modelo existe apenas para verificação, uma vez que os dados de treinamento foram importados apenas no google colab
+
+#### Ambiente de Testes
+Todos os testes do modelo foram realizados no Google Colab ([link para o notebook de testes](https://colab.research.google.com/drive/1VH0lustWpSjAHYZSKYdCEeonL101eZ_w#scrollTo=X6fLn1FhD__k)), aproveitando a facilidade de execução e recursos computacionais disponíveis na plataforma.
+
+#### Estrutura dos Dados de Teste
+Para os testes, todas as conversas foram inseridas diretamente no código como arquivos JSON, simulando transcrições reais de atendimentos. O plano futuro é migrar todas as conversas para o banco de dados e realizar a análise diretamente a partir dele, mas para validação inicial optou-se por essa abordagem mais simples.
+
+#### Funcionamento do Modelo
+O modelo foi estruturado para avaliar cada transcrição de atendimento com base em critérios de QA definidos em um dicionário, como abertura, encerramento, empatia, cordialidade, vícios de linguagem, identificação positiva, oportunidades de negócio, pesquisa de satisfação, ética, abertura de OS e desconexão indevida. Cada critério possui palavras-chave ou padrões que são buscados na transcrição, e o resultado é "Aprovado" ou "Reprovado" para cada item.
+
+Além disso, o modelo realiza uma análise de sentimento utilizando o SpaCy para segmentação de sentenças e o modelo BERT para classificação do sentimento de cada frase. O resultado é consolidado em um DataFrame, que pode ser exportado para CSV para análise posterior.
+
+Atualmente, o modelo retorna apenas se cada critério foi atendido ou não ("Aprovado" ou "Reprovado"). Existe o objetivo de evoluir o modelo para que ele atribua notas quantitativas aos critérios, permitindo uma avaliação mais granular da qualidade do atendimento.
+
+#### Discussão dos Resultados
+Os resultados obtidos até o momento mostram que o modelo consegue identificar padrões básicos de atendimento, como abertura, cordialidade e empatia, mas ainda apresenta limitações em critérios mais complexos, como oportunidades de negócio e pesquisa de satisfação. A maioria dos atendimentos analisados apresenta reprovação em critérios relacionados ao encerramento padrão, identificação positiva e criação de oportunidades, indicando pontos de melhoria nos scripts de atendimento.
+
+O modelo também aponta que, em geral, os atendentes mantêm postura ética e cordial, mas há recorrência de vícios de linguagem e ausência de procedimentos completos em algumas chamadas. A análise de sentimento complementa a avaliação, permitindo identificar atendimentos com maior carga emocional negativa ou positiva.
+
+O desenvolvimento do modelo representa um avanço importante para o projeto, pois permite automatizar parte da avaliação de qualidade e identificar padrões de atendimento que podem ser aprimorados nas próximas sprints.
 
 ## 8.4.2 Sprint 4
 
