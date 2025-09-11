@@ -2071,7 +2071,6 @@ _conteúdo_
 
 ## 8.4.1 Sprint 3
 
-## 8.3.1 Sprint 3
 #### Tecnologias Utilizadas na Análise
 
 O modelo faz uso de diferentes abordagens para enriquecer a análise das transcrições:
