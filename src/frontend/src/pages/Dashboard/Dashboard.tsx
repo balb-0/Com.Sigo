@@ -24,6 +24,12 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
         return 'var(--color-verde)';
     }
 
+    function getCriticalScoreColor(score: number) {
+        if (score > 10) return 'var(--color-vermelho)';
+        if (score > 0) return 'var(--color-amarelo)';
+        return 'var(--color-verde)';
+    }
+
     const mockChamadas: Chamada[] = [
         { id: '1234', dataHora: '10/09/25 14:30', pontuacao: 8, tags: [{ name: 'Resolvido', type: 'positivo' }, { name: 'Elogio', type: 'positivo' }] },
         { id: '1235', dataHora: '15/09/25 14:25', pontuacao: 3, tags: [{ name: 'Sentimento Negativo', type: 'negativo' }, { name: 'Script Incompleto', type: 'negativo' }] },
@@ -49,7 +55,12 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
         { id: '1255', dataHora: '11/09/25 22:10', pontuacao: 3, tags: [{ name: 'Script Incompleto', type: 'negativo' }] },
         { id: '1256', dataHora: '10/09/25 07:30', pontuacao: 6, tags: [{ name: 'Informações Claras', type: 'positivo' }] },
         { id: '1257', dataHora: '10/09/25 23:45', pontuacao: 2, tags: [{ name: 'Cliente Insatisfeito', type: 'negativo' }, { name: 'Demora', type: 'negativo' }] },
-        { id: '1258', dataHora: '09/09/25 12:00', pontuacao: 10, tags: [{ name: 'Elogio', type: 'positivo' }, { name: 'Problema Resolvido', type: 'positivo' }] }
+        { id: '1258', dataHora: '09/09/25 12:00', pontuacao: 10, tags: [{ name: 'Elogio', type: 'positivo' }, { name: 'Problema Resolvido', type: 'positivo' }] },
+        { id: '1259', dataHora: '08/09/25 15:30', pontuacao: 1, tags: [{ name: 'Reclamação Formal', type: 'negativo' }, { name: 'Script Incompleto', type: 'negativo' }] },
+        { id: '1260', dataHora: '07/09/25 10:15', pontuacao: 3, tags: [{ name: 'Cliente Insatisfeito', type: 'negativo' }, { name: 'Sentimento Negativo', type: 'negativo' }] },
+        { id: '1261', dataHora: '06/09/25 17:45', pontuacao: 2, tags: [{ name: 'Demora', type: 'negativo' }, { name: 'Transferência', type: 'neutro' }] },
+        { id: '1262', dataHora: '05/09/25 09:20', pontuacao: 1, tags: [{ name: 'Sentimento Negativo', type: 'negativo' }, { name: 'Cliente Insatisfeito', type: 'negativo' }] },
+        { id: '1263', dataHora: '04/09/25 21:10', pontuacao: 3, tags: [{ name: 'Script Incompleto', type: 'negativo' }, { name: 'Reclamação Formal', type: 'negativo' }] }
     ];
 
     const filteredChamadas = useMemo(() => {
@@ -134,6 +145,7 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     ).length;
 
     const scoreColor = getScoreColor(overallScore);
+    const criticalScoreColor = getCriticalScoreColor(criticalAttendances);
 
     const handleFilterChange = (filterType: FilterType, startDate?: string, endDate?: string, startTime?: string, endTime?: string) => {
         setCurrentFilter(filterType);
@@ -176,16 +188,18 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
                             subtitle="Críticos"
                             value={criticalAttendances.toString()}
                             valueId='critical-value'
-                        />
-                        <KpiCard
-                            title="Chamadas"
-                            subtitle="Analisadas"
-                            value={callsAnalyzed.toString()}
+                            valueStyle={{ color: criticalScoreColor }}
+                            style={{ "--kpi-radial-color": criticalScoreColor } as React.CSSProperties}
                         />
                         <KpiCard
                             title="Transferências"
                             subtitle="Digital"
                             value={digitalTransfers.toString()}
+                        />
+                        <KpiCard
+                            title="Chamadas"
+                            subtitle="Analisadas"
+                            value={callsAnalyzed.toString()}
                         />
                     </div>
                 </div>
