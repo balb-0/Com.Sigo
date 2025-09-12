@@ -44,11 +44,11 @@
 - <a href="https://www.linkedin.com/in/francisco-escobar/">Design - Francisco de Souza Escobar</a>
 - <a href="https://www.linkedin.com/in/filipe-gon%C3%A7alves-08a55015b/">Liderança - Filipe Gonçalves</a>
 
-## 📝 Descrição
+## Descrição
 
-<Descrição do Desafio>.
+Com.Sigo é um protótipo de atendimento para companhia de gás com análise de conversas. O backend (Node + Express + PostgreSQL + pgvector) armazena chamadas e permite busca semântica; o frontend (React + Vite) exibe dashboard e chat.
 
-## 📝 LINKS
+## Links
 
 <a href="/documentos/manual-instalacao.md">Link para o Manual de Instruções</a> que explica como montar, conectar e utilizar o protótipo.
 
@@ -80,7 +80,7 @@ Dentre os arquivos presentes na raiz do projeto, definem-se:
 
 - <b>src</b>: nesta pasta encontra-se todo o código fonte do sistema (circuito e eventuais sistemas complementares).
 
-## 💻 Configuração para desenvolvimento
+## Como executar (dev)
 
 Para configurar o desenvolvimento da aplicação, [instale o git](https://git-scm.com/downloads) e clone esse repositório em seu computador através do comando:
 
@@ -88,7 +88,22 @@ Para configurar o desenvolvimento da aplicação, [instale o git](https://git-sc
 git clone https://github.com/<endereco>
 ```
 
-Em seguida siga as instruções presentes em nosso <a href="/documentos/manual-instalacao.md">manual de instalação</a>.
+1. Backend
+   ```bash
+   cd src/backend
+   npm install
+   npm run migrate
+   npm run seed
+   npm run dev
+   ```
+2. Frontend
+   ```bash
+   cd src/frontend
+   npm install
+   npm run dev
+   ```
+
+Mais detalhes em <a href="/documentos/manual-instalacao.md">Manual de Instalação</a>.
 
 ## 🗃 Histórico de lançamentos
 
@@ -109,7 +124,7 @@ Em seguida siga as instruções presentes em nosso <a href="/documentos/manual-i
   - EXECUÇÃO DE TESTES SISTÊMICOS
   - GESTÃO DE PROJETOS EVOLUTIVA E ANÁLISE DE VIABILIDADE FINANCEIRA
 - 0.5.0 - 09/10/2025
-  - DESENVOLVIMENTO E DOCUMENTAÇÃO TÉCNICA DO PROJETO 
+  - DESENVOLVIMENTO E DOCUMENTAÇÃO TÉCNICA DO PROJETO
   - DOCUMENTAÇÃO TÉCNICA FINAL
   - GESTÃO DE PROJETOS EVOLUTIVA E APRESENTAÇÃO FINAL
 
