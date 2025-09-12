@@ -8,7 +8,7 @@
 }
 
 .message-item {
-    max-width: 32.5rem; /* 520px */
+    max-width: 32.5rem;
 }
 
 .message-item.user {
@@ -27,5 +27,5 @@
 }
 
 .message-audio {
-    width: 18.75rem; /* 300px */
+    width: 18.75rem;
 }

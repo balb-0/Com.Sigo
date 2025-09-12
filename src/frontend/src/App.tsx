@@ -2,7 +2,7 @@
 import './App.css'
 import { useState } from 'react'
 import ChatPage from './pages/ChatPage/ChatPage'
-import Dashboard from './pages/Dashboard/Dashboard'
+import {Dashboard} from './pages/Dashboard/Dashboard'
 import backgroundImage from './assets/images/background.svg'
 
 function App() {

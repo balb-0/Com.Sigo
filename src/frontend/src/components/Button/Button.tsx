@@ -3,7 +3,7 @@ import './Button.css';
 interface ButtonProps {
     label: string,
     icon?: React.ReactNode,
-    onClick?: () => void, //tirar esse "?" depois
+    onClick?: () => void
     disabled?: boolean,
     customPadding?: string,
 }

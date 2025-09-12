@@ -1,19 +1,19 @@
 .root-body {
-    background-color: var(--color-azul-escuro);
     position: relative;
-    min-height: 100vh; /* Garantir altura mínima da viewport */
-    width: 100%; /* w-full */
-    padding: 0; /* p-0 */
-    margin: 0; /* m-0 */
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .background-image {
     pointer-events: none;
     position: absolute;
-    height: 100vh; /* h-screen */
-    width: 100vw; /* w-screen */
-    object-fit: cover; /* object-cover */
+    height: 100%; 
+    width: 100%; 
+    object-fit: cover;
     top: 0;
     left: 0;
-    z-index: -1; /* Para ficar atrás do conteúdo */
+    opacity: 0.25; 
+    overflow: hidden;
 }
