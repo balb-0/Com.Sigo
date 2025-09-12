@@ -2089,6 +2089,85 @@ print(f"Componentes: BERT={result['component_scores']['bert']:.3f}, "
 
 Esta implementação mostra como a arquitetura híbrida processa transcrições de forma eficiente, combinando a capacidade de análise contextual do BERT com a precisão do regex e a relevância estatística do TF-IDF para produzir avaliações completas de qualidade de atendimento.
 
+## 8.3.1 Sprint 3
+
+Nesta sprint, o foco do desenvolvimento frontend foi a construção de uma interface de utilizador (UI) completamente funcional e interativa, transformando o protótipo de alta fidelidade numa experiência dinâmica, utilizando dados simulados (*mock data*) para validar os fluxos e componentes. O objetivo principal foi criar a estrutura visual e, mais importante, toda a lógica de estado que permite a manipulação e visualização dos dados no dashboard.
+
+<div align="center">
+  <sub>Figura X - Página "Dashboard" versão inicial</sub> <br>
+
+  <img src="img/dashboard_codada.png" alt="Imagem da Dashboard codada web" style="max-width: 700px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura X - Página "Chat" versão inicial</sub> <br>
+
+  <img src="img/chat_codado.png" alt="Imagem do chat codado web" style="max-width: 700px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+### 1. Descrição da Interface do Usuário e Componentes Implementados
+
+A interface foi desenvolvida em **React (utilizando Vite)**, com uma arquitetura de componentes reutilizáveis e estilização via **CSS puro**, seguindo as diretrizes do Guia Visual. Os principais componentes implementados e funcionais são:
+
+- **Header.tsx e NavigationTabs.tsx**  
+  Estrutura de navegação principal entre as páginas *Dashboard* e *Chat*, com estado ativo e animações.
+
+- **DataFilter.tsx**  
+  Componente de filtro de período (ex: *"Esse mês"*), que atua como controlador principal de estado para todos os dados exibidos no dashboard.
+
+- **KPI_Card.tsx**  
+  Componentes visuais que exibem os principais indicadores de desempenho. Estes cards são dinâmicos e reagem em tempo real às mudanças no `DataFilter`, recalculando e exibindo as métricas correspondentes ao período selecionado.
+
+- **Table.tsx**  
+  A tabela de dados, implementada com **TanStack Table**, está completamente interativa. Ela recebe os dados já filtrados pelo `DataFilter` e possui lógica interna para ordenação de colunas (ascendente/descendente) e paginação.
+
+---
+
+### 2. Lógica de Interatividade e Gerenciamento de Estado (Frontend)
+
+Diferente de uma simples integração com API, nesta sprint foi construída uma robusta lógica de estado no frontend para simular a experiência final do utilizador.
+
+#### Estado Centralizado
+A página do Dashboard gere um estado central que armazena o período de tempo selecionado pelo utilizador no componente `DataFilter`.
+
+#### Fluxo de Dados Reativo
+
+1. O utilizador seleciona um novo período no `DataFilter` (ex: *"Últimos 7 dias"*).  
+2. Esta ação atualiza o estado central do Dashboard.  
+3. A atualização do estado aciona uma nova renderização dos componentes filhos:  
+   - Os componentes **KPI_Card** recebem os dados já filtrados correspondentes ao novo período e atualizam seus valores.  
+   - O componente **Table** recebe a lista de chamadas correspondente ao novo período e exibe os resultados.  
+
+#### Independência de Filtros
+Enquanto o `DataFilter` controla o conjunto de dados de toda a página, os controlos internos da **Table** (como a ordenação por clique no cabeçalho) manipulam apenas a exibição desses dados, sem afetar os KPIs. Isso garante total liberdade de manipulação para o utilizador.
+
+---
+
+### 3. Instruções de Uso e Testes (Manuais)
+
+Esta secção serve como um guia para validar a interatividade completa do frontend. Estes passos serão a base para a automação dos testes **End-to-End com Cypress**.
+
+#### Cenário de Teste 1: Validação do Filtro de Período Principal
+
+- **Dado que** a aplicação está a ser executada com o período padrão (*"Esse mês"*) selecionado.  
+- **Quando** o utilizador clica no filtro de período e seleciona a opção *"Últimos 7 dias"*.  
+- **Então** os valores exibidos nos quatro cards de KPI devem ser atualizados para refletir os dados dos últimos 7 dias.  
+- **E** as linhas de dados exibidas na tabela de chamadas devem corresponder apenas às chamadas dos últimos 7 dias.  
+
+#### Cenário de Teste 2: Validação da Ordenação da Tabela
+
+- **Dado que** a tabela está a exibir os dados de um período qualquer.  
+- **Quando** o utilizador clica no cabeçalho da coluna *"Pontuação"*.  
+- **Então** as linhas da tabela devem ser reordenadas por pontuação (ex: do menor para o maior).  
+- **E** os valores nos cards de KPI não devem sofrer qualquer alteração.  
+- **Quando** o utilizador clica novamente no cabeçalho da coluna *"Pontuação"*.  
+- **Então** a ordem de classificação deve ser invertida (ex: do maior para o menor).
+
+
 ## 8.4 Desenvolvimento de Features
 
 _conteúdo_
@@ -2144,7 +2223,7 @@ Obs.: Insira informações sobre estratégias para realização dos testes
 _conteúdo_
 Obs.: Insira informações sobre quais frameworks foram usados e como acessar.
 
-# 9\. Planejamento e Execução de Testes
+# 9. Planejamento e Execução de Testes
 
 Esta seção é dedicada ao plano de validação e verificação do projeto. O objetivo é garantir que a solução atenda integralmente aos requisitos de negócio e de projeto definidos. Para isso, o plano está dividido em quatro áreas principais de teste:
 
