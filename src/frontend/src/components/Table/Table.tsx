@@ -68,6 +68,26 @@ const columns = [
                 Data/Hora
             </span>,
         cell: info => info.getValue(),
+        sortingFn: (rowA, rowB) => {
+            const parseDateTime = (dateStr: string) => {
+                const [datePart, timePart] = dateStr.split(' ');
+                const [day, month, year] = datePart.split('/');
+                const [hour, minute] = timePart.split(':');
+
+                return new Date(
+                    Number(`20${year}`),
+                    Number(month) - 1,
+                    Number(day),
+                    Number(hour),
+                    Number(minute)
+                );
+            };
+
+            const dateA = parseDateTime(rowA.getValue('dataHora'));
+            const dateB = parseDateTime(rowB.getValue('dataHora'));
+
+            return dateA.getTime() - dateB.getTime();
+        },
     }),
     columnHelper.accessor('pontuacao', {
         header: () =>
