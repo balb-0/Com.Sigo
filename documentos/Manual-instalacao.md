@@ -29,3 +29,35 @@
 
 
 Explica como montar, conectar e utilizar o protótipo.
+
+## Seed do Banco de Dados (Chamadas)
+
+Pré-requisitos:
+- Banco PostgreSQL acessível via `DATABASE_URL` no `.env` do backend.
+
+Passos:
+1. Aplicar migrações (cria tabela `chamada`):
+   ```bash
+   cd src/backend
+   npm run migrate
+   ```
+2. Popular a base com as conversas geradas (truncate + restart identity):
+   ```bash
+   cd src/backend
+   npm run seed
+   ```
+
+O seed insere uma chamada por arquivo JSON presente em `src/scripts/GenerateConversations/results`, preenchendo apenas `transcript_json`. Os IDs seguem:
+- `cliente_id`: 1, 2, 3, ... (sequencial)
+- `atendente_id`: 1, 2, 3, 4 (rotativo)
+
+## Gerar Conversas (opcional)
+
+Há um gerador de conversas em `src/scripts/GenerateConversations/generateConversations.ts`.
+
+Executar com defaults (gera arquivos em `GenerateConversations/results`):
+```bash
+cd src/scripts
+npm run dev
+```
+Para volumes maiores, veja também `npm run gen:500` em `src/scripts/package.json`.
