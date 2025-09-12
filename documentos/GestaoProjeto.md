@@ -27,9 +27,8 @@
 - <a href="https://www.linkedin.com/in/ryan-botelho-gartlan/">Ryan Botelho Gartlan</a>
 - <a href="https://www.linkedin.com/in/vitor-balbo/">Vitor Margarido Balbo</a>
 
-
-
 # Sumário
+
 - [1. Introdução](#1-introdução)
 - [2. Avaliação das Sprints](#2-avaliação-das-sprints)
   - [2.1 Sprint 1](#21-sprint-1)
@@ -69,11 +68,11 @@ Esta seção mostra como foi a gestão de projetos em cada uma das sprints.
 
 - **Commits mais frequentes**: Ao finalizar uma parte significativa da tarefa, realizar o commit para manter o progresso visível e facilitar ajustes antecipados.
 - **Maior atenção nas revisões**: Dedicar tempo para revisar o trabalho dos outros membros, garantindo qualidade e detectando problemas antes da integração.
-  
+
 &nbsp;&nbsp;&nbsp;&nbsp;Com essas melhorias, a equipe poderá manter a boa organização já conquistada e aumentar a qualidade das entregas, fortalecendo ainda mais a colaboração entre os integrantes.
 
-
 ## 2.2 Sprint 2
+
 ## Pontos Fortes
 
 &nbsp;&nbsp;&nbsp;&nbsp;A Sprint 2 destacou-se pela excelente colaboração e comunicação entre os membros da equipe. Os integrantes demonstraram maior proatividade em se ajudar mutuamente, compartilhando conhecimentos e solucionando dúvidas de forma coletiva. Essa melhoria na comunicação facilitou a resolução de problemas técnicos e contribuiu para um ambiente de trabalho mais integrado e produtivo.
@@ -93,34 +92,58 @@ Esta seção mostra como foi a gestão de projetos em cada uma das sprints.
 &nbsp;&nbsp;&nbsp;&nbsp;Com essas melhorias, a equipe poderá aproveitar ainda melhor a boa comunicação estabelecida e garantir maior clareza na execução das tarefas.
 
 ## 2.3 Sprint 3
-_conteúdo_
- **Nota:** Insira informações sobre mudanças realizadas.
+
+## Pontos Fortes
+
+&nbsp;&nbsp;&nbsp;&nbsp;Nesta sprint, a equipe demonstrou **boa colaboração entre os membros**, trabalhando de forma conjunta no desenvolvimento das funcionalidades planejadas. Essa cooperação permitiu que as tarefas fossem realizadas com maior eficiência e que eventuais obstáculos fossem superados de forma mais ágil.
+
+## Pontos Fracos
+
+&nbsp;&nbsp;&nbsp;&nbsp;Apesar do bom trabalho em equipe, **a comunicação apresentou algumas falhas** ao longo do processo. Em determinados momentos, a troca de informações poderia ter sido mais clara e constante, o que teria evitado dúvidas e possíveis retrabalhos. Essa falta de fluidez impactou parcialmente o andamento das atividades.
+
+## Sugestões de Melhorias
+
+&nbsp;&nbsp;&nbsp;&nbsp;Para as próximas sprints, recomenda-se a implementação das seguintes ações:
+
+- **Melhoria na comunicação interna**: Adotar ferramentas e práticas que incentivem a troca de informações em tempo real, garantindo que todos estejam alinhados.
+- **Rituais mais frequentes**: Realizar reuniões curtas e objetivas durante a sprint para ajustar prioridades e esclarecer dúvidas rapidamente.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Com essas melhorias, a equipe poderá manter a boa colaboração já existente e garantir uma comunicação mais fluida, resultando em entregas mais consistentes.
 
 ## 2.4 Sprint 4
+
 _conteúdo_
- **Nota:** Insira informações sobre mudanças realizadas.
+**Nota:** Insira informações sobre mudanças realizadas.
 
 ## 2.5 Sprint 5
+
 _conteúdo_
- **Nota:** Insira informações sobre mudanças realizadas.
+**Nota:** Insira informações sobre mudanças realizadas.
 
 # 3. Análise de Riscos
+
 _conteúdo_
 
 ## 3.1 Riscos identificados
+
 _conteúdo_
 
 ## 3.2 Mitigação de Riscos
+
 _conteúdo_
 
 # 4. Análise Post Mortem
+
 _conteúdo_
 
 ## 4.1 Sucessos do Projeto
+
 _conteúdo_
 
 ## 4.2 Oportunidades de Melhoria
+
 _conteúdo_
 
 ## 4.3 Lições Aprendidas
+
 _conteúdo_
