@@ -1,0 +1,78 @@
+{
+  "jobId": "job_voice_67890",
+  "audioId": "call-recording-20241212-143022",
+  "transcription": {
+    "language": "pt-BR",
+    "confidence": 0.94,
+    "duration": 185.7,
+    "text": "Atendente: Bom dia, Comgás, meu nome é Maria, como posso ajudá-lo? Cliente: Oi Maria, estou ligando porque minha conta veio muito alta, quase o dobro do mês passado. Atendente: Entendo sua preocupação. Vou verificar sua conta. Pode me informar seu CPF? Cliente: Claro, é 123.456.789-00. Atendente: Obrigada. Estou vendo aqui que houve um aumento no consumo. Vou explicar os detalhes.",
+    "speaker_segments": [
+      {
+        "speaker": "atendente",
+        "text": "Bom dia, Comgás, meu nome é Maria, como posso ajudá-lo?",
+        "start": 0.0,
+        "end": 4.2,
+        "confidence": 0.96
+      },
+      {
+        "speaker": "cliente",
+        "text": "Oi Maria, estou ligando porque minha conta veio muito alta, quase o dobro do mês passado.",
+        "start": 4.5,
+        "end": 10.8,
+        "confidence": 0.92
+      },
+      {
+        "speaker": "atendente",
+        "text": "Entendo sua preocupação. Vou verificar sua conta. Pode me informar seu CPF?",
+        "start": 11.0,
+        "end": 16.3,
+        "confidence": 0.95
+      },
+      {
+        "speaker": "cliente",
+        "text": "Claro, é 123.456.789-00.",
+        "start": 16.8,
+        "end": 19.2,
+        "confidence": 0.98
+      },
+      {
+        "speaker": "atendente",
+        "text": "Obrigada. Estou vendo aqui que houve um aumento no consumo. Vou explicar os detalhes.",
+        "start": 19.5,
+        "end": 25.1,
+        "confidence": 0.93
+      }
+    ]
+  },
+  "analysis": {
+    "cordialidade": true,
+    "tempo_resposta": 1.2,
+    "interrupcoes": 0,
+    "palavras_chave": ["conta", "alta", "consumo", "CPF"],
+    "sentiment_cliente": "preocupado",
+    "sentiment_atendente": "profissional",
+    "intent": "reclamacao_fatura",
+    "script_compliance": {
+      "saudacao": true,
+      "identificacao_empresa": true,
+      "identificacao_atendente": true,
+      "oferecimento_ajuda": true,
+      "solicitacao_dados": true,
+      "empatia": true,
+      "score": 95
+    },
+    "qualidade_audio": {
+      "ruido_fundo": "baixo",
+      "clareza": "alta",
+      "volume": "adequado"
+    }
+  },
+  "score": 4.6,
+  "processedAt": "2024-12-12T14:32:15Z",
+  "qualityMetrics": {
+    "atendimento": 4.8,
+    "resolucao": 4.2,
+    "cortesia": 4.9,
+    "eficiencia": 4.5
+  }
+}

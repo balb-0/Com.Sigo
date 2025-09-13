@@ -1,0 +1,30 @@
+{
+  "jobId": "job_text_12345",
+  "sourceId": "chat-whatsapp-001",
+  "text": "Bom dia! Estou com problema na minha conta de gás. A fatura veio muito alta este mês e gostaria de entender o motivo. Podem me ajudar?",
+  "meta": {
+    "canal": "whatsapp",
+    "uf": "SP",
+    "cidade": "São Paulo",
+    "timestamp": "2024-12-12T09:15:30Z",
+    "numero_cliente": "123456789",
+    "tipo_atendimento": "reclamacao"
+  },
+  "analysis": {
+    "intent": "reclamacao_fatura",
+    "sentiment": "preocupado",
+    "urgencia": "media",
+    "produtos_mencionados": ["gás", "fatura"],
+    "emocoes_detectadas": ["preocupacao", "confusao"],
+    "confidence": 0.89,
+    "palavras_chave": ["problema", "conta", "fatura", "alta", "ajudar"],
+    "categoria": "financeiro"
+  },
+  "score": 3.8,
+  "processedAt": "2024-12-12T09:16:45Z",
+  "qualityMetrics": {
+    "clareza": 4.2,
+    "completude": 3.9,
+    "cortesia": 4.1
+  }
+}
