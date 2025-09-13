@@ -1,0 +1,197 @@
+.tableContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.searchInput {
+    padding: 1rem 1rem 1rem 3rem; 
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-borda);
+    background-color: rgba(var(--color-azul-claro-rgb), 0.5);
+    color: var(--color-branco);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    shadow: var(--shadow-customizada);
+    display: relative;
+}
+
+.searchInput::placeholder {
+    color: var(--color-cinza);
+}
+
+.searchInputWrapper {
+    position: relative;
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.searchInputWrapper::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23A8B2C3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.table {
+    width: 100%;
+    min-height: 24.10rem;
+    border-collapse: collapse;
+    background-color: rgba(var(--color-azul-claro-rgb), 0.5);
+    color: var(--color-branco);
+    border: 1px solid var(--color-borda);
+    border-radius: 0.5rem;
+}
+
+.tableHeader {
+    background-color: var(--color-azul-escuro);
+    border-radius: 8px;
+    border: 1px solid var(--color-borda);
+    padding: 0.5rem 1rem;
+}
+
+.headerRow, .bodyRow {
+    display: flex;
+    width: 100%;
+}
+
+.headerWithIcon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bodyRow {
+    border-bottom: 1px solid var(--color-borda);
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.bodyRow:hover {
+    background-color: rgba(var(--color-azul-claro-rgb), 1);
+    transition: all 0.3s ease;
+
+}
+
+.headerCell, .bodyCell {
+    flex: 1;
+    padding: 0.75rem; 
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; 
+}
+
+.headerCell {
+    font-weight: 600;
+    color: var(--color-branco);
+    cursor: pointer;
+    user-select: none;
+}
+
+.headerCell:last-child, .bodyCell:last-child {
+    flex: 1.5;
+}
+
+.pontuacao {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.pontuacaoTotal {
+    font-weight: 300;
+    font-size: 0.875rem;
+    color: var(--color-cinza);
+}
+
+.pontuacaoAlta {
+    color: var(--color-verde);
+}
+
+.pontuacaoMedia {
+    color: var(--color-amarelo);
+}
+
+.pontuacaoBaixa {
+    color: var(--color-vermelho);
+}
+
+.tagsContainer {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.tagPositivo {
+    background-color: rgba(var(--color-verde-rgb), 0.2);
+    color: var(--color-verde);
+}
+
+.tagNegativo {
+    background-color: rgba(var(--color-vermelho-rgb), 0.2);
+    color: var(--color-vermelho);
+}
+
+.tagNeutro {
+    background-color: rgba(var(--color-amarelo-rgb), 0.2);
+    color: var(--color-amarelo);
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-cinza);
+    font-weight: 400;
+}
+
+.pagination button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-borda);
+    background-color: var(--color-cinza);
+    color: var(--color-azul-escuro);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: var(--color-branco);
+    transition: all 0.3s ease;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#buttons {
+    display: flex;
+    gap: 0.5rem;
+}

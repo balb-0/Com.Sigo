@@ -1,0 +1,48 @@
+.navigation-tabs {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: color 0.25s;
+    font-size: 1.5rem;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-content.active {
+    color: var(--color-branco);
+    font-weight: 600;
+}
+
+.nav-content.inactive {
+    color: var(--color-cinza);
+    transition: color 0.25s;
+}
+
+.nav-content.inactive:hover {
+    color: var(--color-branco);
+}
+
+.active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.125rem;
+    background-color: var(--color-branco);
+    border-radius: 9999px;
+}
+

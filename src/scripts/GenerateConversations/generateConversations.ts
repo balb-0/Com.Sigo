@@ -33,7 +33,57 @@ type STTJson = {
     channelTag: 1;
   }>;
   totalBilledTime: string;
+  meta?: {
+    scenario: string;
+    persona: PersonaProfile['name'];
+    complyCriteriaIds: string[];
+    violateCriteriaIds: string[];
+    seed: number;
+  };
 };
+
+type Criterion = { id: string; title: string; description?: string };
+
+const ALL_CRITERIA: Criterion[] = [
+  { id: '1.1', title: 'Abertura de contato' },
+  { id: '1.2', title: 'Procedimento de espera', description: 'Sinalizar ausência e retornar a cada 1 minuto' },
+  { id: '1.3', title: 'Encerramento de contato', description: 'Encerrar corretamente e se colocar à disposição' },
+  { id: '2.0', title: 'Confirmação de dados quando necessário (cliente sitiado)' },
+  { id: '2.1', title: 'Empatia' },
+  { id: '2.2', title: 'Cordialidade' },
+  { id: '2.3', title: 'Diálogo claro e objetivo, sem vícios/gírias do atendente' },
+  { id: '3.0', title: 'Identificação positiva' },
+  { id: '3.1', title: 'Análise de histórico' },
+  { id: '3.2', title: 'Abertura de STs e notas completas' },
+  { id: '3.3', title: 'Conhecimento de produtos e serviços' },
+  { id: '3.4', title: 'Oportunidades de negócios e Comgás Virtual' },
+  { id: '3.5', title: 'Direcionar para pesquisa de satisfação e informar transferência' },
+  { id: '4.0', title: 'Ética' },
+  { id: '4.1', title: 'Procedimento correto, sem impacto financeiro' },
+  { id: '4.2', title: 'Direcionamento correto de STs' },
+  { id: '4.3', title: 'Registro de solicitação completo nas notas' },
+  { id: '4.4', title: 'Abertura/Classificação de OS correta' },
+  { id: '4.5', title: 'Não desconectar cliente indevidamente' },
+  { id: '4.6', title: 'Não induzir o consumidor a encerrar' },
+  { id: '4.7', title: 'Confirmar dados antes de solicitações/reclamações' },
+  { id: '4.8', title: 'Seguir passos para abertura de solicitações (OS)' },
+  { id: '4.10', title: 'Informar corretamente percentual do Reajuste Tarifário' },
+  { id: 'DR1', title: 'Solicitação do cliente foi atendida?' },
+  { id: 'DR2', title: 'Solicitação atendida sem falhas?' },
+];
+
+function pickCriteriaPlan(rng: () => number, adherenceRatio: number): { comply: string[]; violate: string[] } {
+  const ids = [...new Set(ALL_CRITERIA.map(c => c.id))];
+  // Shuffle
+  for (let i = ids.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [ids[i], ids[j]] = [ids[j], ids[i]];
+  }
+  const numComply = Math.max(1, Math.round(ids.length * adherenceRatio));
+  const comply = ids.slice(0, numComply);
+  const violate = ids.slice(numComply);
+  return { comply, violate };
+}
 
 // Simple seeded RNG for reproducibility
 function createSeededRandom(seed: number) {
@@ -60,7 +110,7 @@ function textToWords(text: string): string[] {
     .filter(Boolean);
 }
 
-function buildSTTFromTurns(turns: Turn[], seed: number): STTJson {
+function buildSTTFromTurns(turns: Turn[], seed: number, meta?: STTJson['meta']): STTJson {
   const rng = createSeededRandom(seed);
   let currentTime = 0;
   const words: STTWord[] = [];
@@ -102,6 +152,7 @@ function buildSTTFromTurns(turns: Turn[], seed: number): STTJson {
       },
     ],
     totalBilledTime,
+    meta,
   };
 }
 
@@ -128,6 +179,18 @@ const cliOptionsSchema = z.object({
   scenarios: z.string().optional(), // pipe or comma separated
   scenariosFile: z.string().optional(), // file with one scenario per line
   perScenario: z.number().int().min(1).max(10000).default(1),
+  // Scenario range controls
+  startScenarioIndex: z.number().int().min(1).default(1),
+  startScenario: z.string().optional(), // e.g., "s05" or "5"
+  // Quality criteria adherence controls
+  adherenceRatio: z.number().min(0).max(1).default(0.85),
+  compliantConversationRatio: z.number().min(0).max(1).default(0.85),
+  nonCompliantAdherenceRatio: z.number().min(0).max(1).default(0.35),
+  // Profanity controls
+  allowProfanity: z.boolean().default(true),
+  allowAgentProfanity: z.boolean().default(false),
+  maxClientProfanityTurnRatio: z.number().min(0).max(1).optional(),
+  profanityExamples: z.boolean().default(true),
 });
 
 function parseArgs(argv: string[]) {
@@ -176,6 +239,15 @@ function parseArgs(argv: string[]) {
     scenarios: args.scenarios !== undefined ? String(args.scenarios) : undefined,
     scenariosFile: args['scenarios-file'] !== undefined ? String(args['scenarios-file']) : undefined,
     perScenario: args['per-scenario'] !== undefined ? Number(args['per-scenario']) : 1,
+    startScenarioIndex: args['start-scenario-index'] !== undefined ? Number(args['start-scenario-index']) : 1,
+    startScenario: args['start-scenario'] !== undefined ? String(args['start-scenario']) : undefined,
+    adherenceRatio: args['adherence-ratio'] !== undefined ? Number(args['adherence-ratio']) : 0.85,
+    compliantConversationRatio: args['compliant-conversation-ratio'] !== undefined ? Number(args['compliant-conversation-ratio']) : 0.85,
+    nonCompliantAdherenceRatio: args['noncompliant-adherence-ratio'] !== undefined ? Number(args['noncompliant-adherence-ratio']) : 0.35,
+    allowProfanity: args['allow-profanity'] !== undefined ? Boolean(args['allow-profanity']) : true,
+    allowAgentProfanity: args['allow-agent-profanity'] !== undefined ? Boolean(args['allow-agent-profanity']) : false,
+    maxClientProfanityTurnRatio: args['max-client-profanity-turn-ratio'] !== undefined ? Number(args['max-client-profanity-turn-ratio']) : undefined,
+    profanityExamples: args['profanity-examples'] !== undefined ? Boolean(args['profanity-examples']) : true,
   });
 
   if (normalized.minTurns > normalized.maxTurns) {
@@ -202,7 +274,12 @@ function baseInstruction(opts: z.infer<typeof cliOptionsSchema>, userPrompt?: st
   lines.push('- Use os rótulos "Atendente:" e "Cliente:" em cada fala.');
   lines.push(`- Entre ${opts.minTurns} e ${opts.maxTurns} falas no total (turnos).`);
   lines.push('- Tom natural, conciso e objetivo; evite monólogos longos.');
-  lines.push(`- Pode conter gírias e palavrões, inclusive fortes, de forma verossímil (nível de caos = ${opts.chaos}). Exemplos: "Porra", "Caralho", "Seus merdas", "Filhas da puta", "Essa bosta não funciona", "Cadê essa porra?", "Que demora do caralho".`);
+  if (opts.allowProfanity) {
+    const examples = opts.profanityExamples ? ' Exemplos: "poxa", "droga" (evite termos extremamente ofensivos).' : '';
+    lines.push(`- Pode conter gírias e eventuais palavrões leves de forma verossímil (nível de caos = ${opts.chaos}).${examples}`);
+  } else {
+    lines.push('- Não utilizar palavrões.');
+  }
   lines.push('- Inclua temas comuns: ligação de emergência (vazamento), 2ª via, falta de gás, instalação, troca de titularidade, renegociação, agendamento, etc.');
   lines.push('- Não inclua narrativa, apenas as falas.');
   if (userPrompt) {
@@ -216,7 +293,9 @@ function creativeInstruction(
   opts: z.infer<typeof cliOptionsSchema>,
   scenario: string,
   meltdown: boolean,
-  persona: PersonaProfile
+  persona: PersonaProfile,
+  complyCriteriaIds: string[],
+  violateCriteriaIds: string[]
 ): string {
   const lines: string[] = [];
   lines.push('[TAREFA] Escreva um diálogo curto em PT-BR entre Cliente e Atendente de uma companhia de gás.');
@@ -225,20 +304,50 @@ function creativeInstruction(
   lines.push('Estilo: extremamente natural, com ruídos de fala espontânea, interrupções, pausas, e gírias brasileiras.');
   lines.push(`Nível de caos: ${opts.chaos} (mais caos = mais gírias, frustração e improviso).`);
   lines.push(`Perfil do cliente: ${persona.name} (${persona.styleNote}).`);
-  if (persona.clientProfanityTurnRatio === 0) {
+  if (!opts.allowProfanity || persona.clientProfanityTurnRatio === 0) {
     lines.push('O cliente NÃO usa palavrões.');
   } else {
-    const percentage = Math.round((persona.clientProfanityTurnRatio * 100) * 0.5);
-    lines.push(`No MÁXIMO ~${percentage}% das FALAS do cliente devem conter palavrões. Varie: algumas sem, outras com, evite palavrão em toda fala.`);
+    const base = opts.maxClientProfanityTurnRatio ?? (persona.clientProfanityTurnRatio * 0.3);
+    const percentage = Math.max(0, Math.min(100, Math.round(base * 100)));
+    lines.push(`No MÁXIMO ~${percentage}% das FALAS do cliente podem conter palavrões leves; evite termos fortes.`);
   }
-  if (meltdown) {
-    lines.push('ATENÇÃO: Neste diálogo específico, o Atendente perde a paciência e responde de forma ríspida em pelo menos uma fala (sem ser criminoso/ofensivo a minorias).');
+  if (meltdown && opts.allowAgentProfanity) {
+    lines.push('O Atendente pode demonstrar impaciência em UMA fala, sem usar palavrões.');
   } else {
-    lines.push('O Atendente mantém profissionalismo, evitando palavrões, mesmo diante de ofensas ocasionais do cliente.');
+    lines.push('O Atendente mantém profissionalismo e NÃO usa palavrões.');
   }
-  lines.push('Permita palavrões quando for natural, sem exagerar em todas as falas.');
   lines.push('Formatação de saída: apenas linhas alternadas com prefixos "Cliente:" e "Atendente:", nada além do diálogo.');
-  lines.push('Exemplo de uma fala: Cliente: Cara, essa porra não funciona há dois dias, socorro.');
+  // Quality criteria plan
+  lines.push('Critérios de qualidade (IDs) e como comportar-se neste diálogo específico:');
+  lines.push('Atenda/COMPLIQUE conforme a lista abaixo. "Cumprir" = demonstrar aderência explícita; "Violação" = não cumprir ou contrariar.');
+  lines.push('IDs a CUMPRIR: ' + (complyCriteriaIds.length ? complyCriteriaIds.join(', ') : '(nenhum)'));
+  lines.push('IDs a VIOLAR: ' + (violateCriteriaIds.length ? violateCriteriaIds.join(', ') : '(nenhum)'));
+  lines.push('Os IDs referem-se ao seguinte quadro:');
+  lines.push('- 1.1 Abertura de contato adequada');
+  lines.push('- 1.2 Procedimento de espera: sinalizar ausência e retornar a cada 1 minuto');
+  lines.push('- 1.3 Encerramento correto com colocação à disposição');
+  lines.push('- 2.0 Confirmação de dados quando necessário (evitar se cliente já está identificado)');
+  lines.push('- 2.1 Empatia');
+  lines.push('- 2.2 Cordialidade');
+  lines.push('- 2.3 Diálogo claro e objetivo, sem vícios/gírias do atendente');
+  lines.push('- 3.0 Identificação positiva conforme processo');
+  lines.push('- 3.1 Análise de histórico para entender necessidade');
+  lines.push('- 3.2 Abertura de STs com categorização e notas completas');
+  lines.push('- 3.3 Conhecimento de produtos e serviços');
+  lines.push('- 3.4 Oportunidades de negócios e incentivo ao Comgás Virtual');
+  lines.push('- 3.5 Direcionar para pesquisa de satisfação e informar transferência');
+  lines.push('- 4.0 Ética (NÃO difamar)');
+  lines.push('- 4.1 Procedimento correto para evitar impacto financeiro');
+  lines.push('- 4.2 Direcionamento correto de STs quando necessário');
+  lines.push('- 4.3 Registro de solicitação completo nas notas');
+  lines.push('- 4.4 Abertura/Classificação de OS correta');
+  lines.push('- 4.5 Não desconectar indevidamente');
+  lines.push('- 4.6 Não induzir o consumidor a encerrar');
+  lines.push('- 4.7 Confirmar dados antes de solicitações/reclamações');
+  lines.push('- 4.8 Seguir passos para abertura de solicitações (OS)');
+  lines.push('- 4.10 Informar corretamente percentual do Reajuste Tarifário');
+  lines.push('- DR1 Solicitação atendida?');
+  lines.push('- DR2 Solicitação atendida sem falhas?');
   return lines.join('\n');
 }
 
@@ -377,7 +486,9 @@ async function generateTurns(
   opts: z.infer<typeof cliOptionsSchema>,
   scenario: string,
   rng: () => number,
-  persona: PersonaProfile
+  persona: PersonaProfile,
+  complyCriteriaIds: string[],
+  violateCriteriaIds: string[]
 ): Promise<Turn[]> {
   const client = createOpenAIClient();
   const meltdown = rng() < opts.agentSnapChance;
@@ -387,7 +498,7 @@ async function generateTurns(
     top_p: opts.topP,
     messages: [
       { role: 'system', content: 'Você escreve diálogos realistas de call center brasileiros com energia caótica quando necessário.' },
-      { role: 'user', content: creativeInstruction(opts, scenario, meltdown, persona) },
+      { role: 'user', content: creativeInstruction(opts, scenario, meltdown, persona, complyCriteriaIds, violateCriteriaIds) },
     ],
   });
   const rawDialog = stage1.choices[0]?.message?.content ?? '';
@@ -422,20 +533,35 @@ async function main() {
 
   if (useScenarios) {
     let index = 0;
-    for (let si = 0; si < scenarios.length; si++) {
+    // Determine starting scenario index (0-based)
+    const startFromLabelMatch = opts.startScenario?.match(/^s?(\d{1,})$/i);
+    const startScenarioIndexOneBased = startFromLabelMatch ? Number(startFromLabelMatch[1]) : opts.startScenarioIndex;
+    const startSi = Math.max(0, Math.min(scenarios.length - 1, startScenarioIndexOneBased - 1));
+    for (let si = startSi; si < scenarios.length; si++) {
       const scenario = scenarios[si];
       const scenarioSlug = slugify(scenario);
       const scenarioId = `s${String(si + 1).padStart(2, '0')}`;
       for (let j = 0; j < opts.perScenario; j++) {
         const seed = baseSeed + index * 97;
         const persona = choosePersonaForScenario(scenario, rng);
+        // decide adherence for this conversation
+        const compliantConversation = rng() < opts.compliantConversationRatio;
+        const plan = pickCriteriaPlan(rng, compliantConversation ? opts.adherenceRatio : opts.nonCompliantAdherenceRatio);
         const turns = await generateTurns(
           opts,
           [instruction, `Cenário específico: ${scenario}`].join('\n\n'),
           rng,
-          persona
+          persona,
+          plan.comply,
+          plan.violate
         );
-        const stt = buildSTTFromTurns(turns, seed);
+        const stt = buildSTTFromTurns(turns, seed, {
+          scenario,
+          persona: persona.name,
+          complyCriteriaIds: plan.comply,
+          violateCriteriaIds: plan.violate,
+          seed,
+        });
         const fileName = `${opts.prefix}-${scenarioId}-${scenarioSlug}-${persona.name}-${String(j + 1).padStart(3, '0')}.json`;
         const filePath = path.join(outDirAbs, fileName);
         fs.writeFileSync(filePath, JSON.stringify(stt, null, 2), 'utf8');
@@ -451,8 +577,16 @@ async function main() {
   for (let i = 0; i < opts.count; i++) {
     const seed = baseSeed + i * 97;
     const persona = choosePersonaForScenario(instruction, rng);
-    const turns = await generateTurns(opts, instruction, rng, persona);
-    const stt = buildSTTFromTurns(turns, seed);
+    const compliantConversation = rng() < opts.compliantConversationRatio;
+    const plan = pickCriteriaPlan(rng, compliantConversation ? opts.adherenceRatio : opts.nonCompliantAdherenceRatio);
+    const turns = await generateTurns(opts, instruction, rng, persona, plan.comply, plan.violate);
+    const stt = buildSTTFromTurns(turns, seed, {
+      scenario: 'default-instruction',
+      persona: persona.name,
+      complyCriteriaIds: plan.comply,
+      violateCriteriaIds: plan.violate,
+      seed,
+    });
     const fileName = `${opts.prefix}-${String(i + 1).padStart(3, '0')}.json`;
     const filePath = path.join(outDirAbs, fileName);
     fs.writeFileSync(filePath, JSON.stringify(stt, null, 2), 'utf8');

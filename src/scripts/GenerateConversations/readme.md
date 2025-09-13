@@ -34,6 +34,12 @@ npm run dev -- --scenarios="vazamento bravo, segunda via confusa" --per-scenario
 npm run dev -- --scenarios-file=meus_cenarios.txt --per-scenario=5
 ```
 
+### Começar a partir de um cenário específico (pular s01..s04)
+- Use `--start-scenario=s05` ou `--start-scenario-index=5` para iniciar do 5º cenário em diante, preservando a numeração `sNN` nos nomes dos arquivos.
+```bash
+npm run dev -- --per-scenario=3 --start-scenario=s05
+```
+
 ## Controles importantes
 - `two-stage` (default true): 1ª etapa criativa, 2ª estrutura JSON
 - `creative-temperature` (default 1.0) e `structure-temperature` (default 0.2)
@@ -41,3 +47,16 @@ npm run dev -- --scenarios-file=meus_cenarios.txt --per-scenario=5
 - `agent-snap-chance` (0..1): chance do atendente responder rispidamente
 - `min-turns` / `max-turns`: faixa de falas
 - `prefix`, `out`, `seed`, `top_p`, `count`
+
+### Novos controles de critérios (qualidade)
+- `adherence-ratio` (0..1, default 0.85): percentual dos critérios a cumprir em diálogos considerados "compliant".
+- `compliant-conversation-ratio` (0..1, default 0.85): fração de conversas que seguem a maior parte dos critérios.
+- `noncompliant-adherence-ratio` (0..1, default 0.35): percentual dos critérios a cumprir em conversas não conformes.
+
+Cada conversa salva inclui `meta` com: `scenario`, `persona`, `complyCriteriaIds`, `violateCriteriaIds`, `seed`.
+
+### Gerar 500 conversas e avaliar
+```bash
+npm run gen:500
+npm run eval:results
+```

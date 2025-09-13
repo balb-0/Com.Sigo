@@ -7,6 +7,9 @@
     "build": "tsc -p tsconfig.json",
     "dev": "tsx GenerateConversations/generateConversations.ts",
     "gen": "node dist/GenerateConversations/generateConversations.js",
+    "eval": "tsx EvaluateConversation/evaluateConversation.ts",
+    "gen:500": "tsx GenerateConversations/generateConversations.ts --count=500 --min-turns=10 --max-turns=18 --chaos=0.5 --compliant-conversation-ratio=0.85 --adherence-ratio=0.9 --noncompliant-adherence-ratio=0.3 --out=GenerateConversations/results --prefix=conv",
+    "eval:results": "tsx EvaluateConversation/evaluateConversation.ts --in=GenerateConversations/results --out=EvaluateConversation/results.json",
     "lint": "eslint ."
   },
   "keywords": [],

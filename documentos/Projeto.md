@@ -53,10 +53,9 @@
   - [3.4 Casos de Uso](#34-casos-de-uso)
   - [3.5 Casos de Uso x Requisitos Funcionais](#35-casos-de-uso-x-requisitos-funcionais)
 - [4. Modelagem de Dados](#4-modelagem-de-dados)
-  - [4.1 Especificação da Base de Dados para Modelo de Recomendação](#41-especificação-da-base-de-dados-para-modelo-de-recomendação)
-  - [4.2 Modelo Conceitual de Dados](#42-modelo-conceitual-de-dados)
-  - [4.3 Modelo Lógico de Dados](#43-modelo-lógico-de-dados)
-  - [4.4 Modelo Físico de Dados](#44-modelo-físico-de-dados)
+  - [4.1 Modelo Conceitual de Dados](#42-modelo-conceitual-de-dados)
+  - [4.2 Modelo Lógico de Dados](#43-modelo-lógico-de-dados)
+  - [4.3 Modelo Físico de Dados](#44-modelo-físico-de-dados)
 - [5. Solução Técnica (Design)](#5-solução-técnica-design)
   - [5.1 Diagrama de Classes](#51-diagrama-de-classes)
   - [5.2 Diagrama de Componentes da UML](#52-diagrama-de-componentes-da-uml)
@@ -79,7 +78,7 @@
   - [8.4 Testes Unitários e de Integração](#84-testes-unitários-e-de-integração)
   - [8.5 Documentações automáticas](#85-documentações-automáticas)
 - [9. Planejamento e Execução de Testes](#9-planejamento-e-execução-de-testes)
-  - [9.1 Testes Funcionais](#91-testes-funcionais)
+  - [9.1 ](#91-testes-funcionais)
     - [9.1.1 Planejamento](#911-planejamento)
     - [9.1.2 Resultados](#912-resultados)
   - [9.2 Testes de RNFs](#92-testes-de-rnfs)
@@ -91,6 +90,7 @@
 - [10. Procedimentos de Implantação](#10-procedimentos-de-implantação)
   - [10.1 Implantação e Configuração do Banco de Dados](#101-implantação-e-configuração-do-banco-de-dados)
   - [10.2 Implantação do Protótipo para uso por equipe de desenvolvimento](#102-implantação-do-protótipo-para-uso-por-equipe-de-desenvolvimento)
+- [11. Webhooks](#11-webhooks)
 - [Referências](#referências)
 
 # 1. Introdução
@@ -329,8 +329,33 @@ As perguntas foram consolidadas em um formulário google simples, que equilibra 
 - Pergunta 6 – Expectativas abertas  
   Coleta insights qualitativos, capturando necessidades que não foram previstas nas opções anteriores.  
 
-#### 2.4.4 Respostas Recebidas e Insights
----
+### 2.4.4 Resultados do Estudo sobre o Usuário do Sistema
+
+Em conformidade com o objetivo de realizar um estudo aprofundado sobre o usuário, a fase inicial da pesquisa consistiu na aplicação de um questionário estruturado. O método visou mapear as necessidades, preferências, habilidades e limitações dos analistas de qualidade que interagirão com o sistema. As respostas coletadas, embora de uma amostra inicial, já fornecem direcionamentos claros para o desenvolvimento.
+
+**Habilidades Confirmadas e a Principal Necessidade do Negócio**
+
+O estudo identificou um perfil de usuário com habilidades digitais de nível intermediário a avançado, combinado com senioridade na função (todos com mais de 3 anos de experiência). Essa proficiência indica que os usuários estão aptos a interagir com uma ferramenta robusta, que ofereça personalização e análise detalhada.
+
+Essa experiência se reflete diretamente na sua principal necessidade: garantir a resolução do problema do cliente. Este foi o critério de sucesso mais valorizado, mostrando que a ferramenta deve, acima de tudo, ajudar o analista a responder à pergunta: "O problema do cliente foi resolvido?".
+
+**Preferências de Usabilidade e Requisitos de Confiança**
+
+No que tange às preferências de interface, a exigência por visualização clara em dashboards foi unânime. Os usuários não querem apenas ter acesso aos dados, eles precisam que a informação seja apresentada de forma visual, intuitiva e rápida.
+
+Contudo, a melhor interface não tem valor sem confiança. A confiabilidade dos dados foi citada como um requisito fundamental. A clareza visual, somada à precisão dos dados, constitui a base para que os analistas confiem na ferramenta e a incorporem em seu fluxo de trabalho diário.
+
+**Superando Limitações com uma Visão Estratégica**
+
+As respostas mais detalhadas revelaram as limitações do processo de análise atual, que é manual e focado em amostras. Os analistas expressaram o desejo de superar essa limitação, transformando a ferramenta em uma plataforma de inteligência. A visão deles para o sistema vai muito além da simples auditoria, englobando funcionalidades estratégicas como:
+
+* **Análise de Causa Raiz:** Identificar e categorizar os principais motivos que levam os clientes a ligar.
+
+* **Monitoramento de Tendências:** Acompanhar em tempo real o surgimento ou aumento de reclamações específicas (ex: "conta alta").
+
+* **Inteligência Geográfica:** Mapear a origem das chamadas para identificar problemas concentrados em regiões específicas.
+
+Esses pontos demonstram que a maior expectativa é por uma ferramenta que não apenas otimize a tarefa atual, mas que forneça uma nova camada de inteligência sobre a operação.
 
 #### 2.4.6 Experiências que o Usuário Deverá Vivenciar
 
@@ -990,9 +1015,149 @@ Como supracitado na seção anterior, o banco de dados será formado por apenas 
 
 O banco vetorial será utilizado para consultas dos usuários, ele será uma unica tabela com todos os dados da chamada armazenados.
 
+
 ## 4.3 Modelo Físico de Dados
 
-_conteúdo_
+&emsp;O modelo físico de dados do projeto **Com.Sigo** foi implementado em **PostgreSQL**, com foco em **robustez**, **integridade dos dados** e **suporte a buscas semânticas** utilizando a extensão **pgvector**.  
+A estrutura contempla a criação da tabela principal de chamadas, índices otimizados e um campo especializado para armazenamento de vetores de embeddings, fundamentais para a análise e recuperação de transcrições de ligações.
+
+---
+
+### **Extensões Utilizadas**
+
+- **pgvector**: Permite operações com vetores diretamente no PostgreSQL, sendo utilizado para **armazenamento e busca semântica** das transcrições das ligações.
+
+```sql
+-- Habilitar pgvector
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+---
+
+### **Tabela Principal: `chamada`**
+
+&emsp;A tabela `chamada` é o núcleo do modelo físico, sendo responsável por armazenar todas as informações referentes às ligações, incluindo **dados básicos**, **transcrições em JSON**, **avaliações de qualidade** e **embeddings**.
+
+```sql
+CREATE TABLE IF NOT EXISTS chamada (
+    chamada_id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cliente_id VARCHAR(255),
+    atendente_id VARCHAR(255),
+    avaliacao_json JSONB,
+    nota_qualidade INTEGER CHECK (nota_qualidade >= 1 AND nota_qualidade <= 5),
+    transcript_json JSONB,
+    embedding vector(1536) -- Campo vetorial para busca semântica
+);
+```
+
+#### **Descrição dos Campos**
+
+| Coluna           | Tipo          | Descrição |
+|------------------|---------------|-----------|
+| `chamada_id`     | SERIAL PK     | Identificador único da chamada |
+| `created_at`     | TIMESTAMP     | Data/hora de criação (default = `CURRENT_TIMESTAMP`) |
+| `cliente_id`     | VARCHAR(255)  | Identificação do cliente vinculado à chamada |
+| `atendente_id`   | VARCHAR(255)  | Identificação do atendente responsável |
+| `avaliacao_json` | JSONB         | Estrutura com os critérios e resultados da avaliação |
+| `nota_qualidade` | INTEGER       | Nota de 1 a 5 (calculada via critérios do TAPI) |
+| `transcript_json`| JSONB         | Transcrição completa, incluindo texto e metadados |
+| `embedding`      | VECTOR(1536)  | Vetor usado para busca semântica |
+
+---
+
+### **Estrutura do JSON de Transcrição**
+
+Exemplo de estrutura salva no campo `transcript_json`:
+
+```json
+{
+  "alternatives": [
+    {
+      "transcript": "Alô, tudo bem? Tô ligando porque tá vazando gás aqui em casa, tá um cheiro insuportável...",
+      "confidence": 0.90,
+      "words": [
+        {
+          "word": "Alô,",
+          "startTime": "0s",
+          "endTime": "0.163s",
+          "speakerTag": 2
+        },
+        {
+          "word": "tudo",
+          "startTime": "0.163s",
+          "endTime": "0.304s",
+          "speakerTag": 2
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "scenario": "Vazamento mas cliente fica satisfeito com atendimento e prazos",
+    "persona": "neutro",
+    "complyCriteriaIds": ["4.1", "2.2", "3.4"],
+    "violateCriteriaIds": ["2.1", "3.0"],
+    "seed": 444968827
+  }
+}
+```
+
+**Campos obrigatórios:**
+- `alternatives.transcript`: Texto consolidado da transcrição.
+- `alternatives.confidence`: Nível de confiança da transcrição.
+- `alternatives.words`: Lista com palavras, tempos de início/fim e identificação do falante.
+- `meta`: Dados contextuais da chamada.
+
+---
+
+### **Regras de Negócio**
+
+- **Nota de qualidade (`nota_qualidade`)**  
+  Determinada com base nos critérios definidos no **TAPI**, variando de **1 a 5**:
+  - **1:** Péssima qualidade
+  - **5:** Excelente qualidade
+
+- **Atualização de embeddings**  
+  O campo `embedding` deve ser **gerado ou atualizado sempre que o `transcript_json` for inserido ou modificado**, garantindo que a busca semântica utilize a transcrição mais recente.
+
+- **Fluxo de entrada de dados**  
+  - O usuário realiza **upload de um arquivo CSV** com os registros das chamadas.
+  - Cada linha do CSV é processada e transformada em um registro na tabela `chamada`.
+  - Caso o transcript seja válido, o embedding é gerado automaticamente.
+
+---
+
+### **Índices Criados**
+
+```sql
+-- Índices tradicionais
+CREATE INDEX IF NOT EXISTS idx_chamada_created_at ON chamada(created_at);
+CREATE INDEX IF NOT EXISTS idx_chamada_cliente_id ON chamada(cliente_id);
+CREATE INDEX IF NOT EXISTS idx_chamada_atendente_id ON chamada(atendente_id);
+CREATE INDEX IF NOT EXISTS idx_chamada_nota_qualidade ON chamada(nota_qualidade);
+
+-- Índice para busca semântica usando HNSW
+CREATE INDEX IF NOT EXISTS idx_chamada_embedding_cosine 
+ON chamada USING hnsw (embedding vector_cosine_ops) 
+WHERE embedding IS NOT NULL;
+```
+
+---
+
+### **Resumo da Implementação**
+
+- **1 Tabela principal** (`chamada`).
+- **1 Extensão habilitada** (`pgvector`).
+- **5 Índices**, incluindo suporte a **busca semântica**.
+- **Campos JSON** para máxima flexibilidade no armazenamento das transcrições e avaliações.
+- **Integração com embeddings**, permitindo consultas avançadas diretamente no banco.
+
+---
+
+**Nota:**  
+Scripts SQL e dados de exemplo estão disponíveis na pasta `/backend/migrations` do projeto.  
+Eles incluem exemplos de inserção, geração de embeddings e consultas para busca semântica.
+
 
 **Nota:** Insira uma explicação e direcionamento para o readme.md da pasta database.
 
@@ -1924,6 +2089,85 @@ print(f"Componentes: BERT={result['component_scores']['bert']:.3f}, "
 
 Esta implementação mostra como a arquitetura híbrida processa transcrições de forma eficiente, combinando a capacidade de análise contextual do BERT com a precisão do regex e a relevância estatística do TF-IDF para produzir avaliações completas de qualidade de atendimento.
 
+## 8.3.1 Sprint 3
+
+Nesta sprint, o foco do desenvolvimento frontend foi a construção de uma interface de utilizador (UI) completamente funcional e interativa, transformando o protótipo de alta fidelidade numa experiência dinâmica, utilizando dados simulados (*mock data*) para validar os fluxos e componentes. O objetivo principal foi criar a estrutura visual e, mais importante, toda a lógica de estado que permite a manipulação e visualização dos dados no dashboard.
+
+<div align="center">
+  <sub>Figura X - Página "Dashboard" versão inicial</sub> <br>
+
+  <img src="img/dashboard_codada.png" alt="Imagem da Dashboard codada web" style="max-width: 700px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura X - Página "Chat" versão inicial</sub> <br>
+
+  <img src="img/chat_codado.png" alt="Imagem do chat codado web" style="max-width: 700px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+### 1. Descrição da Interface do Usuário e Componentes Implementados
+
+A interface foi desenvolvida em **React (utilizando Vite)**, com uma arquitetura de componentes reutilizáveis e estilização via **CSS puro**, seguindo as diretrizes do Guia Visual. Os principais componentes implementados e funcionais são:
+
+- **Header.tsx e NavigationTabs.tsx**  
+  Estrutura de navegação principal entre as páginas *Dashboard* e *Chat*, com estado ativo e animações.
+
+- **DataFilter.tsx**  
+  Componente de filtro de período (ex: *"Esse mês"*), que atua como controlador principal de estado para todos os dados exibidos no dashboard.
+
+- **KPI_Card.tsx**  
+  Componentes visuais que exibem os principais indicadores de desempenho. Estes cards são dinâmicos e reagem em tempo real às mudanças no `DataFilter`, recalculando e exibindo as métricas correspondentes ao período selecionado.
+
+- **Table.tsx**  
+  A tabela de dados, implementada com **TanStack Table**, está completamente interativa. Ela recebe os dados já filtrados pelo `DataFilter` e possui lógica interna para ordenação de colunas (ascendente/descendente) e paginação.
+
+---
+
+### 2. Lógica de Interatividade e Gerenciamento de Estado (Frontend)
+
+Diferente de uma simples integração com API, nesta sprint foi construída uma robusta lógica de estado no frontend para simular a experiência final do utilizador.
+
+#### Estado Centralizado
+A página do Dashboard gere um estado central que armazena o período de tempo selecionado pelo utilizador no componente `DataFilter`.
+
+#### Fluxo de Dados Reativo
+
+1. O utilizador seleciona um novo período no `DataFilter` (ex: *"Últimos 7 dias"*).  
+2. Esta ação atualiza o estado central do Dashboard.  
+3. A atualização do estado aciona uma nova renderização dos componentes filhos:  
+   - Os componentes **KPI_Card** recebem os dados já filtrados correspondentes ao novo período e atualizam seus valores.  
+   - O componente **Table** recebe a lista de chamadas correspondente ao novo período e exibe os resultados.  
+
+#### Independência de Filtros
+Enquanto o `DataFilter` controla o conjunto de dados de toda a página, os controlos internos da **Table** (como a ordenação por clique no cabeçalho) manipulam apenas a exibição desses dados, sem afetar os KPIs. Isso garante total liberdade de manipulação para o utilizador.
+
+---
+
+### 3. Instruções de Uso e Testes (Manuais)
+
+Esta secção serve como um guia para validar a interatividade completa do frontend. Estes passos serão a base para a automação dos testes **End-to-End com Cypress**.
+
+#### Cenário de Teste 1: Validação do Filtro de Período Principal
+
+- **Dado que** a aplicação está a ser executada com o período padrão (*"Esse mês"*) selecionado.  
+- **Quando** o utilizador clica no filtro de período e seleciona a opção *"Últimos 7 dias"*.  
+- **Então** os valores exibidos nos quatro cards de KPI devem ser atualizados para refletir os dados dos últimos 7 dias.  
+- **E** as linhas de dados exibidas na tabela de chamadas devem corresponder apenas às chamadas dos últimos 7 dias.  
+
+#### Cenário de Teste 2: Validação da Ordenação da Tabela
+
+- **Dado que** a tabela está a exibir os dados de um período qualquer.  
+- **Quando** o utilizador clica no cabeçalho da coluna *"Pontuação"*.  
+- **Então** as linhas da tabela devem ser reordenadas por pontuação (ex: do menor para o maior).  
+- **E** os valores nos cards de KPI não devem sofrer qualquer alteração.  
+- **Quando** o utilizador clica novamente no cabeçalho da coluna *"Pontuação"*.  
+- **Então** a ordem de classificação deve ser invertida (ex: do maior para o menor).
+
+
 ## 8.4 Desenvolvimento de Features
 
 _conteúdo_
@@ -1932,17 +2176,349 @@ _conteúdo_
 
 ## 8.4.1 Sprint 3
 
-_conteúdo_
+### 8.4.1.1 Tecnologias Utilizadas na Análise
+
+O modelo faz uso de diferentes abordagens para enriquecer a análise das transcrições:
+
+- **Regex (Expressões Regulares):** Utilizado para identificar padrões específicos de texto nas transcrições, como frases de identificação positiva ou abertura de ordem de serviço. O uso de regex permite encontrar variações de frases e garantir que critérios sejam avaliados mesmo quando o atendente utiliza diferentes formas de expressão.
+
+- **BERT:** O modelo de análise de sentimento utiliza o BERT (Bidirectional Encoder Representations from Transformers), que já é pré-treinado em múltiplos idiomas e tarefas de classificação de sentimento. Isso permite avaliar o tom emocional das frases de forma robusta, sem necessidade de treinamento adicional para o contexto inicial do projeto.
+
+
+### Foco da Sprint 3: Início do Modelo NLP para Qualidade de Atendimento
+
+Um dos principais focos da Sprint 3 foi o início do desenvolvimento do modelo de NLP para avaliação da qualidade do atendimento. O modelo foi criado e está disponível em [`documentos/modelo_nlp_qualidade_atendimento.ipynb`](../src/modelo/algoritmos_projeto.ipynb), onde toda a lógica e testes iniciais foram implementados. Este modelo existe apenas para verificação, uma vez que os dados de treinamento foram importados apenas no google colab
+
+### Ambiente de Testes
+Todos os testes do modelo foram realizados no Google Colab ([link para o notebook de testes](https://colab.research.google.com/drive/1VH0lustWpSjAHYZSKYdCEeonL101eZ_w#scrollTo=X6fLn1FhD__k)), aproveitando a facilidade de execução e recursos computacionais disponíveis na plataforma.
+
+### Estrutura dos Dados de Teste
+Para os testes, todas as conversas foram inseridas diretamente no código como arquivos JSON, simulando transcrições reais de atendimentos. O plano futuro é migrar todas as conversas para o banco de dados e realizar a análise diretamente a partir dele, mas para validação inicial optou-se por essa abordagem mais simples.
+
+### Funcionamento do Modelo
+O modelo foi estruturado para avaliar cada transcrição de atendimento com base em critérios de QA definidos em um dicionário, como abertura, encerramento, empatia, cordialidade, vícios de linguagem, identificação positiva, oportunidades de negócio, pesquisa de satisfação, ética, abertura de OS e desconexão indevida. Cada critério possui palavras-chave ou padrões que são buscados na transcrição, e o resultado é "Aprovado" ou "Reprovado" para cada item.
+
+Além disso, o modelo realiza uma análise de sentimento utilizando o SpaCy para segmentação de sentenças e o modelo BERT para classificação do sentimento de cada frase. O resultado é consolidado em um DataFrame, que pode ser exportado para CSV para análise posterior.
+
+Atualmente, o modelo retorna apenas se cada critério foi atendido ou não ("Aprovado" ou "Reprovado"). Existe o objetivo de evoluir o modelo para que ele atribua notas quantitativas aos critérios, permitindo uma avaliação mais granular da qualidade do atendimento.
+
+### Discussão dos Resultados
+Os resultados obtidos até o momento mostram que o modelo consegue identificar padrões básicos de atendimento, como abertura, cordialidade e empatia, mas ainda apresenta limitações em critérios mais complexos, como oportunidades de negócio e pesquisa de satisfação. A maioria dos atendimentos analisados apresenta reprovação em critérios relacionados ao encerramento padrão, identificação positiva e criação de oportunidades, indicando pontos de melhoria nos scripts de atendimento.
+
+O modelo também aponta que, em geral, os atendentes mantêm postura ética e cordial, mas há recorrência de vícios de linguagem e ausência de procedimentos completos em algumas chamadas. A análise de sentimento complementa a avaliação, permitindo identificar atendimentos com maior carga emocional negativa ou positiva.
+
+O desenvolvimento do modelo representa um avanço importante para o projeto, pois permite automatizar parte da avaliação de qualidade e identificar padrões de atendimento que podem ser aprimorados nas próximas sprints.
+
+### 8.4.1.2 Webhooks - Implementação Completa
+
+### Visão Geral
+
+Este documento descreve a implementação de webhooks para o sistema de automação com reconhecimento de áudio da Comgás. Os webhooks permitem receber notificações de processamento de dados de forma assíncrona, suportando tanto análise de texto quanto transcrição de áudio.
+
+### Abordagens Implementadas
+
+#### Abordagem 1: Webhooks por Tipo de Dados (Implementado)
+
+Implementação atual integrada ao sistema existente, focada na recepção de dados processados por tipo.
+
+#### Endpoints Implementados
+
+- **POST `/api/v1/webhook/text`**
+  - Objetivo: Receber eventos de processamento de texto (análise de chat, WhatsApp, etc.)
+  - Body (JSON):
+    - `sourceId` (string, opcional): identificador da origem do evento
+    - `text` (string, obrigatório): conteúdo textual
+    - `meta` (object, opcional): metadados livres
+    - `analysis` (object, opcional): resultado de análise externa
+    - `score` (number, opcional): nota de qualidade
+  - Respostas:
+    - 200: `{ status: 'ok', created: { ...registro } }`
+    - 400: `{ error: "Missing required field 'text' in payload" }`
+
+- **POST `/api/v1/webhook/voice`**
+  - Objetivo: Receber eventos de transcrição voz-para-texto
+  - Body (JSON):
+    - `audioId` (string, opcional): identificador do áudio
+    - `transcription` (object, obrigatório): conteúdo de transcrição (estrutura livre)
+    - `analysis` (object, opcional): resultado de análise externa
+    - `score` (number, opcional): nota de qualidade
+  - Respostas:
+    - 200: `{ status: 'ok', created: { ...registro } }`
+    - 400: `{ error: "Missing required field 'transcription' in payload" }`
+
+#### Estrutura e Armazenamento
+
+Os handlers criam registros na tabela `chamada` através de `chamadaRepository.create`, preenchendo:
+- `transcript_json`: `{ type: 'text', text, meta }` ou `{ type: 'voice', transcription }`
+- `avaliacao_json`: dados de análise (quando fornecido)
+- `nota_qualidade`: `score` (quando fornecido)
+- `cliente_id`: `sourceId`/`audioId` (quando fornecido)
+
+Não há alteração no schema. Os dados são inseridos usando a infraestrutura atual.
+
+#### Exemplos de Payload - Abordagem 1
+
+**Texto:**
+```json
+{
+  "sourceId": "chat-abc-123",
+  "text": "Cliente solicitou religação e informou leitura",
+  "meta": { "canal": "chat", "uf": "SP" },
+  "analysis": { "intent": "solicitacao_religacao", "sentiment": "neutral" },
+  "score": 4.2
+}
+```
+
+**Voz:**
+```json
+{
+  "audioId": "audio-20250912-001",
+  "transcription": {
+    "language": "pt-BR",
+    "text": "Boa tarde, estou com problema na minha conta, veio muito alta."
+  },
+  "analysis": { "intent": "reclamacao_fatura", "risk": "medium" },
+  "score": 2.8
+}
+```
+
+#### Abordagem 2: Webhooks por Status de Processamento (Alternativa)
+
+Implementação alternativa focada no status do processamento, ideal para monitoramento de sucesso/falha.
+
+#### Endpoints Alternativos
+
+- **POST `/webhook/processing-success`**
+  - Objetivo: Notificar que a transcrição foi concluída corretamente
+  - Body (JSON):
+    - `jobId` (string, obrigatório): identificador do job
+    - `filename` (string, opcional): nome do arquivo processado
+    - `transcription` (string, opcional): texto transcrito
+    - `qualityScore` (number, opcional): pontuação de qualidade
+    - `sentiment` (string, opcional): análise de sentimento
+    - `compliance` (object, opcional): dados de conformidade
+    - `processedAt` (string, opcional): timestamp do processamento
+
+- **POST `/webhook/processing-failure`**
+  - Objetivo: Notificar que houve erro no processamento
+  - Body (JSON):
+    - `jobId` (string, obrigatório): identificador do job
+    - `filename` (string, opcional): nome do arquivo que falhou
+    - `error` (string, obrigatório): descrição do erro
+    - `errorCode` (string, opcional): código do erro
+    - `failedAt` (string, opcional): timestamp da falha
+    - `retryCount` (number, opcional): número de tentativas
+
+#### Exemplos de Payload - Abordagem 2
+
+**Sucesso:**
+```json
+{
+    "jobId": "job_12345",
+    "filename": "atendimento_cliente_001.wav",
+    "transcription": "Olá, como posso ajudá-lo hoje? O cliente respondeu que gostaria de saber sobre sua conta.",
+    "qualityScore": 85,
+    "sentiment": "positivo",
+    "compliance": {
+        "score": 90,
+        "requiredPhrases": ["posso confirmar seu cpf", "obrigado por entrar em contato"],
+        "foundPhrases": ["obrigado por entrar em contato"],
+        "missingPhrases": ["posso confirmar seu cpf"]
+    },
+    "processedAt": "2024-09-11T10:30:00Z"
+}
+```
+
+**Falha:**
+```json
+{
+    "jobId": "job_12346",
+    "filename": "atendimento_cliente_002.wav",
+    "error": "Falha na transcrição: áudio com qualidade muito baixa",
+    "errorCode": "TRANSCRIPTION_FAILED",
+    "failedAt": "2024-09-11T10:35:00Z",
+    "retryCount": 1
+}
+```
+
+### Implementação Técnica Atual
+
+#### Configuração e Dependências
+
+```json
+{
+  "dependencies": {
+    "express": "^4.18.0",
+    "cors": "^2.8.5"
+  }
+}
+```
+
+#### Estrutura de Arquivos
+
+```
+src/backend/
+├── src/
+│   ├── controllers/
+│   │   └── webhook.controller.ts    # Lógica de processamento
+│   └── routes/v1/
+│       └── webhook.routes.ts        # Definição das rotas
+├── examples/webhooks/
+│   ├── text.json                    # Exemplo de payload de texto
+│   └── voice.json                   # Exemplo de payload de voz
+├── tests/
+│   └── webhook.test.js              # Testes automatizados
+└── scripts/
+    └── test-webhooks.js             # Script de teste manual
+```
+
+#### Fluxo de Processamento
+
+1. Provedor externo envia POST para `/api/v1/webhook/text` ou `/api/v1/webhook/voice`
+2. Validação mínima do payload (campo obrigatório presente)
+3. Inserção de registro em `chamada` via `chamadaRepository.create`
+4. Retorno 200 OK ao provedor
+
+### Testes e Validação
+
+#### Testes Automatizados
+
+```javascript
+// Exemplo de teste unitário
+describe('POST /webhook/text', () => {
+  test('deve processar payload válido de texto', async () => {
+    const payload = {
+      sourceId: "test-chat-001",
+      text: "Cliente solicitou religação do gás",
+      meta: { canal: "whatsapp", uf: "SP" },
+      score: 4.2
+    };
+
+    const response = await request(app)
+      .post('/webhook/text')
+      .send(payload)
+      .expect(200);
+
+    expect(response.body.status).toBe('ok');
+    expect(response.body.created.transcript_json.type).toBe('text');
+  });
+});
+```
+
+#### Script de Teste Manual
+
+```javascript
+// Teste manual via script
+const axios = require('axios');
+
+async function testWebhooks() {
+    const textPayload = {
+        sourceId: "manual-test-001",
+        text: "Cliente solicitou religação e informou leitura do medidor",
+        meta: { canal: "whatsapp", uf: "SP" },
+        analysis: { intent: "solicitacao_religacao", sentiment: "neutral" },
+        score: 4.2
+    };
+    
+    const response = await axios.post('http://localhost:3000/webhook/text', textPayload);
+    console.log('✅ Sucesso:', response.data);
+}
+```
+
+### Ativação e Deploy
+
+#### Como Ativar (Próxima Sprint)
+
+1. Registrar as rotas no `src/backend/src/routes/v1.ts`:
+   ```typescript
+   v1Router.use('/webhook', webhookRouter);
+   ```
+
+2. Configurar variáveis de ambiente:
+   ```bash
+   PORT=3000
+   NODE_ENV=production
+   WEBHOOK_SECRET=your-secret-key-here
+   ```
+
+#### Melhorias de Segurança
+
+- Validar assinatura do provedor (cabeçalho `X-Signature` e segredo compartilhado)
+- Limitar IPs/Origins permitidos
+- Usar token de acesso dedicado
+- Implementar rate limiting
+
+#### Monitoramento
+
+- Logs estruturados para cada webhook recebido
+- Métricas de performance e taxa de sucesso
+- Alertas para falhas consecutivas
+- Dashboard de estatísticas (opcional)
+
+### Integração com Sistemas Externos
+
+#### Provedores Suportados
+
+- Sistemas de análise de texto (NLP)
+- Serviços de speech-to-text (Azure, Google, AWS)
+- Plataformas de análise de sentimento
+- APIs de processamento de linguagem natural
+
+#### Exemplo de Integração
+
+```javascript
+// Disparar webhook após processamento
+async function notifyProcessingComplete(jobData) {
+    const payload = {
+        sourceId: jobData.clientId,
+        text: jobData.transcription,
+        analysis: jobData.analysis,
+        score: jobData.qualityScore
+    };
+    
+    await axios.post('/api/v1/webhook/text', payload);
+}
+```
+
+### Casos de Uso no Projeto Comgás
+
+#### Cenário 1: Análise de Chat WhatsApp
+- Cliente envia mensagem via WhatsApp
+- Sistema de NLP processa o texto
+- Webhook `/text` recebe resultado da análise
+- Dados armazenados para monitoramento de qualidade
+
+#### Cenário 2: Transcrição de Ligação Telefônica
+- Ligação é gravada e enviada para transcrição
+- Serviço de speech-to-text processa o áudio
+- Webhook `/voice` recebe transcrição e análise
+- Sistema calcula score de qualidade do atendimento
+
+#### Cenário 3: Monitoramento de Qualidade
+- Webhooks coletam dados de múltiplos canais
+- Sistema analisa padrões e tendências
+- Relatórios automáticos de qualidade gerados
+- Alertas para atendimentos com baixa pontuação
+
+### Resumo da Implementação
+
+**Configuração de rotas e endpoints**: Implementados endpoints `/text` e `/voice` integrados ao sistema atual
+
+**Lógica de processamento**: Controllers TypeScript com validação robusta e integração com banco de dados existente
+
+**Resposta ao provedor**: Códigos HTTP apropriados (200 OK, 400 Bad Request, 500 Internal Server Error)
+
+**Documentação**: Especificação completa com exemplos práticos e casos de teste
+
+**Testes**: Suíte de testes automatizados e scripts de validação manual
+
+**Segurança**: Recomendações para ambiente de produção com autenticação e rate limiting
 
 ## 8.4.2 Sprint 4
 
 _conteúdo_
 
 ## 8.4.3 Sprint 5
-
-_conteúdo_
-
-## 8.5 Testes Unitários e de Integração
 
 _conteúdo_
 Obs.: Insira informações sobre estratégias para realização dos testes
@@ -1954,43 +2530,252 @@ Obs.: Insira informações sobre quais frameworks foram usados e como acessar.
 
 # 9. Planejamento e Execução de Testes
 
-_conteúdo_
+Esta seção é dedicada ao plano de validação e verificação do projeto. O objetivo é garantir que a solução atenda integralmente aos requisitos de negócio e de projeto definidos. Para isso, o plano está dividido em quatro áreas principais de teste:
+
+1.  **Testes Funcionais:** Verificam se cada função do sistema se comporta conforme especificado nos requisitos funcionais.
+
+2.  **Testes de Requisitos Não Funcionais:** Avaliam o desempenho, a precisão e a capacidade do sistema sob condições específicas, como o processamento de áudios longos.
+
+3.  **Testes de Integração:** Garantem que os diferentes componentes da aplicação (backend, frontend, banco de dados) e os serviços externos (APIs da OpenAI, LLMs) se comunicam de forma correta e resiliente.
+
+4.  **Testes de Usabilidade:** Validam a experiência do usuário final, assegurando que a interface do dashboard seja intuitiva, eficiente e útil para os gestores de qualidade.
+
+Em cada subseção, serão detalhados o propósito, a abrangência, as ferramentas escolhidas, os cenários de teste (positivos e negativos) e as instruções para execução.
 
 ## 9.1 Testes Funcionais
 
-_conteúdo_
+O objetivo dos testes funcionais é validar sistematicamente cada um dos requisitos funcionais (RF01 a RF07), garantindo que o núcleo da aplicação execute as tarefas para as quais foi projetado.
 
-## 9.1.1 Planejamento
+### 9.1.1 Planejamento
 
-_conteúdo_
+O planejamento abaixo descreve a estratégia, as ferramentas e os casos de teste que serão utilizados para a validação funcional do sistema.
 
-## 9.1.2 Resultados
+#### **Estratégia, Ferramentas e Automação**
 
-_conteúdo_
+Para garantir consistência, eficiência e portabilidade, será adotada uma abordagem de testes automatizada e containerizada.
 
-## 9.2 Testes de RNFs
+  * **Ambiente de Testes em Contêiner (Docker):** Todos os testes serão executados dentro de um contêiner Docker. Isso garante um ambiente padronizado e isolado para todos os desenvolvedores e para o pipeline de integração contínua (CI/CD), eliminando inconsistências entre diferentes máquinas. A configuração será gerenciada através de um arquivo `docker-compose.yml`.
+  * **Testes de Backend (API e Lógica de Negócio - Python):** Será utilizado o framework **Pytest**. Ele foi escolhido por sua sintaxe simples, ecossistema robusto de plugins (como o `pytest-cov` para análise de cobertura de código) e o poderoso sistema de *fixtures*, que facilita a configuração e o reuso de estados de teste.
+  * **Testes de Frontend (Dashboard - JavaScript/React):**
+      * **Jest:** Para testes unitários e de componentes. A lógica interna de componentes da interface será validada de forma rápida e isolada.
+      * **Cypress:** Para testes End-to-End (E2E). A jornada completa do usuário no navegador será simulada, desde o login, passando pelo upload de um arquivo, até a visualização do resultado no painel, garantindo que a integração entre as camadas do sistema funcione como esperado.
+  * **Abordagem BDD com Gherkin:** Para garantir que os testes estejam alinhados às regras de negócio e sejam compreensíveis por todos os membros da equipe, serão adotados os princípios do BDD (*Behavior-Driven Development*). Os casos de teste serão descritos usando uma linguagem inspirada na sintaxe Gherkin (`Dado`, `Quando`, `Então`), o que torna o comportamento esperado do sistema explícito e inequívoco.
 
-_conteúdo_
+#### **Abrangência dos Testes**
 
-## 9.2.1 Planejamento
+A estratégia visa alcançar uma **cobertura de requisitos de 100%**, onde cada requisito funcional terá, no mínimo, um caso de teste positivo e um negativo associado. Adicionalmente, busca-se uma **cobertura de código superior a 80%** para os módulos críticos do backend (processamento de NLP, regras de score, endpoints da API), medida com a ferramenta `pytest-cov`. Isso garante que a maior parte do código implementado seja testada, reduzindo a probabilidade de bugs.
 
-_conteúdo_
+#### **Casos de Teste Funcionais**
 
-## 9.2.2 Resultados
+A seguir, a lista detalhada dos casos de teste planejados, mapeados para cada requisito funcional.
 
-_conteúdo_
+| ID            | Título do Caso de Teste                                             | Requisito(s) Associado(s) | Pré-condições                                               | Passos para Execução                                                                                                                                              | Dados de Entrada                                   | Resultado(s) Esperado(s)                                                                                                                                                                |
+| :------------ | :------------------------------------------------------------------ | :------------------------ | :---------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **CT-RF-001** | **(Positivo)** Envio de um arquivo de áudio válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página do dashboard. 2. **Quando** ele clica em "Analisar Chamada" e seleciona um arquivo de áudio (`.wav`, `.mp3`). 3. **E** submete o arquivo. | `chamada_valida.mp3`                               | 1. **Então** o sistema deve identificar a entrada como "áudio". 2. **E** iniciar o fluxo de transcrição. 3. **E** exibir uma notificação de "Processando áudio...".                         |
+| **CT-RF-002** | **(Positivo)** Envio de um arquivo de texto válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página do dashboard. 2. **Quando** ele clica em "Analisar Chamada" e seleciona um arquivo de texto (`.txt`). 3. **E** submete o arquivo. | `transcricao_valida.txt`                           | 1. **Então** o sistema deve identificar a entrada como "texto". 2. **E** iniciar o fluxo de análise de NLP diretamente. 3. **E** exibir uma notificação de "Analisando transcrição...".      |
+| **CT-RF-003** | **(Negativo)** Tentativa de envio de arquivo com formato não suportado | RF01                      | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página de upload. 2. **Quando** ele tenta submeter um arquivo com formato inválido (ex: `.docx`, `.png`).                      | `documento.docx`                                   | 1. **Então** a interface deve exibir uma mensagem de erro clara: "Formato de arquivo inválido. Suportados: .mp3, .wav, .txt". 2. **E** a requisição de upload não deve ser enviada ao servidor. |
+| **CT-RF-004** | **(Positivo)** Geração e armazenamento corretos da avaliação         | RF02, RF07                | Uma chamada foi submetida e processada com sucesso.         | 1. **Dado** que uma chamada foi processada. 2. **Quando** o processo de análise é concluído.                                                                         | `transcricao_qualquer.txt`                         | 1. **Então** o sistema deve gerar 3 critérios de avaliação. 2. **E** cada critério deve ter uma nota numérica entre 0 e 5. 3. **E** os dados da chamada devem ser persistidos corretamente no banco de dados. |
+| **CT-RF-005** | **(Positivo)** Visualização de indicadores consolidados no painel   | RF03                      | Múltiplas chamadas já foram processadas.                    | 1. **Dado** que existem 10 chamadas processadas no banco de dados. 2. **Quando** o usuário acessa o dashboard.                                                            | N/A                                                | 1. **Então** o painel deve exibir os indicadores gerais (ex: média de score geral). 2. **E** os gráficos devem ser renderizados com os dados consolidados.                             |
+| **CT-RF-006** | **(Negativo)** Painel sem dados                                     | RF03                      | Nenhuma chamada foi processada ainda.                       | 1. **Dado** que o banco de dados de chamadas está vazio. 2. **Quando** o usuário acessa o dashboard.                                                                     | N/A                                                | 1. **Então** o painel deve exibir uma mensagem informativa (ex: "Nenhuma chamada analisada ainda"). 2. **E** os gráficos e indicadores devem aparecer em um estado vazio, sem erros.      |
+| **CT-RF-007** | **(Positivo)** Upload de múltiplos arquivos simultaneamente         | RF05                      | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página de upload. 2. **Quando** ele seleciona 3 arquivos válidos de uma vez. 3. **E** submete o lote.                                | `chamada1.mp3`, `chamada2.txt`, `chamada3.wav`      | 1. **Então** o sistema deve criar 3 jobs de análise separados. 2. **E** a interface deve mostrar o progresso individual de cada arquivo. 3. **E** todas as chamadas devem ser processadas com sucesso. |
+| **CT-RF-008** | **(Positivo)** Destaque visual de chamada com score baixo           | RF06                      | Uma chamada foi processada e recebeu um score abaixo do limite (2.0). | 1. **Dado** que uma chamada foi analisada e recebeu score final de 1.5. 2. **Quando** o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 1.5                             | 1. **Então** a linha ou card correspondente a essa chamada deve ter um destaque visual claro (ex: fundo vermelho ou um ícone de alerta).                                                |
+| **CT-RF-009** | **(Negativo)** Chamada com score alto não é destacada               | RF06                      | Uma chamada foi processada e recebeu um score acima do limite (2.0).  | 1. **Dado** que uma chamada foi analisada e recebeu score final de 4.5. 2. **Quando** o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 4.5                             | 1. **Então** a linha ou card correspondente a essa chamada **não** deve possuir qualquer destaque visual de alerta.                                                                  |
+
+### 9.1.2 Resultados
+
+####################
+
+## 9.2 Testes de Requisitos Não Funcionais (RNFs)
+
+O propósito desta fase de testes é avaliar os aspectos de qualidade do sistema que não estão relacionados a funcionalidades específicas, mas sim a como o sistema se comporta sob determinadas condições. Serão validados atributos críticos como desempenho, capacidade de carga e precisão da análise, garantindo que a solução seja não apenas funcional, mas também eficiente, robusta e confiável, conforme especificado nos RNFs.
+
+### 9.2.1 Planejamento
+
+Abaixo são detalhadas a estratégia, as ferramentas e os casos de teste planejados para validar os requisitos não funcionais do projeto.
+
+#### **Estratégia e Ferramentas**
+
+Para a execução dos testes de RNF, será utilizado um conjunto de ferramentas e abordagens específicas para cada tipo de requisito. Os testes serão executados em um ambiente de homologação, com configuração de hardware similar ao de produção, para garantir que os resultados sejam os mais realistas possíveis.
+
+* **Testes de Desempenho e Carga (RNF01, RNF02):**
+    * **Ferramenta:** **k6 (Grafana k6)**. Foi escolhida por ser uma ferramenta moderna, de código aberto, focada em performance e projetada para ser amigável para desenvolvedores. Os scripts de teste são escritos em JavaScript, o que facilita a criação de cenários complexos de carga e a integração com o ecossistema de desenvolvimento.
+
+    * **Alternativa:** **Locust**. Sendo uma ferramenta baseada em Python, o Locust se apresenta como uma excelente alternativa para o projeto. Ele permite que os testes de performance sejam escritos em código Python puro.
+
+* **Testes de Precisão do Modelo (RNF03):**
+    * **Ferramenta:** Scripts customizados em **Python** utilizando bibliotecas como `scikit-learn` e `pandas`.
+    
+    * **Estratégia:** Este teste não mede o desempenho em termos de velocidade, mas sim a **qualidade e a acurácia** da análise de NLP. Será criado um conjunto de dados de validação ("golden dataset") com amostras de transcrições previamente rotuladas por humanos com as intenções corretas. O teste consistirá em submeter essas amostras ao sistema, coletar os resultados e compará-los com o gabarito, calculando a métrica de acurácia.
+
+#### **Abrangência e Justificativa**
+
+A abrangência dos testes de RNF está focada em garantir que o sistema atenda aos critérios de aceitação que definem sua viabilidade técnica e operacional.
+
+* **Justificativa:** A validação desses requisitos é crucial. Um sistema que não consegue processar áudios longos (RNF01) ou que demora excessivamente para entregar um resultado (RNF02) pode ser funcionalmente correto, mas operacionalmente inútil. Da mesma forma, se a precisão da análise for baixa (RNF03), toda a informação gerada pelo sistema perde a credibilidade, invalidando seu propósito de negócio.
+* **Abrangência:** O plano cobre **100% dos RNFs definidos**. Para cada requisito, foi criado pelo menos um cenário de teste positivo para validar o critério de aceite. Foram incluídos também cenários de estresse (negativos) para entender os limites do sistema, como o comportamento sob carga simultânea, mesmo que não haja um RNF específico para isso.
+
+#### **Casos de Teste de RNFs**
+
+| ID | Título do Caso de Teste | Componentes Integrados | Pré-condições | Instruções Detalhadas para Execução | Validação dos Resultados |
+| :-- | :--- | :--- | :--- | :--- | :--- |
+| **CT-INT-001** | **(Positivo)** Comunicação bem-sucedida e gravação da resposta da API externa | Backend ↔ API OpenAI | `VCR.py` está em modo de gravação. | 1. **Dado** um arquivo de áudio válido. 2. **Quando** o serviço de análise é invocado pela primeira vez. | 1. **Então** a API da OpenAI deve retornar uma resposta de sucesso (200 OK). 2. **E** um "cassete" (.yaml) deve ser criado pelo `VCR.py` com a interação. |
+| **CT-INT-002** | **(Negativo)** Tratamento de erro de indisponibilidade da API externa | Backend ↔ API OpenAI | O "cassete" foi modificado para retornar um erro (ex: 503). | 1. **Dado** o mesmo áudio do teste anterior. 2. **Quando** o serviço de análise é invocado. | 1. **Então** o sistema não deve travar. 2. **E** uma exceção apropriada deve ser capturada e registrada em log. |
+| **CT-INT-003** | **(Positivo - Cache)** Armazenamento em cache da resposta na primeira chamada | Backend ↔ Módulo de Cache | O cache da aplicação está vazio. | 1. **Dado** um novo arquivo de áudio. 2. **Quando** o serviço de análise é invocado. | 1. **Então** uma requisição real é feita à API externa. 2. **E** o resultado é armazenado no cache interno. |
+| **CT-INT-004**| **(Positivo - Cache)** Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente. | 1. **Dado** o mesmo áudio do teste anterior. 2. **E** a conexão externa está desabilitada (simulado). 3. **Quando** o serviço é invocado novamente. | 1. **Então** o resultado deve ser retornado com sucesso, idêntico ao da primeira chamada. 2. **E** NENHUMA requisição HTTP para a API externa deve ter sido realizada. |
+| **CT-INT-005** | **(Positivo)** Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise foi concluída com sucesso. | 1. **Dado** um objeto de resultado de análise válido. 2. **Quando** a função de persistência é chamada. | 1. **Então** um novo registro correspondente deve existir no banco de dados, com todos os campos consistentes. |
+| **CT-INT-006** | **(Negativo)** Tratamento de erro de indisponibilidade do banco de dados | Backend ↔ Banco de Dados | O serviço do banco de dados está offline (simulado). | 1. **Dado** um objeto de resultado de análise válido. 2. **Quando** a função de persistência é chamada. | 1. **Então** o sistema não deve travar. 2. **E** uma exceção de falha de conexão deve ser capturada e registrada em log. |
+| **CT-INT-007** | **(Negativo)** Tratamento de resposta malformada da API externa | Backend ↔ API OpenAI | O "cassete" foi modificado para retornar um JSON inválido (status 200 OK). | 1. **Dado** um arquivo de áudio válido. 2. **Quando** o serviço de análise é invocado. | 1. **Então** o sistema deve tratar o erro de parsing do JSON. 2. **E** uma exceção de resposta inválida deve ser capturada e registrada em log. |### 2.4.4 Resultados do Estudo sobre o Usuário do Sistema
+
+### 9.2.2 Resultados
+
+#####################
 
 ## 9.3 Testes de Usabilidade
 
-_conteúdo_
+O objetivo dos testes de usabilidade é avaliar a experiência do usuário (UX) ao interagir com a plataforma. O foco não é encontrar bugs, mas sim identificar pontos de fricção, medir a facilidade de aprendizado e aferir a satisfação geral do usuário final ao realizar tarefas-chave no sistema. Os resultados coletados servirão como base para melhorias no design da interface e no fluxo de interação.
 
-## 9.3.1 Planejamento
+### 9.3.1 Planejamento
 
-_conteúdo_
+A seguir, são detalhados o objetivo, a metodologia, os participantes, os cenários e o roteiro para a execução dos testes de usabilidade.
 
-## 9.3.2 Resultados
+#### **Objetivo do Teste**
+Avaliar a facilidade de uso, a clareza da informação e a satisfação geral dos usuários finais, tanto analistas de qualidade quanto supervisores, ao interagir com o dashboard de análise de chamadas. O objetivo secundário é identificar os principais problemas de usabilidade e coletar feedback qualitativo para refinar a interface do protótipo.
 
-_conteúdo_
+#### **Estratégia e Metodologia**
+
+* **Formato do Teste:** Será conduzido um teste de usabilidade moderado. Um moderador guiará cada participante através de um roteiro de tarefas, fará perguntas e observará a interação do usuário com a plataforma. As sessões serão gravadas, mediante consentimento do participante, para posterior análise da equipe.
+
+* **Metodologias:**
+    * **Protocolo Think-Aloud (Pense Alto):** Os participantes serão instruídos a verbalizar seus pensamentos, dúvidas e impressões enquanto realizam as tarefas. Isso fornecerá insights sobre seu modelo mental e suas expectativas em relação ao sistema.
+
+    * **System Usability Scale (SUS):** Ao final da sessão, o moderador aplicará verbalmente o questionário SUS. Ele fará as 10 perguntas do questionário e anotará as respostas do participante em uma escala de 1 a 5. Este método gera uma pontuação quantitativa da usabilidade percebida do sistema.
+
+#### **Perfil dos Participantes**
+Serão recrutados **no mínimo 5 participantes** externos à equipe de desenvolvimento do projeto. O critério de recrutamento buscará pessoas com perfis que se assemelhem às duas personas mapeadas, garantindo que a solução seja validada sob as duas perspectivas de uso.
+
+* **Perfil 1: Analista de Qualidade (baseado em Julia Souza)**
+
+    * **Descrição:** Profissionais com experiência em análise e monitoramento de qualidade de atendimento. Seu trabalho é focado na escuta e avaliação detalhada de ligações para garantir a conformidade com os scripts e os padrões de excelência. Buscam ferramentas que automatizem a análise para aumentar a amostragem e identificar padrões ou chamadas críticas com mais rapidez.
+
+    * **Quantidade:** 2 a 3 participantes.
+
+* **Perfil 2: Supervisor de Operações (baseado em Carlos Martins)**
+
+    * **Descrição:** Líderes de equipes de call center, responsáveis pelo desempenho geral do time e pela garantia de que os operadores sigam os scripts e mantenham a cordialidade. Necessitam de dados objetivos e consolidados para direcionar treinamentos, corrigir falhas rapidamente e fornecer feedbacks assertivos aos atendentes.
+
+    * **Quantidade:** 2 a 3 participantes.
+
+#### **Roteiro e Cenários do Teste**
+
+O teste terá uma duração estimada de 30-40 minutos por participante.
+
+**Parte 1: Introdução e Contextualização (5 min)**
+
+1.  Apresentação do moderador e agradecimento.
+2.  Explicação do objetivo: "Estamos testando o sistema, não você. Não existem respostas certas ou erradas."
+3.  Solicitação de permissão para gravar a sessão para fins de análise.
+4.  Explicação do protocolo *Think-Aloud*.
+5.  Contextualização inicial: "Imagine que você é um(a) [Analista de Qualidade / Supervisor de Operações] e recebeu acesso a uma nova ferramenta para ajudar a analisar as chamadas de atendimento."
+
+**Parte 2: Tarefas de Usabilidade (20-25 min)**
+
+As tarefas serão adaptadas conforme o perfil do participante.
+
+**Roteiro para o Perfil "Analista de Qualidade":**
+
+* **Cenário 1: Investigação de Chamadas Críticas.**
+
+    * **Tarefa:** "O painel inicial está mostrando um ranking com as ligações mais críticas. Sua tarefa é investigar uma dessas chamadas com nota baixa para entender por que ela foi mal avaliada e encontrar os trechos que justificam essa pontuação." 
+
+    * **Objetivo de observação:** Avaliar a facilidade de navegar do dashboard geral para a análise detalhada de uma chamada e a clareza na apresentação dos pontos críticos.
+
+* **Cenário 2: Geração de Relatório para Supervisão.**
+
+    * **Tarefa:** "Com base na sua análise, prepare um resumo dos problemas encontrados nesta chamada. O que você destacaria em um relatório para o supervisor da equipe?"
+
+    * **Objetivo de observação:** Verificar se as informações apresentadas são suficientes e claras para que a analista possa cumprir sua responsabilidade de gerar relatórios para supervisores.
+
+**Roteiro para o Perfil "Supervisor de Operações":**
+
+* **Cenário 1: Análise da Performance da Equipe.**
+
+    * **Tarefa:** "Você acabou de iniciar seu dia e quer uma visão geral do desempenho da sua equipe. Olhando o painel, qual é a pontuação média? Há algum caso crítico que exige sua atenção imediata?" 
+
+    * **Objetivo de observação:** Avaliar a eficácia do dashboard em comunicar métricas consolidadas e alertas importantes para a gestão da equipe.
+
+* **Cenário 2: Preparação para um Feedback Individual.**
+
+    * **Tarefa:** "Você notou um atendente com desempenho abaixo do esperado. Investigue as chamadas desse atendente para identificar um padrão de comportamento, seja um ponto forte ou uma falha recorrente, para que você possa agendar um feedback individual com ele."
+
+    * **Objetivo de observação:** Medir a facilidade de filtrar informações por atendente e obter insights que possam guiar treinamentos e feedbacks, um dos principais interesses de Carlos.
+
+**Parte 3: Pós-Teste e Aplicação do SUS (5 min)**
+
+1.  Perguntas abertas para coletar impressões gerais:
+    * "Qual foi sua primeira impressão sobre a ferramenta?"
+    * "As informações apresentadas são confiáveis para o seu trabalho?"
+    * "Houve algo que você achou particularmente fácil ou difícil?"
+2.  Aplicação verbal do Questionário SUS pelo moderador.
+
+#### **Questionário System Usability Scale (SUS)**
+
+O moderador lerá cada uma das 10 afirmações abaixo e registrará a resposta do participante em uma escala de 1 a 5 (onde 1 = Discordo Totalmente e 5 = Concordo Totalmente).
+
+1.  Acho que usaria este sistema com frequência.
+2.  Acho o sistema desnecessariamente complexo.
+3.  Achei o sistema fácil de usar.
+4.  Acho que precisaria do apoio de uma pessoa com conhecimentos técnicos para poder usar este sistema.
+5.  Achei que as várias funções deste sistema estavam bem integradas.
+6.  Achei que havia muita inconsistência no sistema.
+7.  Imagino que a maioria das pessoas aprenderia a usar este sistema muito rapidamente.
+8.  Achei o sistema muito complicado de usar.
+9.  Me senti muito confiante ao usar o sistema.
+10. Precisei aprender muitas coisas novas antes de conseguir usar o sistema.
+
+### 9.3.2 Resultados
+
+########################
+
+## 9.4 Testes de Integração
+
+O objetivo dos testes de integração é verificar se os diferentes módulos e componentes do sistema, incluindo serviços externos, funcionam corretamente quando combinados. Esta fase de testes foca em validar o fluxo de dados e as interações entre o backend, o banco de dados, o módulo de cache e as APIs externas, garantindo que a comunicação seja robusta e que os erros sejam tratados de forma apropriada.
+
+### 9.4.1 Planejamento
+
+A seguir, são detalhados a estratégia, as ferramentas e os casos de teste planejados para validar as integrações da aplicação.
+
+#### **Estratégia e Ferramentas**
+
+A estratégia consiste em testar cada ponto de integração de forma isolada, mas completa, focando na lógica de comunicação entre os componentes.
+
+* **Ferramentas:**
+
+    * **Pytest:** Será o framework principal para a escrita e execução dos testes de integração do backend. Sua estrutura flexível permite interagir com os diferentes componentes da aplicação (serviços, endpoints de API, banco de dados) de forma controlada.
+
+    * **VCR.py:** Para atender ao requisito do "módulo VHS" e testar a integração com a API externa da OpenAI, será utilizada a biblioteca `VCR.py`. Ela funciona como um "gravador" para as requisições HTTP. Na primeira execução de um teste, ela grava a interação real com a API da OpenAI em um arquivo (chamado "cassete"). Nas execuções futuras, a biblioteca intercepta a chamada e "reproduz" a resposta gravada, sem se conectar à internet. Isso permite testar a lógica de integração de forma rápida, determinística e sem custos, além de ser o mecanismo ideal para validar o funcionamento do sistema de cache.
+
+#### **Abrangência e Justificativa**
+
+* **Abrangência:** Os testes cobrirão os três pontos de integração mais críticos da arquitetura:
+    1.  A comunicação do backend com a API externa da OpenAI para transcrição.
+    2.  A lógica do módulo de cache ("VHS") para evitar requisições repetidas.
+    3.  A persistência dos dados analisados no banco de dados PostgreSQL.
+    
+* **Justificativa:** A falha em qualquer um desses pontos compromete o sistema inteiro. Se a comunicação com a API externa falhar, a funcionalidade principal do sistema é bloqueada. Se o cache não funcionar corretamente, o projeto pode incorrer em custos elevados e lentidão, violando seus objetivos centrais. Se a persistência de dados falhar, os resultados das análises são perdidos. Portanto, a validação dessas integrações é fundamental para a estabilidade e viabilidade da solução.
+
+#### **Casos de Teste de Integração**
+
+| ID | Título do Caso de Teste | Componentes Integrados | Pré-condições | Instruções Detalhadas para Execução | Validação dos Resultados |
+| :-- | :--- | :--- | :--- | :--- | :--- |
+| **CT-INT-001** | **(Positivo)** Comunicação bem-sucedida e gravação da resposta da API externa | Backend ↔ API OpenAI | O teste está configurado com uma chave de API válida. `VCR.py` está em modo de gravação. | 1. **Dado** um arquivo de áudio válido. 2. **Quando** o serviço de análise é invocado pela primeira vez com este arquivo. | 1. **Então** a API da OpenAI deve retornar um status de sucesso (200 OK) com a transcrição. 2. **E** um arquivo "cassete" (.yaml) deve ser criado pelo `VCR.py` contendo a requisição e a resposta exatas. |
+| **CT-INT-002** | **(Negativo)** Tratamento de erro de indisponibilidade da API externa | Backend ↔ API OpenAI | O "cassete" gerado no teste anterior foi modificado para retornar um erro (ex: 503 Service Unavailable). | 1. **Dado** o mesmo arquivo de áudio do teste anterior. 2. **Quando** o serviço de análise é invocado. 3. **E** `VCR.py` reproduz a resposta de erro 503. | 1. **Então** o sistema não deve travar. 2. **E** uma exceção apropriada deve ser capturada. 3. **E** um log de erro detalhado deve ser registrado, indicando a falha na comunicação com o serviço externo. |
+| **CT-INT-003** | **(Positivo - Cache)** Armazenamento em cache da resposta na primeira chamada | Backend ↔ Módulo de Cache | O cache da aplicação está vazio para o dado de entrada. | 1. **Dado** um novo arquivo de áudio nunca antes analisado. 2. **Quando** o serviço de análise é invocado. | 1. **Então** uma requisição real é feita à API da OpenAI. 2. **E** o resultado (transcrição) é armazenado com sucesso no mecanismo de cache interno da aplicação. |
+| **CT-INT-004**| **(Positivo - Cache)** Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente com o mesmo arquivo de áudio. | 1. **Dado** o mesmo arquivo de áudio do teste anterior. 2. **E** a conexão com a API externa está desabilitada (simulado via mock ou `VCR.py` em modo de bloqueio). 3. **Quando** o serviço de análise é invocado novamente. | 1. **Então** o resultado da análise deve ser retornado com sucesso. 2. **E** o resultado deve ser idêntico ao da primeira chamada. 3. **E** NENHUMA requisição HTTP para a API da OpenAI deve ter sido realizada, provando que o dado veio do cache. |
+| **CT-INT-005** | **(Positivo)** Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise (real ou via cache) foi concluída com sucesso. | 1. **Dado** um objeto de resultado de análise válido. 2. **Quando** a função de persistência é chamada com este objeto. 3. **E** uma consulta é feita diretamente ao banco de dados PostgreSQL. | 1. **Então** um novo registro correspondente à chamada analisada deve existir na tabela apropriada. 2. **E** todos os campos (notas, metadados, etc.) devem estar consistentes com o objeto de resultado. |
+
+### 9.4.2 Resultados
+
+########################
 
 # 10. Procedimentos de Implantação
 
@@ -2007,5 +2792,11 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
+
+
+
+
+
 
 

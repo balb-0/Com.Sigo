@@ -1,0 +1,21 @@
+.audio-recorder-button {
+  padding: 8px;
+  background: var(--color-vermelho);
+  border: none;
+  border-radius: 6px;
+  color: var(--color-branco);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.audio-recorder-button:hover {
+  opacity: 0.9;
+}
+
+.audio-recorder-button.recording {
+  background: var(--color-amarelo);
+  color: var(--color-azul-escuro);
+}

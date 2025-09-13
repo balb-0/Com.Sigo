@@ -2,12 +2,12 @@
   <tr>
     <td>
       <a href="https://www.querocomgas.com.br/?utm_source=google&utm_medium=cpc&utm_term=comg%C3%A1s&utm_campaign=21432544487&utm_content=765228372932&gad_source=1&gad_campaignid=21432544487&gbraid=0AAAAABVP93Y1dgkYEH7cb900l9xETrtQj&gclid=CjwKCAjwtfvEBhAmEiwA-DsKjgFtOeGUYeQECLrAI8S2y4lavUc_XcfZPp2zRsE2z1Vt1NAQdp2__xoCbvYQAvD_BwE">
-        <img src="img/image.png" alt="Comgas" width="150" border="0">
+        <img src="./documentos/img/image.png" alt="Comgas" width="150" border="0">
       </a>
     </td>
     <td>
       <a href="https://www.inteli.edu.br/">
-        <img src="img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="150" border="0">
+        <img src="./documentos/img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="150" border="0">
       </a>
     </td>
   </tr>
@@ -44,11 +44,11 @@
 - <a href="https://www.linkedin.com/in/francisco-escobar/">Design - Francisco de Souza Escobar</a>
 - <a href="https://www.linkedin.com/in/filipe-gon%C3%A7alves-08a55015b/">Liderança - Filipe Gonçalves</a>
 
-## 📝 Descrição
+## Descrição
 
-<Descrição do Desafio>.
+Com.Sigo é um protótipo de atendimento para companhia de gás com análise de conversas. O backend (Node + Express + PostgreSQL + pgvector) armazena chamadas e permite busca semântica; o frontend (React + Vite) exibe dashboard e chat.
 
-## 📝 LINKS
+## Links
 
 <a href="/documentos/manual-instalacao.md">Link para o Manual de Instruções</a> que explica como montar, conectar e utilizar o protótipo.
 
@@ -80,7 +80,7 @@ Dentre os arquivos presentes na raiz do projeto, definem-se:
 
 - <b>src</b>: nesta pasta encontra-se todo o código fonte do sistema (circuito e eventuais sistemas complementares).
 
-## 💻 Configuração para desenvolvimento
+## Como executar (dev)
 
 Para configurar o desenvolvimento da aplicação, [instale o git](https://git-scm.com/downloads) e clone esse repositório em seu computador através do comando:
 
@@ -88,7 +88,22 @@ Para configurar o desenvolvimento da aplicação, [instale o git](https://git-sc
 git clone https://github.com/<endereco>
 ```
 
-Em seguida siga as instruções presentes em nosso <a href="/documentos/manual-instalacao.md">manual de instalação</a>.
+1. Backend
+   ```bash
+   cd src/backend
+   npm install
+   npm run migrate
+   npm run seed
+   npm run dev
+   ```
+2. Frontend
+   ```bash
+   cd src/frontend
+   npm install
+   npm run dev
+   ```
+
+Mais detalhes em <a href="/documentos/manual-instalacao.md">Manual de Instalação</a>.
 
 ## 🗃 Histórico de lançamentos
 
@@ -109,10 +124,11 @@ Em seguida siga as instruções presentes em nosso <a href="/documentos/manual-i
   - EXECUÇÃO DE TESTES SISTÊMICOS
   - GESTÃO DE PROJETOS EVOLUTIVA E ANÁLISE DE VIABILIDADE FINANCEIRA
 - 0.5.0 - 09/10/2025
-  - DESENVOLVIMENTO E DOCUMENTAÇÃO TÉCNICA DO PROJETO 
+  - DESENVOLVIMENTO E DOCUMENTAÇÃO TÉCNICA DO PROJETO
   - DOCUMENTAÇÃO TÉCNICA FINAL
   - GESTÃO DE PROJETOS EVOLUTIVA E APRESENTAÇÃO FINAL
 
-## 📋 Licença/License
+## Licença
 
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/ENDEREÇOGRUPO>"><nome do projeto></a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/ENDEREÇOGRUPO">INTELI, <aluno1>, <aluno2>, <aluno3>, <aluno4>, <aluno5>, <aluno6></a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+Este projeto está licenciado sob a licença Creative Commons Attribution 4.0 International (CC BY 4.0).
+Mais informações: https://creativecommons.org/licenses/by/4.0/

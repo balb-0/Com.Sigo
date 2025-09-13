@@ -1,0 +1,20 @@
+.audio-uploader-label {
+  cursor: pointer;
+  padding: 8px;
+  background: var(--color-cinza);
+  color: var(--color-azul-escuro);
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.audio-uploader-label:hover {
+  background: var(--color-branco);
+}
+
+.audio-uploader-input {
+  display: none;
+}

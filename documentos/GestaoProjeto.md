@@ -27,9 +27,8 @@
 - <a href="https://www.linkedin.com/in/ryan-botelho-gartlan/">Ryan Botelho Gartlan</a>
 - <a href="https://www.linkedin.com/in/vitor-balbo/">Vitor Margarido Balbo</a>
 
-
-
 # Sumário
+
 - [1. Introdução](#1-introdução)
 - [2. Avaliação das Sprints](#2-avaliação-das-sprints)
   - [2.1 Sprint 1](#21-sprint-1)
@@ -69,11 +68,11 @@ Esta seção mostra como foi a gestão de projetos em cada uma das sprints.
 
 - **Commits mais frequentes**: Ao finalizar uma parte significativa da tarefa, realizar o commit para manter o progresso visível e facilitar ajustes antecipados.
 - **Maior atenção nas revisões**: Dedicar tempo para revisar o trabalho dos outros membros, garantindo qualidade e detectando problemas antes da integração.
-  
+
 &nbsp;&nbsp;&nbsp;&nbsp;Com essas melhorias, a equipe poderá manter a boa organização já conquistada e aumentar a qualidade das entregas, fortalecendo ainda mais a colaboração entre os integrantes.
 
-
 ## 2.2 Sprint 2
+
 ## Pontos Fortes
 
 &nbsp;&nbsp;&nbsp;&nbsp;A Sprint 2 destacou-se pela excelente colaboração e comunicação entre os membros da equipe. Os integrantes demonstraram maior proatividade em se ajudar mutuamente, compartilhando conhecimentos e solucionando dúvidas de forma coletiva. Essa melhoria na comunicação facilitou a resolução de problemas técnicos e contribuiu para um ambiente de trabalho mais integrado e produtivo.
@@ -93,34 +92,61 @@ Esta seção mostra como foi a gestão de projetos em cada uma das sprints.
 &nbsp;&nbsp;&nbsp;&nbsp;Com essas melhorias, a equipe poderá aproveitar ainda melhor a boa comunicação estabelecida e garantir maior clareza na execução das tarefas.
 
 ## 2.3 Sprint 3
-_conteúdo_
- **Nota:** Insira informações sobre mudanças realizadas.
+
+#### Pontos Fortes
+
+&nbsp;&nbsp;&nbsp;&nbsp;Nesta sprint, a principal força do grupo foi a capacidade de entrega e a autonomia individual. Mesmo com desafios de organização, conseguimos concluir todo o escopo planejado, o que demonstra o comprometimento e a competência técnica dos membros. Além disso, quando a comunicação fluiu, mostramos ser um time integrado, onde cada um consegue trabalhar no seu ritmo e ajudar quando necessário. Essa resiliência para "fazer acontecer" é um ativo importante do nosso grupo.
+
+#### Pontos Fracos
+
+&nbsp;&nbsp;&nbsp;&nbsp;O nosso maior ponto fraco foi a falta de disciplina na execução dos nossos próprios processos. As nossas reuniões diárias (dailies) nem sempre atingiram seu potencial, o que por vezes gerou um desalinhamento sobre o andamento das tarefas. Essa falha de sincronização se refletiu na organização do nosso quadro no Trello, que poderia ter sido mais claro e ter facilitado ainda mais o acompanhamento do progresso. 
+
+#### Plano de Melhoria para a Sprint 3
+
+&nbsp;&nbsp;&nbsp;&nbsp;Para a próxima sprint, nosso foco será em melhorar a forma como trabalhamos juntos, atacando a causa raiz dos nossos desafios de alinhamento e aprendizado. Com base nos feedbacks e na nossa autoavaliação, definimos as seguintes ações prioritárias:
+
+1.  **Reestruturar as Dailies:** Vamos implementar um formato rápido e objetivo, com um facilitador rotativo e foco nas três perguntas essenciais (o que fiz, o que farei, impedimentos). A meta é garantir que todos saiam da reunião sabendo exatamente em que ponto o time está.
+
+2.  **Gestão Ativa dos Feedbacks:** Criaremos um docs para registrar todos os feedbacks recebidos. Em seguida, vamos transformar cada feedback em uma task concreta com um ou mais responsáveis, garantindo que estamos aprendendo e evoluindo continuamente.
+
+3. **Refinar o Detalhamento das Tarefas:** Durante a planning, vamos dedicar um tempo específico para discutir e quebrar tarefas que pareçam grandes ou complexas demais. A ideia é garantir que cada card no nosso quadro represente uma unidade de trabalho clara e executável, evitando ambiguidades e facilitando a colaboração.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Com essas ações, esperamos resolver nossos desafios de comunicação e planejamento, mantendo a agilidade e a autonomia que já são nossos pontos fortes.
 
 ## 2.4 Sprint 4
+
 _conteúdo_
- **Nota:** Insira informações sobre mudanças realizadas.
+**Nota:** Insira informações sobre mudanças realizadas.
 
 ## 2.5 Sprint 5
+
 _conteúdo_
- **Nota:** Insira informações sobre mudanças realizadas.
+**Nota:** Insira informações sobre mudanças realizadas.
 
 # 3. Análise de Riscos
+
 _conteúdo_
 
 ## 3.1 Riscos identificados
+
 _conteúdo_
 
 ## 3.2 Mitigação de Riscos
+
 _conteúdo_
 
 # 4. Análise Post Mortem
+
 _conteúdo_
 
 ## 4.1 Sucessos do Projeto
+
 _conteúdo_
 
 ## 4.2 Oportunidades de Melhoria
+
 _conteúdo_
 
 ## 4.3 Lições Aprendidas
+
 _conteúdo_

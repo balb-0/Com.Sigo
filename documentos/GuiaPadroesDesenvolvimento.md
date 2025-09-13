@@ -30,7 +30,21 @@
 
 # Sumário
 
-
+- [1. Introdução](#1-introdução)
+  - [1.1 Objetivo do Documento](#11-objetivo-do-documento)
+- [2. Padrões de Codificação](#2-padrões-de-codificação)
+  - [2.1 Naming Conventions](#21-naming-conventions)
+  - [2.2 Formatação de Código](#22-formatação-de-código)
+  - [2.3 Comentários e Documentação](#23-comentários-e-documentação)
+- [3. Padrões de Projeto](#3-padrões-de-projeto)
+  - [3.1 Design Patterns](#31-design-patterns)
+  - [3.2 Arquitetura de Software](#32-arquitetura-de-software)
+- [4. Práticas de Desenvolvimento](#4-práticas-de-desenvolvimento)
+  - [4.1 Testes Automatizados](#41-testes-automatizados)
+  - [4.2 Controle de Qualidade](#42-controle-de-qualidade)
+- [5. Ferramentas e Tecnologias](#5-ferramentas-e-tecnologias)
+  - [5.1 Ferramentas de Desenvolvimento](#51-ferramentas-de-desenvolvimento)
+  - [5.2 Tecnologias e Frameworks](#52-tecnologias-e-frameworks)
 
 # 1. Introdução
 _conteúdo_
@@ -48,17 +62,17 @@ _conteúdo_
 
 - Variáveis e Funções: Utilize camelCase
   - Exemplos:
-    - ```let userName = "John";``` 
-    - ```function calculateTotal() { ... } 
+    - ```let userName = "John";```
+    - ```function calculateTotal() { ... }
 
 - Classes e Interfaces: Utilize PascalCase
   - Exemplos:
-    - ```class UserProfile { ... }``` 
-    - ```interface PaymentGateway { ... }```  
+    - ```class UserProfile { ... }```
+    - ```interface PaymentGateway { ... }```
 
 - Constantes: Utilize UPPER_CASE com underscores
   - Exemplo:
-    - const MAX_USERS = 100; 
+    - const MAX_USERS = 100;
 
 ## 2.2 Formatação de Código
 
@@ -78,7 +92,7 @@ _conteúdo_
   - Exemplo: // Calcula o total com desconto
 
 - Comentários de Bloco: Use para documentar funções e classes com JSDoc.
-  - Exemplo: 
+  - Exemplo:
     ```
     /**
     * Calcula o total de um pedido.
@@ -124,7 +138,7 @@ _conteúdo_
 - Testes de Integração: Como sugestão, utilizar o Cypress para testes de integração.
   - Exemplo: Testar a interação entre componentes de frontend e backend.
 
-- Testes end-to-end: Como sugestão, utilizar o Cypress para testes end-to-end. 
+- Testes end-to-end: Como sugestão, utilizar o Cypress para testes end-to-end.
   - Exemplo: Testar um RF de ponta a ponta.
 
 ## 4.2 Controle de Qualidade
@@ -146,4 +160,3 @@ _conteúdo_
 - Backend: Utilize Node.js com TypeScript.
 
 - Frontend: Utilize Angular com TypeScript.
-
