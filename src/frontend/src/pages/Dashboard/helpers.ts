@@ -90,5 +90,7 @@ export function formatChamadaRow(row: ChamadaResponse): Chamada {
         dataHora,
         pontuacao: score,
         tags,
-    };
+        transcript_json: row.transcript_json ?? null,
+        avaliacao_json: row.avaliacao_json ?? null,
+    } as Chamada;
 }
