@@ -2,12 +2,12 @@
   <tr>
     <td>
       <a href="https://www.querocomgas.com.br/?utm_source=google&utm_medium=cpc&utm_term=comg%C3%A1s&utm_campaign=21432544487&utm_content=765228372932&gad_source=1&gad_campaignid=21432544487&gbraid=0AAAAABVP93Y1dgkYEH7cb900l9xETrtQj&gclid=CjwKCAjwtfvEBhAmEiwA-DsKjgFtOeGUYeQECLrAI8S2y4lavUc_XcfZPp2zRsE2z1Vt1NAQdp2__xoCbvYQAvD_BwE">
-        <img src="./documentos/img/image.png" alt="Comgas" width="150" border="0">
+        <img src="./documentos/img/image.png" alt="Comgas" width="350" border="0">
       </a>
     </td>
     <td>
       <a href="https://www.inteli.edu.br/">
-        <img src="./documentos/img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="150" border="0">
+        <img src="./documentos/img/logo-Inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="500" border="0">
       </a>
     </td>
   </tr>
@@ -46,46 +46,56 @@
 
 ## Descrição
 
-Com.Sigo é um protótipo de atendimento para companhia de gás com análise de conversas. O backend (Node + Express + PostgreSQL + pgvector) armazena chamadas e permite busca semântica; o frontend (React + Vite) exibe dashboard e chat.
+Com.Sigo é um sistema inteligente de atendimento para companhias de gás que utiliza análise de conversas e busca semântica para melhorar a qualidade do atendimento ao cliente. O sistema é composto por:
+
+- **Backend**: Node.js + Express + PostgreSQL + pgvector para armazenamento e busca semântica de chamadas
+- **Frontend**: React + TypeScript + Vite para interface de dashboard e chat interativo
+- **Modelo de IA**: Algoritmos de processamento de linguagem natural para análise de conversas
+- **Webhooks**: Sistema de integração para recebimento de dados de chamadas em tempo real
 
 ## Links
 
-<a href="/documentos/manual-instalacao.md">Link para o Manual de Instruções</a> que explica como montar, conectar e utilizar o protótipo.
+<a href="./documentos/Manual-instalacao.md">Link para o Manual de Instruções</a> que explica como utilizar o projeto.
 
-<a href="/documentos/index.md">Link para a documentação geral</a> do projeto.
+<a href="./documentos/Index.md">Link para a documentação geral</a> do projeto.
 
 ## 📁 Estrutura de pastas
 
 |--> documentos<br>
-&emsp;| --> outros <br>
-&emsp;| documento<br>
-&emsp;| documento<br>
-|--> imagens<br>
+&emsp;|--> img (imagens do projeto)<br>
+&emsp;|--> GestaoProjeto.md<br>
+&emsp;|--> GestaoConfiguracao.md<br>
+&emsp;|--> GuiaPadroesDesenvolvimento.md<br>
+&emsp;|--> Index.md<br>
+&emsp;|--> Manual-instalacao.md<br>
+&emsp;|--> Projeto.md<br>
 |--> src<br>
-&emsp;|--> dir<br>
-&emsp;|--> dir<br>
-&emsp;|--> dir<br>
-&emsp;|--> dir<br>
-&emsp;|--> dir<br>
-&emsp;|--> dir<br>
-| readme.md<br>
+&emsp;|--> backend (API Node.js + Express)<br>
+&emsp;|--> frontend (React + TypeScript)<br>
+&emsp;|--> modelo (Jupyter notebooks com algoritmos)<br>
+&emsp;|--> scripts (Scripts auxiliares)<br>
+|| README.md<br>
 
 Dentre os arquivos presentes na raiz do projeto, definem-se:
 
-- <b>readme.md</b>: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
+- <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
 
 - <b>documentos</b>: aqui estarão todos os documentos do projeto. Há também uma pasta denominada <b>outros</b> onde podem estar presentes documentos complementares à documentação principal.
 
-- <b>imagens</b>: imagens relacionadas ao projeto como um todo (por exemplo imagens do sistema, do grupo, logotipos e afins).
+- <b>documentos/img</b>: imagens relacionadas ao projeto como um todo (por exemplo imagens do sistema, do grupo, logotipos e afins).
 
-- <b>src</b>: nesta pasta encontra-se todo o código fonte do sistema (circuito e eventuais sistemas complementares).
+- <b>src</b>: nesta pasta encontra-se todo o código fonte do sistema, dividido em:
+  - **backend**: API em Node.js com Express, PostgreSQL e pgvector
+  - **frontend**: Interface React com TypeScript e Vite
+  - **modelo**: Notebooks Jupyter com algoritmos de análise
+  - **scripts**: Scripts auxiliares para IA e processamento
 
 ## Como executar (dev)
 
 Para configurar o desenvolvimento da aplicação, [instale o git](https://git-scm.com/downloads) e clone esse repositório em seu computador através do comando:
 
 ```
-git clone https://github.com/<endereco>
+git clone https://github.com/Inteli-College/2025-2A-T13-ES07-G03.git
 ```
 
 1. Backend
@@ -103,7 +113,14 @@ git clone https://github.com/<endereco>
    npm run dev
    ```
 
-Mais detalhes em <a href="/documentos/manual-instalacao.md">Manual de Instalação</a>.
+Mais detalhes em <a href="./documentos/Manual-instalacao.md">Manual de Instalação</a>.
+
+### Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- PostgreSQL (versão 14 ou superior)
+- npm ou yarn
+- Git
 
 ## 🗃 Histórico de lançamentos
 
@@ -132,3 +149,5 @@ Mais detalhes em <a href="/documentos/manual-instalacao.md">Manual de Instalaç�
 
 Este projeto está licenciado sob a licença Creative Commons Attribution 4.0 International (CC BY 4.0).
 Mais informações: https://creativecommons.org/licenses/by/4.0/
+
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Inteli-College/2025-2A-T13-ES07-G03">Com.Sigo</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Inteli-College/2025-2A-T13-ES07-G03">INTELI, <a href="https://www.linkedin.com/in/andre-lobo-dev/">André Eduardo Lobo de Paula</a>, <a href="https://www.linkedin.com/in/joao-souza-campos/">João Victor de Souza Campos</a>, <a href="https://www.linkedin.com/in/otavio-vasc/">Otavio de Carvalho Vasconcelos</a>, <a href="https://www.linkedin.com/in/rafaelbarbosa-dev/">Rafael Rocha Barbosa</a>, <a href="https://www.linkedin.com/in/rodrigo-lee/">Rodrigo Hu Tchie Lee</a>, <a href="https://www.linkedin.com/in/ryan-botelho-gartlan/">Ryan Botelho Gartlan</a>, <a href="https://www.linkedin.com/in/vitor-balbo/">Vitor Margarido Balbo</a></a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
