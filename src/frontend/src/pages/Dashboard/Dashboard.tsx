@@ -3,8 +3,9 @@ import Header from "../../components/Header/Header";
 import KpiCard from '../../components/KPICard/KPICard';
 import { ChamadasTable, type Chamada } from '../../components/Table/Table.tsx';
 import { DateFilter, type FilterType } from '../../components/DateFilter/DateFilter.tsx';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { listChamadas, type ChamadaResponse } from '../../lib/api';
+import { formatChamadaRow } from './helpers';
 
 interface DashboardProps {
     currentPage?: string;
@@ -35,44 +36,23 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    async function loadChamadas() {
+    const loadChamadas = useCallback(async () => {
         setLoading(true);
         setError(null);
         try {
             const rows: ChamadaResponse[] = await listChamadas();
-            const mapped: Chamada[] = rows.map((row) => {
-                const created = new Date(row.created_at);
-                const day = String(created.getDate()).padStart(2, '0');
-                const month = String(created.getMonth() + 1).padStart(2, '0');
-                const year = String(created.getFullYear()).slice(-2);
-                const hour = String(created.getHours()).padStart(2, '0');
-                const minute = String(created.getMinutes()).padStart(2, '0');
-                const dataHora = `${day}/${month}/${year} ${hour}:${minute}`;
-
-                const score = typeof row.nota_qualidade === 'number' && !Number.isNaN(row.nota_qualidade)
-                    ? Math.round(row.nota_qualidade)
-                    : 0;
-
-                const tags: Chamada['tags'] = [];
-
-                return {
-                    id: String(row.chamada_id),
-                    dataHora,
-                    pontuacao: score,
-                    tags,
-                };
-            });
+            const mapped: Chamada[] = rows.map(formatChamadaRow);
             setChamadas(mapped);
         } catch (e) {
             setError(e instanceof Error ? e.message : 'Erro ao carregar chamadas');
         } finally {
             setLoading(false);
         }
-    }
+    }, []);
 
     useEffect(() => {
         loadChamadas();
-    }, []);
+    }, [loadChamadas]);
 
     const filteredChamadas = useMemo(() => {
         const parseDateTime = (dateStr: string) => {
