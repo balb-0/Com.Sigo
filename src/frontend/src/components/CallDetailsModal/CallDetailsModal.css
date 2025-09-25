@@ -1,0 +1,346 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: var(--color-azul-claro);
+  border-radius: 12px;
+  box-shadow: 0px 8px 24px 0px #00000033;
+  width: 100%;
+  max-width: 75%;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.modal-header {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 0px;
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-icon {
+  color: var(--color-branco);
+  display: flex;
+  align-items: center;
+}
+
+.call-id {
+  color: var(--color-branco);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modal-header-center {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.call-date,
+.call-score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-cinza);
+  font-size: 14px;
+}
+
+.modal-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.call-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.close-button {
+  background: var(--color-vermelho);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-branco);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.close-button:hover {
+  opacity: 0.8;
+}
+
+/* Call Info Section */
+.call-info-section {
+  background: #1e3350;
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px 0px #00000033;
+  padding: 16px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 54px;
+  box-sizing: border-box;
+  color: var(--color-branco);
+}
+
+.call-info-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.call-info-center {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.call-info-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-branco);
+  font-size: 14px;
+  font-weight: 600;
+  margin: 16px 16px 0 16px;
+  padding: 8px 0px;
+}
+
+/* Body */
+.modal-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Resumo Content */
+.resumo-content {
+  background: #1e3350;
+  border: 1px solid #f4f4f41a;
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px 0px #00000033;
+  padding: 16px;
+  margin: 16px;
+  color: var(--color-branco);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 300px;
+  scrollbar-width: none;
+}
+
+.summary-section,
+.analysis-section {
+  color: var(--color-branco);
+}
+
+.summary-section h3,
+.analysis-section h3 {
+  color: var(--color-branco);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.summary-section p {
+  color: var(--color-branco);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.analysis-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.analysis-section li {
+  color: var(--color-branco);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* Conversa Content */
+.conversa-content {
+  position: relative;
+  background-color: rgba(var(--color-azul-claro-rgb), 0.5);
+  border: 1px solid var(--color-borda);
+  border-radius: 12px;
+  box-shadow: 0px 8px 24px 0px #00000033;
+  padding: 24px;
+  margin: 16px;
+  color: var(--color-branco);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+  scrollbar-width: none;
+}
+
+.conversa-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../assets/images/background.svg");
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.25;
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.conversa-content > * {
+  position: relative;
+  z-index: 1;
+}
+
+.conversation-message {
+  max-width: 412px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conversation-message.cliente {
+  align-self: flex-end;
+}
+
+.conversation-message.atendente {
+  align-self: flex-start;
+}
+
+.conversation-message .message-content {
+  background: #1e3350;
+  border: 1px solid #f4f4f41a;
+  border-radius: 8px;
+  border-top-right-radius: 0;
+  padding: 16px;
+  color: var(--color-branco);
+  box-shadow: 0px 8px 24px 0px #00000033;
+  min-height: 54px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conversation-message.cliente .message-content {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 0;
+}
+
+.conversation-message .message-header {
+  color: var(--color-branco);
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0.8;
+  margin: 0;
+  text-align: right;
+}
+
+.conversation-message.atendente .message-header {
+  text-align: left;
+}
+
+.conversation-message .message-text {
+  color: var(--color-branco);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Tags */
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tagPositivo {
+  background-color: rgba(var(--color-verde-rgb), 0.2);
+  color: var(--color-verde);
+}
+
+.tagNegativo {
+  background-color: rgba(var(--color-vermelho-rgb), 0.2);
+  color: var(--color-vermelho);
+}
+
+.tagNeutro {
+  background-color: rgba(var(--color-amarelo-rgb), 0.2);
+  color: var(--color-amarelo);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .modal-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .modal-header-center {
+    gap: 16px;
+  }
+
+  .conversation-message.cliente {
+    margin-right: 20px;
+  }
+
+  .conversation-message.atendente {
+    margin-left: 20px;
+  }
+}
