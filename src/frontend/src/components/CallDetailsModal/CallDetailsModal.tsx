@@ -19,30 +19,49 @@ export function CallDetailsModal({
 }: CallDetailsModalProps) {
   if (!isOpen || !chamada) return null;
 
-  // Mock conversation data - in real app this would come from API
-  const conversation: ConversationMessage[] = [
-    {
-      role: "Cliente",
-      content:
-        "Alô? Finalmente! Eu já tentei resolver isso pelo site umas três vezes, mas aquele robô não entende nada do que eu falo!",
-    },
-    {
-      role: "Atendente",
-      content:
-        "Boa tarde! Peço desculpas pela sua experiência no nosso canal digital. Meu nome é Atendente e agora eu vou te ajudar a resolver isso. Pode me confirmar seu CPF, por favor?",
-    },
-    {
-      role: "Cliente",
-      content:
-        "(Informa o CPF). O problema é que a minha fatura deste mês veio com um valor muito mais alto, cobrando um serviço que eu não contratei.",
-    },
-  ];
+  type Word = { word: string; speakerTag?: number };
+  type Alternative = { words?: Word[]; transcript?: string };
+  type Result = { channelTag?: number; alternatives?: Alternative[] };
+  type TranscriptJson = { results?: Result[] };
 
-  const mockSummary =
-    "O cliente iniciou a chamada frustrado com o canal digital (Transferência Digital), mas o atendente reverteu a situação com agilidade e empatia, cancelando um serviço indevido e emitindo uma nova fatura. A chamada terminou com a questão totalmente Resolvida e um Elogio explícito ao atendente.";
+  const parsed: TranscriptJson | null = (chamada.transcript_json as any) ?? null;
 
-  const mockAnalysis =
-    "Para o Atendimento Humano: O atendente aplicou excelentemente as técnicas de reversão de cliente insatisfeito. A empatia inicial e a resolução rápida foram cruciais para o sucesso. Este é um ótimo exemplo para usar em treinamentos.";
+  // Build conversation turns grouped by speaker using words if available; fallback to overall transcript
+  const conversation: ConversationMessage[] = (() => {
+    if (!parsed?.results || parsed.results.length === 0) {
+      return chamada.tags.length
+        ? [{ role: "Atendente", content: "Sem transcrição disponível para esta chamada." }]
+        : [];
+    }
+    const turns: ConversationMessage[] = [];
+    for (const res of parsed.results) {
+      const alt = res.alternatives?.[0];
+      if (!alt) continue;
+      if (alt.words && alt.words.length > 0) {
+        let currentSpeaker: number | undefined = alt.words[0].speakerTag;
+        let currentText: string[] = [];
+        const flush = () => {
+          if (!currentSpeaker || currentText.length === 0) return;
+          const role: ConversationMessage["role"] = currentSpeaker === 1 ? "Atendente" : "Cliente";
+          turns.push({ role, content: currentText.join(" ") });
+          currentText = [];
+        };
+        for (const w of alt.words) {
+          if (w.speakerTag !== currentSpeaker) {
+            flush();
+            currentSpeaker = w.speakerTag;
+          }
+          currentText.push(w.word);
+        }
+        flush();
+      } else if (alt.transcript) {
+        turns.push({ role: "Atendente", content: alt.transcript });
+      }
+    }
+    return turns.length > 0 ? turns : [{ role: "Atendente", content: "Sem transcrição disponível." }];
+  })();
+  const mockSummary = undefined;
+  const mockAnalysis = undefined;
 
   const getScoreColor = (score: number) => {
     if (score < 4) return "var(--color-vermelho)";
@@ -143,7 +162,7 @@ export function CallDetailsModal({
           <div className="call-info-right">
             <div className="call-tags">
               {chamada.tags.map((tag, index) => (
-                <span key={index} className={`tag ${getTagClass(tag.type)}`}>
+                <span key={index} className={`tag ${getTagClass(tag.type)}`} title={tag.hint || tag.name}>
                   {tag.name}
                 </span>
               ))}
@@ -167,19 +186,22 @@ export function CallDetailsModal({
             Ponto de vista da IA
           </div>
 
-          <div className="resumo-content">
-            <div className="summary-section">
-              <h3>Resumo da Chamada:</h3>
-              <p>{mockSummary}</p>
+          {mockSummary && (
+            <div className="resumo-content">
+              <div className="summary-section">
+                <h3>Resumo da Chamada:</h3>
+                <p>{mockSummary}</p>
+              </div>
+              {mockAnalysis && (
+                <div className="analysis-section">
+                  <h3>Análise e Sugestões:</h3>
+                  <ul>
+                    <li>{mockAnalysis}</li>
+                  </ul>
+                </div>
+              )}
             </div>
-
-            <div className="analysis-section">
-              <h3>Análise e Sugestões:</h3>
-              <ul>
-                <li>{mockAnalysis}</li>
-              </ul>
-            </div>
-          </div>
+          )}
 
           {/* Complete Conversation Section */}
           <div className="section-header">
@@ -209,6 +231,9 @@ export function CallDetailsModal({
                 </div>
               </div>
             ))}
+            {conversation.length === 0 && (
+              <div className="message-text">Sem transcrição disponível.</div>
+            )}
           </div>
         </div>
       </div>

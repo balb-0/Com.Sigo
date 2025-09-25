@@ -16,6 +16,7 @@ export type TagType = "positivo" | "negativo" | "neutro";
 export interface Tag {
   name: string;
   type: TagType;
+  hint?: string;
 }
 
 export interface Chamada {
@@ -23,6 +24,8 @@ export interface Chamada {
   dataHora: string;
   pontuacao: number;
   tags: Tag[];
+  transcript_json?: unknown | null;
+  avaliacao_json?: unknown | null;
 }
 
 const columnHelper = createColumnHelper<Chamada>();
@@ -141,7 +144,7 @@ const columns = [
     cell: (info) => (
       <div className="tagsContainer">
         {info.getValue().map((tag, index) => (
-          <span key={index} className={`tag ${getTagClass(tag.type)}`}>
+          <span key={index} className={`tag ${getTagClass(tag.type)}`} title={tag.hint || tag.name}>
             {tag.name}
           </span>
         ))}

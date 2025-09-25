@@ -2,12 +2,11 @@ import "./Dashboard.css";
 import Header from "../../components/Header/Header";
 import KpiCard from "../../components/KPICard/KPICard";
 import { ChamadasTable, type Chamada } from "../../components/Table/Table.tsx";
-import {
-  DateFilter,
-  type FilterType,
-} from "../../components/DateFilter/DateFilter.tsx";
+import { DateFilter, type FilterType } from "../../components/DateFilter/DateFilter.tsx";
 import { CallDetailsModal } from "../../components/CallDetailsModal/CallDetailsModal";
-import { useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { listChamadas, type ChamadaResponse } from "../../lib/api";
+import { formatChamadaRow } from "./helpers";
 
 interface DashboardProps {
   currentPage?: string;
@@ -20,6 +19,7 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
   const [customEndDate, setCustomEndDate] = useState<string>("");
   const [customStartTime, setCustomStartTime] = useState<string>("");
   const [customEndTime, setCustomEndTime] = useState<string>("");
+
   const [selectedChamada, setSelectedChamada] = useState<Chamada | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -35,242 +35,27 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     return "var(--color-verde)";
   }
 
-  const mockChamadas: Chamada[] = [
-    {
-      id: "1234",
-      dataHora: "10/09/25 14:30",
-      pontuacao: 8,
-      tags: [
-        { name: "Resolvido", type: "positivo" },
-        { name: "Elogio", type: "positivo" },
-      ],
-    },
-    {
-      id: "1235",
-      dataHora: "15/09/25 14:25",
-      pontuacao: 3,
-      tags: [
-        { name: "Sentimento Negativo", type: "negativo" },
-        { name: "Script Incompleto", type: "negativo" },
-      ],
-    },
-    {
-      id: "1236",
-      dataHora: "20/09/25 14:20",
-      pontuacao: 6,
-      tags: [
-        { name: "Transferência", type: "neutro" },
-        { name: "Resolvido", type: "positivo" },
-      ],
-    },
-    {
-      id: "1237",
-      dataHora: "05/08/25 14:15",
-      pontuacao: 9,
-      tags: [{ name: "Elogio", type: "positivo" }],
-    },
-    {
-      id: "1238",
-      dataHora: "18/08/25 14:10",
-      pontuacao: 2,
-      tags: [{ name: "Reclamação Formal", type: "negativo" }],
-    },
-    {
-      id: "1239",
-      dataHora: "25/08/25 14:05",
-      pontuacao: 5,
-      tags: [{ name: "Transferência", type: "neutro" }],
-    },
-    {
-      id: "1240",
-      dataHora: "12/07/25 14:00",
-      pontuacao: 7,
-      tags: [
-        { name: "Resolvido", type: "positivo" },
-        { name: "Cortesia", type: "positivo" },
-      ],
-    },
-    {
-      id: "1241",
-      dataHora: "30/07/25 13:55",
-      pontuacao: 4,
-      tags: [{ name: "Dúvidas Técnicas", type: "neutro" }],
-    },
-    {
-      id: "1242",
-      dataHora: "10/12/24 13:50",
-      pontuacao: 10,
-      tags: [
-        { name: "Excelente Atendimento", type: "positivo" },
-        { name: "Elogio", type: "positivo" },
-      ],
-    },
-    {
-      id: "1243",
-      dataHora: "24/12/24 13:45",
-      pontuacao: 1,
-      tags: [
-        { name: "Cliente Insatisfeito", type: "negativo" },
-        { name: "Demora", type: "negativo" },
-      ],
-    },
-    {
-      id: "1244",
-      dataHora: "15/06/24 13:40",
-      pontuacao: 8,
-      tags: [
-        { name: "Transferência", type: "neutro" },
-        { name: "Resolvido", type: "positivo" },
-      ],
-    },
-    {
-      id: "1245",
-      dataHora: "28/06/24 13:35",
-      pontuacao: 6,
-      tags: [{ name: "Informações Claras", type: "positivo" }],
-    },
-    {
-      id: "1246",
-      dataHora: "08/03/23 13:30",
-      pontuacao: 3,
-      tags: [
-        { name: "Script Incompleto", type: "negativo" },
-        { name: "Transferência", type: "neutro" },
-      ],
-    },
-    {
-      id: "1247",
-      dataHora: "22/03/23 13:25",
-      pontuacao: 9,
-      tags: [
-        { name: "Problema Resolvido", type: "positivo" },
-        { name: "Rapidez", type: "positivo" },
-      ],
-    },
-    {
-      id: "1248",
-      dataHora: "14/11/23 13:20",
-      pontuacao: 5,
-      tags: [{ name: "Aguardando Retorno", type: "neutro" }],
-    },
-    {
-      id: "1249",
-      dataHora: "11/09/25 08:15",
-      pontuacao: 7,
-      tags: [
-        { name: "Resolvido", type: "positivo" },
-        { name: "Rapidez", type: "positivo" },
-      ],
-    },
-    {
-      id: "1250",
-      dataHora: "11/09/25 09:45",
-      pontuacao: 6,
-      tags: [{ name: "Informações Claras", type: "positivo" }],
-    },
-    {
-      id: "1251",
-      dataHora: "11/09/25 11:30",
-      pontuacao: 4,
-      tags: [{ name: "Dúvidas Técnicas", type: "neutro" }],
-    },
-    {
-      id: "1252",
-      dataHora: "11/09/25 16:20",
-      pontuacao: 9,
-      tags: [{ name: "Excelente Atendimento", type: "positivo" }],
-    },
-    {
-      id: "1253",
-      dataHora: "11/09/25 18:50",
-      pontuacao: 5,
-      tags: [{ name: "Transferência", type: "neutro" }],
-    },
-    {
-      id: "1254",
-      dataHora: "11/09/25 20:35",
-      pontuacao: 8,
-      tags: [
-        { name: "Cortesia", type: "positivo" },
-        { name: "Resolvido", type: "positivo" },
-      ],
-    },
-    {
-      id: "1255",
-      dataHora: "11/09/25 22:10",
-      pontuacao: 3,
-      tags: [{ name: "Script Incompleto", type: "negativo" }],
-    },
-    {
-      id: "1256",
-      dataHora: "10/09/25 07:30",
-      pontuacao: 6,
-      tags: [{ name: "Informações Claras", type: "positivo" }],
-    },
-    {
-      id: "1257",
-      dataHora: "10/09/25 23:45",
-      pontuacao: 2,
-      tags: [
-        { name: "Cliente Insatisfeito", type: "negativo" },
-        { name: "Demora", type: "negativo" },
-      ],
-    },
-    {
-      id: "1258",
-      dataHora: "09/09/25 12:00",
-      pontuacao: 10,
-      tags: [
-        { name: "Elogio", type: "positivo" },
-        { name: "Problema Resolvido", type: "positivo" },
-      ],
-    },
-    {
-      id: "1259",
-      dataHora: "08/09/25 15:30",
-      pontuacao: 1,
-      tags: [
-        { name: "Reclamação Formal", type: "negativo" },
-        { name: "Script Incompleto", type: "negativo" },
-      ],
-    },
-    {
-      id: "1260",
-      dataHora: "07/09/25 10:15",
-      pontuacao: 3,
-      tags: [
-        { name: "Cliente Insatisfeito", type: "negativo" },
-        { name: "Sentimento Negativo", type: "negativo" },
-      ],
-    },
-    {
-      id: "1261",
-      dataHora: "06/09/25 17:45",
-      pontuacao: 2,
-      tags: [
-        { name: "Demora", type: "negativo" },
-        { name: "Transferência", type: "neutro" },
-      ],
-    },
-    {
-      id: "1262",
-      dataHora: "05/09/25 09:20",
-      pontuacao: 1,
-      tags: [
-        { name: "Sentimento Negativo", type: "negativo" },
-        { name: "Cliente Insatisfeito", type: "negativo" },
-      ],
-    },
-    {
-      id: "1263",
-      dataHora: "04/09/25 21:10",
-      pontuacao: 3,
-      tags: [
-        { name: "Script Incompleto", type: "negativo" },
-        { name: "Reclamação Formal", type: "negativo" },
-      ],
-    },
-  ];
+  const [chamadas, setChamadas] = useState<Chamada[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadChamadas = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const rows: ChamadaResponse[] = await listChamadas();
+      const mapped: Chamada[] = rows.map(formatChamadaRow);
+      setChamadas(mapped);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Erro ao carregar chamadas");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadChamadas();
+  }, [loadChamadas]);
 
   const filteredChamadas = useMemo(() => {
     const parseDateTime = (dateStr: string) => {
@@ -293,13 +78,13 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
 
     switch (currentFilter) {
       case "thisYear":
-        return mockChamadas.filter((chamada: Chamada) => {
+        return chamadas.filter((chamada: Chamada) => {
           const chamadaDate = parseDateTime(chamada.dataHora);
           return chamadaDate.getFullYear() === currentYear;
         });
 
       case "thisMonth":
-        return mockChamadas.filter((chamada: Chamada) => {
+        return chamadas.filter((chamada: Chamada) => {
           const chamadaDate = parseDateTime(chamada.dataHora);
           return (
             chamadaDate.getFullYear() === currentYear &&
@@ -308,7 +93,7 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
         });
 
       case "custom":
-        return mockChamadas.filter((chamada: Chamada) => {
+        return chamadas.filter((chamada: Chamada) => {
           const chamadaDateTime = parseDateTime(chamada.dataHora);
           let passesDateFilter = true;
           let passesTimeFilter = true;
@@ -348,16 +133,9 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
         });
 
       default:
-        return mockChamadas;
+        return chamadas;
     }
-  }, [
-    currentFilter,
-    customStartDate,
-    customEndDate,
-    customStartTime,
-    customEndTime,
-    mockChamadas,
-  ]);
+  }, [currentFilter, customStartDate, customEndDate, customStartTime, customEndTime, chamadas]);
 
   const overallScore =
     filteredChamadas.length > 0
@@ -407,7 +185,8 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
   };
 
   const handleRowClick = (chamadaId: string) => {
-    const chamada = filteredChamadas.find((c) => c.id === chamadaId);
+    const chamada = filteredChamadas.find((c) => c.id === chamadaId) ||
+      chamadas.find((c) => c.id === chamadaId) || null;
     if (chamada) {
       setSelectedChamada(chamada);
       setIsModalOpen(true);
@@ -429,44 +208,63 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
             <DateFilter onFilterChange={handleFilterChange} />
           </div>
           <div id="kpi-cards">
-            <KpiCard
-              showSubvalue={true}
-              id="overall-score"
-              title="Pontuação"
-              subtitle="Média Geral"
-              value={overallScore.toString()}
-              valueStyle={{ color: scoreColor }}
-              style={
-                { "--kpi-radial-color": scoreColor } as React.CSSProperties
-              }
-            />
-            <KpiCard
-              id="critical-attendances"
-              title="Atendimentos"
-              subtitle="Críticos"
-              value={criticalAttendances.toString()}
-              valueId="critical-value"
-              valueStyle={{ color: criticalScoreColor }}
-              style={
-                {
-                  "--kpi-radial-color": criticalScoreColor,
-                } as React.CSSProperties
-              }
-            />
-            <KpiCard
-              title="Transferências"
-              subtitle="Digital"
-              value={digitalTransfers.toString()}
-            />
-            <KpiCard
-              title="Chamadas"
-              subtitle="Analisadas"
-              value={callsAnalyzed.toString()}
-            />
+            {loading ? (
+              <div className="kpi-skeletons">
+                <div className="skeleton skeleton-card"></div>
+                <div className="skeleton skeleton-card"></div>
+                <div className="skeleton skeleton-card"></div>
+                <div className="skeleton skeleton-card"></div>
+              </div>
+            ) : (
+              <>
+                <KpiCard
+                  showSubvalue={true}
+                  id="overall-score"
+                  title="Pontuação"
+                  subtitle="Média Geral"
+                  value={overallScore.toString()}
+                  valueStyle={{ color: scoreColor }}
+                  style={{ "--kpi-radial-color": scoreColor } as React.CSSProperties}
+                />
+                <KpiCard
+                  id="critical-attendances"
+                  title="Atendimentos"
+                  subtitle="Críticos"
+                  value={criticalAttendances.toString()}
+                  valueId="critical-value"
+                  valueStyle={{ color: criticalScoreColor }}
+                  style={{ "--kpi-radial-color": criticalScoreColor } as React.CSSProperties}
+                />
+                <KpiCard
+                  title="Transferências"
+                  subtitle="Digital"
+                  value={digitalTransfers.toString()}
+                />
+                <KpiCard
+                  title="Chamadas"
+                  subtitle="Analisadas"
+                  value={callsAnalyzed.toString()}
+                />
+              </>
+            )}
           </div>
         </div>
         <div>
-          <ChamadasTable data={filteredChamadas} onRowClick={handleRowClick} />
+          {error && (
+            <div style={{ color: 'var(--color-vermelho)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span>Erro: {error}</span>
+              <button onClick={loadChamadas}>Tentar novamente</button>
+            </div>
+          )}
+          {loading ? (
+            <div className="table-skeleton">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="skeleton skeleton-row"></div>
+              ))}
+            </div>
+          ) : (
+            <ChamadasTable data={filteredChamadas} onRowClick={handleRowClick} />
+          )}
         </div>
       </main>
 
