@@ -42,3 +42,14 @@ async function fetchJson<T>(input: RequestInfo | URL, init?: RequestInit & { tim
 export async function listChamadas(): Promise<ChamadaResponse[]> {
   return fetchJson(`${API_BASE}/v1/chamadas`, { timeoutMs: 10000 });
 }
+
+export async function createChamada(jsonData: any): Promise<ChamadaResponse> {
+  return fetchJson(`${API_BASE}/v1/chamadas`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(jsonData),
+    timeoutMs: 10000,
+  });
+}
