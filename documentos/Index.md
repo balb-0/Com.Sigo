@@ -31,17 +31,17 @@ Esta documentação está organizada em diferentes arquivos conforme apresentado
 
 ### Gestão do Projeto
 
-- **GestaoProjeto.md**: ESCREVER PARA QUE SERVE O DOC
+- **GestaoProjeto.md**: Documento de gestão de projetos que estabelece orientações para planejamento, monitoramento e controle das sprints, incluindo avaliações de desempenho, análise de riscos e lições aprendidas.
 
 ### Processo de Desenvolvimento de Software
 
-- **GestaoConfiguracao.md**: ESCREVER PARA QUE SERVE O DOC
-- **GuiaPadroesDesenvolvimento.md**: ESCREVER PARA QUE SERVE O DOC
+- **GestaoConfiguracao.md**: Documento de gestão de configuração que define diretrizes para controle de versão, políticas de branches (Gitflow), commits, pull requests, infraestrutura como código e gestão de arquivos sensíveis.
+- **GuiaPadroesDesenvolvimento.md**: Guia de padrões de desenvolvimento que estabelece convenções de codificação, práticas de desenvolvimento, ferramentas e tecnologias para garantir qualidade e consistência do código.
 
 ### Desenvolvimento do Produto
 
-- **Projeto.md**: Documento técnico do produto (visão, arquitetura, decisões).
-- **Manual-instalacao.md**: Instalação, execução e seed do banco de dados.
+- **Projeto.md**: Documento técnico completo do produto Com.Sigo, contendo visão, requisitos, modelagem de dados, arquitetura, design visual, desenvolvimento e procedimentos de implantação.
+- **Manual-instalacao.md**: Manual de instalação, execução e configuração do banco de dados para o projeto.
 
 ## Licença
 
