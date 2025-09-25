@@ -1,35 +1,58 @@
 const processedEvents = [];
 const failedEvents = [];
+const startedEvents = [];
 
 /**
- * Processa notificações de sucesso.
- * @param {Object} payload - Dados recebidos do webhook, contendo status e dados completos.
+ * Processa notificações de início de processamento.
+ * @param {Object} payload - Dados iniciais da chamada.
+ * @returns {Object} - Confirmação do processamento.
+ */
+function handleProcessingStart(payload) {
+    const { jobId, clienteId } = payload;
+    
+    if (!jobId || !clienteId) {
+        throw new Error('jobId e clienteId são obrigatórios no payload de início.');
+    }
+
+    const startedEvent = {
+        id: generateEventId(),
+        jobId,
+        clienteId,
+        status: 'started',
+        receivedAt: new Date().toISOString()
+    };
+    
+    startedEvents.push(startedEvent);
+    
+    console.log(`⏳ Evento de início registrado para o job ${jobId}.`);
+
+    return {
+        eventId: startedEvent.id,
+        jobId: startedEvent.jobId,
+        message: 'Evento de início processado.'
+    };
+}
+
+
+/**
+ * Processa notificações de sucesso (payload simples).
+ * @param {Object} payload - Dados recebidos do webhook.
  * @returns {Object} - Resultado do processamento.
  */
 function handleProcessingSuccess(payload) {
-    // 1. Processamento da Versão 1: Preparar os dados para o banco
-    const { jobId, transcription, qualityScore, analysis, sentiment } = payload;
+    const { jobId, clienteId, chamada_id, resultado } = payload;
     
-    // Simula a preparação dos dados para o repositório da Versão 1
-    const chamadaRecord = {
-        cliente_id: jobId,
-        transcript_json: { transcription, sentiment },
-        avaliacao_json: { analysis },
-        nota_qualidade: qualityScore,
-        data_registro: new Date().toISOString()
-    };
-    
-    // AQUI SERIA A CHAMADA AO BANCO DE DADOS DA VERSÃO 1
-    // Exemplo: chamadaRepository.create(chamadaRecord);
-    
-    console.log(`Dados da chamada preparados para o banco:`, JSON.stringify(chamadaRecord, null, 2));
+    if (!jobId || !clienteId || !chamada_id || resultado !== 'sucesso') {
+        throw new Error('Payload de sucesso incompleto ou inválido.');
+    }
 
-    // 2. Processamento da Versão 2: Armazenar evento para monitoramento
     const processedEvent = {
         id: generateEventId(),
         jobId,
+        clienteId,
+        chamada_id,
         status: 'success',
-        processedAt: new Date().toISOString()
+        receivedAt: new Date().toISOString()
     };
     
     processedEvents.push(processedEvent);
@@ -39,27 +62,26 @@ function handleProcessingSuccess(payload) {
     return {
         eventId: processedEvent.id,
         jobId: processedEvent.jobId,
-        message: 'Evento processado e armazenado temporariamente.'
+        message: 'Evento de sucesso processado.'
     };
 }
 
 /**
- * Processa notificações de falha.
+ * Processa notificações de falha (payload simples).
  * @param {Object} payload - Dados recebidos do webhook.
  * @returns {Object} - Resultado do processamento.
  */
 function handleProcessingFailure(payload) {
-    const { jobId, error, errorCode } = payload;
+    const { jobId, clienteId, resultado } = payload;
 
-    if (!jobId || !error) {
-        throw new Error('jobId e error são obrigatórios no payload de falha');
+    if (!jobId || !clienteId || resultado !== 'falha') {
+        throw new Error('Payload de falha incompleto ou inválido');
     }
 
     const failedEvent = {
         id: generateEventId(),
         jobId,
-        error,
-        errorCode,
+        clienteId,
         status: 'failed',
         receivedAt: new Date().toISOString()
     };
@@ -71,7 +93,7 @@ function handleProcessingFailure(payload) {
     return {
         eventId: failedEvent.id,
         jobId: failedEvent.jobId,
-        message: 'Evento de falha processado e armazenado.'
+        message: 'Evento de falha processado.'
     };
 }
 
@@ -81,5 +103,6 @@ function generateEventId() {
 
 module.exports = {
     handleProcessingSuccess,
-    handleProcessingFailure
+    handleProcessingFailure,
+    handleProcessingStart
 };
