@@ -90,7 +90,7 @@
 - [10. Procedimentos de Implantação](#10-procedimentos-de-implantação)
   - [10.1 Implantação e Configuração do Banco de Dados](#101-implantação-e-configuração-do-banco-de-dados)
   - [10.2 Implantação do Protótipo para uso por equipe de desenvolvimento](#102-implantação-do-protótipo-para-uso-por-equipe-de-desenvolvimento)
-- [11. Webhooks](#11-webhooks)
+- [11. Orçamento](#11-orçamento)
 - [Referências](#referências)
 
 # 1. Introdução
@@ -2788,6 +2788,47 @@ _conteúdo_
 ## 10.2 Implantação do Protótipo para uso por equipe de desenvolvimento
 
 _conteúdo_
+
+# 11. Orçamento e Caixa
+
+&emsp;O orçamento do projeto foi estruturado a partir da soma de custos diretos (equipe, infraestrutura e ferramentas) e despesas fixas (como aluguel e utilidades), incorporando ainda os encargos trabalhistas de FGTS e INSS. Sobre esse valor consolidado aplicou-se um acréscimo de 15%, simulando uma margem de segurança ou contingência que aproxima a precificação das práticas reais de mercado. Dessa forma, o orçamento não apenas reflete os gastos necessários para execução do projeto, mas também cria uma reserva estratégica para imprevistos.
+
+### Orçamento
+<div align="center">
+  <sub>Figura 10.1 - Orçamento 1</sub> <br>
+
+  <img src="img/section11/orcamento_1.png" alt="" style="width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura 10.2 - Orçamento 2</sub> <br>
+
+  <img src="img/section11/orcamento_2.png" alt="" style="width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura 10.3 - Orçamento 3</sub> <br>
+
+  <img src="img/section11/orcamento_3.png" alt="" style="width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+### Fluxo de Caixa Simulação
+
+&emsp;O fluxo de caixa foi construído de forma cronológica, registrando entradas e saídas ao longo do período de 04 de agosto a 09 de outubro de 2025. O método consistiu em calcular o saldo acumulado mês a mês, garantindo que os aportes financeiros e as margens definidas fossem suficientes para cobrir todos os compromissos. Esse equilíbrio permite observar a sustentabilidade do projeto no curto prazo e identificar com clareza quais despesas têm maior impacto sobre a liquidez.
+
+<div align="center">
+  <sub>Figura 10.4 - Fluxo de Caixa</sub> <br>
+
+  <img src="img/section11/fluxo_caixa.png" alt="" style="width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
 
 # Referências
 
