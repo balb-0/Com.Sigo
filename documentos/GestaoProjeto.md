@@ -99,7 +99,7 @@ Esta seção mostra como foi a gestão de projetos em cada uma das sprints.
 
 #### Pontos Fracos
 
-&nbsp;&nbsp;&nbsp;&nbsp;O nosso maior ponto fraco foi a falta de disciplina na execução dos nossos próprios processos. As nossas reuniões diárias (dailies) nem sempre atingiram seu potencial, o que por vezes gerou um desalinhamento sobre o andamento das tarefas. Essa falha de sincronização se refletiu na organização do nosso quadro no Trello, que poderia ter sido mais claro e ter facilitado ainda mais o acompanhamento do progresso. 
+&nbsp;&nbsp;&nbsp;&nbsp;O nosso maior ponto fraco foi a falta de disciplina na execução dos nossos próprios processos. As nossas reuniões diárias (dailies) nem sempre atingiram seu potencial, o que por vezes gerou um desalinhamento sobre o andamento das tarefas. Essa falha de sincronização se refletiu na organização do nosso quadro no Trello, que poderia ter sido mais claro e ter facilitado ainda mais o acompanhamento do progresso.
 
 #### Plano de Melhoria para a Sprint 3
 
@@ -109,14 +109,46 @@ Esta seção mostra como foi a gestão de projetos em cada uma das sprints.
 
 2.  **Gestão Ativa dos Feedbacks:** Criaremos um docs para registrar todos os feedbacks recebidos. Em seguida, vamos transformar cada feedback em uma task concreta com um ou mais responsáveis, garantindo que estamos aprendendo e evoluindo continuamente.
 
-3. **Refinar o Detalhamento das Tarefas:** Durante a planning, vamos dedicar um tempo específico para discutir e quebrar tarefas que pareçam grandes ou complexas demais. A ideia é garantir que cada card no nosso quadro represente uma unidade de trabalho clara e executável, evitando ambiguidades e facilitando a colaboração.
+3.  **Refinar o Detalhamento das Tarefas:** Durante a planning, vamos dedicar um tempo específico para discutir e quebrar tarefas que pareçam grandes ou complexas demais. A ideia é garantir que cada card no nosso quadro represente uma unidade de trabalho clara e executável, evitando ambiguidades e facilitando a colaboração.
 
 &nbsp;&nbsp;&nbsp;&nbsp;Com essas ações, esperamos resolver nossos desafios de comunicação e planejamento, mantendo a agilidade e a autonomia que já são nossos pontos fortes.
 
 ## 2.4 Sprint 4
 
-_conteúdo_
-**Nota:** Insira informações sobre mudanças realizadas.
+Durante a Sprint 4, o foco esteve na **conclusão geral do projeto**, garantindo que todas as funcionalidades planejadas fossem entregues com qualidade e alinhamento entre os membros da equipe. Além disso, houve um esforço significativo para consolidar o trabalho em grupo e realizar boas discussões que guiaram as decisões finais do desenvolvimento.
+
+### Pontos Fortes
+
+- **Trabalho em grupo e colaboração**: A equipe manteve um bom nível de interação e apoio mútuo, favorecendo a resolução de problemas e a tomada de decisões em conjunto.
+- **Boas discussões durante o desenvolvimento**: As reuniões e interações permitiram debates produtivos, resultando em escolhas mais assertivas para o projeto.
+- **Finalização geral do projeto**: Todo o escopo planejado foi concluído, evidenciando comprometimento e dedicação de todos os membros.
+
+### Pontos Fracos
+
+- **Dificuldade no gerenciamento do tempo**: Em alguns momentos, o time enfrentou problemas para equilibrar prazos e prioridades, o que gerou pressão nas entregas finais.
+- **Falta de organização na execução das tasks**: Algumas tarefas não estavam claramente definidas ou priorizadas, resultando em retrabalhos e certa perda de eficiência.
+
+### Acompanhamento de Progresso
+
+| Aspecto                        | Sprint 3                                | Sprint 4                                                    |
+| :----------------------------- | :-------------------------------------- | :---------------------------------------------------------- |
+| **Pontualidade**               | Entregas dentro do prazo                | Impactada por desafios de tempo nas entregas finais         |
+| **Priorização das tasks**      | Organização parcial, quadro pouco claro | Falhas na organização geraram momentos de retrabalho        |
+| **Divisão de tarefas**         | Boa colaboração entre membros           | Foco coletivo na finalização do escopo                      |
+| **Dailys**                     | Algumas inconsistentes                  | Objetivas, mas poderiam ter sido mais frequentes            |
+| **Revisões (PRs)**             | Participação crescente, mas irregular   | Estáveis, porém sem checklist definido                      |
+| **Apresentação Sprint Review** | Evoluiu com valorização do frontend     | Evidenciou fechamento do ciclo do projeto                   |
+| **Validação com professores**  | Feedbacks construtivos sobre UX/UI      | Feedback final positivo, confirmando conclusão do projeto   |
+| **Documentação**               | Ainda insuficiente                      | Concluída para entrega final                                |
+| **Sugestões implementadas**    | Maioria implementada                    | Priorizadas melhorias críticas                              |
+| **Riscos**                     | Novos riscos relacionados à organização | Reduzidos com finalização, mas gestão de tempo segue alerta |
+
+### Sugestões de Melhoria
+
+- **Melhorar gestão do tempo**: Utilizar técnicas como timeboxing ou priorização baseada em valor para equilibrar demandas e prazos.
+- **Organização de tasks**: Definir critérios claros para detalhamento e priorização das tarefas, reduzindo ambiguidades e retrabalho.
+- **Rituais de acompanhamento mais consistentes**: Garantir frequência e qualidade nas reuniões, principalmente em sprints críticas.
+- **Documentação contínua**: Manter atualizações regulares para evitar acúmulo de débito técnico em entregas futuras.
 
 ## 2.5 Sprint 5
 
