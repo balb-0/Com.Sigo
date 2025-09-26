@@ -2804,7 +2804,55 @@ O moderador lerá cada uma das 10 afirmações abaixo e registrará a resposta d
 
 ### 9.3.2 Resultados
 
-########################
+#### Execução dos Testes de Usabilidade
+Os testes de usabilidade foram realizados com 5 participantes da faculdade, sendo 3 simulando um perfil de Analista de Qualidade (baseado na persona Julia Souza) e 2 simulando o perfil de Supervisor de Operações (baseado na persona Carlos Martins). Todos os participantes foram externos à equipe de desenvolvimento, conforme o planejamento.
+**Metodologia:**
+- Protocolo Think-Aloud (Pense Alto)
+- Aplicação do questionário System Usability Scale (SUS) ao final
+**Roteiro Executado:**
+1. Introdução e contextualização
+2. Execução das tarefas de usabilidade (2 cenários por perfil)
+3. Coleta de feedback aberto
+4. Aplicação do SUS
+#### Dados Quantitativos
+| Participante | Perfil                | Tarefa 1 (Conclusão) | Tempo Tarefa 1 | Tarefa 2 (Conclusão) | Tempo Tarefa 2 | SUS |
+|--------------|----------------------|----------------------|---------------|----------------------|---------------|-----|
+| Leonardo Ogata           | Analista de Qualidade| Sucesso              | 1m40s         | Sucesso              | 26s         | 82  |
+| Fernando Oliveira         | Analista de Qualidade| Sucesso              | 1m55s         | Sucesso              | 50s         | 78  |
+| Marco Ruas         | Analista de Qualidade| Sucesso              | 1m30s         | Sucesso              | 45s         | 85  |
+| Giovanna Britto         | Supervisor           | Sucesso              | 1m20s         | Sucesso              | 19s         | 80  |
+| Murilo Couto      | Supervisor           | Sucesso              | 1m35s         | Sucesso              | 35s         | 76  |
+**Descrição**
+- A tarefa 1 foi entender os dados (passando pela dashboard, clicando nas chamadas, mandando mensagens no chat).
+- A tarefa 2 foi em entrar no botao de importar chamada e fazer toda a importação, já verificando se o dado foi corretamente inserido
+**Médias:**
+- Taxa de conclusão: 100% (todas as tarefas foram concluídas por todos)
+- Tempo médio Tarefa 1: 1m32s
+- Tempo médio Tarefa 2: 35s
+- SUS médio: 80,2
+**Interpretação do SUS:** Score médio acima de 70, considerado "Bom". Todos os participantes relataram confiança e facilidade de uso.
+#### Dados Qualitativos (Principais Observações)
+- **Navegação:** Todos os participantes conseguiram navegar do dashboard geral para a análise detalhada sem dificuldades. O destaque visual para chamadas críticas foi elogiado.
+- **Clareza das informações:** Analistas relataram que os pontos críticos das chamadas estavam claros e que as informações eram suficientes para gerar relatórios.
+- **Filtros:** Supervisores acharam fácil filtrar por atendente e identificar padrões de desempenho.
+- **Design:** Interface considerada "limpa" e "moderna". Um participante sugeriu aumentar o contraste de alguns elementos para facilitar a leitura.
+- **Dificuldades:** O fernando tentou enviar um json não válido (demos um json com uma chave faltando), mas conseguiu ao perceber o erro.
+- **Sugestões:** Adicionar tooltip explicativo em alguns ícones e permitir exportação direta do relatório em PDF.
+#### Feedback Aberto
+> "Achei muito fácil encontrar as informações que eu precisava." (Giovanna)
+> "Achei muito legal poder filtrar as chamadas pelo chat e funcionou bem" (Leonardo)
+> "gravei o audio e ele apareceu transcrito e virou instrução de filtragem das chamadas" (Murilo)
+> "Seria legal se desse para exportar o relatório em PDF." (Marco Ruas)
+#### Conclusão e Recomendações
+Os testes de usabilidade atingiram as metas estabelecidas:
+- Eficácia: 100% de conclusão das tarefas
+- Eficiência: Tempo médio por tarefa abaixo de 2 minutos
+- Satisfação: SUS médio 80,2 (acima do esperado)
+**Principais recomendações para melhoria:**
+- Aumentar contraste de alguns elementos para acessibilidade
+- Adicionar tooltips explicativos em ícones
+- Implementar exportação direta de relatórios em PDF
+O feedback dos participantes será utilizado para priorizar ajustes de interface e funcionalidades nas próximas sprints.
 
 ## 9.4 Testes de Integração
 
