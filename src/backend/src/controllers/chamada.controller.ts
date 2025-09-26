@@ -16,20 +16,24 @@ async function getById(req: Request, res: Response) {
 async function create(req: Request, res: Response) {
   try {
     const jsonData = req.body;
-    
+
     if (!jsonData || Object.keys(jsonData).length === 0) {
       return res.status(400).json({ error: 'Dados JSON não fornecidos no body da requisição' });
     }
 
     console.log('Recebendo dados para criar chamada:', JSON.stringify(jsonData, null, 2));
-    
+
+    // Ensure default nota 8 if service yields undefined/invalid
+    if (!jsonData?.defaultNota) {
+      jsonData.defaultNota = 8;
+    }
     const row = await chamadaService.createFromJson(jsonData);
     res.status(201).json(row);
   } catch (error) {
     console.error('Error creating chamada:', error);
-    
+
     if (error instanceof Error) {
-      res.status(400).json({ 
+      res.status(400).json({
         error: error.message,
         details: 'Verifique se o JSON contém todos os campos obrigatórios: meta, results, totalBilledTime'
       });
