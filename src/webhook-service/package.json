@@ -1,5 +1,5 @@
 {
-  "name": "webhook-hibrido",
+  "name": "webhook-service",
   "version": "1.0.0",
   "description": "Servidor de webhooks hibrido para processamento de audio e texto.",
   "main": "server.js",

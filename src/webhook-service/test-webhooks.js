@@ -3,48 +3,50 @@ const axios = require('axios');
 const BASE_URL = 'http://localhost:3000';
 
 async function testWebhooks() {
-    console.log('🧪 Iniciando testes dos webhooks híbridos...\n');
+    console.log('🧪 Iniciando testes dos webhooks com payloads simples...\\n');
 
-    // Payload de Sucesso (versão rica em dados)
-    console.log('1️⃣ Testando webhook de sucesso com dados completos...');
+    // Payload de Início de Processamento
+    console.log('0️⃣ Testando webhook de início de processamento...');
+    try {
+        const startPayload = {
+            jobId: "start_job_001",
+            clienteId: "cliente_123"
+        };
+        const response = await axios.post(`${BASE_URL}/webhook/processing-start`, startPayload);
+        console.log('✅ Sucesso (Início):', response.data);
+    } catch (error) {
+        console.log('❌ Erro (Início):', error.response?.data || error.message);
+    }
+    console.log('\\n');
+
+    // Payload de Sucesso (simples)
+    console.log('1️⃣ Testando webhook de sucesso...');
     try {
         const successPayload = {
-            jobId: "test_job_hibrido_001",
-            filename: "teste_sucesso.wav",
-            transcription: "Este é um teste de transcrição bem-sucedida, com dados de análise.",
-            qualityScore: 92,
-            sentiment: "positivo",
-            analysis: {
-                intent: "solicitacao_religacao",
-                sentiment: "neutral"
-            },
-            processedAt: new Date().toISOString()
+            jobId: "test_job_001",
+            clienteId: "cliente_123",
+            chamada_id: "chamada_001",
+            resultado: "sucesso"
         };
-
         const response = await axios.post(`${BASE_URL}/webhook/processing-success`, successPayload);
         console.log('✅ Sucesso:', response.data);
-
     } catch (error) {
         console.log('❌ Erro:', error.response?.data || error.message);
     }
 
-    console.log('\n');
+    console.log('\\n');
 
-    // Payload de Falha
+    // Payload de Falha (simples)
     console.log('2️⃣ Testando webhook de falha...');
     try {
         const failurePayload = {
-            jobId: "test_job_hibrido_002",
-            filename: "teste_falha.wav",
-            error: "Arquivo de áudio corrompido ou formato inválido.",
-            errorCode: "CORRUPTED_FILE",
-            failedAt: new Date().toISOString(),
-            retryCount: 0
+            jobId: "test_job_002",
+            clienteId: "cliente_123",
+            chamada_id: "chamada_002",
+            resultado: "falha"
         };
-
         const response = await axios.post(`${BASE_URL}/webhook/processing-failure`, failurePayload);
         console.log('✅ Sucesso:', response.data);
-
     } catch (error) {
         console.log('❌ Erro:', error.response?.data || error.message);
     }
