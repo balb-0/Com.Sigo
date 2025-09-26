@@ -2532,13 +2532,13 @@ Obs.: Insira informações sobre quais frameworks foram usados e como acessar.
 
 Esta seção é dedicada ao plano de validação e verificação do projeto. O objetivo é garantir que a solução atenda integralmente aos requisitos de negócio e de projeto definidos. Para isso, o plano está dividido em quatro áreas principais de teste:
 
-1.  **Testes Funcionais:** Verificam se cada função do sistema se comporta conforme especificado nos requisitos funcionais.
+1.  *Testes Funcionais:* Verificam se cada função do sistema se comporta conforme especificado nos requisitos funcionais.
 
-2.  **Testes de Requisitos Não Funcionais:** Avaliam o desempenho, a precisão e a capacidade do sistema sob condições específicas, como o processamento de áudios longos.
+2.  *Testes de Requisitos Não Funcionais:* Avaliam o desempenho, a precisão e a capacidade do sistema sob condições específicas, como o processamento de áudios longos.
 
-3.  **Testes de Integração:** Garantem que os diferentes componentes da aplicação (backend, frontend, banco de dados) e os serviços externos (APIs da OpenAI, LLMs) se comunicam de forma correta e resiliente.
+3.  *Testes de Integração:* Garantem que os diferentes componentes da aplicação (backend, frontend, banco de dados) e os serviços externos (APIs da OpenAI, LLMs) se comunicam de forma correta e resiliente.
 
-4.  **Testes de Usabilidade:** Validam a experiência do usuário final, assegurando que a interface do dashboard seja intuitiva, eficiente e útil para os gestores de qualidade.
+4.  *Testes de Usabilidade:* Validam a experiência do usuário final, assegurando que a interface do dashboard seja intuitiva, eficiente e útil para os gestores de qualidade.
 
 Em cada subseção, serão detalhados o propósito, a abrangência, as ferramentas escolhidas, os cenários de teste (positivos e negativos) e as instruções para execução.
 
@@ -2550,36 +2550,36 @@ O objetivo dos testes funcionais é validar sistematicamente cada um dos requisi
 
 O planejamento abaixo descreve a estratégia, as ferramentas e os casos de teste que serão utilizados para a validação funcional do sistema.
 
-#### **Estratégia, Ferramentas e Automação**
+#### *Estratégia, Ferramentas e Automação*
 
 Para garantir consistência, eficiência e portabilidade, será adotada uma abordagem de testes automatizada e containerizada.
 
-  * **Ambiente de Testes em Contêiner (Docker):** Todos os testes serão executados dentro de um contêiner Docker. Isso garante um ambiente padronizado e isolado para todos os desenvolvedores e para o pipeline de integração contínua (CI/CD), eliminando inconsistências entre diferentes máquinas. A configuração será gerenciada através de um arquivo `docker-compose.yml`.
-  * **Testes de Backend (API e Lógica de Negócio - Python):** Será utilizado o framework **Pytest**. Ele foi escolhido por sua sintaxe simples, ecossistema robusto de plugins (como o `pytest-cov` para análise de cobertura de código) e o poderoso sistema de *fixtures*, que facilita a configuração e o reuso de estados de teste.
-  * **Testes de Frontend (Dashboard - JavaScript/React):**
-      * **Jest:** Para testes unitários e de componentes. A lógica interna de componentes da interface será validada de forma rápida e isolada.
-      * **Cypress:** Para testes End-to-End (E2E). A jornada completa do usuário no navegador será simulada, desde o login, passando pelo upload de um arquivo, até a visualização do resultado no painel, garantindo que a integração entre as camadas do sistema funcione como esperado.
-  * **Abordagem BDD com Gherkin:** Para garantir que os testes estejam alinhados às regras de negócio e sejam compreensíveis por todos os membros da equipe, serão adotados os princípios do BDD (*Behavior-Driven Development*). Os casos de teste serão descritos usando uma linguagem inspirada na sintaxe Gherkin (`Dado`, `Quando`, `Então`), o que torna o comportamento esperado do sistema explícito e inequívoco.
+  * *Ambiente de Testes em Contêiner (Docker):* Todos os testes serão executados dentro de um contêiner Docker. Isso garante um ambiente padronizado e isolado para todos os desenvolvedores e para o pipeline de integração contínua (CI/CD), eliminando inconsistências entre diferentes máquinas. A configuração será gerenciada através de um arquivo ⁠ docker-compose.yml ⁠.
+  * *Testes de Backend (API e Lógica de Negócio - Python):* Será utilizado o framework *Pytest. Ele foi escolhido por sua sintaxe simples, ecossistema robusto de plugins (como o ⁠ pytest-cov ⁠ para análise de cobertura de código) e o poderoso sistema de *fixtures, que facilita a configuração e o reuso de estados de teste.
+  * *Testes de Frontend (Dashboard - JavaScript/React):*
+      * *Jest:* Para testes unitários e de componentes. A lógica interna de componentes da interface será validada de forma rápida e isolada.
+      * *Cypress:* Para testes End-to-End (E2E). A jornada completa do usuário no navegador será simulada, desde o login, passando pelo upload de um arquivo, até a visualização do resultado no painel, garantindo que a integração entre as camadas do sistema funcione como esperado.
+  * *Abordagem BDD com Gherkin:* Para garantir que os testes estejam alinhados às regras de negócio e sejam compreensíveis por todos os membros da equipe, serão adotados os princípios do BDD (Behavior-Driven Development). Os casos de teste serão descritos usando uma linguagem inspirada na sintaxe Gherkin (⁠ Dado ⁠, ⁠ Quando ⁠, ⁠ Então ⁠), o que torna o comportamento esperado do sistema explícito e inequívoco.
 
-#### **Abrangência dos Testes**
+#### *Abrangência dos Testes*
 
-A estratégia visa alcançar uma **cobertura de requisitos de 100%**, onde cada requisito funcional terá, no mínimo, um caso de teste positivo e um negativo associado. Adicionalmente, busca-se uma **cobertura de código superior a 80%** para os módulos críticos do backend (processamento de NLP, regras de score, endpoints da API), medida com a ferramenta `pytest-cov`. Isso garante que a maior parte do código implementado seja testada, reduzindo a probabilidade de bugs.
+A estratégia visa alcançar uma *cobertura de requisitos de 100%, onde cada requisito funcional terá, no mínimo, um caso de teste positivo e um negativo associado. Adicionalmente, busca-se uma **cobertura de código superior a 80%* para os módulos críticos do backend (processamento de NLP, regras de score, endpoints da API), medida com a ferramenta ⁠ pytest-cov ⁠. Isso garante que a maior parte do código implementado seja testada, reduzindo a probabilidade de bugs.
 
-#### **Casos de Teste Funcionais**
+#### *Casos de Teste Funcionais*
 
 A seguir, a lista detalhada dos casos de teste planejados, mapeados para cada requisito funcional.
 
 | ID            | Título do Caso de Teste                                             | Requisito(s) Associado(s) | Pré-condições                                               | Passos para Execução                                                                                                                                              | Dados de Entrada                                   | Resultado(s) Esperado(s)                                                                                                                                                                |
 | :------------ | :------------------------------------------------------------------ | :------------------------ | :---------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **CT-RF-001** | **(Positivo)** Envio de um arquivo de áudio válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página do dashboard. 2. **Quando** ele clica em "Analisar Chamada" e seleciona um arquivo de áudio (`.wav`, `.mp3`). 3. **E** submete o arquivo. | `chamada_valida.mp3`                               | 1. **Então** o sistema deve identificar a entrada como "áudio". 2. **E** iniciar o fluxo de transcrição. 3. **E** exibir uma notificação de "Processando áudio...".                         |
-| **CT-RF-002** | **(Positivo)** Envio de um arquivo de texto válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página do dashboard. 2. **Quando** ele clica em "Analisar Chamada" e seleciona um arquivo de texto (`.txt`). 3. **E** submete o arquivo. | `transcricao_valida.txt`                           | 1. **Então** o sistema deve identificar a entrada como "texto". 2. **E** iniciar o fluxo de análise de NLP diretamente. 3. **E** exibir uma notificação de "Analisando transcrição...".      |
-| **CT-RF-003** | **(Negativo)** Tentativa de envio de arquivo com formato não suportado | RF01                      | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página de upload. 2. **Quando** ele tenta submeter um arquivo com formato inválido (ex: `.docx`, `.png`).                      | `documento.docx`                                   | 1. **Então** a interface deve exibir uma mensagem de erro clara: "Formato de arquivo inválido. Suportados: .mp3, .wav, .txt". 2. **E** a requisição de upload não deve ser enviada ao servidor. |
-| **CT-RF-004** | **(Positivo)** Geração e armazenamento corretos da avaliação         | RF02, RF07                | Uma chamada foi submetida e processada com sucesso.         | 1. **Dado** que uma chamada foi processada. 2. **Quando** o processo de análise é concluído.                                                                         | `transcricao_qualquer.txt`                         | 1. **Então** o sistema deve gerar 3 critérios de avaliação. 2. **E** cada critério deve ter uma nota numérica entre 0 e 5. 3. **E** os dados da chamada devem ser persistidos corretamente no banco de dados. |
-| **CT-RF-005** | **(Positivo)** Visualização de indicadores consolidados no painel   | RF03                      | Múltiplas chamadas já foram processadas.                    | 1. **Dado** que existem 10 chamadas processadas no banco de dados. 2. **Quando** o usuário acessa o dashboard.                                                            | N/A                                                | 1. **Então** o painel deve exibir os indicadores gerais (ex: média de score geral). 2. **E** os gráficos devem ser renderizados com os dados consolidados.                             |
-| **CT-RF-006** | **(Negativo)** Painel sem dados                                     | RF03                      | Nenhuma chamada foi processada ainda.                       | 1. **Dado** que o banco de dados de chamadas está vazio. 2. **Quando** o usuário acessa o dashboard.                                                                     | N/A                                                | 1. **Então** o painel deve exibir uma mensagem informativa (ex: "Nenhuma chamada analisada ainda"). 2. **E** os gráficos e indicadores devem aparecer em um estado vazio, sem erros.      |
-| **CT-RF-007** | **(Positivo)** Upload de múltiplos arquivos simultaneamente         | RF05                      | O usuário está autenticado no sistema.                      | 1. **Dado** que o usuário está na página de upload. 2. **Quando** ele seleciona 3 arquivos válidos de uma vez. 3. **E** submete o lote.                                | `chamada1.mp3`, `chamada2.txt`, `chamada3.wav`      | 1. **Então** o sistema deve criar 3 jobs de análise separados. 2. **E** a interface deve mostrar o progresso individual de cada arquivo. 3. **E** todas as chamadas devem ser processadas com sucesso. |
-| **CT-RF-008** | **(Positivo)** Destaque visual de chamada com score baixo           | RF06                      | Uma chamada foi processada e recebeu um score abaixo do limite (2.0). | 1. **Dado** que uma chamada foi analisada e recebeu score final de 1.5. 2. **Quando** o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 1.5                             | 1. **Então** a linha ou card correspondente a essa chamada deve ter um destaque visual claro (ex: fundo vermelho ou um ícone de alerta).                                                |
-| **CT-RF-009** | **(Negativo)** Chamada com score alto não é destacada               | RF06                      | Uma chamada foi processada e recebeu um score acima do limite (2.0).  | 1. **Dado** que uma chamada foi analisada e recebeu score final de 4.5. 2. **Quando** o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 4.5                             | 1. **Então** a linha ou card correspondente a essa chamada **não** deve possuir qualquer destaque visual de alerta.                                                                  |
+| *CT-RF-001* | *(Positivo)* Envio de um arquivo de áudio válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página do dashboard. 2. *Quando* ele clica em "Analisar Chamada" e seleciona um arquivo de áudio (⁠ .wav ⁠, ⁠ .mp3 ⁠). 3. *E* submete o arquivo. | ⁠ chamada_valida.mp3 ⁠                               | 1. *Então* o sistema deve identificar a entrada como "áudio". 2. *E* iniciar o fluxo de transcrição. 3. *E* exibir uma notificação de "Processando áudio...".                         |
+| *CT-RF-002* | *(Positivo)* Envio de um arquivo de texto válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página do dashboard. 2. *Quando* ele clica em "Analisar Chamada" e seleciona um arquivo de texto (⁠ .txt ⁠). 3. *E* submete o arquivo. | ⁠ transcricao_valida.txt ⁠                           | 1. *Então* o sistema deve identificar a entrada como "texto". 2. *E* iniciar o fluxo de análise de NLP diretamente. 3. *E* exibir uma notificação de "Analisando transcrição...".      |
+| *CT-RF-003* | *(Negativo)* Tentativa de envio de arquivo com formato não suportado | RF01                      | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página de upload. 2. *Quando* ele tenta submeter um arquivo com formato inválido (ex: ⁠ .docx ⁠, ⁠ .png ⁠).                      | ⁠ documento.docx ⁠                                   | 1. *Então* a interface deve exibir uma mensagem de erro clara: "Formato de arquivo inválido. Suportados: .mp3, .wav, .txt". 2. *E* a requisição de upload não deve ser enviada ao servidor. |
+| *CT-RF-004* | *(Positivo)* Geração e armazenamento corretos da avaliação         | RF02, RF07                | Uma chamada foi submetida e processada com sucesso.         | 1. *Dado* que uma chamada foi processada. 2. *Quando* o processo de análise é concluído.                                                                         | ⁠ transcricao_qualquer.txt ⁠                         | 1. *Então* o sistema deve gerar 3 critérios de avaliação. 2. *E* cada critério deve ter uma nota numérica entre 0 e 5. 3. *E* os dados da chamada devem ser persistidos corretamente no banco de dados. |
+| *CT-RF-005* | *(Positivo)* Visualização de indicadores consolidados no painel | RF03 | Um conjunto de 10 chamadas foi processado, com os seguintes scores: ⁠ [5, 5, 4, 4, 4, 3, 3, 2, 2, 1] ⁠. | 1. *Dado* que o usuário acessa o dashboard. | N/A | 1. *Então* o painel deve exibir um card de "Score Médio Geral" com o valor *3.30. 2. **E* o gráfico de "Distribuição de Scores" deve mostrar *1 chamada* na faixa 'Crítico' (0-1), *2 chamadas* na faixa 'Ruim' (1-2), *2 chamadas* na faixa 'Regular' (2-3), *3 chamadas* na faixa 'Bom' (3-4) e *2 chamadas* na faixa 'Excelente' (4-5). |
+| *CT-RF-006* | *(Negativo)* Painel sem dados                                     | RF03                      | Nenhuma chamada foi processada ainda.                       | 1. *Dado* que o banco de dados de chamadas está vazio. 2. *Quando* o usuário acessa o dashboard.                                                                     | N/A                                                | 1. *Então* o painel deve exibir uma mensagem informativa (ex: "Nenhuma chamada analisada ainda"). 2. *E* os gráficos e indicadores devem aparecer em um estado vazio, sem erros.      |
+| *CT-RF-007* | *(Positivo)* Upload de múltiplos arquivos simultaneamente         | RF05                      | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página de upload. 2. *Quando* ele seleciona 3 arquivos válidos de uma vez. 3. *E* submete o lote.                                | ⁠ chamada1.mp3 ⁠, ⁠ chamada2.txt ⁠, ⁠ chamada3.wav ⁠      | 1. *Então* o sistema deve criar 3 jobs de análise separados. 2. *E* a interface deve mostrar o progresso individual de cada arquivo. 3. *E* todas as chamadas devem ser processadas com sucesso. |
+| *CT-RF-008* | *(Positivo)* Destaque visual de chamada com score baixo           | RF06                      | Uma chamada foi processada e recebeu um score abaixo do limite (2.0). | 1. *Dado* que uma chamada foi analisada e recebeu score final de 1.5. 2. *Quando* o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 1.5                             | 1. *Então* a linha ou card correspondente a essa chamada deve ter um destaque visual claro (ex: fundo vermelho ou um ícone de alerta).                                                |
+| *CT-RF-009* | *(Negativo)* Chamada com score alto não é destacada               | RF06                      | Uma chamada foi processada e recebeu um score acima do limite (2.0).  | 1. *Dado* que uma chamada foi analisada e recebeu score final de 4.5. 2. *Quando* o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 4.5                             | 1. *Então* a linha ou card correspondente a essa chamada *não* deve possuir qualquer destaque visual de alerta.                                                                  |
 
 ### 9.1.2 Resultados
 
@@ -2593,38 +2593,34 @@ O propósito desta fase de testes é avaliar os aspectos de qualidade do sistema
 
 Abaixo são detalhadas a estratégia, as ferramentas e os casos de teste planejados para validar os requisitos não funcionais do projeto.
 
-#### **Estratégia e Ferramentas**
+#### *Estratégia e Ferramentas*
 
 Para a execução dos testes de RNF, será utilizado um conjunto de ferramentas e abordagens específicas para cada tipo de requisito. Os testes serão executados em um ambiente de homologação, com configuração de hardware similar ao de produção, para garantir que os resultados sejam os mais realistas possíveis.
 
-* **Testes de Desempenho e Carga (RNF01, RNF02):**
-    * **Ferramenta:** **k6 (Grafana k6)**. Foi escolhida por ser uma ferramenta moderna, de código aberto, focada em performance e projetada para ser amigável para desenvolvedores. Os scripts de teste são escritos em JavaScript, o que facilita a criação de cenários complexos de carga e a integração com o ecossistema de desenvolvimento.
+•⁠  ⁠*Testes de Desempenho e Carga (RNF01, RNF02):*
+    * *Ferramenta:* *k6 (Grafana k6)*. Foi escolhida por ser uma ferramenta moderna, de código aberto, focada em performance e projetada para ser amigável para desenvolvedores. Os scripts de teste são escritos em JavaScript, o que facilita a criação de cenários complexos de carga e a integração com o ecossistema de desenvolvimento.
 
-    * **Alternativa:** **Locust**. Sendo uma ferramenta baseada em Python, o Locust se apresenta como uma excelente alternativa para o projeto. Ele permite que os testes de performance sejam escritos em código Python puro.
+    * *Alternativa:* *Locust*. Sendo uma ferramenta baseada em Python, o Locust se apresenta como uma excelente alternativa para o projeto. Ele permite que os testes de performance sejam escritos em código Python puro.
 
-* **Testes de Precisão do Modelo (RNF03):**
-    * **Ferramenta:** Scripts customizados em **Python** utilizando bibliotecas como `scikit-learn` e `pandas`.
+•⁠  ⁠*Testes de Precisão do Modelo (RNF03):*
+    * *Ferramenta:* Scripts customizados em *Python* utilizando bibliotecas como ⁠ scikit-learn ⁠ e ⁠ pandas ⁠.
     
-    * **Estratégia:** Este teste não mede o desempenho em termos de velocidade, mas sim a **qualidade e a acurácia** da análise de NLP. Será criado um conjunto de dados de validação ("golden dataset") com amostras de transcrições previamente rotuladas por humanos com as intenções corretas. O teste consistirá em submeter essas amostras ao sistema, coletar os resultados e compará-los com o gabarito, calculando a métrica de acurácia.
+    * *Estratégia:* Este teste não mede o desempenho em termos de velocidade, mas sim a *qualidade e a acurácia* da análise de NLP. Será criado um conjunto de dados de validação ("golden dataset") com amostras de transcrições previamente rotuladas por humanos com as intenções corretas. O teste consistirá em submeter essas amostras ao sistema, coletar os resultados e compará-los com o gabarito, calculando a métrica de acurácia.
 
-#### **Abrangência e Justificativa**
+#### *Abrangência e Justificativa*
 
 A abrangência dos testes de RNF está focada em garantir que o sistema atenda aos critérios de aceitação que definem sua viabilidade técnica e operacional.
 
-* **Justificativa:** A validação desses requisitos é crucial. Um sistema que não consegue processar áudios longos (RNF01) ou que demora excessivamente para entregar um resultado (RNF02) pode ser funcionalmente correto, mas operacionalmente inútil. Da mesma forma, se a precisão da análise for baixa (RNF03), toda a informação gerada pelo sistema perde a credibilidade, invalidando seu propósito de negócio.
-* **Abrangência:** O plano cobre **100% dos RNFs definidos**. Para cada requisito, foi criado pelo menos um cenário de teste positivo para validar o critério de aceite. Foram incluídos também cenários de estresse (negativos) para entender os limites do sistema, como o comportamento sob carga simultânea, mesmo que não haja um RNF específico para isso.
+•⁠  ⁠*Justificativa:* A validação desses requisitos é crucial. Um sistema que não consegue processar áudios longos (RNF01) ou que demora excessivamente para entregar um resultado (RNF02) pode ser funcionalmente correto, mas operacionalmente inútil. Da mesma forma, se a precisão da análise for baixa (RNF03), toda a informação gerada pelo sistema perde a credibilidade, invalidando seu propósito de negócio.
+•⁠  ⁠*Abrangência:* O plano cobre *100% dos RNFs definidos*. Para cada requisito, foi criado pelo menos um cenário de teste positivo para validar o critério de aceite. Foram incluídos também cenários de estresse (negativos) para entender os limites do sistema, como o comportamento sob carga simultânea, mesmo que não haja um RNF específico para isso.
 
-#### **Casos de Teste de RNFs**
+#### *Casos de Teste de RNFs*
 
-| ID | Título do Caso de Teste | Componentes Integrados | Pré-condições | Instruções Detalhadas para Execução | Validação dos Resultados |
+| ID | Título do Caso de Teste | RNF Associado | Métricas a Coletar | Ferramenta / Script de Execução | Critério de Aceite (Resultado Esperado) |
 | :-- | :--- | :--- | :--- | :--- | :--- |
-| **CT-INT-001** | **(Positivo)** Comunicação bem-sucedida e gravação da resposta da API externa | Backend ↔ API OpenAI | `VCR.py` está em modo de gravação. | 1. **Dado** um arquivo de áudio válido. 2. **Quando** o serviço de análise é invocado pela primeira vez. | 1. **Então** a API da OpenAI deve retornar uma resposta de sucesso (200 OK). 2. **E** um "cassete" (.yaml) deve ser criado pelo `VCR.py` com a interação. |
-| **CT-INT-002** | **(Negativo)** Tratamento de erro de indisponibilidade da API externa | Backend ↔ API OpenAI | O "cassete" foi modificado para retornar um erro (ex: 503). | 1. **Dado** o mesmo áudio do teste anterior. 2. **Quando** o serviço de análise é invocado. | 1. **Então** o sistema não deve travar. 2. **E** uma exceção apropriada deve ser capturada e registrada em log. |
-| **CT-INT-003** | **(Positivo - Cache)** Armazenamento em cache da resposta na primeira chamada | Backend ↔ Módulo de Cache | O cache da aplicação está vazio. | 1. **Dado** um novo arquivo de áudio. 2. **Quando** o serviço de análise é invocado. | 1. **Então** uma requisição real é feita à API externa. 2. **E** o resultado é armazenado no cache interno. |
-| **CT-INT-004**| **(Positivo - Cache)** Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente. | 1. **Dado** o mesmo áudio do teste anterior. 2. **E** a conexão externa está desabilitada (simulado). 3. **Quando** o serviço é invocado novamente. | 1. **Então** o resultado deve ser retornado com sucesso, idêntico ao da primeira chamada. 2. **E** NENHUMA requisição HTTP para a API externa deve ter sido realizada. |
-| **CT-INT-005** | **(Positivo)** Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise foi concluída com sucesso. | 1. **Dado** um objeto de resultado de análise válido. 2. **Quando** a função de persistência é chamada. | 1. **Então** um novo registro correspondente deve existir no banco de dados, com todos os campos consistentes. |
-| **CT-INT-006** | **(Negativo)** Tratamento de erro de indisponibilidade do banco de dados | Backend ↔ Banco de Dados | O serviço do banco de dados está offline (simulado). | 1. **Dado** um objeto de resultado de análise válido. 2. **Quando** a função de persistência é chamada. | 1. **Então** o sistema não deve travar. 2. **E** uma exceção de falha de conexão deve ser capturada e registrada em log. |
-| **CT-INT-007** | **(Negativo)** Tratamento de resposta malformada da API externa | Backend ↔ API OpenAI | O "cassete" foi modificado para retornar um JSON inválido (status 200 OK). | 1. **Dado** um arquivo de áudio válido. 2. **Quando** o serviço de análise é invocado. | 1. **Então** o sistema deve tratar o erro de parsing do JSON. 2. **E** uma exceção de resposta inválida deve ser capturada e registrada em log. |### 2.4.4 Resultados do Estudo sobre o Usuário do Sistema
+| *CT-RNF-001*| Teste de estresse com arquivo de longa duração | RNF01 | 1. Consumo de CPU (%). <br> 2. Consumo de Memória (MB). <br> 3. Taxa de Sucesso (%). | Execução manual de upload de um arquivo de 75 minutos, monitorando os recursos do servidor. | O sistema deve processar o arquivo completamente com taxa de sucesso de 100%, sem exceder os limites de recursos do ambiente. |
+| *CT-RNF-002| Teste de Desempenho de Transcrição (Carga Padrão) | RNF02 | 1. Tempo médio de resposta (s). <br> 2. Percentil 95 (P95) do tempo de resposta (s). <br> 3. Taxa de sucesso (%). | **Ex.:* ⁠ k6 run scripts/desempenho.js --vus 10 --duration 2m ⁠ | O P95 do tempo de resposta para a análise deve ser *menor ou igual a 300 segundos (5 minutos). A taxa de sucesso das requisições deve ser **superior a 99%*. |
+| *CT-RNF-003| Teste de Acurácia da Detecção de Intenção | RNF03 | Acurácia (%). | **Ex.:* ⁠ python scripts/valida_acuracia.py --dataset validacao.csv ⁠ | A acurácia do modelo, calculada pela fórmula (Previsões Corretas / Total de Amostras), deve ser *maior ou igual a 90%*. |
 
 ### 9.2.2 Resultados
 
@@ -2638,78 +2634,91 @@ O objetivo dos testes de usabilidade é avaliar a experiência do usuário (UX) 
 
 A seguir, são detalhados o objetivo, a metodologia, os participantes, os cenários e o roteiro para a execução dos testes de usabilidade.
 
-#### **Objetivo do Teste**
+#### *Objetivo do Teste*
 Avaliar a facilidade de uso, a clareza da informação e a satisfação geral dos usuários finais, tanto analistas de qualidade quanto supervisores, ao interagir com o dashboard de análise de chamadas. O objetivo secundário é identificar os principais problemas de usabilidade e coletar feedback qualitativo para refinar a interface do protótipo.
 
-#### **Estratégia e Metodologia**
+#### *Estratégia e Metodologia*
 
-* **Formato do Teste:** Será conduzido um teste de usabilidade moderado. Um moderador guiará cada participante através de um roteiro de tarefas, fará perguntas e observará a interação do usuário com a plataforma. As sessões serão gravadas, mediante consentimento do participante, para posterior análise da equipe.
+•⁠  ⁠*Formato do Teste:* Será conduzido um teste de usabilidade moderado. Um moderador guiará cada participante através de um roteiro de tarefas, fará perguntas e observará a interação do usuário com a plataforma. As sessões serão gravadas, mediante consentimento do participante, para posterior análise da equipe.
 
-* **Metodologias:**
-    * **Protocolo Think-Aloud (Pense Alto):** Os participantes serão instruídos a verbalizar seus pensamentos, dúvidas e impressões enquanto realizam as tarefas. Isso fornecerá insights sobre seu modelo mental e suas expectativas em relação ao sistema.
+•⁠  ⁠*Metodologias:*
+    * *Protocolo Think-Aloud (Pense Alto):* Os participantes serão instruídos a verbalizar seus pensamentos, dúvidas e impressões enquanto realizam as tarefas. Isso fornecerá insights sobre seu modelo mental e suas expectativas em relação ao sistema.
 
-    * **System Usability Scale (SUS):** Ao final da sessão, o moderador aplicará verbalmente o questionário SUS. Ele fará as 10 perguntas do questionário e anotará as respostas do participante em uma escala de 1 a 5. Este método gera uma pontuação quantitativa da usabilidade percebida do sistema.
+    * *System Usability Scale (SUS):* Ao final da sessão, o moderador aplicará verbalmente o questionário SUS. Ele fará as 10 perguntas do questionário e anotará as respostas do participante em uma escala de 1 a 5. Este método gera uma pontuação quantitativa da usabilidade percebida do sistema.
 
-#### **Perfil dos Participantes**
-Serão recrutados **no mínimo 5 participantes** externos à equipe de desenvolvimento do projeto. O critério de recrutamento buscará pessoas com perfis que se assemelhem às duas personas mapeadas, garantindo que a solução seja validada sob as duas perspectivas de uso.
+#### *Métricas e Critérios de Sucesso*
+Para cada tarefa do roteiro, serão coletadas as seguintes métricas para avaliar a usabilidade de forma objetiva:
+•⁠  ⁠*Eficácia (Taxa de Conclusão):* Percentual de participantes que conseguem completar a tarefa com sucesso. *Meta:* ≥ 90%.
+•⁠  ⁠*Eficiência (Tempo na Tarefa):* Tempo médio, em segundos, que os participantes levam para completar a tarefa. *Meta:* Tempo médio para a Tarefa 1 < 2 minutos.
+•⁠  ⁠*Satisfação (SUS):* Pontuação geral calculada a partir do questionário SUS. *Meta:* Score médio ≥ 70 (considerado "Bom").
 
-* **Perfil 1: Analista de Qualidade (baseado em Julia Souza)**
+#### *Análise dos Dados Coletados*
+Após a conclusão das sessões, os dados serão centralizados para a análise em equipe:
+1.  Os dados quantitativos (taxas de sucesso por tarefa, tempo de execução, respostas do SUS) serão registrados em uma planilha do Google Sheets para facilitar a visualização e o cálculo das metas.
+2.  As observações qualitativas e os principais comentários do protocolo "pensar alto" serão compilados em um documento de anotações.
+3.  A planilha e as anotações serão apresentadas ao grupo em uma sessão de análise conjunta. A equipe irá revisar os dados para identificar padrões, as tarefas com maior dificuldade e a causa raiz dos problemas de usabilidade.
+4.  Ao final, será gerado um relatório consolidado com o score SUS, as métricas de tarefas e uma lista priorizada de recomendações de melhoria para a equipe.
 
-    * **Descrição:** Profissionais com experiência em análise e monitoramento de qualidade de atendimento. Seu trabalho é focado na escuta e avaliação detalhada de ligações para garantir a conformidade com os scripts e os padrões de excelência. Buscam ferramentas que automatizem a análise para aumentar a amostragem e identificar padrões ou chamadas críticas com mais rapidez.
+#### *Perfil dos Participantes*
+Serão recrutados *no mínimo 5 participantes* externos à equipe de desenvolvimento do projeto. O critério de recrutamento buscará pessoas com perfis que se assemelhem às duas personas mapeadas, garantindo que a solução seja validada sob as duas perspectivas de uso.
 
-    * **Quantidade:** 2 a 3 participantes.
+•⁠  ⁠*Perfil 1: Analista de Qualidade (baseado em Julia Souza)*
 
-* **Perfil 2: Supervisor de Operações (baseado em Carlos Martins)**
+    * *Descrição:* Profissionais com experiência em análise e monitoramento de qualidade de atendimento. Seu trabalho é focado na escuta e avaliação detalhada de ligações para garantir a conformidade com os scripts e os padrões de excelência. Buscam ferramentas que automatizem a análise para aumentar a amostragem e identificar padrões ou chamadas críticas com mais rapidez.
 
-    * **Descrição:** Líderes de equipes de call center, responsáveis pelo desempenho geral do time e pela garantia de que os operadores sigam os scripts e mantenham a cordialidade. Necessitam de dados objetivos e consolidados para direcionar treinamentos, corrigir falhas rapidamente e fornecer feedbacks assertivos aos atendentes.
+    * *Quantidade:* 2 a 3 participantes.
 
-    * **Quantidade:** 2 a 3 participantes.
+•⁠  ⁠*Perfil 2: Supervisor de Operações (baseado em Carlos Martins)*
 
-#### **Roteiro e Cenários do Teste**
+    * *Descrição:* Líderes de equipes de call center, responsáveis pelo desempenho geral do time e pela garantia de que os operadores sigam os scripts e mantenham a cordialidade. Necessitam de dados objetivos e consolidados para direcionar treinamentos, corrigir falhas rapidamente e fornecer feedbacks assertivos aos atendentes.
+
+    * *Quantidade:* 2 a 3 participantes.
+
+#### *Roteiro e Cenários do Teste*
 
 O teste terá uma duração estimada de 30-40 minutos por participante.
 
-**Parte 1: Introdução e Contextualização (5 min)**
+*Parte 1: Introdução e Contextualização (5 min)*
 
 1.  Apresentação do moderador e agradecimento.
 2.  Explicação do objetivo: "Estamos testando o sistema, não você. Não existem respostas certas ou erradas."
 3.  Solicitação de permissão para gravar a sessão para fins de análise.
-4.  Explicação do protocolo *Think-Aloud*.
+4.  Explicação do protocolo Think-Aloud.
 5.  Contextualização inicial: "Imagine que você é um(a) [Analista de Qualidade / Supervisor de Operações] e recebeu acesso a uma nova ferramenta para ajudar a analisar as chamadas de atendimento."
 
-**Parte 2: Tarefas de Usabilidade (20-25 min)**
+*Parte 2: Tarefas de Usabilidade (20-25 min)*
 
 As tarefas serão adaptadas conforme o perfil do participante.
 
-**Roteiro para o Perfil "Analista de Qualidade":**
+*Roteiro para o Perfil "Analista de Qualidade":*
 
-* **Cenário 1: Investigação de Chamadas Críticas.**
+•⁠  ⁠*Cenário 1: Investigação de Chamadas Críticas.*
 
-    * **Tarefa:** "O painel inicial está mostrando um ranking com as ligações mais críticas. Sua tarefa é investigar uma dessas chamadas com nota baixa para entender por que ela foi mal avaliada e encontrar os trechos que justificam essa pontuação." 
+    * *Tarefa:* "O painel inicial está mostrando um ranking com as ligações mais críticas. Sua tarefa é investigar uma dessas chamadas com nota baixa para entender por que ela foi mal avaliada e encontrar os trechos que justificam essa pontuação." 
 
-    * **Objetivo de observação:** Avaliar a facilidade de navegar do dashboard geral para a análise detalhada de uma chamada e a clareza na apresentação dos pontos críticos.
+    * *Objetivo de observação:* Avaliar a facilidade de navegar do dashboard geral para a análise detalhada de uma chamada e a clareza na apresentação dos pontos críticos.
 
-* **Cenário 2: Geração de Relatório para Supervisão.**
+•⁠  ⁠*Cenário 2: Geração de Relatório para Supervisão.*
 
-    * **Tarefa:** "Com base na sua análise, prepare um resumo dos problemas encontrados nesta chamada. O que você destacaria em um relatório para o supervisor da equipe?"
+    * *Tarefa:* "Com base na sua análise, prepare um resumo dos problemas encontrados nesta chamada. O que você destacaria em um relatório para o supervisor da equipe?"
 
-    * **Objetivo de observação:** Verificar se as informações apresentadas são suficientes e claras para que a analista possa cumprir sua responsabilidade de gerar relatórios para supervisores.
+    * *Objetivo de observação:* Verificar se as informações apresentadas são suficientes e claras para que a analista possa cumprir sua responsabilidade de gerar relatórios para supervisores.
 
-**Roteiro para o Perfil "Supervisor de Operações":**
+*Roteiro para o Perfil "Supervisor de Operações":*
 
-* **Cenário 1: Análise da Performance da Equipe.**
+•⁠  ⁠*Cenário 1: Análise da Performance da Equipe.*
 
-    * **Tarefa:** "Você acabou de iniciar seu dia e quer uma visão geral do desempenho da sua equipe. Olhando o painel, qual é a pontuação média? Há algum caso crítico que exige sua atenção imediata?" 
+    * *Tarefa:* "Você acabou de iniciar seu dia e quer uma visão geral do desempenho da sua equipe. Olhando o painel, qual é a pontuação média? Há algum caso crítico que exige sua atenção imediata?" 
 
-    * **Objetivo de observação:** Avaliar a eficácia do dashboard em comunicar métricas consolidadas e alertas importantes para a gestão da equipe.
+    * *Objetivo de observação:* Avaliar a eficácia do dashboard em comunicar métricas consolidadas e alertas importantes para a gestão da equipe.
 
-* **Cenário 2: Preparação para um Feedback Individual.**
+•⁠  ⁠*Cenário 2: Preparação para um Feedback Individual.*
 
-    * **Tarefa:** "Você notou um atendente com desempenho abaixo do esperado. Investigue as chamadas desse atendente para identificar um padrão de comportamento, seja um ponto forte ou uma falha recorrente, para que você possa agendar um feedback individual com ele."
+    * *Tarefa:* "Você notou um atendente com desempenho abaixo do esperado. Investigue as chamadas desse atendente para identificar um padrão de comportamento, seja um ponto forte ou uma falha recorrente, para que você possa agendar um feedback individual com ele."
 
-    * **Objetivo de observação:** Medir a facilidade de filtrar informações por atendente e obter insights que possam guiar treinamentos e feedbacks, um dos principais interesses de Carlos.
+    * *Objetivo de observação:* Medir a facilidade de filtrar informações por atendente e obter insights que possam guiar treinamentos e feedbacks, um dos principais interesses de Carlos.
 
-**Parte 3: Pós-Teste e Aplicação do SUS (5 min)**
+*Parte 3: Pós-Teste e Aplicação do SUS (5 min)*
 
 1.  Perguntas abertas para coletar impressões gerais:
     * "Qual foi sua primeira impressão sobre a ferramenta?"
@@ -2717,7 +2726,7 @@ As tarefas serão adaptadas conforme o perfil do participante.
     * "Houve algo que você achou particularmente fácil ou difícil?"
 2.  Aplicação verbal do Questionário SUS pelo moderador.
 
-#### **Questionário System Usability Scale (SUS)**
+#### *Questionário System Usability Scale (SUS)*
 
 O moderador lerá cada uma das 10 afirmações abaixo e registrará a resposta do participante em uma escala de 1 a 5 (onde 1 = Discordo Totalmente e 5 = Concordo Totalmente).
 
@@ -2730,7 +2739,7 @@ O moderador lerá cada uma das 10 afirmações abaixo e registrará a resposta d
 7.  Imagino que a maioria das pessoas aprenderia a usar este sistema muito rapidamente.
 8.  Achei o sistema muito complicado de usar.
 9.  Me senti muito confiante ao usar o sistema.
-10. Precisei aprender muitas coisas novas antes de conseguir usar o sistema.
+10.⁠ ⁠Precisei aprender muitas coisas novas antes de conseguir usar o sistema.
 
 ### 9.3.2 Resultados
 
@@ -2744,34 +2753,36 @@ O objetivo dos testes de integração é verificar se os diferentes módulos e c
 
 A seguir, são detalhados a estratégia, as ferramentas e os casos de teste planejados para validar as integrações da aplicação.
 
-#### **Estratégia e Ferramentas**
+#### *Estratégia e Ferramentas*
 
 A estratégia consiste em testar cada ponto de integração de forma isolada, mas completa, focando na lógica de comunicação entre os componentes.
 
-* **Ferramentas:**
+•⁠  ⁠*Ferramentas:*
 
-    * **Pytest:** Será o framework principal para a escrita e execução dos testes de integração do backend. Sua estrutura flexível permite interagir com os diferentes componentes da aplicação (serviços, endpoints de API, banco de dados) de forma controlada.
+    * *Pytest:* Será o framework principal para a escrita e execução dos testes de integração do backend. Sua estrutura flexível permite interagir com os diferentes componentes da aplicação (serviços, endpoints de API, banco de dados) de forma controlada.
 
-    * **VCR.py:** Para atender ao requisito do "módulo VHS" e testar a integração com a API externa da OpenAI, será utilizada a biblioteca `VCR.py`. Ela funciona como um "gravador" para as requisições HTTP. Na primeira execução de um teste, ela grava a interação real com a API da OpenAI em um arquivo (chamado "cassete"). Nas execuções futuras, a biblioteca intercepta a chamada e "reproduz" a resposta gravada, sem se conectar à internet. Isso permite testar a lógica de integração de forma rápida, determinística e sem custos, além de ser o mecanismo ideal para validar o funcionamento do sistema de cache.
+    * *VCR.py:* Para atender ao requisito do "módulo VHS" e testar a integração com a API externa da OpenAI, será utilizada a biblioteca ⁠ VCR.py ⁠. Ela funciona como um "gravador" para as requisições HTTP. Na primeira execução de um teste, ela grava a interação real com a API da OpenAI em um arquivo (chamado "cassete"). Nas execuções futuras, a biblioteca intercepta a chamada e "reproduz" a resposta gravada, sem se conectar à internet. Isso permite testar a lógica de integração de forma rápida, determinística e sem custos, além de ser o mecanismo ideal para validar o funcionamento do sistema de cache.
 
-#### **Abrangência e Justificativa**
+#### *Abrangência e Justificativa*
 
-* **Abrangência:** Os testes cobrirão os três pontos de integração mais críticos da arquitetura:
+•⁠  ⁠*Abrangência:* Os testes cobrirão os seguintes pontos de integração para garantir uma visão sistêmica:
     1.  A comunicação do backend com a API externa da OpenAI para transcrição.
     2.  A lógica do módulo de cache ("VHS") para evitar requisições repetidas.
     3.  A persistência dos dados analisados no banco de dados PostgreSQL.
-    
-* **Justificativa:** A falha em qualquer um desses pontos compromete o sistema inteiro. Se a comunicação com a API externa falhar, a funcionalidade principal do sistema é bloqueada. Se o cache não funcionar corretamente, o projeto pode incorrer em custos elevados e lentidão, violando seus objetivos centrais. Se a persistência de dados falhar, os resultados das análises são perdidos. Portanto, a validação dessas integrações é fundamental para a estabilidade e viabilidade da solução.
+    4.  *Integração Frontend ↔ Backend:* Validar os contratos da API, garantindo que os payloads enviados pelo frontend são corretamente interpretados pelo backend e que as respostas do backend são renderizadas corretamente no frontend.
+    5.  *Integração Interna do Módulo de Análise:* Validar que os outputs dos diferentes modelos de NLP (BERT, Regex) são combinados corretamente pelo serviço de fusão para gerar o score final.
 
-#### **Casos de Teste de Integração**
+•⁠  ⁠*Justificativa:* A falha em qualquer um desses pontos compromete o sistema. A comunicação com serviços externos e o banco de dados é a espinha dorsal da aplicação. Da mesma forma, inconsistências entre frontend e backend ou na lógica interna de análise podem gerar dados incorretos ou falhas na experiência do usuário. Portanto, a validação de todas essas integrações é fundamental para a estabilidade da solução.
+
+#### *Casos de Teste de Integração*
 
 | ID | Título do Caso de Teste | Componentes Integrados | Pré-condições | Instruções Detalhadas para Execução | Validação dos Resultados |
 | :-- | :--- | :--- | :--- | :--- | :--- |
-| **CT-INT-001** | **(Positivo)** Comunicação bem-sucedida e gravação da resposta da API externa | Backend ↔ API OpenAI | O teste está configurado com uma chave de API válida. `VCR.py` está em modo de gravação. | 1. **Dado** um arquivo de áudio válido. 2. **Quando** o serviço de análise é invocado pela primeira vez com este arquivo. | 1. **Então** a API da OpenAI deve retornar um status de sucesso (200 OK) com a transcrição. 2. **E** um arquivo "cassete" (.yaml) deve ser criado pelo `VCR.py` contendo a requisição e a resposta exatas. |
-| **CT-INT-002** | **(Negativo)** Tratamento de erro de indisponibilidade da API externa | Backend ↔ API OpenAI | O "cassete" gerado no teste anterior foi modificado para retornar um erro (ex: 503 Service Unavailable). | 1. **Dado** o mesmo arquivo de áudio do teste anterior. 2. **Quando** o serviço de análise é invocado. 3. **E** `VCR.py` reproduz a resposta de erro 503. | 1. **Então** o sistema não deve travar. 2. **E** uma exceção apropriada deve ser capturada. 3. **E** um log de erro detalhado deve ser registrado, indicando a falha na comunicação com o serviço externo. |
-| **CT-INT-003** | **(Positivo - Cache)** Armazenamento em cache da resposta na primeira chamada | Backend ↔ Módulo de Cache | O cache da aplicação está vazio para o dado de entrada. | 1. **Dado** um novo arquivo de áudio nunca antes analisado. 2. **Quando** o serviço de análise é invocado. | 1. **Então** uma requisição real é feita à API da OpenAI. 2. **E** o resultado (transcrição) é armazenado com sucesso no mecanismo de cache interno da aplicação. |
-| **CT-INT-004**| **(Positivo - Cache)** Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente com o mesmo arquivo de áudio. | 1. **Dado** o mesmo arquivo de áudio do teste anterior. 2. **E** a conexão com a API externa está desabilitada (simulado via mock ou `VCR.py` em modo de bloqueio). 3. **Quando** o serviço de análise é invocado novamente. | 1. **Então** o resultado da análise deve ser retornado com sucesso. 2. **E** o resultado deve ser idêntico ao da primeira chamada. 3. **E** NENHUMA requisição HTTP para a API da OpenAI deve ter sido realizada, provando que o dado veio do cache. |
-| **CT-INT-005** | **(Positivo)** Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise (real ou via cache) foi concluída com sucesso. | 1. **Dado** um objeto de resultado de análise válido. 2. **Quando** a função de persistência é chamada com este objeto. 3. **E** uma consulta é feita diretamente ao banco de dados PostgreSQL. | 1. **Então** um novo registro correspondente à chamada analisada deve existir na tabela apropriada. 2. **E** todos os campos (notas, metadados, etc.) devem estar consistentes com o objeto de resultado. |
+| *CT-INT-001* | *(Positivo)* Comunicação bem-sucedida e gravação da resposta da API externa | Backend ↔ API OpenAI | O teste está configurado com uma chave de API válida. ⁠ VCR.py ⁠ está em modo de gravação. | 1. *Dado* um arquivo de áudio válido. 2. *Quando* o serviço de análise é invocado pela primeira vez com este arquivo. | 1. *Então* a API da OpenAI deve retornar um status de sucesso (200 OK) com a transcrição. 2. *E* um arquivo "cassete" (.yaml) deve ser criado pelo ⁠ VCR.py ⁠ contendo a requisição e a resposta exatas. |
+| *CT-INT-002* | *(Negativo)* Tratamento de erro de indisponibilidade da API externa | Backend ↔ API OpenAI | O "cassete" gerado no teste anterior foi modificado para retornar um erro (ex: 503 Service Unavailable). | 1. *Dado* o mesmo arquivo de áudio do teste anterior. 2. *Quando* o serviço de análise é invocado. 3. *E* ⁠ VCR.py ⁠ reproduz a resposta de erro 503. | 1. *Então* o sistema não deve travar. 2. *E* uma exceção apropriada deve ser capturada. 3. *E* um log de erro detalhado deve ser registrado, indicando a falha na comunicação com o serviço externo. |
+| *CT-INT-003* | *(Positivo - Cache)* Armazenamento em cache da resposta na primeira chamada | Backend ↔ Módulo de Cache | O cache da aplicação está vazio para o dado de entrada. | 1. *Dado* um novo arquivo de áudio nunca antes analisado. 2. *Quando* o serviço de análise é invocado. | 1. *Então* uma requisição real é feita à API da OpenAI. 2. *E* o resultado (transcrição) é armazenado com sucesso no mecanismo de cache interno da aplicação. |
+| *CT-INT-004| *(Positivo - Cache)* Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente com o mesmo arquivo de áudio. | 1. **Dado* o mesmo arquivo de áudio do teste anterior. 2. *E* a conexão com a API externa está desabilitada (simulado via mock ou ⁠ VCR.py ⁠ em modo de bloqueio). 3. *Quando* o serviço de análise é invocado novamente. | 1. *Então* o resultado da análise deve ser retornado com sucesso. 2. *E* o resultado deve ser idêntico ao da primeira chamada. 3. *E* NENHUMA requisição HTTP para a API da OpenAI deve ter sido realizada, provando que o dado veio do cache. |
+| *CT-INT-005* | *(Positivo)* Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise (real ou via cache) foi concluída com sucesso. | 1. *Dado* um objeto de resultado de análise válido. 2. *Quando* a função de persistência é chamada com este objeto. 3. *E* uma consulta é feita diretamente ao banco de dados PostgreSQL. | 1. *Então* um novo registro correspondente à chamada analisada deve existir na tabela apropriada. 2. *E* todos os campos (notas, metadados, etc.) devem estar consistentes com o objeto de resultado. |
 
 ### 9.4.2 Resultados
 
@@ -2792,6 +2803,7 @@ _conteúdo_
 # Referências
 
 _conteúdo_
+
 
 
 
