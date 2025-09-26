@@ -157,9 +157,10 @@ const columns = [
 interface ChamadasTableProps {
   data: Chamada[];
   onRowClick?: (chamadaId: string) => void;
+  actions?: React.ReactNode;
 }
 
-export function ChamadasTable({ data, onRowClick }: ChamadasTableProps) {
+export function ChamadasTable({ data, onRowClick, actions }: ChamadasTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
 
@@ -198,7 +199,10 @@ export function ChamadasTable({ data, onRowClick }: ChamadasTableProps) {
     <>
       <div className="tableContainer">
         <div className="searchContainer">
-          <h3 className="page-titles">Análise de Chamadas Recentes</h3>
+          <div className="leftActions">
+            <h3 className="page-titles">Análise de Chamadas Recentes</h3>
+            {actions}
+          </div>
           <div className="searchInputWrapper">
             <input
               type="text"

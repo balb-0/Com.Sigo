@@ -7,6 +7,7 @@ import { CallDetailsModal } from "../../components/CallDetailsModal/CallDetailsM
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { listChamadas, type ChamadaResponse } from "../../lib/api";
 import { formatChamadaRow } from "./helpers";
+import Button from "../../components/Button/Button";
 
 interface DashboardProps {
   currentPage?: string;
@@ -75,12 +76,20 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     const now = new Date();
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth();
+    const startOfWeek = new Date(now);
+    const day = startOfWeek.getDay(); // 0=Sun..6=Sat
+    const diffToMonday = (day + 6) % 7; // Monday as start
+    startOfWeek.setHours(0,0,0,0);
+    startOfWeek.setDate(startOfWeek.getDate() - diffToMonday);
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23,59,59,999);
 
     switch (currentFilter) {
-      case "thisYear":
+      case "thisWeek":
         return chamadas.filter((chamada: Chamada) => {
-          const chamadaDate = parseDateTime(chamada.dataHora);
-          return chamadaDate.getFullYear() === currentYear;
+          const d = parseDateTime(chamada.dataHora);
+          return d >= startOfWeek && d <= endOfWeek;
         });
 
       case "thisMonth":
@@ -90,6 +99,14 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
             chamadaDate.getFullYear() === currentYear &&
             chamadaDate.getMonth() === currentMonth
           );
+        });
+
+      case "today":
+        return chamadas.filter((chamada: Chamada) => {
+          const d = parseDateTime(chamada.dataHora);
+          return d.getFullYear() === now.getFullYear() &&
+            d.getMonth() === now.getMonth() &&
+            d.getDate() === now.getDate();
         });
 
       case "custom":
@@ -198,6 +215,32 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     setSelectedChamada(null);
   };
 
+  function exportToCsv(rows: Chamada[]) {
+    const header = ["id", "dataHora", "pontuacao", "tags"];
+    const csvRows = [header.join(",")];
+    for (const r of rows) {
+      const values = [
+        r.id,
+        r.dataHora,
+        String(r.pontuacao),
+        r.tags.map(t => t.name).join("|")
+      ].map(v => `"${String(v).replace(/"/g, '""')}"`);
+      csvRows.push(values.join(","));
+    }
+    const csv = csvRows.join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    const now = new Date();
+    const ts = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}_${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`;
+    a.download = `chamadas_${ts}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <div className="dashboard-container">
       <Header currentPage={currentPage} onNavigate={onNavigate} />
@@ -263,7 +306,16 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
               ))}
             </div>
           ) : (
-            <ChamadasTable data={filteredChamadas} onRowClick={handleRowClick} />
+            <ChamadasTable
+              data={filteredChamadas}
+              onRowClick={handleRowClick}
+              actions={
+                <Button
+                  label="Exportar CSV"
+                  onClick={() => exportToCsv(filteredChamadas)}
+                />
+              }
+            />
           )}
         </div>
       </main>

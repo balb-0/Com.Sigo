@@ -2,7 +2,7 @@ import './DateFilter.css';
 import { useState, useEffect } from 'react';
 import backgroundImage from '../../assets/images/background.svg';
 
-export type FilterType = 'all' | 'thisYear' | 'thisMonth' | 'custom';
+export type FilterType = 'all' | 'thisWeek' | 'thisMonth' | 'today' | 'custom';
 
 export interface DateFilterProps {
     onFilterChange: (
@@ -103,16 +103,22 @@ export function DateFilter({ onFilterChange }: DateFilterProps) {
                         Tudo
                     </button>
                     <button
-                        className={`filter-btn ${selectedFilter === 'thisYear' ? 'active' : ''}`}
-                        onClick={() => handleFilterChange('thisYear')}
+                        className={`filter-btn ${selectedFilter === 'thisWeek' ? 'active' : ''}`}
+                        onClick={() => handleFilterChange('thisWeek')}
                     >
-                        Este Ano
+                        Esta Semana
                     </button>
                     <button
                         className={`filter-btn ${selectedFilter === 'thisMonth' ? 'active' : ''}`}
                         onClick={() => handleFilterChange('thisMonth')}
                     >
                         Este Mês
+                    </button>
+                    <button
+                        className={`filter-btn ${selectedFilter === 'today' ? 'active' : ''}`}
+                        onClick={() => handleFilterChange('today')}
+                    >
+                        Hoje
                     </button>
                     <button
                         className={`filter-btn ${selectedFilter === 'custom' ? 'active' : ''}`}
