@@ -2820,7 +2820,7 @@ _conteúdo_
 
 ### Fluxo de Caixa Simulação
 
-&emsp;O fluxo de caixa é uma simulação que foi construída de forma cronológica, registrando entradas e saídas ao longo do período de 04 de agosto a 09 de outubro de 2025. O método consistiu em calcular o saldo acumulado mês a mês, garantindo que os aportes financeiros e as margens definidas fossem suficientes para cobrir todos os compromissos. Esse equilíbrio permite observar a sustentabilidade do projeto no curto prazo e identificar com clareza quais despesas têm maior impacto sobre a liquidez. O nosso fluxo de caixa simula um investimento de um fundo de investimentos.
+&emsp;O fluxo de caixa criado é uma simulação que foi construída de forma cronológica, registrando entradas e saídas ao longo do período de 04 de agosto a 09 de outubro de 2025. O método consistiu em calcular o saldo acumulado mês a mês, garantindo que os aportes financeiros e as margens definidas fossem suficientes para cobrir todos os compromissos. Esse equilíbrio permite observar a sustentabilidade do projeto no curto prazo e identificar com clareza quais despesas têm maior impacto sobre a liquidez. O nosso fluxo de caixa simula um investimento de um fundo de investimentos.
 
 <div align="center">
   <sub>Figura 10.4 - Fluxo de Caixa</sub> <br>
