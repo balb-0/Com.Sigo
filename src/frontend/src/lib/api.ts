@@ -43,7 +43,7 @@ export async function listChamadas(): Promise<ChamadaResponse[]> {
   return fetchJson(`${API_BASE}/v1/chamadas`, { timeoutMs: 10000 });
 }
 
-export async function createChamada(jsonData: any): Promise<ChamadaResponse> {
+export async function createChamada(jsonData: unknown): Promise<ChamadaResponse> {
   return fetchJson(`${API_BASE}/v1/chamadas`, {
     method: 'POST',
     headers: {
@@ -51,5 +51,34 @@ export async function createChamada(jsonData: any): Promise<ChamadaResponse> {
     },
     body: JSON.stringify(jsonData),
     timeoutMs: 10000,
+  });
+}
+
+export async function transcribeAudioByUrl(url: string): Promise<{ text: string }> {
+  return fetchJson(`${API_BASE}/v1/transcribe/audio`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url }),
+    timeoutMs: 60000,
+  });
+}
+
+export type DashboardQuery = {
+  filter?: 'all' | 'thisWeek' | 'thisMonth' | 'today' | 'custom';
+  startDate?: string;
+  endDate?: string;
+  startTime?: string;
+  endTime?: string;
+  minScore?: number;
+  maxScore?: number;
+  tag?: string;
+};
+
+export async function parseFiltersWithAI(text: string): Promise<{ params: DashboardQuery; summary: string }> {
+  return fetchJson(`${API_BASE}/v1/nl/filters`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+    timeoutMs: 20000,
   });
 }

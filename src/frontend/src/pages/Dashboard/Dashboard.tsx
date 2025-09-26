@@ -23,6 +23,9 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
 
   const [selectedChamada, setSelectedChamada] = useState<Chamada | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [minScore, setMinScore] = useState<number | null>(null);
+  const [maxScore, setMaxScore] = useState<number | null>(null);
+  const [activeTag, setActiveTag] = useState<string>("");
 
   function getScoreColor(score: number) {
     if (score < 4) return "var(--color-vermelho)";
@@ -58,6 +61,28 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     loadChamadas();
   }, [loadChamadas]);
 
+  // Apply query params from currentPage ("/" or "/?filter=thisWeek&minScore=6&tag=empatia")
+  useEffect(() => {
+    if (!currentPage) return;
+    const fakeOrigin = 'http://local';
+    const u = new URL(currentPage, fakeOrigin);
+    const f = (u.searchParams.get('filter') ?? '').trim();
+    const startDate = u.searchParams.get('startDate') ?? '';
+    const endDate = u.searchParams.get('endDate') ?? '';
+    const startTime = u.searchParams.get('startTime') ?? '';
+    const endTime = u.searchParams.get('endTime') ?? '';
+    const minS = u.searchParams.get('minScore');
+    const maxS = u.searchParams.get('maxScore');
+    const tag = u.searchParams.get('tag') ?? '';
+
+    if (f === 'thisWeek' || f === 'thisMonth' || f === 'today' || f === 'custom' || f === 'all') {
+      handleFilterChange(f as FilterType, startDate, endDate, startTime, endTime);
+    }
+    if (minS !== null) setMinScore(minS ? Number(minS) : null);
+    if (maxS !== null) setMaxScore(maxS ? Number(maxS) : null);
+    setActiveTag(tag);
+  }, [currentPage]);
+
   const filteredChamadas = useMemo(() => {
     const parseDateTime = (dateStr: string) => {
       const [datePart, timePart] = dateStr.split(" ");
@@ -85,32 +110,33 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     endOfWeek.setDate(startOfWeek.getDate() + 6);
     endOfWeek.setHours(23,59,59,999);
 
+    let base = chamadas;
     switch (currentFilter) {
       case "thisWeek":
-        return chamadas.filter((chamada: Chamada) => {
+        base = chamadas.filter((chamada: Chamada) => {
           const d = parseDateTime(chamada.dataHora);
           return d >= startOfWeek && d <= endOfWeek;
         });
-
+        break;
       case "thisMonth":
-        return chamadas.filter((chamada: Chamada) => {
+        base = chamadas.filter((chamada: Chamada) => {
           const chamadaDate = parseDateTime(chamada.dataHora);
           return (
             chamadaDate.getFullYear() === currentYear &&
             chamadaDate.getMonth() === currentMonth
           );
         });
-
+        break;
       case "today":
-        return chamadas.filter((chamada: Chamada) => {
+        base = chamadas.filter((chamada: Chamada) => {
           const d = parseDateTime(chamada.dataHora);
           return d.getFullYear() === now.getFullYear() &&
             d.getMonth() === now.getMonth() &&
             d.getDate() === now.getDate();
         });
-
+        break;
       case "custom":
-        return chamadas.filter((chamada: Chamada) => {
+        base = chamadas.filter((chamada: Chamada) => {
           const chamadaDateTime = parseDateTime(chamada.dataHora);
           let passesDateFilter = true;
           let passesTimeFilter = true;
@@ -148,11 +174,25 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
 
           return passesDateFilter && passesTimeFilter;
         });
-
+        break;
       default:
-        return chamadas;
+        base = chamadas;
+        break;
     }
-  }, [currentFilter, customStartDate, customEndDate, customStartTime, customEndTime, chamadas]);
+    // Score filters
+    if (typeof minScore === 'number') {
+      base = base.filter((c) => c.pontuacao >= minScore);
+    }
+    if (typeof maxScore === 'number') {
+      base = base.filter((c) => c.pontuacao <= maxScore);
+    }
+    // Tag filter (contains, case-insensitive)
+    if (activeTag) {
+      const norm = activeTag.toLowerCase();
+      base = base.filter((c) => c.tags.some(t => t.name.toLowerCase().includes(norm)));
+    }
+    return base;
+  }, [currentFilter, customStartDate, customEndDate, customStartTime, customEndTime, chamadas, minScore, maxScore, activeTag]);
 
   const overallScore =
     filteredChamadas.length > 0
@@ -250,6 +290,31 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
             <h1 className="page-titles">Dashboard de Qualidade</h1>
             <DateFilter onFilterChange={handleFilterChange} />
           </div>
+          {(typeof minScore === 'number' || typeof maxScore === 'number' || activeTag) && (
+            <div style={{ display: 'flex', gap: '8px', margin: '8px 0' }}>
+              {typeof minScore === 'number' && (
+                <span className="tag tagNeutro" title="Filtro de pontuação mínima">
+                  Nota ≥ {minScore}
+                </span>
+              )}
+              {typeof maxScore === 'number' && (
+                <span className="tag tagNeutro" title="Filtro de pontuação máxima">
+                  Nota ≤ {maxScore}
+                </span>
+              )}
+              {activeTag && (
+                <span className="tag tagNeutro" title="Filtro por tag ativa">
+                  Tag: {activeTag}
+                </span>
+              )}
+              <button
+                onClick={() => { setMinScore(null); setMaxScore(null); setActiveTag(''); }}
+                style={{ marginLeft: 'auto' }}
+              >
+                Limpar filtros
+              </button>
+            </div>
+          )}
           <div id="kpi-cards">
             {loading ? (
               <div className="kpi-skeletons">
