@@ -5,3 +5,4 @@ export const chamadaRouter = Router();
 
 chamadaRouter.get('/', chamadaController.list);
 chamadaRouter.get('/:id', chamadaController.getById);
+chamadaRouter.post('/', chamadaController.create);
