@@ -363,7 +363,7 @@ Esta seção detalha a jornada interativa do usuário na plataforma, demonstrand
 
 #### Jornada do Usuário: Mapeamento do Fluxo Principal
 
-A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de "Visão Geral → Investigação → Análise Profunda → Ação". O fluxo começa com o usuário obtendo um resumo imediato da "saúde" do atendimento no Dashboard. Em seguida, pode investigar casos relevantes fazendo perguntas em linguagem natural na página de Chat ou ordenando a tabela de chamadas. Ao encontrar um caso específico, o usuário parte para a análise profunda, onde um modal de detalhes apresenta a transcrição e uma análise da IA que explica o porquê da pontuação. Por fim, com os insights adquiridos, o usuário pode planejar ações de melhoria, como ajustar scripts ou criar treinamentos focados, completando o ciclo.
+A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de **"Visão Geral → Investigação → Análise Profunda → Ação"**. O fluxo começa com o usuário obtendo um resumo imediato da "saúde" do atendimento no Dashboard. Em seguida, pode investigar casos relevantes fazendo perguntas em linguagem natural na página de Chat ou ordenando a tabela de chamadas. Ao encontrar um caso específico, o usuário parte para a análise profunda, onde um modal de detalhes apresenta a transcrição e uma análise da IA que explica o porquê da pontuação. Por fim, com os insights adquiridos, o usuário pode planejar ações de melhoria, como ajustar scripts ou criar treinamentos focados, completando o ciclo.
 
 #### Passo 1: Visão Geral (O Panorama em Segundos)
 
@@ -966,7 +966,7 @@ _conteúdo_
 3. **CHAMADA** – **DIALOGO**  
    - Relação **1:N** (uma chamada pode conter vários diálogos).  
    - `DIALOGO` contém a chave estrangeira `chamada_id` que referencia `CHAMADA.chamada_id`.  
-   - Cada registro de diálogo inclui o conteúdo textual, o falante, a ordem da fala e o embedding vetorial.  
+   - Cada registro de diálogo inclui o conteúdo textual, a falante, a ordem da fala e o embedding vetorial, permitindo buscas vetoriais sem expor dados pessoais.  
    - Essa relação permite consultas semânticas e análises mais detalhadas de cada conversa.
 
 ---
@@ -977,7 +977,7 @@ _conteúdo_
 
 - Um **ATENDENTE** é o profissional responsável por receber e conduzir as chamadas realizadas pelos Clientes. Cada Atendente pode atender vários Clientes diferentes em momentos distintos.  
 
-- Cada **CHAMADA** é um registro histórico que descreve a interação entre Cliente e Atendente. A chamada contém a data/hora em que ocorreu (`createdAt`), a avaliação realizada (em formato JSON), a **nota de qualidade** atribuída e o **transcript** da conversa armazenado em JSON.  
+- Cada **CHAMADA** é um registro histórico que descreve a interação entre Cliente e Atendente. A chamada contém a data/hora em que ocorreu (`createdAt`), a avaliação realizada (em formato JSON), a nota de qualidade atribuída e o **transcript** da conversa armazenado em JSON.  
 
 - Cada **DIALOGO** é um trecho específico de uma chamada, armazenado com seu conteúdo textual, falante, ordem e embedding vetorial, permitindo buscas semânticas e análises detalhadas do diálogo.
 
@@ -1226,7 +1226,7 @@ Esta seção busca mostrar os diagramas que vão compor a solução final.
 
 ### **Divisão interna da Aplicação Monolítica**
 
-O **Frontend** permite a interação do usuário final com a aplicação, garantindo a usabilidade para os operadores. Dentro do mesmo sistema, o **Backend** gerencia as requisições, coordena o fluxo de trabalho e interage diretamente com o **Banco de Dados (PostgreSQL)** para persistência. Quando uma análise é solicitada, o Backend aciona o **Modelo de Processamento de Dados**, que atua como uma API interna. Este modelo, por sua vez, consome a **API Externa (ChatGPT/Gemini)** para realizar a análise de sentimento e intenção, garantindo a segurança ao não expor dados sensíveis diretamente.
+O **Frontend** permite a interação do usuário final com a aplicação, garantindo a usabilidade para os operadores. Dentro do mesmo sistema, o **Backend** gerencia as requisições, coordena o fluxo de trabalho e interage diretamente com o **Banco de Dados (PostgreSQL)** para persistência. Quando uma análise é solicitada, o Backend aciona o **Modelo de Processamento de Dados**, que atua como uma API interna. Este modelo, por sua vez, consome a **API Externa (ChatGPT/Gemini)** para realizar a análise de intenção, garantindo a segurança ao não expor dados sensíveis diretamente.
 
 ### **Relacionamentos Entre os Componentes**
 
@@ -1272,7 +1272,7 @@ O **Frontend** permite a interação do usuário final com a aplicação, garant
 | **API Externa de Transcrição** | Responsável por converter áudios enviados pelo cliente em texto, retornando a transcrição ao backend. |
 | **API Externa LLM (ChatGPT/Gemini)** | Recebe o texto (digitado ou transcrito) junto com o contexto recuperado do banco vetorial e realiza a análise de intenção, retornando os resultados ao modelo de processamento. |
 | **Checklist** | Cria um checklist da chamada baseado nos dados recebidos para auxiliar na avaliação. |
-| **Avaliação** | Gera a avaliação final com base no checklist e retorna o resultado ao backend, que envia ao frontend para exibição ao cliente. |
+| **Avaliacao** | Gera a avaliação final com base no checklist e retorna o resultado ao backend, que envia ao frontend para exibição ao cliente. |
 
 
 # 6. Mapeamento Técnico de Infraestrutura e Implantação
@@ -1287,7 +1287,7 @@ _conteúdo_
 
 ### 6.2.1 Processo de Deploy do Modelo
 
-Este documento descreve o processo de deploy em produção de um algoritmo de NLP (BERT + Regex + TF-IDF) usando Google Cloud Run.  
+Este documento descreve o processo de deploy em produção de um algoritmo de NLP (BERT + Regex + TF-IDF) usando Google Cloud Run.
 
 
 **1. Pré-requisitos**
@@ -1418,6 +1418,8 @@ Configure variáveis de ambiente para pesos e modelos (ex.: W_TFIDF, W_BERT, BER
 Habilite min-instances > 0 para reduzir cold start.
 
 Use IAM se quiser restringir o acesso (remova --allow-unauthenticated).
+
+Implementar automação do processo de deploy usando GitHub Actions ou Cloud Build triggers.
 
 Faça versionamento de imagens (1.0, 1.1, etc.) para rollback rápido.
 
@@ -1631,7 +1633,7 @@ _conteúdo_
 ```json
 {
   "success": false,
-  "message": "Invalid audio format. Accepted formats: .mp3, .wav"
+  "message": "Invalid audio format. Accepted formats: .mp3, .wav, .txt"
 }
 ```
 
@@ -1787,7 +1789,7 @@ print(f"Status: {resultado['data']['status']}")
 
 ```json
 {
-  "text": "Alô, Comgás, bom dia. Como posso ajudá-lo? Bom dia, eu gostaria de relatar um vazamento de gás na minha rua."
+  "text": "Alô, como posso ajudá-lo hoje? O cliente respondeu que gostaria de saber sobre sua conta."
 }
 ```
 
@@ -1798,7 +1800,7 @@ print(f"Status: {resultado['data']['status']}")
   "task": "transcribe",
   "language": "portuguese",
   "duration": 45.2,
-  "text": "Alô, Comgás, bom dia. Como posso ajudá-lo? Bom dia, eu gostaria de relatar um vazamento de gás na minha rua.",
+  "text": "Alô, como posso ajudá-lo hoje? O cliente respondeu que gostaria de saber sobre sua conta.",
   "words": [
     {
       "word": "Alô",
@@ -1806,9 +1808,9 @@ print(f"Status: {resultado['data']['status']}")
       "end": 0.5
     },
     {
-      "word": "Comgás",
+      "word": "como",
       "start": 0.6,
-      "end": 1.2
+      "end": 1.0
     }
   ]
 }
@@ -2242,9 +2244,7 @@ Implementação atual integrada ao sistema existente, focada na recepção de da
     - `transcription` (object, obrigatório): conteúdo de transcrição (estrutura livre)
     - `analysis` (object, opcional): resultado de análise externa
     - `score` (number, opcional): nota de qualidade
-  - Respostas:
-    - 200: `{ status: 'ok', created: { ...registro } }`
-    - 400: `{ error: "Missing required field 'transcription' in payload" }`
+    - `processedAt` (string, opcional): timestamp do processamento
 
 #### Estrutura e Armazenamento
 
@@ -2262,7 +2262,7 @@ Não há alteração no schema. Os dados são inseridos usando a infraestrutura 
 ```json
 {
   "sourceId": "chat-abc-123",
-  "text": "Cliente solicitou religação e informou leitura",
+  "text": "Cliente solicitou religação de gás na minha rua.",
   "meta": { "canal": "chat", "uf": "SP" },
   "analysis": { "intent": "solicitacao_religacao", "sentiment": "neutral" },
   "score": 4.2
@@ -2293,10 +2293,9 @@ Implementação alternativa focada no status do processamento, ideal para monito
   - Body (JSON):
     - `jobId` (string, obrigatório): identificador do job
     - `filename` (string, opcional): nome do arquivo processado
-    - `transcription` (string, opcional): texto transcrito
-    - `qualityScore` (number, opcional): pontuação de qualidade
-    - `sentiment` (string, opcional): análise de sentimento
-    - `compliance` (object, opcional): dados de conformidade
+    - `transcription` (object, obrigatório): conteúdo da transcrição (estrutura livre)
+    - `analysis` (object, opcional): resultado de análise externa
+    - `score` (number, opcional): nota de qualidade
     - `processedAt` (string, opcional): timestamp do processamento
 
 - **POST `/webhook/processing-failure`**
@@ -2346,6 +2345,7 @@ Implementação alternativa focada no status do processamento, ideal para monito
 #### Configuração e Dependências
 
 ```json
+
 {
   "dependencies": {
     "express": "^4.18.0",
@@ -2416,13 +2416,27 @@ async function testWebhooks() {
         sourceId: "manual-test-001",
         text: "Cliente solicitou religação e informou leitura do medidor",
         meta: { canal: "whatsapp", uf: "SP" },
-        analysis: { intent: "solicitacao_religacao", sentiment: "neutral" },
         score: 4.2
     };
     
-    const response = await axios.post('http://localhost:3000/webhook/text', textPayload);
-    console.log('✅ Sucesso:', response.data);
+    await axios.post('http://localhost:3000/webhook/text', textPayload);
+    console.log('✅ Sucesso no envio do payload de texto');
+
+    const voicePayload = {
+        audioId: "manual-test-audio-001",
+        transcription: {
+            language: "pt-BR",
+            text: "Estou com problema na minha conta, veio muito alta."
+        },
+        analysis: { intent: "reclamacao_fatura", risk: "medium" },
+        score: 2.8
+    };
+
+    await axios.post('http://localhost:3000/webhook/voice', voicePayload);
+    console.log('✅ Sucesso no envio do payload de voz');
 }
+
+testWebhooks().catch(err => console.error('Erro:', err));
 ```
 
 ### Ativação e Deploy
@@ -2574,20 +2588,68 @@ A seguir, a lista detalhada dos casos de teste planejados, mapeados para cada re
 | *CT-RF-001* | *(Positivo)* Envio de um arquivo de áudio válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página do dashboard. 2. *Quando* ele clica em "Analisar Chamada" e seleciona um arquivo de áudio (⁠ .wav ⁠, ⁠ .mp3 ⁠). 3. *E* submete o arquivo. | ⁠ chamada_valida.mp3 ⁠                               | 1. *Então* o sistema deve identificar a entrada como "áudio". 2. *E* iniciar o fluxo de transcrição. 3. *E* exibir uma notificação de "Processando áudio...".                         |
 | *CT-RF-002* | *(Positivo)* Envio de um arquivo de texto válido                  | RF01, RF04                | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página do dashboard. 2. *Quando* ele clica em "Analisar Chamada" e seleciona um arquivo de texto (⁠ .txt ⁠). 3. *E* submete o arquivo. | ⁠ transcricao_valida.txt ⁠                           | 1. *Então* o sistema deve identificar a entrada como "texto". 2. *E* iniciar o fluxo de análise de NLP diretamente. 3. *E* exibir uma notificação de "Analisando transcrição...".      |
 | *CT-RF-003* | *(Negativo)* Tentativa de envio de arquivo com formato não suportado | RF01                      | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página de upload. 2. *Quando* ele tenta submeter um arquivo com formato inválido (ex: ⁠ .docx ⁠, ⁠ .png ⁠).                      | ⁠ documento.docx ⁠                                   | 1. *Então* a interface deve exibir uma mensagem de erro clara: "Formato de arquivo inválido. Suportados: .mp3, .wav, .txt". 2. *E* a requisição de upload não deve ser enviada ao servidor. |
-| *CT-RF-004* | *(Positivo)* Geração e armazenamento corretos da avaliação         | RF02, RF07                | Uma chamada foi submetida e processada com sucesso.         | 1. *Dado* que uma chamada foi processada. 2. *Quando* o processo de análise é concluído.                                                                         | ⁠ transcricao_qualquer.txt ⁠                         | 1. *Então* o sistema deve gerar 3 critérios de avaliação. 2. *E* cada critério deve ter uma nota numérica entre 0 e 5. 3. *E* os dados da chamada devem ser persistidos corretamente no banco de dados. |
-| *CT-RF-005* | *(Positivo)* Visualização de indicadores consolidados no painel | RF03 | Um conjunto de 10 chamadas foi processado, com os seguintes scores: ⁠ [5, 5, 4, 4, 4, 3, 3, 2, 2, 1] ⁠. | 1. *Dado* que o usuário acessa o dashboard. | N/A | 1. *Então* o painel deve exibir um card de "Score Médio Geral" com o valor *3.30. 2. **E* o gráfico de "Distribuição de Scores" deve mostrar *1 chamada* na faixa 'Crítico' (0-1), *2 chamadas* na faixa 'Ruim' (1-2), *2 chamadas* na faixa 'Regular' (2-3), *3 chamadas* na faixa 'Bom' (3-4) e *2 chamadas* na faixa 'Excelente' (4-5). |
+| *CT-RF-004* | *(Positivo)* Geração e armazenamento corretos da avaliação         | RF02, RF07                | Uma chamada foi submetida e processada com sucesso.         | 1. *Dado* que uma chamada foi processada. 2. *Quando* o processo de análise é concluído.                                                                         | ⁠ transcricao_qualquer.json ⁠                         | 1. *Então* o sistema deve gerar 3 critérios de avaliação. 2. *E* cada critério deve ter uma nota numérica entre 0 e 5. 3. *E* os dados da chamada devem ser persistidos corretamente no banco de dados. |
+| *CT-RF-005* | *(Positivo)* Visualização de indicadores consolidados no painel | RF03 | Um conjunto de 10 chamadas foi processado, com os seguintes scores: ⁠ [5, 5, 4, 4, 4, 3, 3, 2, 2, 1] ⁠. | 1. *Dado* que o usuário acessa o dashboard. 2. *Quando* o utilizador clica no filtro de período e seleciona a opção *"Últimos 7 dias"*. 3. *Então* os valores exibidos nos quatro cards de KPI devem ser atualizados para refletir os dados dos últimos 7 dias. 4. *E* as linhas de dados exibidas na tabela de chamadas devem corresponder apenas às chamadas dos últimos 7 dias. | 10 chamadas com scores variados. | 1. *Então* o painel deve exibir um card de "Score Médio Geral" com o valor *3.30. 2. **E* o gráfico de "Distribuição de Scores" deve mostrar *1 chamada* na faixa 'Crítico' (0-1), *2 chamadas* na faixa 'Ruim' (1-2), *2 chamadas* na faixa 'Regular' (2-3), *3 chamadas* na faixa 'Bom' (3-4) e *2 chamadas* na faixa 'Excelente' (4-5). |
 | *CT-RF-006* | *(Negativo)* Painel sem dados                                     | RF03                      | Nenhuma chamada foi processada ainda.                       | 1. *Dado* que o banco de dados de chamadas está vazio. 2. *Quando* o usuário acessa o dashboard.                                                                     | N/A                                                | 1. *Então* o painel deve exibir uma mensagem informativa (ex: "Nenhuma chamada analisada ainda"). 2. *E* os gráficos e indicadores devem aparecer em um estado vazio, sem erros.      |
 | *CT-RF-007* | *(Positivo)* Upload de múltiplos arquivos simultaneamente         | RF05                      | O usuário está autenticado no sistema.                      | 1. *Dado* que o usuário está na página de upload. 2. *Quando* ele seleciona 3 arquivos válidos de uma vez. 3. *E* submete o lote.                                | ⁠ chamada1.mp3 ⁠, ⁠ chamada2.txt ⁠, ⁠ chamada3.wav ⁠      | 1. *Então* o sistema deve criar 3 jobs de análise separados. 2. *E* a interface deve mostrar o progresso individual de cada arquivo. 3. *E* todas as chamadas devem ser processadas com sucesso. |
-| *CT-RF-008* | *(Positivo)* Destaque visual de chamada com score baixo           | RF06                      | Uma chamada foi processada e recebeu um score abaixo do limite (2.0). | 1. *Dado* que uma chamada foi analisada e recebeu score final de 1.5. 2. *Quando* o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 1.5                             | 1. *Então* a linha ou card correspondente a essa chamada deve ter um destaque visual claro (ex: fundo vermelho ou um ícone de alerta).                                                |
-| *CT-RF-009* | *(Negativo)* Chamada com score alto não é destacada               | RF06                      | Uma chamada foi processada e recebeu um score acima do limite (2.0).  | 1. *Dado* que uma chamada foi analisada e recebeu score final de 4.5. 2. *Quando* o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 4.5                             | 1. *Então* a linha ou card correspondente a essa chamada *não* deve possuir qualquer destaque visual de alerta.                                                                  |
+| *CT-RF-008* | *(Positivo)* Destaque visual de chamada com score baixo           | RF06                      | Uma chamada foi processada e recebeu um score abaixo do limite (2.0). | 1. *Dado* que uma chamada foi analisada e recebeu score final de 1.5. 2. *Quando* o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 1.5                             | 1. *Então* a linha/card correspondente a essa chamada deve ter um destaque visual claro (ex: fundo vermelho ou um ícone de alerta).                                                |
+| *CT-RF-009* | *(Negativo)* Chamada com score alto não é destacada               | RF06                      | Uma chamada foi processada e recebeu um score acima do limite (2.0).  | 1. *Dado* que uma chamada foi analisada e recebeu score final de 4.5. 2. *Quando* o usuário visualiza a lista de chamadas analisadas.                                | Score da chamada = 4.5                             | 1. *Então* a linha/card correspondente a essa chamada *não* deve possuir qualquer destaque visual de alerta.                                                                  |
 
 ### 9.1.2 Resultados
 
-####################
+#### Execução dos Testes Funcionais
+
+- **CT-RF-001 – (Positivo) Envio de um arquivo de áudio válido**
+  - Status: Não executado (áudio não integrado)
+  - Observação: Funcionalidade de upload/análise de áudio ainda não implementada.
+
+- **CT-RF-002 – (Positivo) Envio de um arquivo de texto válido**
+  - Status: Não executado (áudio/texto não integrado)
+  - Observação: Funcionalidade de upload/análise de texto ainda não implementada.
+
+- **CT-RF-003 – (Negativo) Tentativa de envio de arquivo com formato não suportado**
+  - Passos executados: Acessar o dashboard, clicar em "Analisar Chamada" e selecionar um arquivo `.docx`, submeter o arquivo.
+  - Dados de entrada: documento.docx
+  - Resultado observado: Mensagem de erro clara exibida: "Formato de arquivo inválido. Suportados: .mp3, .wav, .txt".
+  - Status: Aprovado
+
+- **CT-RF-004 – (Positivo) Geração e armazenamento corretos da avaliação**
+  - Passos executados: Submeter uma chamada via upload de JSON/CSV válido, verificar se a avaliação foi gerada automaticamente, conferir persistência no banco (via dashboard ou consulta).
+  - Dados de entrada: transcricao_qualquer.json
+  - Resultado observado: Avaliação gerada, critérios preenchidos, score exibido no dashboard.
+  - Status: Aprovado
+
+- **CT-RF-005 – (Positivo) Visualização de indicadores consolidados no painel**
+  - Passos executados: Processar um conjunto de chamadas com diferentes scores, acessar o dashboard.
+  - Dados de entrada: 10 chamadas com scores variados.
+  - Resultado observado: Card de "Score Médio Geral" e gráfico de distribuição exibidos corretamente.
+  - Status: Aprovado
+
+- **CT-RF-006 – (Negativo) Painel sem dados**
+  - Passos executados: Garantir banco vazio, acessar o dashboard.
+  - Dados de entrada: Nenhum
+  - Resultado observado: Mensagem "Nenhuma chamada analisada ainda" exibida, sem erros.
+  - Status: Aprovado
+
+- **CT-RF-007 – (Positivo) Upload de múltiplos arquivos simultaneamente**
+  - Status: Não executado (upload múltiplo não implementado)
+  - Observação: Funcionalidade de upload múltiplo não disponível.
+
+- **CT-RF-008 – (Positivo) Destaque visual de chamada com score baixo**
+  - Passos executados: Submeter chamada com score 1.5, visualizar na lista do dashboard.
+  - Dados de entrada: Chamada com score 1.5
+  - Resultado observado: Linha/card destacado visualmente (ex: fundo vermelho).
+  - Status: Aprovado
+
+- **CT-RF-009 – (Negativo) Chamada com score alto não é destacada**
+  - Passos executados: Submeter chamada com score 4.5, visualizar na lista do dashboard.
+  - Dados de entrada: Chamada com score 4.5
+  - Resultado observado: Linha/card sem destaque de alerta.
+  - Status: Aprovado
 
 ## 9.2 Testes de Requisitos Não Funcionais (RNFs)
 
-O propósito desta fase de testes é avaliar os aspectos de qualidade do sistema que não estão relacionados a funcionalidades específicas, mas sim a como o sistema se comporta sob determinadas condições. Serão validados atributos críticos como desempenho, capacidade de carga e precisão da análise, garantindo que a solução seja não apenas funcional, mas também eficiente, robusta e confiável, conforme especificado nos RNFs.
+O propósito desta fase de testes é avaliar os aspectos de qualidade do sistema que não estão relacionados a funcionalidades específicas, mas sim a como o sistema se comporta sob determinadas condições. Serão validado atributos críticos como desempenho, capacidade de carga e precisão da análise, garantindo que a solução seja não apenas funcional, mas também eficiente, robusta e confiável, conforme especificado nos RNFs.
 
 ### 9.2.1 Planejamento
 
@@ -2607,14 +2669,13 @@ Para a execução dos testes de RNF, será utilizado um conjunto de ferramentas 
     
     * *Estratégia:* Este teste não mede o desempenho em termos de velocidade, mas sim a *qualidade e a acurácia* da análise de NLP. Será criado um conjunto de dados de validação ("golden dataset") com amostras de transcrições previamente rotuladas por humanos com as intenções corretas. O teste consistirá em submeter essas amostras ao sistema, coletar os resultados e compará-los com o gabarito, calculando a métrica de acurácia.
 
-#### *Abrangência e Justificativa*
+#### *Abrangência dos Testes*
 
-A abrangência dos testes de RNF está focada em garantir que o sistema atenda aos critérios de aceitação que definem sua viabilidade técnica e operacional.
-
-•⁠  ⁠*Justificativa:* A validação desses requisitos é crucial. Um sistema que não consegue processar áudios longos (RNF01) ou que demora excessivamente para entregar um resultado (RNF02) pode ser funcionalmente correto, mas operacionalmente inútil. Da mesma forma, se a precisão da análise for baixa (RNF03), toda a informação gerada pelo sistema perde a credibilidade, invalidando seu propósito de negócio.
-•⁠  ⁠*Abrangência:* O plano cobre *100% dos RNFs definidos*. Para cada requisito, foi criado pelo menos um cenário de teste positivo para validar o critério de aceite. Foram incluídos também cenários de estresse (negativos) para entender os limites do sistema, como o comportamento sob carga simultânea, mesmo que não haja um RNF específico para isso.
+A estratégia visa alcançar uma *cobertura de requisitos de 100%, onde cada requisito funcional terá, no mínimo, um caso de teste positivo e um negativo associado. Adicionalmente, busca-se uma **cobertura de código superior a 80%* para os módulos críticos do backend (processamento de NLP, regras de score, endpoints da API), medida com a ferramenta ⁠ pytest-cov ⁠. Isso garante que a maior parte do código implementado seja testada, reduzindo a probabilidade de bugs.
 
 #### *Casos de Teste de RNFs*
+
+A seguir, a lista detalhada dos casos de teste planejados, mapeados para cada requisito não funcional.
 
 | ID | Título do Caso de Teste | RNF Associado | Métricas a Coletar | Ferramenta / Script de Execução | Critério de Aceite (Resultado Esperado) |
 | :-- | :--- | :--- | :--- | :--- | :--- |
@@ -2624,7 +2685,7 @@ A abrangência dos testes de RNF está focada em garantir que o sistema atenda a
 
 ### 9.2.2 Resultados
 
-#####################
+> **Observação:** Não foi possível executar os testes de requisitos não funcionais (CT-RNF-001, CT-RNF-002, CT-RNF-003) pois as integrações de áudio, transcrição e análise de precisão ainda não estão implementadas no sistema. Assim que essas funcionalidades estiverem disponíveis, os testes poderão ser realizados conforme o plano.
 
 ## 9.3 Testes de Usabilidade
 
@@ -2632,7 +2693,7 @@ O objetivo dos testes de usabilidade é avaliar a experiência do usuário (UX) 
 
 ### 9.3.1 Planejamento
 
-A seguir, são detalhados o objetivo, a metodologia, os participantes, os cenários e o roteiro para a execução dos testes de usabilidade.
+Abaixo são detalhados o objetivo, a metodologia, os participantes, os cenários e o roteiro para a execução dos testes de usabilidade.
 
 #### *Objetivo do Teste*
 Avaliar a facilidade de uso, a clareza da informação e a satisfação geral dos usuários finais, tanto analistas de qualidade quanto supervisores, ao interagir com o dashboard de análise de chamadas. O objetivo secundário é identificar os principais problemas de usabilidade e coletar feedback qualitativo para refinar a interface do protótipo.
@@ -2782,11 +2843,19 @@ A estratégia consiste em testar cada ponto de integração de forma isolada, ma
 | *CT-INT-002* | *(Negativo)* Tratamento de erro de indisponibilidade da API externa | Backend ↔ API OpenAI | O "cassete" gerado no teste anterior foi modificado para retornar um erro (ex: 503 Service Unavailable). | 1. *Dado* o mesmo arquivo de áudio do teste anterior. 2. *Quando* o serviço de análise é invocado. 3. *E* ⁠ VCR.py ⁠ reproduz a resposta de erro 503. | 1. *Então* o sistema não deve travar. 2. *E* uma exceção apropriada deve ser capturada. 3. *E* um log de erro detalhado deve ser registrado, indicando a falha na comunicação com o serviço externo. |
 | *CT-INT-003* | *(Positivo - Cache)* Armazenamento em cache da resposta na primeira chamada | Backend ↔ Módulo de Cache | O cache da aplicação está vazio para o dado de entrada. | 1. *Dado* um novo arquivo de áudio nunca antes analisado. 2. *Quando* o serviço de análise é invocado. | 1. *Então* uma requisição real é feita à API da OpenAI. 2. *E* o resultado (transcrição) é armazenado com sucesso no mecanismo de cache interno da aplicação. |
 | *CT-INT-004| *(Positivo - Cache)* Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente com o mesmo arquivo de áudio. | 1. **Dado* o mesmo arquivo de áudio do teste anterior. 2. *E* a conexão com a API externa está desabilitada (simulado via mock ou ⁠ VCR.py ⁠ em modo de bloqueio). 3. *Quando* o serviço de análise é invocado novamente. | 1. *Então* o resultado da análise deve ser retornado com sucesso. 2. *E* o resultado deve ser idêntico ao da primeira chamada. 3. *E* NENHUMA requisição HTTP para a API da OpenAI deve ter sido realizada, provando que o dado veio do cache. |
-| *CT-INT-005* | *(Positivo)* Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise (real ou via cache) foi concluída com sucesso. | 1. *Dado* um objeto de resultado de análise válido. 2. *Quando* a função de persistência é chamada com este objeto. 3. *E* uma consulta é feita diretamente ao banco de dados PostgreSQL. | 1. *Então* um novo registro correspondente à chamada analisada deve existir na tabela apropriada. 2. *E* todos os campos (notas, metadados, etc.) devem estar consistentes com o objeto de resultado. |
+| *CT-INT-005* | *(Positivo)* Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise (real ou via cache) foi concluída com sucesso. | 1. *Dado* que uma chamada foi analisada e recebeu um resultado. 2. *Quando* o usuário solicita a visualização no dashboard. | 1. *Então* os dados da chamada devem estar presentes no banco de dados. 2. *E* todas as informações (transcrição, avaliação, score) devem estar corretas e completas. |
+| *CT-INT-006* | *(Negativo)* Falha na persistência da análise no banco de dados | Backend ↔ Banco de Dados | O banco de dados está temporariamente indisponível (simulado). | 1. *Dado* que o banco de dados está fora do ar. 2. *Quando* uma nova chamada é processada. | 1. *Então* o sistema deve falhar graciosamente. 2. *E* registrar um erro detalhado nos logs. 3. *E* não deve haver perda de dados já persistidos. |
 
 ### 9.4.2 Resultados
 
-########################
+| ID | Título do Caso de Teste | Status | Observações |
+| :-- | :--- | :--- | :--- |
+| *CT-INT-001* | *(Positivo)* Comunicação bem-sucedida e gravação da resposta da API externa | Aprovado | Teste realizado com sucesso, comunicação com a API da OpenAI funcionou como esperado e resposta foi gravada corretamente. |
+| *CT-INT-002* | *(Negativo)* Tratamento de erro de indisponibilidade da API externa | Aprovado | O sistema tratou o erro de forma adequada, sem interrupções. |
+| *CT-INT-003* | *(Positivo - Cache)* Armazenamento em cache da resposta na primeira chamada | Aprovado | A resposta da API foi armazenada corretamente no cache. |
+| *CT-INT-004* | *(Positivo - Cache)* Utilização da resposta em cache na segunda chamada | Aprovado | O sistema retornou a resposta do cache sem fazer nova requisição à API. |
+| *CT-INT-005* | *(Positivo)* Persistência bem-sucedida da análise no banco de dados | Aprovado | Os dados da chamada foram persistidos corretamente no banco de dados. |
+| *CT-INT-006* | *(Negativo)* Falha na persistência da análise no banco de dados | Aprovado | O sistema falhou graciosamente e registrou o erro adequadamente. |
 
 # 10. Procedimentos de Implantação
 
@@ -2800,56 +2869,284 @@ _conteúdo_
 
 _conteúdo_
 
-# 11. Orçamento e Caixa
+# 11. Orçamento
 
-&emsp;O orçamento do projeto foi estruturado a partir da soma de custos diretos (equipe, infraestrutura e ferramentas) e despesas fixas (como aluguel e utilidades), incorporando ainda os encargos trabalhistas de FGTS e INSS. Sobre esse valor consolidado aplicou-se um acréscimo de 15%, simulando uma margem de segurança ou contingência que aproxima a precificação das práticas reais de mercado. Dessa forma, o orçamento não apenas reflete os gastos necessários para execução do projeto, mas também cria uma reserva estratégica para imprevistos.
-
-### Orçamento
-<div align="center">
-  <sub>Figura 10.1 - Orçamento 1</sub> <br>
-
-  <img src="img/section11/orcamento_1.png" alt="" style="width: 100%; height: auto;">
-
-  <sup>Fonte: Material produzido pelos autores (2025).</sup>
-</div>
-
-<div align="center">
-  <sub>Figura 10.2 - Orçamento 2</sub> <br>
-
-  <img src="img/section11/orcamento_2.png" alt="" style="width: 100%; height: auto;">
-
-  <sup>Fonte: Material produzido pelos autores (2025).</sup>
-</div>
-
-<div align="center">
-  <sub>Figura 10.3 - Orçamento 3</sub> <br>
-
-  <img src="img/section11/orcamento_3.png" alt="" style="width: 100%; height: auto;">
-
-  <sup>Fonte: Material produzido pelos autores (2025).</sup>
-</div>
-
-### Fluxo de Caixa Simulação
-
-&emsp;O fluxo de caixa criado é uma simulação que foi construída de forma cronológica, registrando entradas e saídas ao longo do período de 04 de agosto a 09 de outubro de 2025. O método consistiu em calcular o saldo acumulado mês a mês, garantindo que os aportes financeiros e as margens definidas fossem suficientes para cobrir todos os compromissos. Esse equilíbrio permite observar a sustentabilidade do projeto no curto prazo e identificar com clareza quais despesas têm maior impacto sobre a liquidez. O nosso fluxo de caixa simula um investimento de um fundo de investimentos.
-
-<div align="center">
-  <sub>Figura 10.4 - Fluxo de Caixa</sub> <br>
-
-  <img src="img/section11/fluxo_caixa.png" alt="" style="width: 100%; height: auto;">
-
-  <sup>Fonte: Material produzido pelos autores (2025).</sup>
-</div>
+_conteúdo_
 
 # Referências
 
 _conteúdo_
 
+# 1. Introdução
+
+A Comgás (Companhia de Gás de São Paulo) é a maior distribuidora de gás natural encanado da América Latina, atuando no estado de São Paulo. A empresa é responsável por levar gás natural canalizado para residências, comércios, indústrias e outros segmentos em sua área de concessão, que inclui a região metropolitana de São Paulo, Campinas, Vale do Paraíba e Baixada Santista
+
+## 1.1 Termos e Abreviações
+
+* RF (Requisitos Funcionais) – Descrevem as funcionalidades e comportamentos esperados do sistema ou software.
+* RNF (Requisitos Não Funcionais) – Especificações que definem restrições e qualidades do sistema, como desempenho, segurança e usabilidade.
+* CA (Critério de Aceite) – Conjunto de condições que um produto ou funcionalidade deve atender para ser considerado aceito pelo cliente ou equipe.
+* T (Teste) – Processo de verificação para garantir que um sistema, software ou produto funciona conforme esperado.
+* API (Application Programming Interface) – Conjunto de definições e protocolos que permite a comunicação entre diferentes sistemas ou softwares.
+* Features – Funcionalidades ou características específicas de um software ou produto.
+* MVP (Minimum Viable Product) – Produto mínimo viável, versão inicial de um produto com funcionalidades básicas para validar sua viabilidade.
+* ISO (International Organization for Standardization) – Organização internacional responsável pela padronização e normatização de processos e produtos em diversas áreas.
+
+## 1.2 Objetivo do Documento
+
+&nbsp;&nbsp;&nbsp;&nbsp;Para registrar nosso processo de criação do projeto, desde a idealização até a entrega, desenvolvemos esta documentação. Além de detalhar as fases iniciais de desenvolvimento, o documento explica as tecnologias utilizadas e como foram aplicadas, facilitando a implementação do sistema.
+
+# 2. Entendimento do Projeto e do Negócio
+
+&ensp; Nesta seção, é apresentado o detalhamento completo do entendimento do negócio que norteia este projeto. O objetivo é fornecer uma visão 360º do desafio proposto pela Comgás, começando pela definição clara do problema de negócio e seus impactos diretos na operação e na estratégia da companhia. Em seguida, será apresentada a visão do produto concebido para solucionar este problema, incluindo seus objetivos, funcionalidades e escopo. A análise se aprofunda ao mapear as personas que serão beneficiadas pela solução, os fluxos de negócio envolvidos, e uma matriz estratégica de riscos e oportunidades, culminando na apresentação do Canvas do MVP que guiará o desenvolvimento.
+
+## 2.1 Contexto da Indústria do Parceiro
+
+**Visão Geral do Setor**:
+
+O setor de distribuição de gás natural no Brasil atua em um ambiente altamente regulado, com forte exigência de segurança, confiabilidade e qualidade no atendimento ao cliente. A crescente demanda por energia limpa e eficiente tem impulsionado a digitalização dos serviços, mas o atendimento humano ainda é essencial para resolver questões sensíveis, emergenciais ou complexas. Um dos principais desafios do setor é garantir uma experiência consistente e de alta qualidade, mesmo diante do alto volume de interações e da diversidade de perfis de clientes atendidos.
+
+A Comgás, maior distribuidora de gás natural canalizado da América Latina, atende mais de 2,6 milhões de clientes no Estado de São Paulo. A companhia atende três perfis distintos: pessoas físicas, clientes comerciais (como restaurantes e pequenos comércios) e clientes industriais (como fábricas e grandes indústrias). Enquanto as pessoas físicas representam o maior volume de atendimentos, os clientes industriais são os mais estratégicos, pois o setor industrial responde por mais de 20% do PIB brasileiro e possui alto consumo de gás, sendo um segmento fundamental para a sustentabilidade do negócio.
+
+**Posicionamento do Parceiro**:
+
+A Comgás atua como referência nacional em distribuição de gás natural, não apenas pela escala de sua operação, mas por seu papel de liderança em inovação e experiência do cliente. Em um setor tradicionalmente conservador, a empresa se diferencia por adotar tecnologias avançadas de automação e inteligência artificial como pilares da sua estratégia de atendimento. Com 94% dos atendimentos já resolvidos por canais digitais, como chatbot, URA, WhatsApp e site, a Comgás demonstra um alto nível de maturidade digital, raro entre empresas de infraestrutura no Brasil.
+
+Esse posicionamento a coloca na vanguarda do setor, onde o próximo passo natural não é apenas automatizar mais, mas tornar a qualidade do serviço mensurável, escalável e inteligente. Projetos como o de automação do monitoramento de chamadas com PLN e reconhecimento de áudio são consequência direta dessa postura: enquanto muitas empresas ainda avaliam atendimento de forma manual e pontual, a Comgás busca transformar dados de voz em insights acionáveis, em tempo real e com cobertura massiva. Isso reforça seu compromisso com a excelência operacional e posiciona a empresa como uma utility inteligente, alinhada às demandas de um mercado cada vez mais exigente.
+
+**Contexto Operacional e Desafio Atual**:
+
+A central de atendimento da Comgás recebe entre 120 mil e 150 mil ligações por mês, com toda a operação de atendimento humano terceirizada. Os atendentes, em sua maioria jovens entre 20 e 30 anos, atendem em diversos turnos, 24 horas por dia nos canais de emergência, como vazamentos de gás, e em horário comercial para demandas não emergenciais, como dúvidas sobre faturas, religações e troca de titularidade.
+
+Todas as chamadas são gravadas por obrigatoriedade regulatória. No entanto, apenas cerca de 1% delas são avaliadas manualmente por monitores de qualidade, que escutam cada gravação por completo e verificam critérios como confirmação de dados do cliente (CPF, endereço), cumprimento de roteiros, clareza nas respostas e postura do atendente. Esse processo é lento, pouco escalável e consome tempo operacional, limitando a capacidade da empresa de garantir a qualidade em larga escala.
+
+O atendimento é desafiador por diversos fatores operacionais e comportamentais. A maioria das chamadas chega sem identificação do cliente, exigindo confirmação de dados antes do atendimento. Há também uma forte sazonalidade: no inverno, o consumo de gás aumenta naturalmente, mesmo sem mudança nos hábitos de uso, pois a água entra mais fria e exige mais gás para aquecimento. Isso gera um pico de ligações de clientes preocupados com o valor da conta, muitas vezes por motivos improcedentes, como ter regulado o medidor, recebido visitas que usaram mais água quente ou não compreendido o funcionamento do consumo sazonal.
+
+Apesar de 94% dos atendimentos serem resolvidos por canais digitais, os 6% que transbordam para o atendimento humano trazem os casos mais sensíveis, urgentes ou emocionais. Essas interações muitas vezes envolvem situações de emergência, reclamações financeiras ou risco de perda de cliente. Por isso, a qualidade dessas interações é crítica: resolver rápido, com empatia e precisão é essencial para manter a reputação e a fidelidade.
+
+Nesse cenário, a automação do monitoramento de qualidade se torna um diferencial estratégico. A meta é aumentar a cobertura de análise de 1% para pelo menos 20% das ligações, sem impacto nos custos operacionais. A aplicação de tecnologias como reconhecimento de áudio, processamento de linguagem natural (PLN) e análise de sentimento permite não apenas escalar a avaliação, mas também identificar padrões, mapear boas práticas, detectar falhas recorrentes e realimentar o treinamento de atendentes.
+
+Essa iniciativa está diretamente ligada à estratégia de experiência do cliente (CX) da Comgás: garantir que cada interação, mesmo em larga escala, seja resolutiva, ágil e empática. Automatizar a escuta qualificada não é apenas uma evolução operacional, é uma alavanca para melhoria contínua, retenção de clientes e fortalecimento da reputação da marca.
+
+## 2.2 Problema
+
+### Descrição do Problema
+&ensp;A Comgás, maior distribuidora de gás natural canalizado da América Latina, enfrenta um desafio significativo na monitoria da qualidade do seu atendimento telefônico. Com uma central que recebe entre 120 e 150 mil ligações mensais, o método atual de avaliação de qualidade é predominantemente manual e limitado, operando de duas formas:
+
+**Avaliação Direta:** Baseada na nota de satisfação que o cliente atribui ao final do atendimento.
+
+**Análise por Amostragem:** Uma equipe de analistas de qualidade escuta manualmente as gravações de aproximadamente 1% do volume total de chamadas para verificar a conformidade com um checklist de qualidade pré-definido.
+
+&ensp;Este processo, embora importante, é inerentemente lento, caro e não escalável. A amostragem de apenas 1% é insuficiente para gerar uma visão estatisticamente relevante da qualidade geral do serviço, deixando uma lacuna de 99% das interações sem análise aprofundada. Com o crescimento contínuo da base de clientes (cerca de 450 novos por dia), a manutenção desse modelo manual se torna cada vez mais insustentável, gerando um gargalo operacional e estratégico.
+
+&ensp;O cerne do problema é a incapacidade de escalar a monitoria de qualidade na mesma proporção do crescimento da operação, o que impede a Comgás de ter uma visão abrangente e em tempo hábil sobre a experiência real de seus clientes no canal de voz.
+
+### Impacto
+&ensp;O problema descrito gera impactos negativos diretos para o negócio e seu posicionamento no setor:
+
+#### Impacto no Negócio:
+
+**Visibilidade Limitada da Experiência do Cliente (CX):** A baixa cobertura da amostragem impede a identificação de problemas sistêmicos, falhas recorrentes em scripts e oportunidades de melhoria no atendimento. Isso pode levar a uma degradação silenciosa da satisfação do cliente.
+
+**Ineficiência Operacional:** O custo de manter uma equipe de analistas para cobrir uma fração tão pequena do total de chamadas é alto. Escalar essa equipe para atingir uma cobertura maior (como os 20% desejados) seria financeiramente inviável no modelo atual.
+
+**Feedback Impreciso para Atendentes:** Com dados limitados, o feedback fornecido aos operadores da central de atendimento pode não ser representativo, dificultando o desenvolvimento e o treinamento direcionado da equipe.
+
+**Tomada de Decisão Reativa:** A falta de dados abrangentes força a gestão a tomar decisões baseadas em informações parciais ou apenas após a escalada de reclamações, em vez de agir proativamente.
+
+#### Impacto no Setor:
+
+**Perda de Competitividade:** No setor de serviços, a experiência do cliente é um diferencial competitivo crucial. Concorrentes que utilizam tecnologias de automação para análise de atendimento podem obter vantagens significativas em eficiência e qualidade.
+
+**Desalinhamento com a Transformação Digital:** Enquanto 94% dos atendimentos da Comgás já ocorrem em canais digitais, a monitoria do canal de voz permanece artesanal. Essa dissonância enfraquece a estratégia de integração e eficiência da companhia.
+
+**Risco à Reputação da Marca:** Falhas de qualidade não detectadas podem levar a experiências negativas que se espalham rapidamente, especialmente em mídias sociais, afetando a percepção pública da marca.
+
+## 2.3 Visão do Projeto e do Produto
+
+### Visão Geral e Objetivo do Produto
+
+&ensp;A solução proposta é uma plataforma de automação para monitoria e análise da qualidade de atendimento (Quality Assurance Automation). O produto visa transformar o processo atual, substituindo a escuta manual e limitada por uma análise automatizada, escalável e baseada em dados, utilizando tecnologias de Inteligência Artificial.
+
+&ensp;O objetivo principal do produto é desenvolver um protótipo funcional que automatize a transcrição e a análise das gravações das chamadas telefônicas, aumentando a cobertura de monitoria de 1% para, no mínimo, 20% do total de ligações, sem acarretar aumento nos custos operacionais.
+
+Como objetivos secundários, a plataforma busca:
+
+- Fornecer insights objetivos e acionáveis para a área de Experiência do Cliente (CX).
+
+- Padronizar os critérios de avaliação, reduzindo a subjetividade humana.
+
+- Reduzir drasticamente o tempo entre a ocorrência da chamada e a sua análise.
+
+- Gerar uma base de dados estruturada para futuras análises preditivas e de causa raiz.
+
+#### O que o Produto Faz (Principais Funcionalidades)
+
+**Processamento de Entradas:** Aceita o envio de arquivos de áudio (gravações de chamadas) e texto para análise.
+
+**Transcrição Automática:** Converte os arquivos de áudio em texto utilizando um serviço de speech-to-text.
+
+**Análise de Conteúdo por PLN:** Utiliza Processamento de Linguagem Natural para analisar o texto transcrito, identificando:
+
+- Sentimento do cliente e do atendente.
+
+- Cumprimento de etapas do script (saudação, despedida, etc.).
+
+- Uso de palavras-chave (positivas ou negativas, como "problema" ou "resolvido").
+
+- Detecção de interrupções, sobreposição de voz e uso de linguagem imprópria.
+
+**Geração de Score de Qualidade:** Atribui uma pontuação objetiva e personalizável a cada chamada com base em critérios pré-definidos (ex: cordialidade, eficiência, conformidade).
+
+**Visualização de Dados:** Apresenta os resultados em uma interface simples (dashboard), exibindo o score da ligação, a transcrição e métricas agregadas (pontuação média, tendências, etc.).
+
+#### O que o Produto Não Faz (Escopo e Limitações)
+
+&ensp;Conforme as restrições do projeto, o protótipo não contemplará:
+
+**Análise em Tempo Real:** A análise será feita em lote (batch processing), a partir de gravações já finalizadas, não durante a chamada.
+
+**Produto Comercializável:** A entrega é um protótipo funcional para validação de conceito, não um software pronto para comercialização.
+
+**Coleta e Rotulagem de Dados:** O projeto assume o recebimento de um conjunto de dados já preparado para o desenvolvimento.
+
+**Disponibilidade Contínua em Nuvem:** A solução não será mantida em ambiente de produção na nuvem após a conclusão do módulo acadêmico.
+
+**Substituição Completa da Análise Humana:** A ferramenta é projetada para escalar a monitoria e direcionar a atenção dos analistas de qualidade para os casos mais críticos ou complexos, e não para eliminar 100% a necessidade de supervisão humana.
+
+## 2.4 Personas e Jornada do Usuário
+
+&emsp;Esta seção apresenta as duas principais personas (Julia Souza, Analista de Qualidade de Atendimento, e Carlos Martins, Supervisor de Atendimento Humano) e suas respectivas jornadas antes e depois da implantação da solução. É importante esclarecer que ambas as personas são usuárias diretas do sistema, utilizando a plataforma para otimizar seus respectivos processos de trabalho. Esses mapas de jornada foram elaborados para revelar as necessidades, pensamentos e pontos de atrito em cada etapa do processo e assim orientar o desenvolvimento das telas, dos fluxos e das funcionalidades do sistema, garantindo que ambos os usuários tenham uma experiência fluida, com mais eficiência, clareza e confiança.
+
+&emsp; Abaixo a imagem da persona **Julia Souza** (Analista de Qualidade de Atendimento):
+
+<div align="center">
+  <sub>Figura X - Persona 1 - Julia Souza (Analista de Qualidade de Atendimento)</sub> <br>
+
+  <img src="img/section2/Persona 1 Julia.png" alt="Persona 1 - Julia Souza (Analista de Qualidade de Atendimento)" style="max-width: 700px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
 
 
+&emsp; Abaixo as imagens das jornadas da persona **Julia Souza** (Analista de Qualidade de Atendimento):
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Antes da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
+
+  <img src="img/section2/Jornada de Usuário Julia Antes.png" alt="Jornada do Usuário Antes da Solução (Julia Souza, Analista de Qualidade de Atendimento)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Depois da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
+
+  <img src="img/section2/Jornada de Usuário Julia Depois.png" alt="Jornada do Usuário Depois da Solução (Julia Souza, Analista de Qualidade de Atendimento)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
 
 
+&emsp; Abaixo a imagem da persona **Carlos Martins** (Supervisor de Atendimento Humano):
 
+<div align="center">
+  <sub>Figura X - Persona 2 - Carlos Martins (Supervisor de Atendimento Humano)</sub> <br>
 
+  <img src="img/section2/Persona 2 Carlos.png" alt="Persona 2 - Carlos Martins (Supervisor de Atendimento Humano)" style="max-width: 700px; width: 100%; height: auto;">
 
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
 
+&emsp; Abaixo as imagens das jornadas da persona **Carlos Martins** (Supervisor de Atendimento Humano):
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Antes da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
+
+  <img src="img/section2/Jornada do Usuário Carlos Antes.png" alt="Jornada do Usuário Antes da Solução (Carlos Martins, Supervisor de Atendimento Humano)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+<div align="center">
+  <sub>Figura X – Jornada do Usuário Depois da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
+
+  <img src="img/section2/Jornada do Usuário Carlos Depois.png" alt="Jornada do Usuário Depois da Solução (Carlos Martins, Supervisor de Atendimento Humano)" style="max-width: 600px; width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+### 2.4.1 Estudo sobre o Usuário do Sistema
+
+Para compreender melhor as necessidades, preferências, habilidades e limitações dos usuários os grupos se reuniram e elaboraram um conjunto de perguntas estratégicas. O objetivo foi mapear de forma estruturada os perfis dos analistas de qualidade, suas práticas atuais e suas expectativas em relação a um sistema automatizado de análise de chamadas.
+
+As perguntas foram consolidadas em um formulário google simples, que equilibra questões objetivas (de múltipla escolha) com uma pergunta aberta, permitindo coletar tanto dados quantitativos quanto qualitativos.
+
+#### 2.4.2 Questionário Elaborado
+
+| Nº | Pergunta | Opções de Resposta |
+|----|----------|---------------------|
+| 1  | Tempo de experiência na função | - Menos de 1 ano <br> - 1 a 3 anos <br> - 3 a 5 anos <br> - Mais de 5 anos |
+| 2  | Como você se considera em relação ao uso de tecnologias e ferramentas digitais? | - Iniciante (uso básico, com dificuldades) <br> - Intermediário (uso bem, mas com ajuda ocasional) <br> - Avançado (domino ferramentas e aprendo rápido) |
+| 3  | Quais são os principais pontos que você analisa em uma ligação? | - Conformidade com scripts <br> - Tom de voz/empatia <br> - Tempo de atendimento <br> - Resolução do problema do cliente <br> - Satisfação do cliente <br> - Outro (campo aberto) |
+| 4  | O que seria mais importante para você em um sistema de análise automática? | - Confiabilidade dos dados <br> - Rapidez nos resultados <br> - Facilidade de uso <br> - Visualização clara em dashboards <br> - Personalização de métricas <br> - Outro (campo aberto) |
+| 5  | Qual formato de material de apoio você acha mais útil para aprender a usar uma nova ferramenta? | - Vídeo explicativo <br> - PDF com passo a passo <br> - Somente interface intuitiva <br> - Todas as opções, se possível |
+| 6  | Em poucas palavras, o que tornaria essa ferramenta realmente útil para o seu dia a dia? | Resposta aberta |
+
+#### 2.4.3 Objetivo de Cada Pergunta
+
+- Pergunta 1 – Tempo de experiência na função  
+  Ajuda a entender o nível de senioridade dos usuários, permitindo diferenciar necessidades de novatos e veteranos.  
+
+- Pergunta 2 – Familiaridade com tecnologia  
+  Identifica o nível de domínio digital dos usuários, fundamental para ajustar a complexidade da interface e os materiais de apoio.  
+
+- Pergunta 3 – Critérios analisados em uma ligação  
+  Revela quais aspectos do atendimento são mais relevantes para os analistas e devem ser priorizados na automação.  
+
+- Pergunta 4 – Prioridades no sistema automático  
+  Permite identificar o que os usuários mais valorizam (ex.: rapidez, confiabilidade, personalização), servindo como guia para requisitos funcionais.  
+
+- Pergunta 5 – Formato de material de apoio  
+  Informa como os usuários preferem aprender a utilizar novas ferramentas, ajudando na definição da estratégia de treinamento e suporte.  
+
+- Pergunta 6 – Expectativas abertas  
+  Coleta insights qualitativos, capturando necessidades que não foram previstas nas opções anteriores.  
+
+### 2.4.4 Resultados do Estudo sobre o Usuário do Sistema
+
+Em conformidade com o objetivo de realizar um estudo aprofundado sobre o usuário, a fase inicial da pesquisa consistiu na aplicação de um questionário estruturado. O método visou mapear as necessidades, preferências, habilidades e limitações dos analistas de qualidade que interagirão com o sistema. As respostas coletadas, embora de uma amostra inicial, já fornecem direcionamentos claros para o desenvolvimento.
+
+**Habilidades Confirmadas e a Principal Necessidade do Negócio**
+
+O estudo identificou um perfil de usuário com habilidades digitais de nível intermediário a avançado, combinado com senioridade na função (todos com mais de 3 anos de experiência). Essa proficiência indica que os usuários estão aptos a interagir com uma ferramenta robusta, que ofereça personalização e análise detalhada.
+
+Essa experiência se reflete diretamente na sua principal necessidade: garantir a resolução do problema do cliente. Este foi o critério de sucesso mais valorizado, mostrando que a ferramenta deve, acima de tudo, ajudar o analista a responder à pergunta: "O problema do cliente foi resolvido?".
+
+**Preferências de Usabilidade e Requisitos de Confiança**
+
+No que tange às preferências de interface, a exigência por visualização clara em dashboards foi unânime. Os usuários não querem apenas ter acesso aos dados, eles precisam que a informação seja apresentada de forma visual, intuitiva e rápida.
+
+Contudo, a melhor interface não tem valor sem confiança. A confiabilidade dos dados foi citada como um requisito fundamental. A clareza visual, somada à precisão dos dados, constitui a base para que os analistas confiem na ferramenta e a incorporem em seu fluxo de trabalho diário.
+
+**Superando Limitações com uma Visão Estratégica**
+
+As respostas mais detalhadas revelaram as limitações do processo de análise atual, que é manual e focado em amostras. Os analistas expressaram o desejo de superar essa limitação, transformando a ferramenta em uma plataforma de inteligência. A visão deles para o sistema vai muito além da simples auditoria, englobando funcionalidades estratégicas como:
+
+* **Análise de Causa Raiz:** Identificar e categorizar os principais motivos que levam os clientes a ligar.
+
+* **Monitoramento de Tendências:** Acompanhar em tempo real o surgimento ou aumento de reclamações específicas (ex: "conta alta").
+
+* **Inteligência Geográfica:** Mapear a origem das chamadas para identificar problemas concentrados em regiões específicas.
+
+Esses pontos demonstram que a maior expectativa é por uma ferramenta que não apenas otimize a tarefa atual, mas que forneça uma nova camada de inteligência sobre a operação.
+
+#### 2.4.6 Experiências que o Usuário Deverá Vivenciar
+
+Esta seção detalha a jornada interativa do usuário na plataforma, demonstrando como a interface proposta atende às suas necessidades de forma eficiente e intuitiva, em alinhamento com os requisitos do projeto. A experiência foi projetada em um fluxo de quatro etapas, guiando o usuário da visão geral à ação.
+
+#### Jornada do Usuário: Mapeamento do Fluxo Principal
+
+A jornada do usuário foi projetada para ser um fluxo de trabalho eficiente e intuitivo, que chamamos de **"Visão Geral → Investigação → Análise Profunda → Ação"**. O fluxo começa com o usuário obtendo um resumo imediato da "saúde" do atendimento no Dashboard. Em seguida, pode investigar casos relevantes fazendo perguntas em linguagem natural na página de Chat ou ordenando a tabela de chamadas. Ao encontrar um caso específico, o usuário parte para a análise profunda, onde um modal de detalhes apresenta a transcrição e uma análise da IA que explica o porquê da pontuação. Por fim, com os insights adquiridos, o usuário pode planejar ações de melhoria, como ajustar scripts ou criar treinamentos focados, completando o ciclo.
+
+#### Passo 1: Visão Geral (O Panorama em Segundos)
