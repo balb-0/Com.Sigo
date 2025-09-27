@@ -3,23 +3,27 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only src/app/server.ts",
     "build": "tsc",
     "start": "node dist/app/server.js",
     "migrate": "ts-node-dev --transpile-only src/migrations/runMigrations.ts",
     "test-db": "ts-node-dev --transpile-only src/scripts/test-db-setup.ts",
     "seed:chamadas": "ts-node-dev --transpile-only src/scripts/seed-chamadas.ts",
-    "seed": "npm run seed:chamadas"
+    "seed": "npm run seed:chamadas",
+    "update:chamadas:timestamps": "ts-node-dev --transpile-only src/scripts/update-chamadas-timestamps.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.12.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "multer": "^2.0.2",
+    "openai": "^4.57.0",
     "pg": "^8.16.3",
     "pgvector": "^0.2.1",
     "swagger-jsdoc": "^6.2.8",
@@ -28,9 +32,12 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
     "@types/multer": "^2.0.0",
     "@types/node": "^24.3.1",
     "@types/swagger-ui-express": "^4.1.8",
+    "jest": "^30.1.3",
+    "ts-jest": "^29.4.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
   }

@@ -1,37 +1,26 @@
 
 import './App.css'
-import { useState } from 'react'
+import { useCallback } from 'react'
 import ChatPage from './pages/ChatPage/ChatPage'
 import {Dashboard} from './pages/Dashboard/Dashboard'
 import backgroundImage from './assets/images/background.svg'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'dashboard' | 'chat'>('dashboard')
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  const handleNavigate = (href: string) => {
-    if (href === '/') {
-      setCurrentPage('dashboard')
-    } else if (href === '/chat') {
-      setCurrentPage('chat')
-    }
-  }
-
-  const renderCurrentPage = () => {
-    const currentHref = currentPage === 'dashboard' ? '/' : '/chat'
-
-    switch (currentPage) {
-      case 'chat':
-        return <ChatPage currentPage={currentHref} onNavigate={handleNavigate} />
-      case 'dashboard':
-      default:
-        return <Dashboard currentPage={currentHref} onNavigate={handleNavigate} />
-    }
-  }
+  const handleNavigate = useCallback((href: string) => {
+    navigate(href)
+  }, [navigate])
 
   return (
     <div className="root-body">
       <img src={backgroundImage} alt="Background" className="background-image" />
-      {renderCurrentPage()}
+      <Routes>
+        <Route path="/" element={<Dashboard currentPage={location.pathname + location.search} onNavigate={handleNavigate} />} />
+        <Route path="/chat" element={<ChatPage currentPage={location.pathname + location.search} onNavigate={handleNavigate} />} />
+      </Routes>
     </div>
   )
 }

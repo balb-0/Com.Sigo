@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './NavigationTabs.css';
 
 interface Tab {
@@ -15,7 +16,9 @@ interface NavigationTabsProps {
 }
 
 export default function NavigationTabs({ tabs, currentPage, onNavigate }: NavigationTabsProps) {
-    const pathname = currentPage || '/';
+    const routerLocation = useLocation();
+    const routerNavigate = useNavigate();
+    const pathname = currentPage || routerLocation.pathname;
 
     return (
         <nav className="navigation-tabs">
@@ -24,7 +27,10 @@ export default function NavigationTabs({ tabs, currentPage, onNavigate }: Naviga
                 return (
                     <button
                         key={tab.href}
-                        onClick={() => onNavigate?.(tab.href)}
+                        onClick={() => {
+                            if (onNavigate) onNavigate(tab.href);
+                            else routerNavigate(tab.href);
+                        }}
                         className="nav-link"
                     >
                         <span className={`nav-content ${isActive ? 'active' : 'inactive'}`}>

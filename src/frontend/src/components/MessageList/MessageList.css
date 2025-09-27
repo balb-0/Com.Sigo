@@ -60,3 +60,25 @@
   color: var(--color-branco);
   margin: 0;
 }
+
+.typing-dots {
+  display: inline-block;
+}
+.typing-dots span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 2px;
+  background: var(--color-branco);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: blink 1.4s infinite both;
+}
+.typing-dots span:nth-child(2) { animation-delay: .2s; }
+.typing-dots span:nth-child(3) { animation-delay: .4s; }
+
+@keyframes blink {
+  0% { opacity: .2; }
+  20% { opacity: 1; }
+  100% { opacity: .2; }
+}
