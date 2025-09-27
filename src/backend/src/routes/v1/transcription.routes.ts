@@ -2,6 +2,8 @@ import { Router } from 'express';
 import path from 'path';
 import fs from 'fs/promises';
 import { transcribeLocalAudioFilePTBR } from '../../services/transcription.service';
+// No topo do seu arquivo de processamento de áudio, adicione esta linha:
+const webhookNotifier = require('../../services/webhookNotifier'); // Ajuste o caminho se necessário
 
 export const transcriptionRouter = Router();
 
@@ -10,7 +12,13 @@ type TranscribeBody = {
 };
 
 transcriptionRouter.post('/audio', async (req, res) => {
+  const jobId = `job_${Date.now()}`;
+  const clienteId = req.body.clienteId || 'unknown';
+  
   try {
+    // Notificar início do processamento
+    await webhookNotifier.notifyProcessingStart(jobId, clienteId);
+    
     const body = req.body as TranscribeBody;
     const url = body?.url?.trim();
     if (!url) {
@@ -37,8 +45,15 @@ transcriptionRouter.post('/audio', async (req, res) => {
     }
 
     const result = await transcribeLocalAudioFilePTBR(localFilePath);
+    
+    // Notificar sucesso do processamento
+    await webhookNotifier.notifyProcessingSuccess(jobId, clienteId, result);
+    
     return res.json(result);
   } catch (err) {
+    // Notificar falha do processamento
+    await webhookNotifier.notifyProcessingFailure(jobId, clienteId, err.message);
+    
     // eslint-disable-next-line no-console
     console.error(err);
     return res.status(500).json({ error: 'Transcription failed' });
