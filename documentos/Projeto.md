@@ -2591,52 +2591,6 @@ curl -X POST http://localhost:3000/webhook/processing-start \
   -d '{"jobId":"start_job_001","clienteId":"cliente_123"}'
 ```
 
----
-
-#### 8.4.1.2.12 Anexos — exemplos de payload 
-
-**processing-start**
-
-```json
-{ "jobId": "start_job_001", "clienteId": "cliente_123" }
-```
-
-**processing-success**
-
-```json
-{ "jobId": "test_job_001", "clienteId": "cliente_123", "chamada_id": "chamada_001", "resultado": "sucesso" }
-```
-
-**processing-failure**
-
-```json
-{ "jobId": "test_job_002", "clienteId": "cliente_123", "resultado": "falha", "error": "audio corrupted" }
-```
-
-**/webhook/text**
-
-```json
-{
-  "jobId": "job_text_001",
-  "clienteId": "cliente_123",
-  "source": "whatsapp",
-  "text": "Preciso de religação de gás.",
-  "analysis": { "intent": "solicitacao_religacao", "sentiment": "neutral" }
-}
-```
-
-**/webhook/voice**
-
-```json
-{
-  "jobId": "job_audio_001",
-  "clienteId": "cliente_123",
-  "chamada_id": "chamada_010",
-  "audioUrl": "https://storage.example.com/audio/abc.wav",
-  "metadata": { "callStart": "2025-10-06T11:50:00Z" }
-}
-```
-
 ## 8.4.2 Sprint 4
 
 _conteúdo_
