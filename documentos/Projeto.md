@@ -2217,7 +2217,7 @@ Esta seção descreve a implementação atual do `webhook-service` e especifica 
 
 ---
 
-#### 8.4.1.2.2 Implementação atual (código do repositório)
+#### 8.4.1.2.2 Implementação atual
 
 Resumo: o repositório implementa um servidor Express que expõe endpoints para notificação de início, sucesso e falha do processamento de jobs. Esses endpoints são definidos em `server.js` e delegam a validação e registro para `webhook-handlers.js`. Há um utilitário de notificação (`webhookNotifier.js`) e um script de teste (`test-webhooks.js`). As dependências e scripts estão em `package.json`.
 
@@ -2231,7 +2231,7 @@ Arquivos principais:
 
 ---
 
-#### 8.4.1.2.3 Endpoints implementados (estado atual)
+#### 8.4.1.2.3 Endpoints implementados 
 
 Os endpoints abaixo estão implementados no código do repositório:
 
@@ -2386,7 +2386,7 @@ Os endpoints abaixo estão implementados no código do repositório:
 
 ---
 
-#### 8.4.1.2.5 Rotas propostas para voz e texto (requisito do feedback)
+#### 8.4.1.2.5 Rotas propostas para voz e texto 
 
 As rotas abaixo **não estão implementadas** no código atual; seguem especificações canônicas para implementação imediata.
 
@@ -2423,7 +2423,7 @@ As rotas abaixo **não estão implementadas** no código atual; seguem especific
 }
 ```
 
-##### POST /webhook/voice (proposta)
+##### POST /webhook/voice 
 
 * Finalidade: receber eventos relacionados a áudios (URLs para blob storage) e/ou transcrições já geradas.
 * Campos recomendados/obrigatórios:
@@ -2465,7 +2465,7 @@ As rotas abaixo **não estão implementadas** no código atual; seguem especific
 
 ---
 
-#### 8.4.1.2.6 Formato canônico de transcrição salvo (recomendação)
+#### 8.4.1.2.6 Formato canônico de transcrição salvo 
 
 Ao persistir `transcript` no banco (campo `transcript_json` na tabela `chamada`), recomenda-se o formato abaixo, compatível com outputs comuns de STT e com consumo por módulos de avaliação:
 
@@ -2593,7 +2593,7 @@ curl -X POST http://localhost:3000/webhook/processing-start \
 
 ---
 
-#### 8.4.1.2.12 Anexos — exemplos de payload (resumo)
+#### 8.4.1.2.12 Anexos — exemplos de payload 
 
 **processing-start**
 
@@ -2613,7 +2613,7 @@ curl -X POST http://localhost:3000/webhook/processing-start \
 { "jobId": "test_job_002", "clienteId": "cliente_123", "resultado": "falha", "error": "audio corrupted" }
 ```
 
-**/webhook/text (proposta)**
+**/webhook/text**
 
 ```json
 {
@@ -2625,7 +2625,7 @@ curl -X POST http://localhost:3000/webhook/processing-start \
 }
 ```
 
-**/webhook/voice (proposta)**
+**/webhook/voice**
 
 ```json
 {
