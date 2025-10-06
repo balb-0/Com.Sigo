@@ -2209,310 +2209,433 @@ O modelo também aponta que, em geral, os atendentes mantêm postura ética e co
 
 O desenvolvimento do modelo representa um avanço importante para o projeto, pois permite automatizar parte da avaliação de qualidade e identificar padrões de atendimento que podem ser aprimorados nas próximas sprints.
 
-### 8.4.1.2 Webhooks - Implementação Completa
+### 8.4.1.2 Webhooks (serviço: `webhook-service`)
 
-### Visão Geral
+#### 8.4.1.2.1 Objetivo
 
-Este documento descreve a implementação de webhooks para o sistema de automação com reconhecimento de áudio da Comgás. Os webhooks permitem receber notificações de processamento de dados de forma assíncrona, suportando tanto análise de texto quanto transcrição de áudio.
+Esta seção descreve a implementação atual do `webhook-service` e especifica rotas, esquemas de payload, exemplos de processamento, requisitos de segurança e recomendações técnicas. O objetivo é (i) documentar com precisão o que está implementado no repositório e (ii) fornecer especificações para as rotas de texto e voz exigidas pelo feedback.
 
-### Abordagens Implementadas
+---
 
-#### Abordagem 1: Webhooks por Tipo de Dados (Implementado)
+#### 8.4.1.2.2 Implementação atual (código do repositório)
 
-Implementação atual integrada ao sistema existente, focada na recepção de dados processados por tipo.
+Resumo: o repositório implementa um servidor Express que expõe endpoints para notificação de início, sucesso e falha do processamento de jobs. Esses endpoints são definidos em `server.js` e delegam a validação e registro para `webhook-handlers.js`. Há um utilitário de notificação (`webhookNotifier.js`) e um script de teste (`test-webhooks.js`). As dependências e scripts estão em `package.json`.
 
-#### Endpoints Implementados
+Arquivos principais:
 
-- **POST `/api/v1/webhook/text`**
-  - Objetivo: Receber eventos de processamento de texto (análise de chat, WhatsApp, etc.)
-  - Body (JSON):
-    - `sourceId` (string, opcional): identificador da origem do evento
-    - `text` (string, obrigatório): conteúdo textual
-    - `meta` (object, opcional): metadados livres
-    - `analysis` (object, opcional): resultado de análise externa
-    - `score` (number, opcional): nota de qualidade
-  - Respostas:
-    - 200: `{ status: 'ok', created: { ...registro } }`
-    - 400: `{ error: "Missing required field 'text' in payload" }`
+* `server.js` — servidor Express e rotas: `/webhook/processing-start`, `/webhook/processing-success`, `/webhook/processing-failure`.
+* `webhook-handlers.js` — validação mínima, geração de `eventId`, registro temporário em memória (arrays) e retorno de confirmação.
+* `webhookNotifier.js` — funções que enviam notificações HTTP a esses endpoints (`notifyProcessingStart`, `notifyProcessingSuccess`, `notifyProcessingFailure`).
+* `test-webhooks.js` — script de teste que posta payloads de exemplo para validar comportamento local.
+* `package.json` — scripts `start` e `test` e dependências (express, cors, axios).
 
-- **POST `/api/v1/webhook/voice`**
-  - Objetivo: Receber eventos de transcrição voz-para-texto
-  - Body (JSON):
-    - `audioId` (string, opcional): identificador do áudio
-    - `transcription` (object, obrigatório): conteúdo de transcrição (estrutura livre)
-    - `analysis` (object, opcional): resultado de análise externa
-    - `score` (number, opcional): nota de qualidade
-  - Respostas:
-    - 200: `{ status: 'ok', created: { ...registro } }`
-    - 400: `{ error: "Missing required field 'transcription' in payload" }`
+---
 
-#### Estrutura e Armazenamento
+#### 8.4.1.2.3 Endpoints implementados (estado atual)
 
-Os handlers criam registros na tabela `chamada` através de `chamadaRepository.create`, preenchendo:
-- `transcript_json`: `{ type: 'text', text, meta }` ou `{ type: 'voice', transcription }`
-- `avaliacao_json`: dados de análise (quando fornecido)
-- `nota_qualidade`: `score` (quando fornecido)
-- `cliente_id`: `sourceId`/`audioId` (quando fornecido)
+Os endpoints abaixo estão implementados no código do repositório:
 
-Não há alteração no schema. Os dados são inseridos usando a infraestrutura atual.
+##### POST /webhook/processing-start
 
-#### Exemplos de Payload - Abordagem 1
+* Finalidade: notificar o início do processamento de um job.
+* Campos obrigatórios (payload):
 
-**Texto:**
+  * `jobId` (string)
+  * `clienteId` (string)
+* Comportamento:
+
+  * Validação de presença de `jobId` e `clienteId`.
+  * Geração de evento (`eventId`, `status: "started"`, `receivedAt`) e armazenamento em memória.
+  * Resposta HTTP: `202 Accepted` com JSON de confirmação.
+
+**Exemplo de request**
+
 ```json
 {
-  "sourceId": "chat-abc-123",
-  "text": "Cliente solicitou religação e informou leitura",
-  "meta": { "canal": "chat", "uf": "SP" },
-  "analysis": { "intent": "solicitacao_religacao", "sentiment": "neutral" },
-  "score": 4.2
+  "jobId": "start_job_001",
+  "clienteId": "cliente_123"
 }
 ```
 
-**Voz:**
-```json
-{
-  "audioId": "audio-20250912-001",
-  "transcription": {
-    "language": "pt-BR",
-    "text": "Boa tarde, estou com problema na minha conta, veio muito alta."
-  },
-  "analysis": { "intent": "reclamacao_fatura", "risk": "medium" },
-  "score": 2.8
-}
-```
-
-#### Abordagem 2: Webhooks por Status de Processamento (Alternativa)
-
-Implementação alternativa focada no status do processamento, ideal para monitoramento de sucesso/falha.
-
-#### Endpoints Alternativos
-
-- **POST `/webhook/processing-success`**
-  - Objetivo: Notificar que a transcrição foi concluída corretamente
-  - Body (JSON):
-    - `jobId` (string, obrigatório): identificador do job
-    - `filename` (string, opcional): nome do arquivo processado
-    - `transcription` (string, opcional): texto transcrito
-    - `qualityScore` (number, opcional): pontuação de qualidade
-    - `sentiment` (string, opcional): análise de sentimento
-    - `compliance` (object, opcional): dados de conformidade
-    - `processedAt` (string, opcional): timestamp do processamento
-
-- **POST `/webhook/processing-failure`**
-  - Objetivo: Notificar que houve erro no processamento
-  - Body (JSON):
-    - `jobId` (string, obrigatório): identificador do job
-    - `filename` (string, opcional): nome do arquivo que falhou
-    - `error` (string, obrigatório): descrição do erro
-    - `errorCode` (string, opcional): código do erro
-    - `failedAt` (string, opcional): timestamp da falha
-    - `retryCount` (number, opcional): número de tentativas
-
-#### Exemplos de Payload - Abordagem 2
-
-**Sucesso:**
-```json
-{
-    "jobId": "job_12345",
-    "filename": "atendimento_cliente_001.wav",
-    "transcription": "Olá, como posso ajudá-lo hoje? O cliente respondeu que gostaria de saber sobre sua conta.",
-    "qualityScore": 85,
-    "sentiment": "positivo",
-    "compliance": {
-        "score": 90,
-        "requiredPhrases": ["posso confirmar seu cpf", "obrigado por entrar em contato"],
-        "foundPhrases": ["obrigado por entrar em contato"],
-        "missingPhrases": ["posso confirmar seu cpf"]
-    },
-    "processedAt": "2024-09-11T10:30:00Z"
-}
-```
-
-**Falha:**
-```json
-{
-    "jobId": "job_12346",
-    "filename": "atendimento_cliente_002.wav",
-    "error": "Falha na transcrição: áudio com qualidade muito baixa",
-    "errorCode": "TRANSCRIPTION_FAILED",
-    "failedAt": "2024-09-11T10:35:00Z",
-    "retryCount": 1
-}
-```
-
-### Implementação Técnica Atual
-
-#### Configuração e Dependências
+**Exemplo de response**
 
 ```json
 {
-  "dependencies": {
-    "express": "^4.18.0",
-    "cors": "^2.8.5"
+  "status": "accepted",
+  "message": "Notificação de início processada com sucesso",
+  "data": {
+    "eventId": "k8z1x...",
+    "jobId": "start_job_001",
+    "message": "Evento de início processado."
   }
 }
 ```
 
-#### Estrutura de Arquivos
+##### POST /webhook/processing-success
 
-```
-src/backend/
-├── src/
-│   ├── controllers/
-│   │   └── webhook.controller.ts    # Lógica de processamento
-│   └── routes/v1/
-│       └── webhook.routes.ts        # Definição das rotas
-├── examples/webhooks/
-│   ├── text.json                    # Exemplo de payload de texto
-│   └── voice.json                   # Exemplo de payload de voz
-├── tests/
-│   └── webhook.test.js              # Testes automatizados
-└── scripts/
-    └── test-webhooks.js             # Script de teste manual
-```
+* Finalidade: notificar conclusão bem sucedida de um job (transcrição/analítica).
+* Campos obrigatórios (payload):
 
-#### Fluxo de Processamento
+  * `jobId` (string)
+  * `clienteId` (string)
+  * `chamada_id` (string)
+  * `resultado` (string) — valor esperado: `"sucesso"`
+* Comportamento:
 
-1. Provedor externo envia POST para `/api/v1/webhook/text` ou `/api/v1/webhook/voice`
-2. Validação mínima do payload (campo obrigatório presente)
-3. Inserção de registro em `chamada` via `chamadaRepository.create`
-4. Retorno 200 OK ao provedor
+  * Validação dos campos e do valor de `resultado`.
+  * Registro do evento (`status: "success"`) em memória e retorno `200 OK`.
 
-### Testes e Validação
+**Exemplo de request**
 
-#### Testes Automatizados
-
-```javascript
-// Exemplo de teste unitário
-describe('POST /webhook/text', () => {
-  test('deve processar payload válido de texto', async () => {
-    const payload = {
-      sourceId: "test-chat-001",
-      text: "Cliente solicitou religação do gás",
-      meta: { canal: "whatsapp", uf: "SP" },
-      score: 4.2
-    };
-
-    const response = await request(app)
-      .post('/webhook/text')
-      .send(payload)
-      .expect(200);
-
-    expect(response.body.status).toBe('ok');
-    expect(response.body.created.transcript_json.type).toBe('text');
-  });
-});
-```
-
-#### Script de Teste Manual
-
-```javascript
-// Teste manual via script
-const axios = require('axios');
-
-async function testWebhooks() {
-    const textPayload = {
-        sourceId: "manual-test-001",
-        text: "Cliente solicitou religação e informou leitura do medidor",
-        meta: { canal: "whatsapp", uf: "SP" },
-        analysis: { intent: "solicitacao_religacao", sentiment: "neutral" },
-        score: 4.2
-    };
-    
-    const response = await axios.post('http://localhost:3000/webhook/text', textPayload);
-    console.log('✅ Sucesso:', response.data);
+```json
+{
+  "jobId": "test_job_001",
+  "clienteId": "cliente_123",
+  "chamada_id": "chamada_001",
+  "resultado": "sucesso"
 }
 ```
 
-### Ativação e Deploy
+**Exemplo de response**
 
-#### Como Ativar (Próxima Sprint)
-
-1. Registrar as rotas no `src/backend/src/routes/v1.ts`:
-   ```typescript
-   v1Router.use('/webhook', webhookRouter);
-   ```
-
-2. Configurar variáveis de ambiente:
-   ```bash
-   PORT=3000
-   NODE_ENV=production
-   WEBHOOK_SECRET=your-secret-key-here
-   ```
-
-#### Melhorias de Segurança
-
-- Validar assinatura do provedor (cabeçalho `X-Signature` e segredo compartilhado)
-- Limitar IPs/Origins permitidos
-- Usar token de acesso dedicado
-- Implementar rate limiting
-
-#### Monitoramento
-
-- Logs estruturados para cada webhook recebido
-- Métricas de performance e taxa de sucesso
-- Alertas para falhas consecutivas
-- Dashboard de estatísticas (opcional)
-
-### Integração com Sistemas Externos
-
-#### Provedores Suportados
-
-- Sistemas de análise de texto (NLP)
-- Serviços de speech-to-text (Azure, Google, AWS)
-- Plataformas de análise de sentimento
-- APIs de processamento de linguagem natural
-
-#### Exemplo de Integração
-
-```javascript
-// Disparar webhook após processamento
-async function notifyProcessingComplete(jobData) {
-    const payload = {
-        sourceId: jobData.clientId,
-        text: jobData.transcription,
-        analysis: jobData.analysis,
-        score: jobData.qualityScore
-    };
-    
-    await axios.post('/api/v1/webhook/text', payload);
+```json
+{
+  "status": "success",
+  "message": "Notificação de sucesso processada",
+  "data": {
+    "eventId": "m9a2b...",
+    "jobId": "test_job_001",
+    "message": "Evento de sucesso processado."
+  }
 }
 ```
 
-### Casos de Uso no Projeto Comgás
+##### POST /webhook/processing-failure
 
-#### Cenário 1: Análise de Chat WhatsApp
-- Cliente envia mensagem via WhatsApp
-- Sistema de NLP processa o texto
-- Webhook `/text` recebe resultado da análise
-- Dados armazenados para monitoramento de qualidade
+* Finalidade: notificar falha de processamento de um job.
+* Campos obrigatórios (payload):
 
-#### Cenário 2: Transcrição de Ligação Telefônica
-- Ligação é gravada e enviada para transcrição
-- Serviço de speech-to-text processa o áudio
-- Webhook `/voice` recebe transcrição e análise
-- Sistema calcula score de qualidade do atendimento
+  * `jobId` (string)
+  * `clienteId` (string)
+  * `resultado` (string) — valor esperado: `"falha"`
+* Comportamento:
 
-#### Cenário 3: Monitoramento de Qualidade
-- Webhooks coletam dados de múltiplos canais
-- Sistema analisa padrões e tendências
-- Relatórios automáticos de qualidade gerados
-- Alertas para atendimentos com baixa pontuação
+  * Validação e registro em memória (`status: "failed"`).
+  * Retorno `200 OK` com confirmação.
 
-### Resumo da Implementação
+**Exemplo de request**
 
-**Configuração de rotas e endpoints**: Implementados endpoints `/text` e `/voice` integrados ao sistema atual
+```json
+{
+  "jobId": "test_job_002",
+  "clienteId": "cliente_123",
+  "resultado": "falha"
+}
+```
 
-**Lógica de processamento**: Controllers TypeScript com validação robusta e integração com banco de dados existente
+---
 
-**Resposta ao provedor**: Códigos HTTP apropriados (200 OK, 400 Bad Request, 500 Internal Server Error)
+#### 8.4.1.2.4 Esquemas (JSON Schema simplificado) — endpoints implementados
 
-**Documentação**: Especificação completa com exemplos práticos e casos de teste
+**processing-start**
 
-**Testes**: Suíte de testes automatizados e scripts de validação manual
+```json
+{
+  "type": "object",
+  "required": ["jobId", "clienteId"],
+  "properties": {
+    "jobId": { "type": "string" },
+    "clienteId": { "type": "string" }
+  },
+  "additionalProperties": true
+}
+```
 
-**Segurança**: Recomendações para ambiente de produção com autenticação e rate limiting
+**processing-success**
+
+```json
+{
+  "type": "object",
+  "required": ["jobId", "clienteId", "chamada_id", "resultado"],
+  "properties": {
+    "jobId": { "type": "string" },
+    "clienteId": { "type": "string" },
+    "chamada_id": { "type": "string" },
+    "resultado": { "type": "string", "enum": ["sucesso"] }
+  },
+  "additionalProperties": true
+}
+```
+
+**processing-failure**
+
+```json
+{
+  "type": "object",
+  "required": ["jobId", "clienteId", "resultado"],
+  "properties": {
+    "jobId": { "type": "string" },
+    "clienteId": { "type": "string" },
+    "resultado": { "type": "string", "enum": ["falha"] },
+    "error": { "type": "string" },
+    "errorCode": { "type": "string" }
+  },
+  "additionalProperties": true
+}
+```
+
+---
+
+#### 8.4.1.2.5 Rotas propostas para voz e texto (requisito do feedback)
+
+As rotas abaixo **não estão implementadas** no código atual; seguem especificações canônicas para implementação imediata.
+
+#### POST /webhook/text (proposta)
+
+* Finalidade: receber resultados de processamento de entradas de texto (chat, WhatsApp, formulários) ou análises já executadas.
+* Validação mínima obrigatória:
+
+  * `jobId` (string) — recomendado para correlação
+  * `clienteId` (string) — quando aplicável
+  * `text` (string) — conteúdo textual (ou `analysis` se o texto não for enviado)
+* Payload recomendado:
+
+  * `source` (enum: "chat" | "whatsapp" | "form" | "other")
+  * `text` (string)
+  * `analysis` (object) — `{ intent, entities, sentiment, tags }`
+  * `score` (number) — nota de qualidade (opcional)
+  * `metadata` (object) — `{ "channel", "sessionId", "timestamp" }`
+* Resposta recomendada:
+
+  * `202 Accepted` (aceitação assíncrona) ou `200 OK` (síncrono)
+
+**Exemplo de request**
+
+```json
+{
+  "jobId": "job_text_001",
+  "clienteId": "cliente_123",
+  "source": "whatsapp",
+  "text": "Preciso de religação de gás, por favor.",
+  "analysis": { "intent": "solicitacao_religacao", "sentiment": "neutral" },
+  "score": 4.4,
+  "metadata": { "sessionId": "sess-abc", "timestamp": "2025-10-06T12:00:00Z" }
+}
+```
+
+##### POST /webhook/voice (proposta)
+
+* Finalidade: receber eventos relacionados a áudios (URLs para blob storage) e/ou transcrições já geradas.
+* Campos recomendados/obrigatórios:
+
+  * `jobId` (string)
+  * `clienteId` (string) — quando aplicável
+  * `chamada_id` (string)
+  * `audioUrl` (string) — URL para arquivo de áudio (quando aplicável)
+  * `durationSeconds` (number) — opção
+  * `transcript` (object) — quando transcrição já tiver sido produzida
+  * `metadata` (object)
+* Estrutura recomendada de `transcript`:
+
+```json
+{
+  "language": "pt-BR",
+  "text": "Transcrição consolidada...",
+  "alternatives": [ /* opcional */ ],
+  "confidence": 0.92
+}
+```
+
+* Resposta recomendada:
+
+  * `202 Accepted` para enfileiramento; `200 OK` se processado de forma síncrona.
+
+**Exemplo de request**
+
+```json
+{
+  "jobId": "job_audio_001",
+  "clienteId": "cliente_123",
+  "chamada_id": "chamada_010",
+  "audioUrl": "https://storage.example.com/audio/abc.wav",
+  "durationSeconds": 123,
+  "metadata": { "callStart": "2025-10-06T11:50:00Z" }
+}
+```
+
+---
+
+#### 8.4.1.2.6 Formato canônico de transcrição salvo (recomendação)
+
+Ao persistir `transcript` no banco (campo `transcript_json` na tabela `chamada`), recomenda-se o formato abaixo, compatível com outputs comuns de STT e com consumo por módulos de avaliação:
+
+```json
+{
+  "alternatives": [
+    {
+      "transcript": "Texto consolidado da transcrição",
+      "confidence": 0.93,
+      "words": [
+        { "word": "Olá", "startTime": "0s", "endTime": "0.3s", "speakerTag": 2 }
+      ]
+    }
+  ],
+  "meta": {
+    "source": "voice",
+    "language": "pt-BR",
+    "durationSeconds": 120,
+    "callId": "chamada_010"
+  }
+}
+```
+
+---
+
+#### 8.4.1.2.7 Integração com filas (SQS) e orquestração assíncrona
+
+Recomenda-se adotar enfileiramento para processamento de arquivos grandes e operações demoradas:
+
+Fluxo proposto:
+
+1. Ingress webhook (HTTP) → validação mínima.
+2. Publicar mensagem na fila (SQS/RabbitMQ/Kafka) com envelope:
+
+```json
+{
+  "jobId": "job_audio_001",
+  "clienteId": "cliente_123",
+  "type": "voice" | "text",
+  "payload": { /* body recebido */ },
+  "receivedAt": "ISO-8601"
+}
+```
+
+3. Consumidores processam a fila (download de `audioUrl`, transcrição, análise) e, ao final, invocam `/webhook/processing-success` ou `/webhook/processing-failure` ou atualizam diretamente o registro no banco.
+4. Configurar DLQ (dead-letter queue), visibilidade adequada e idempotência por `jobId`.
+
+Benefícios: desacoplamento, retry automático, controle de backpressure e melhor escalabilidade.
+
+---
+
+#### 8.4.1.2.8 Comportamento de erro e idempotência
+
+* Validação: campos obrigatórios devem produzir `400 Bad Request` com mensagem clara. O código atual retorna `500` para validações falhas; recomenda-se diferenciar erros de validação (400) de erros de servidor (500).
+* Idempotência: endpoints devem suportar reenvio sem duplicação. Recomenda-se deduplicação por `jobId` ou armazenamento de hash do payload.
+* Retries: consumidores devem respeitar `retryCount` e utilizar DLQ para falhas persistentes.
+* Respostas de erro devem ter formato padrão, por exemplo:
+
+```json
+{
+  "status": "error",
+  "code": "VALIDATION_ERROR",
+  "message": "Campo jobId é obrigatório",
+  "details": { /* opcional */ }
+}
+```
+
+---
+
+#### 8.4.1.2.9 Segurança, autenticação e conformidade
+
+Recomendações para produção:
+
+1. **Autenticação de webhook**: HMAC (assinatura no cabeçalho) ou token compartilhado. Validar `X-Signature` ou `Authorization` em cada request.
+2. **TLS obrigatório**: exigir HTTPS.
+3. **Rate limiting**: limitar chamadas por origem/IP.
+4. **Mascaramento/anonimização**: mascarar PII antes de persistir ou exportar (conformidade LGPD).
+5. **Logging e auditoria**: logs estruturados com `correlationId`, `eventId` e `jobId`.
+6. **Controle de acesso**: RBAC para qualquer dashboard administrativo.
+
+---
+
+#### 8.4.1.2.10 Testes e validação
+
+* Testes locais: executar `npm test` para rodar `test-webhooks.js`, que envia payloads de exemplo para `http://localhost:3000`.
+* Recomendações de testes adicionais:
+
+  * Unit tests para `webhook-handlers.js` (validação, geração de `eventId`).
+  * Integration tests para rotas em `server.js`.
+  * Testes de contrato (schemas) usando `ajv` ou ferramenta equivalente.
+  * Testes que simulam fila (mock SQS) para validar comportamento assíncrono e retry.
+
+---
+
+#### 8.4.1.2.11 Como executar localmente
+
+1. Instalar dependências:
+
+```bash
+cd webhook-service
+npm install
+```
+
+2. Iniciar servidor:
+
+```bash
+npm start
+# por padrão: http://0.0.0.0:3000 (ou PORT via env)
+```
+
+3. Executar script de testes:
+
+```bash
+npm test
+# executa test-webhooks.js que chama os endpoints de processing-* usando axios
+```
+
+Exemplo rápido com `curl`:
+
+```bash
+curl -X POST http://localhost:3000/webhook/processing-start \
+  -H "Content-Type: application/json" \
+  -d '{"jobId":"start_job_001","clienteId":"cliente_123"}'
+```
+
+---
+
+#### 8.4.1.2.12 Anexos — exemplos de payload (resumo)
+
+**processing-start**
+
+```json
+{ "jobId": "start_job_001", "clienteId": "cliente_123" }
+```
+
+**processing-success**
+
+```json
+{ "jobId": "test_job_001", "clienteId": "cliente_123", "chamada_id": "chamada_001", "resultado": "sucesso" }
+```
+
+**processing-failure**
+
+```json
+{ "jobId": "test_job_002", "clienteId": "cliente_123", "resultado": "falha", "error": "audio corrupted" }
+```
+
+**/webhook/text (proposta)**
+
+```json
+{
+  "jobId": "job_text_001",
+  "clienteId": "cliente_123",
+  "source": "whatsapp",
+  "text": "Preciso de religação de gás.",
+  "analysis": { "intent": "solicitacao_religacao", "sentiment": "neutral" }
+}
+```
+
+**/webhook/voice (proposta)**
+
+```json
+{
+  "jobId": "job_audio_001",
+  "clienteId": "cliente_123",
+  "chamada_id": "chamada_010",
+  "audioUrl": "https://storage.example.com/audio/abc.wav",
+  "metadata": { "callStart": "2025-10-06T11:50:00Z" }
+}
+```
 
 ## 8.4.2 Sprint 4
 
