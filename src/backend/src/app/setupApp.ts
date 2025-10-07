@@ -19,6 +19,21 @@ export function createApp(env?: RuntimeEnv): Application {
     res.json({ status: 'ok' });
   });
 
+  app.get('/api/health', (_req, res) => {
+    res.json({ status: 'ok' });
+  });
+
+  /**
+   * @openapi
+   * /health:
+   *   get:
+   *     summary: Healthcheck da API
+   *     tags: [System]
+   *     responses:
+   *       200:
+   *         description: API saudável
+   */
+
   app.use('/api', routes);
 
   setupSwagger(app);
