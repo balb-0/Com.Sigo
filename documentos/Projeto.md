@@ -3228,15 +3228,186 @@ describe('chamadaService (Testes Unitários)', () => {
 
 # 10. Procedimentos de Implantação
 
-_conteúdo_
+Esta seção descreve os procedimentos seguidos para implantar o protótipo (banco de dados, backend e frontend) em um provedor de nuvem leve — no nosso caso, adotamos o Render (render.com). Os passos e comandos descritos abaixo assumem que os serviços já foram criados no Render e que as variáveis de ambiente necessárias foram configuradas conforme indicado. Incluímos também instruções para recriar o ambiente localmente e comandos úteis para manutenção (migrations, seed, testes de conexão).
+
+Resumo dos serviços deployados no Render (exemplos):
+
+- Banco de dados PostgreSQL gerenciado: ComSigo-db (Render managed Postgres)
+- Backend (Node + TypeScript): comsigo-backend (Web Service)
+- Frontend (React + Vite): comsigo-frontend (Static Site)
+
+Observação: os nomes e URLs abaixo são ilustrativos, substitua pelos valores reais do seu painel do Render (ex.: https://comsigo-backend.onrender.com, https://comsigo-frontend.onrender.com). Onde for necessário, colocamos as variáveis de ambiente exatas usadas pelo projeto.
+
+Principais premissas e vantagens do deploy no Render:
+
+- O Postgres gerenciado no Render permite configurar uma URL de conexão (DATABASE_URL) acessível apenas para os serviços autorizados.
+- O Render suporta builds automáticos a partir do repositório (GitHub/GitLab) e define comandos de build/start definidos no `package.json` de cada subprojeto.
+- É possível definir variáveis de ambiente por serviço e configurar health checks.
+
+O que documentamos a seguir:
+
+- Configuração do banco (extensão pgvector, migrations e índices).
+- Variáveis de ambiente necessárias (backend e frontend).
+- Comandos de build, start, migration e seed usados no Render.
+- Checagens pós-implantação e dicas de troubleshooting.
 
 ## 10.1 Implantação e Configuração do Banco de Dados
 
-_conteúdo_
+Ambiente alvo: Render Managed Postgres (ou outro provedor compatível com PostgreSQL e com suporte a extensões).
+
+1) Criação e configuração do banco no Render
+
+- Criar um novo serviço do tipo "Postgres" no painel do Render. Nome sugerido: ComSigo-db.
+- Escolher o plano adequado (para protótipo, um plano gratuito ou de baixo custo é suficiente).
+- Após a criação, copie a connection string fornecida pelo Render — usaremos essa URL como `DATABASE_URL`.
+
+2) Extensão pgvector
+
+O projeto usa vetores (pgvector) para busca semântica. É necessário ativar a extensão `vector` (nome adotado no Postgres/Render) no banco:
+
+- No painel do Render, abra a seção SQL (ou conecte-se com psql/pgAdmin) e execute a migration que habilita a extensão. No repositório temos a migration `001_enable_pgvector.sql` que contém:
+
+  CREATE EXTENSION IF NOT EXISTS vector;
+
+Nota: Alguns provedores gerenciados habilitam extensões automaticamente ou podem restringir a criação de extensões em planos muito limitados. Caso o Render não permita, solicite suporte ou mude para um plano/fornecedor que permita `pgvector`.
+
+3) Migrations e esquema
+
+O backend inclui um runner de migrations baseado em SQL files (pasta `src/migrations/sql`). As migrations disponíveis criam a tabela `chamada` e índices, por exemplo `002_create_chamada_table.sql`. Para executar as migrations no ambiente do Render:
+
+- Método recomendado (executar uma vez depois da criação do banco):
+  - Defina `DATABASE_URL` nas Environment Variables do serviço `comsigo-backend` apontando para a URL do Postgres gerenciado.
+  - No painel do Render, crie um Job temporário (One-off) ou utilize o deploy hook para rodar o comando de migration. Com as configurações do `package.json` do backend, o comando é:
+
+    npm run migrate
+
+  - Esse script executa `src/migrations/runMigrations.ts` que varre `src/migrations/sql` e aplica os arquivos pendentes.
+
+- Alternativa (via psql): conectar ao banco e executar os arquivos `.sql` presentes em `src/migrations/sql` na ordem (001 -> 002 -> 003).
+
+4) Variáveis de ambiente do banco
+
+- DATABASE_URL: string de conexão do Postgres fornecida pelo Render. Exemplo:
+  postgres://user:password@hostname:5432/comsigo_db
+
+5) Seeds (dados iniciais)
+
+O repositório contém scripts de seed (ex.: `src/scripts/seed-chamadas.ts`) e um atalho `npm run seed` no `package.json` do backend. Para popular dados iniciais após as migrations, execute:
+
+  npm run seed
+
+No Render, execute esse comando em um job one-off ou como parte do processo de deploy controlado.
+
+6) Backup e restauração
+
+- Configure snapshots automáticos no painel do Render (ou rotina de dump/pg_restore para o seu armazenamento). Para exportar manualmente:
+
+  pg_dump --format=custom --dbname="$DATABASE_URL" -f backup_comsigo.dump
+
+7) Permissões e rede
+
+- Por padrão, o Render gerencia o acesso entre serviços do mesmo projeto. Garanta que o `comsigo-backend` tenha a variável `DATABASE_URL` apontando para o DB e não exponha credenciais em repositórios públicos.
+
+Checklist de verificação após configurar o banco:
+
+- [ ] DATABASE_URL configurada no serviço `comsigo-backend`.
+- [ ] Extensão `vector` criada (migration 001 executada).
+- [ ] Migrations aplicadas sem erros (ver logs do job `npm run migrate`).
+- [ ] Índices criados (verificar `idx_chamada_*`).
+- [ ] Seeds executados (opcional) e tabelas populadas com amostras.
+
 
 ## 10.2 Implantação do Protótipo para uso por equipe de desenvolvimento
 
-_conteúdo_
+Esta subseção descreve como o frontend e o backend foram implantados no Render e quais configurações foram usadas para permitir que a equipe acesse o protótipo em produção (modo de demonstração/protótipo). As instruções abaixo foram escritas assumindo que ambos os serviços já estão deployados e expostos por URLs públicas fornecidas pelo Render.
+
+1) Backend (comsigo-backend)
+
+- Tipo de serviço: Web Service (Node)
+- Build command configurado no Render: `npm install && npm run build`
+- Start command configurado no Render: `npm start`
+- Ambiente: Node 18+ (escolha a versão compatível no painel do Render)
+
+Variáveis de ambiente obrigatórias (definidas no painel do Render para `comsigo-backend`):
+
+- DATABASE_URL = postgres://... (URL do Postgres gerenciado)
+- NODE_ENV = production
+- PORT = 4000 (opcional — o runner `env.ts` usa 4000 por padrão)
+- CORS_ORIGIN = https://comsigo-frontend.onrender.com (ou `*` durante testes locais, preferir URL específica em produção)
+- OPENAI_API_KEY = <sua-chave-openai> (se usar funcionalidades que dependem do OpenAI)
+- OPENAI_MODEL = gpt-4o-mini (opcional; valor default no código)
+
+Comandos úteis no backend (para executar via one-off job ou container shell no Render):
+
+- Aplicar migrations:
+  npm run migrate
+- Rodar seeds:
+  npm run seed
+- Testar conexão com o banco (script disponível no projeto):
+  npm run test-db
+
+Health check e endpoints
+
+- O backend expõe endpoints HTTP (por exemplo `/health` ou `/api/*`). Configure um health check no painel do Render apontando para `/health` (ou `/`) para que o Render valide se o serviço está pronto.
+
+Logs e troubleshooting
+
+- Verifique os logs de deploy e runtime no painel do Render. Erros comuns:
+  - Falha ao conectar ao banco (verifique `DATABASE_URL` e se o IP do serviço tem permissão).
+  - Falta de variável `OPENAI_API_KEY` se funções de transcrição/NL forem acionadas.
+
+2) Frontend (comsigo-frontend)
+
+- Tipo de serviço: Static Site (Render) ou Web Service (se preferir SSR). Para um app Vite + React, o Static Site é suficiente.
+- Build command configurado no Render: `npm install && npm run build`
+- Publish directory: `dist` (ou conforme `vite` — normalmente `dist`)
+
+Variáveis de ambiente para o frontend (definidas no serviço `comsigo-frontend` no Render):
+
+- VITE_API_BASE_URL = https://comsigo-backend.onrender.com (URL pública do backend)
+
+Observações sobre CORS
+
+- O backend deve ter `CORS_ORIGIN` configurado para permitir a URL do frontend. Caso o frontend e o backend fiquem em domínios diferentes, confirme que o cabeçalho `Access-Control-Allow-Origin` permita a origem do frontend.
+
+3) Integração e fluxos de CI/CD
+
+- Conectar o repositório GitHub/GitLab ao Render. Configurar deploy automático a cada push para a branch `main`.
+- Para evitar que migrations sejam executadas acidentalmente em deploys parciais, preferimos rodar `npm run migrate` manualmente via one-off job após revisar o deploy (ou usar um job de deploy controlado).
+
+4) Acesso da equipe e instruções rápidas de uso
+
+- URLs públicas (exemplos):
+  - Frontend: https://comsigo-frontend.onrender.com
+  - Backend API: https://comsigo-backend.onrender.com
+
+- Para a equipe testar o fluxo completo:
+  1. Acesse o frontend público.
+  2. Faça login (se aplicável) ou use a interface para enviar um áudio/texto para análise.
+  3. Verifique o dashboard e abra uma chamada para conferir transcrição, score e detalhes.
+
+5) Rotina de manutenção e rollback
+
+- Recomendamos manter backups automáticos do Postgres e anotar os commits correspondentes a cada deploy que altera o esquema.
+- Para rollback rápido: reverter a branch no Git e redeploy pelo painel do Render; caso o esquema de banco tenha sido alterado, restaure o backup antes de apontar o backend para o DB restaurado.
+
+6) Segurança e boas práticas (resumo)
+
+- Não colocar `DATABASE_URL` ou `OPENAI_API_KEY` em arquivos de configuração versionados (.env no repositório). Use as Environment Variables do Render.
+- Definir regras de CORS estritas (origem do frontend apenas).
+- Habilitar TLS (o Render fornece HTTPS automaticamente para domínios fornecidos pelo serviço).
+
+Checklist pós-implantação do protótipo:
+
+- [ ] Frontend acessível em https e carregando recursos estáticos.
+- [ ] Backend respondendo (health check OK) e endpoints funcionando.
+- [ ] Migrations aplicadas e tabelas/índices presentes.
+- [ ] Comunicação Frontend -> Backend funcionando (verificar console do navegador e network).
+- [ ] Logs do backend sem erros críticos após o deploy.
+
+Notas finais
+
+Esta documentação assume que o deploy no Render já foi feito e está funcional. Caso haja necessidade de documentar passo-a-passo a criação dos serviços no painel do Render (click-through), podemos adicionar screenshots e instruções detalhadas do painel do Render, incluindo como adicionar Environment Variables e executar one-off jobs.
 
 # 11. Orçamento e Caixa
 
