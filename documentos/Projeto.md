@@ -234,7 +234,7 @@ Como objetivos secundários, a plataforma busca:
 &emsp; Abaixo a imagem da persona **Julia Souza** (Analista de Qualidade de Atendimento):
 
 <div align="center">
-  <sub>Figura X - Persona 1 - Julia Souza (Analista de Qualidade de Atendimento)</sub> <br>
+  <sub>Figura 2.4.1 - Persona 1 - Julia Souza (Analista de Qualidade de Atendimento)</sub> <br>
 
   <img src="img/section2/Persona 1 Julia.png" alt="Persona 1 - Julia Souza (Analista de Qualidade de Atendimento)" style="max-width: 700px; width: 100%; height: auto;">
 
@@ -245,7 +245,7 @@ Como objetivos secundários, a plataforma busca:
 &emsp; Abaixo as imagens das jornadas da persona **Julia Souza** (Analista de Qualidade de Atendimento):
 
 <div align="center">
-  <sub>Figura X – Jornada do Usuário Antes da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
+  <sub>Figura 2.4.2 – Jornada do Usuário Antes da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
 
   <img src="img/section2/Jornada de Usuário Julia Antes.png" alt="Jornada do Usuário Antes da Solução (Julia Souza, Analista de Qualidade de Atendimento)" style="max-width: 600px; width: 100%; height: auto;">
 
@@ -253,7 +253,7 @@ Como objetivos secundários, a plataforma busca:
 </div>
 
 <div align="center">
-  <sub>Figura X – Jornada do Usuário Depois da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
+  <sub>Figura 2.4.3 – Jornada do Usuário Depois da Solução (Julia Souza, Analista de Qualidade de Atendimento)</sub> <br>
 
   <img src="img/section2/Jornada de Usuário Julia Depois.png" alt="Jornada do Usuário Depois da Solução (Julia Souza, Analista de Qualidade de Atendimento)" style="max-width: 600px; width: 100%; height: auto;">
 
@@ -264,7 +264,7 @@ Como objetivos secundários, a plataforma busca:
 &emsp; Abaixo a imagem da persona **Carlos Martins** (Supervisor de Atendimento Humano):
 
 <div align="center">
-  <sub>Figura X - Persona 2 - Carlos Martins (Supervisor de Atendimento Humano)</sub> <br>
+  <sub>Figura 2.4.4 - Persona 2 - Carlos Martins (Supervisor de Atendimento Humano)</sub> <br>
 
   <img src="img/section2/Persona 2 Carlos.png" alt="Persona 2 - Carlos Martins (Supervisor de Atendimento Humano)" style="max-width: 700px; width: 100%; height: auto;">
 
@@ -274,7 +274,7 @@ Como objetivos secundários, a plataforma busca:
 &emsp; Abaixo as imagens das jornadas da persona **Carlos Martins** (Supervisor de Atendimento Humano):
 
 <div align="center">
-  <sub>Figura X – Jornada do Usuário Antes da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
+  <sub>Figura 2.4.5 – Jornada do Usuário Antes da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
 
   <img src="img/section2/Jornada do Usuário Carlos Antes.png" alt="Jornada do Usuário Antes da Solução (Carlos Martins, Supervisor de Atendimento Humano)" style="max-width: 600px; width: 100%; height: auto;">
 
@@ -282,7 +282,7 @@ Como objetivos secundários, a plataforma busca:
 </div>
 
 <div align="center">
-  <sub>Figura X – Jornada do Usuário Depois da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
+  <sub>Figura 2.4.6 – Jornada do Usuário Depois da Solução (Carlos Martins, Supervisor de Atendimento Humano)</sub> <br>
 
   <img src="img/section2/Jornada do Usuário Carlos Depois.png" alt="Jornada do Usuário Depois da Solução (Carlos Martins, Supervisor de Atendimento Humano)" style="max-width: 600px; width: 100%; height: auto;">
 
@@ -750,7 +750,7 @@ Em conclusão, a estratégia de entrega para as sprints 3, 4 e 5 assegura o dese
 &nbsp;&nbsp;&nbsp;&nbsp;Segue abaixo, o Canvas MVP da aplicação web desenvolvido a partir das atividades realizadas durante os encontros com o parceiro e as discussões em grupo.
 
 <div align="center">
-<sub>Figura 2.9.1 - Canvas MVP do projeto</sub><br>
+<sub>Figura 3.1 - Canvas MVP do projeto</sub><br>
 <img src="img/canvas_mvp.png"><br>
 <sup>Fonte: Material produzido pelos autores (2025) </sup>
 </div>
@@ -993,7 +993,7 @@ Dessa forma, garantimos a integridade do modelo conceitual para fins acadêmicos
 Aqui está o modelo lógico da solução:
 
 <div align="center">
-<sub>Figura 4.1.1 - Modelagem Lógica Relacional</sub><br>
+<sub>Figura 4.2.1 - Modelagem Lógica Relacional</sub><br>
 <img src="img/section4/modelo-logico.png" width="80%"><br>
 <sup>Fonte: Material produzido pelos autores (2025) </sup>
 </div>
@@ -1001,7 +1001,7 @@ Aqui está o modelo lógico da solução:
 Como supracitado na seção anterior, o banco de dados será formado por apenas uma tabela, onde clientes e atendentes são apenas tabelas representativas, mas não existirão.
 
 <div align="center">
-<sub>Figura 4.1.1 - Modelagem Lógica Vetorial</sub><br>
+<sub>Figura 4.2.2 - Modelagem Lógica Vetorial</sub><br>
 <img src="img/section4/dialogo.png" width="80%"><br>
 <sup>Fonte: Material produzido pelos autores (2025) </sup>
 </div>
@@ -1460,9 +1460,9 @@ Faça versionamento de imagens (1.0, 1.1, etc.) para rollback rápido.
 **Wireframe (Estrutura)**  
 **Resultado Final (Mockup)**  
 
-<div align="center"><sub>Figura 1 - Estrutura do Dashboard</sub> <br> <img src="img/wireframe-dashboard.png" alt="Wireframe da tela principal do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.1 - Estrutura do Dashboard</sub> <br> <img src="img/wireframe-dashboard.png" alt="Wireframe da tela principal do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
-<div align="center"><sub>Figura 2 - Mockup do Dashboard</sub> <br> <img src="img/mockup-dashboard.png" alt="Mockup final do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.2 - Mockup do Dashboard</sub> <br> <img src="img/mockup-dashboard.png" alt="Mockup final do dashboard." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
 <sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
 
@@ -1475,9 +1475,9 @@ Faça versionamento de imagens (1.0, 1.1, etc.) para rollback rápido.
 **Wireframe (Estrutura)**  
 **Resultado Final (Mockup)**  
 
-<div align="center"><sub>Figura 3 - Estrutura do Chat</sub> <br> <img src="img/wireframe-chat.png" alt="Wireframe do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.3 - Estrutura do Chat</sub> <br> <img src="img/wireframe-chat.png" alt="Wireframe do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
-<div align="center"><sub>Figura 4 - Mockup do Chat</sub> <br> <img src="img/mockup-chat.png" alt="Mockup final do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.4 - Mockup do Chat</sub> <br> <img src="img/mockup-chat.png" alt="Mockup final do Chat." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
 <sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
 
@@ -1490,13 +1490,13 @@ Faça versionamento de imagens (1.0, 1.1, etc.) para rollback rápido.
 **Wireframe (Estrutura)**  
 **Resultado Final (Mockup)**  
 
-<div align="center"><sub>Figura 5 - Estrutura do Modal de Input</sub> <br> <img src="img/wireframe-modal-input.png" alt="Wireframe do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.5 - Estrutura do Modal de Input</sub> <br> <img src="img/wireframe-modal-input.png" alt="Wireframe do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
-<div align="center"><sub>Figura 6 - Mockup do Modal de Input</sub> <br> <img src="img/mockup-modal-input.jpg" alt="Mockup final do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.6 - Mockup do Modal de Input</sub> <br> <img src="img/mockup-modal-input.jpg" alt="Mockup final do modal de input." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
-<div align="center"><sub>Figura 7 - Estrutura do Modal de Detalhes</sub> <br> <img src="img/wireframe-modal-detalhes.png" alt="Wireframe do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.7 - Estrutura do Modal de Detalhes</sub> <br> <img src="img/wireframe-modal-detalhes.png" alt="Wireframe do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
-<div align="center"><sub>Figura 8 - Mockup do Modal de Detalhes</sub> <br> <img src="img/mockup-modal-detalhes.jpg" alt="Mockup final do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
+<div align="center"><sub>Figura 7.1.8 - Mockup do Modal de Detalhes</sub> <br> <img src="img/mockup-modal-detalhes.jpg" alt="Mockup final do modal de detalhes." style="max-width: 400px; width: 100%; height: auto;"></div>  
 
 <sup style="text-align: center;">Fonte: Material produzido pelos autores (2025).</sup>  
 
@@ -2071,7 +2071,7 @@ Esta implementação mostra como a arquitetura híbrida processa transcrições 
 Nesta sprint, o foco do desenvolvimento frontend foi a construção de uma interface de utilizador (UI) completamente funcional e interativa, transformando o protótipo de alta fidelidade numa experiência dinâmica, utilizando dados simulados (*mock data*) para validar os fluxos e componentes. O objetivo principal foi criar a estrutura visual e, mais importante, toda a lógica de estado que permite a manipulação e visualização dos dados no dashboard.
 
 <div align="center">
-  <sub>Figura X - Página "Dashboard" versão inicial</sub> <br>
+  <sub>Figura 8.3.1.1 - Página "Dashboard" versão inicial</sub> <br>
 
   <img src="img/dashboard_codada.png" alt="Imagem da Dashboard codada web" style="max-width: 700px; width: 100%; height: auto;">
 
@@ -2079,7 +2079,7 @@ Nesta sprint, o foco do desenvolvimento frontend foi a construção de uma inter
 </div>
 
 <div align="center">
-  <sub>Figura X - Página "Chat" versão inicial</sub> <br>
+  <sub>Figura 8.3.1.2 - Página "Chat" versão inicial</sub> <br>
 
   <img src="img/chat_codado.png" alt="Imagem do chat codado web" style="max-width: 700px; width: 100%; height: auto;">
 
@@ -3077,7 +3077,7 @@ _conteúdo_
 
 ### Orçamento
 <div align="center">
-  <sub>Figura 10.1 - Orçamento 1</sub> <br>
+  <sub>Figura 11.1 - Orçamento 1</sub> <br>
 
   <img src="img/section11/orcamento_1.png" alt="" style="width: 100%; height: auto;">
 
@@ -3085,7 +3085,7 @@ _conteúdo_
 </div>
 
 <div align="center">
-  <sub>Figura 10.2 - Orçamento 2</sub> <br>
+  <sub>Figura 11.2 - Orçamento 2</sub> <br>
 
   <img src="img/section11/orcamento_2.png" alt="" style="width: 100%; height: auto;">
 
@@ -3093,7 +3093,7 @@ _conteúdo_
 </div>
 
 <div align="center">
-  <sub>Figura 10.3 - Orçamento 3</sub> <br>
+  <sub>Figura 11.3 - Orçamento 3</sub> <br>
 
   <img src="img/section11/orcamento_3.png" alt="" style="width: 100%; height: auto;">
 
