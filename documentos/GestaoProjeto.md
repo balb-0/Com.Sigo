@@ -152,8 +152,41 @@ Durante a Sprint 4, o foco esteve na **conclusão geral do projeto**, garantindo
 
 ## 2.5 Sprint 5
 
-_conteúdo_
-**Nota:** Insira informações sobre mudanças realizadas.
+Durante a Sprint 5, o foco esteve em **finalizar o projeto de forma estável e coerente**, consolidando as entregas realizadas nas sprints anteriores. A equipe manteve um bom ritmo de execução, concluindo grande parte das tarefas com antecedência e garantindo uma entrega final sem contratempos técnicos ou de integração.  
+
+### Pontos Fortes
+- **Entrega Antecipada das Funcionalidades**: Grande parte das atividades planejadas foi finalizada logo no início da sprint, permitindo tempo hábil para revisões e pequenos ajustes antes da entrega final.  
+- **Conclusão do Projeto sem Bloqueios**: A entrega final ocorreu sem incidentes ou atrasos, evidenciando o amadurecimento do time e a consolidação dos aprendizados das sprints anteriores.  
+- **Cooperação e Ritmo de Trabalho Consistente**: A equipe manteve uma cadência estável, com boa comunicação e suporte mútuo para garantir a conclusão do produto.  
+
+### Pontos Fracos
+- **Impacto da Prova Final de Módulo**: As avaliações acadêmicas paralelas reduziram a disponibilidade de tempo de alguns membros, afetando o ritmo de execução em determinados momentos.  
+- **Imprevisto com o Banco de Dados**: Foi necessário reconfigurar e reimportar dados após um incidente técnico, o que gerou esforço adicional e pequenas pausas no cronograma.  
+
+### Acompanhamento de Progresso
+
+| Aspecto                        | Sprint 3                                                       | Sprint 4                                                    | Sprint 5                                                    |
+| :----------------------------- | :------------------------------------------------------------- | :---------------------------------------------------------- | :---------------------------------------------------------- |
+| **Pontualidade**               | Entregas dentro do prazo                                       | Impactada por desafios de tempo nas entregas finais         | Recuperada; entregas concluídas antes do prazo              |
+| **Priorização das tasks**      | Organização parcial, quadro pouco claro                        | Falhas na organização geraram momentos de retrabalho        | Planejamento eficiente, foco em finalização                 |
+| **Divisão de tarefas**         | Boa colaboração entre membros                                  | Foco coletivo na finalização do escopo                      | Equilíbrio entre funções, execução coordenada               |
+| **Dailys**                     | Algumas inconsistentes                                         | Objetivas, mas poderiam ter sido mais frequentes            | Reduzidas devido à estabilidade do fluxo                    |
+| **Revisões (PRs)**             | Participação crescente, mas irregular                         | Estáveis, porém sem checklist definido                      | Revisões pontuais, com foco em ajustes finais               |
+| **Apresentação Sprint Review** | Evoluiu com valorização do frontend                            | Evidenciou fechamento do ciclo do projeto                   | Concluiu com apresentação consolidada e estável             |
+| **Validação com professores**  | Feedbacks construtivos sobre UX/UI                            | Feedback final positivo, confirmando conclusão do projeto   | Validação final positiva, destacando qualidade técnica       |
+| **Documentação**               | Ainda insuficiente                                             | Concluída para entrega final                                | Refinada e completa para encerramento do módulo             |
+| **Sugestões implementadas**    | Maioria implementada                                           | Priorizadas melhorias críticas                              | Todas aplicadas; time consolidado e autônomo                |
+| **Riscos**                     | Novos riscos relacionados à organização                        | Reduzidos, mas gestão de tempo ainda sensível               | Riscos mitigados; sistema estável e pronto para entrega      |
+
+### Conclusão Geral do Projeto
+
+&nbsp;&nbsp;&nbsp;&nbsp;Ao longo das cinco sprints, a equipe demonstrou uma **evolução constante em organização, comunicação e maturidade técnica**. Nas sprints iniciais, os principais desafios envolveram a gestão de tempo e a padronização das tarefas — pontos que foram gradualmente resolvidos com a adoção de práticas mais consistentes e com o aumento da sinergia entre os membros.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Durante o desenvolvimento, o grupo aprimorou a **colaboração interdisciplinar entre frontend, backend e análise**, garantindo que as entregas fossem integradas e coerentes com os objetivos do projeto. A partir da Sprint 3, observou-se um crescimento na autonomia individual e na qualidade das revisões, refletindo o amadurecimento do processo de trabalho em equipe.
+
+&nbsp;&nbsp;&nbsp;&nbsp;A Sprint 4 consolidou o projeto tecnicamente e a Sprint 5 simbolizou seu fechamento com **estabilidade, boa documentação e entrega completa**. O grupo demonstrou capacidade de aprendizado contínuo, adaptabilidade e foco em resultados — competências fundamentais para o sucesso do projeto.
+
+**Nota:** Projeto finalizado com êxito, atingindo os objetivos definidos no planejamento inicial e consolidando um fluxo de trabalho colaborativo e eficiente.
 
 # 3. Análise de Riscos
 
