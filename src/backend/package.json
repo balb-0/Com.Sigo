@@ -11,7 +11,8 @@
     "test-db": "ts-node-dev --transpile-only src/scripts/test-db-setup.ts",
     "seed:chamadas": "ts-node-dev --transpile-only src/scripts/seed-chamadas.ts",
     "seed": "npm run seed:chamadas",
-    "update:chamadas:timestamps": "ts-node-dev --transpile-only src/scripts/update-chamadas-timestamps.ts"
+    "update:chamadas:timestamps": "ts-node-dev --transpile-only src/scripts/update-chamadas-timestamps.ts",
+    "backfill:segments": "ts-node-dev --transpile-only src/scripts/backfill-chamada-embeddings.ts"
   },
   "keywords": [],
   "author": "",

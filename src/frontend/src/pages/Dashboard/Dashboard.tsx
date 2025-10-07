@@ -69,6 +69,7 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     const f = (u.searchParams.get('filter') ?? '').trim();
     const startDate = u.searchParams.get('startDate') ?? '';
     const endDate = u.searchParams.get('endDate') ?? '';
+    const lastDays = u.searchParams.get('lastDays');
     const startTime = u.searchParams.get('startTime') ?? '';
     const endTime = u.searchParams.get('endTime') ?? '';
     const minS = u.searchParams.get('minScore');
@@ -76,7 +77,21 @@ export function Dashboard({ currentPage, onNavigate }: DashboardProps) {
     const tag = u.searchParams.get('tag') ?? '';
 
     if (f === 'thisWeek' || f === 'thisMonth' || f === 'today' || f === 'custom' || f === 'all') {
-      handleFilterChange(f as FilterType, startDate, endDate, startTime, endTime);
+      if (f === 'custom' && !startDate && !endDate && lastDays) {
+        // Compute range from lastDays back from today
+        const n = Number(lastDays);
+        if (!Number.isNaN(n) && n > 0) {
+          const end = new Date();
+          const start = new Date();
+          start.setDate(end.getDate() - n);
+          const iso = (d: Date) => d.toISOString().slice(0,10);
+          handleFilterChange('custom', iso(start), iso(end), startTime, endTime);
+        } else {
+          handleFilterChange(f as FilterType, startDate, endDate, startTime, endTime);
+        }
+      } else {
+        handleFilterChange(f as FilterType, startDate, endDate, startTime, endTime);
+      }
     }
     if (minS !== null) setMinScore(minS ? Number(minS) : null);
     if (maxS !== null) setMaxScore(maxS ? Number(maxS) : null);
