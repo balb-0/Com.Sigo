@@ -71,8 +71,6 @@
   - [8.2 Algoritmo de NLP Utilizado e sua Implementação](#82-algoritmo-de-nlp-utilizado-e-sua-implementação)
   - [8.3 Desenvolvimento de Features](#83-desenvolvimento-de-features)
     - [8.3.1 Sprint 3](#831-sprint-3)
-    - [8.3.2 Sprint 4](#832-sprint-4)
-    - [8.3.3 Sprint 5](#833-sprint-5)
   - [8.4 Documentações automáticas](#84-documentações-automáticas)
 - [9. Planejamento e Execução de Testes](#9-planejamento-e-execução-de-testes)
   - [9.1 Testes Funcionais](#91-testes-funcionais)
@@ -2490,15 +2488,6 @@ async function notifyProcessingComplete(jobData) {
 **Testes**: Suíte de testes automatizados e scripts de validação manual
 
 **Segurança**: Recomendações para ambiente de produção com autenticação e rate limiting
-
-## 8.3.2 Sprint 4
-
-_conteúdo_
-
-## 8.3.3 Sprint 5
-
-_conteúdo_
-Obs.: Insira informações sobre estratégias para realização dos testes
 
 ## 8.4 Documentações automáticas
 
