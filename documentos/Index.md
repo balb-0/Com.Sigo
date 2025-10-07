@@ -29,23 +29,23 @@
 
 Esta documentação está organizada em diferentes arquivos conforme apresentado abaixo.
 
-### Gestão do Projeto
+### Gestão do Projeto 
 
-- **GestaoProjeto.md**: Documento de gestão de projetos que estabelece orientações para planejamento, monitoramento e controle das sprints, incluindo avaliações de desempenho, análise de riscos e lições aprendidas.
+- **[GestaoProjeto.md](GestaoProjeto.md)**: Documento de gestão de projetos que estabelece orientações para planejamento, monitoramento e controle das sprints, incluindo avaliações de desempenho, análise de riscos e lições aprendidas.
 
 ### Processo de Desenvolvimento de Software
 
-- **GestaoConfiguracao.md**: Documento de gestão de configuração que define diretrizes para controle de versão, políticas de branches (Gitflow), commits, pull requests, infraestrutura como código e gestão de arquivos sensíveis.
-- **GuiaPadroesDesenvolvimento.md**: Guia de padrões de desenvolvimento que estabelece convenções de codificação, práticas de desenvolvimento, ferramentas e tecnologias para garantir qualidade e consistência do código.
+- **[GestaoConfiguracao.md](GestaoConfiguracao.md)**: Documento de gestão de configuração que define diretrizes para controle de versão, políticas de branches (Gitflow), commits, pull requests, infraestrutura como código e gestão de arquivos sensíveis.
+- **[GuiaPadroesDesenvolvimento.md](GuiaPadroesDesenvolvimento.md)**: Guia de padrões de desenvolvimento que estabelece convenções de codificação, práticas de desenvolvimento, ferramentas e tecnologias para garantir qualidade e consistência do código.
 
 ### Desenvolvimento do Produto
 
-- **Projeto.md**: Documento técnico completo do produto Com.Sigo, contendo visão, requisitos, modelagem de dados, arquitetura, design visual, desenvolvimento e procedimentos de implantação.
-- **Manual-instalacao.md**: Manual de instalação, execução e configuração do banco de dados para o projeto.
+- **[Projeto.md](Projeto.md)**: Documento técnico completo do produto Com.Sigo, contendo visão, requisitos, modelagem de dados, arquitetura, design visual, desenvolvimento e procedimentos de implantação.
+- **[Manual-instalacao.md](Manual-instalacao.md)**: Manual de instalação, execução e configuração do banco de dados para o projeto.
 
 ## Licença
 
 Este projeto está licenciado sob a licença Creative Commons Attribution 4.0 International (CC BY 4.0).
 Mais informações: https://creativecommons.org/licenses/by/4.0/
 
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Inteli-College/2025-2A-T13-ES07-G03">Com.Sigo</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Inteli-College/2025-2A-T13-ES07-G03">INTELI, <a href="https://www.linkedin.com/in/andre-lobo-dev/">André Eduardo Lobo de Paula</a>, <a href="https://www.linkedin.com/in/joao-souza-campos/">João Victor de Souza Campos</a>, <a href="https://www.linkedin.com/in/otavio-vasc/">Otavio de Carvalho Vasconcelos</a>, <a href="https://www.linkedin.com/in/rafaelbarbosa-dev/">Rafael Rocha Barbosa</a>, <a href="https://www.linkedin.com/in/rodrigo-lee/">Rodrigo Hu Tchie Lee</a>, <a href="https://www.linkedin.com/in/ryan-botelho-gartlan/">Ryan Botelho Gartlan</a>, <a href="https://www.linkedin.com/in/vitor-balbo/">Vitor Margarido Balbo</a></a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Inteli-College/2025-2A-T13-ES07-G03">Com.Sigo</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://inteli.edu.br">INTELI, <a href="https://www.linkedin.com/in/andre-lobo-dev/">André Eduardo Lobo de Paula</a>, <a href="https://www.linkedin.com/in/joao-souza-campos/">João Victor de Souza Campos</a>, <a href="https://www.linkedin.com/in/otavio-vasc/">Otavio de Carvalho Vasconcelos</a>, <a href="https://www.linkedin.com/in/rafaelbarbosa-dev/">Rafael Rocha Barbosa</a>, <a href="https://www.linkedin.com/in/rodrigo-lee/">Rodrigo Hu Tchie Lee</a>, <a href="https://www.linkedin.com/in/ryan-botelho-gartlan/">Ryan Botelho Gartlan</a>, <a href="https://www.linkedin.com/in/vitor-balbo/">Vitor Margarido Balbo</a></a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
