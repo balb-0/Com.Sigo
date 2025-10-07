@@ -39,13 +39,14 @@
   - [2.3 Visão do Projeto e do Produto](#23-visão-do-projeto-e-do-produto)
   - [2.4 Personas e Jornada do Usuário](#24-personas-e-jornada-do-usuário)
   - [2.5 Modelagem do Fluxo de Negócio](#25-modelagem-do-fluxo-de-negócio)
-    - [2.5.1 Cadeia de Valor](#251-cadeia-de-valor)
-    - [2.5.2 Fluxo de Negócio Proposto (AS-IS e TO-BE)](#252-fluxo-de-negócio-proposto-as-is-e-to-be)
+    - [2.5.1 Fluxo de Negócio do Processo Atual (AS-IS)](#251-fluxo-de-negócio-do-processo-atual-as-is)
   - [2.6 Matriz de Risco do Projeto](#26-matriz-de-risco-do-projeto)
-  - [2.7 Matriz SWOT](#26-matriz-swot)
-  - [ Ideação](#27-ideação)
-  - [2.9 Canvas do Projeto](#28-canvas-do-projeto)
-  - [2.10 Business Drivers](#210-business-drivers)
+  - [2.7 Matriz SWOT](#27-matriz-swot)
+  - [2.8 Ideação](#28-ideação)
+  - [2.9 Definição da Estratégia de Entrega para as Sprints 3, 4 e 5](#29-definição-da-estratégia-de-entrega-para-as-sprints-3-4-e-5)
+
+  - [2.10 Canvas do Projeto](#210-canvas-do-projeto)
+  - [2.11 Business Drivers](#211-business-drivers)
 - [3. Requisitos do Projeto](#3-requisitos-do-projeto)
   - [3.1 Requisitos Funcionais (RFs)](#31-requisitos-funcionais-rfs)
   - [3.2 Requisitos Não Funcionais (RNFs)](#32-requisitos-não-funcionais-rnfs)
@@ -53,32 +54,26 @@
   - [3.4 Casos de Uso](#34-casos-de-uso)
   - [3.5 Casos de Uso x Requisitos Funcionais](#35-casos-de-uso-x-requisitos-funcionais)
 - [4. Modelagem de Dados](#4-modelagem-de-dados)
-  - [4.1 Modelo Conceitual de Dados](#42-modelo-conceitual-de-dados)
-  - [4.2 Modelo Lógico de Dados](#43-modelo-lógico-de-dados)
-  - [4.3 Modelo Físico de Dados](#44-modelo-físico-de-dados)
+  - [4.1 Modelo Conceitual de Dados](#41-modelo-conceitual-de-dados)
+  - [4.2 Modelo Lógico de Dados](#42-modelo-lógico-de-dados)
+  - [4.3 Modelo Físico de Dados](#43-modelo-físico-de-dados)
 - [5. Solução Técnica (Design)](#5-solução-técnica-design)
   - [5.1 Diagrama de Classes](#51-diagrama-de-classes)
   - [5.2 Diagrama de Componentes da UML](#52-diagrama-de-componentes-da-uml)
   - [5.3 Diagramas de Sequência da UML](#53-diagramas-de-sequência-da-uml)
 - [6. Mapeamento Técnico de Infraestrutura e Implantação](#6-mapeamento-técnico-de-infraestrutura-e-implantação)
-  - [6.1 Diagrama de Implantação da UML](#61-diagrama-de-implantação-da-uml)
-  - [6.2 Justificativa das Escolhas de Implantação](#62-justificativa-das-escolhas-de-implantação)
-  - [6.3 Considerações sobre Desempenho e Segurança](#63-considerações-sobre-desempenho-e-segurança)
+  - [6.1 Justificativa das Escolhas de Implantação](#61-justificativa-das-escolhas-de-implantação)
 - [7. Projeto Visual da Solução](#7-projeto-visual-da-solução)
-  - [7.1 Desenvolvimento de Wireframes](#71-desenvolvimento-de-wireframes)
-  - [7.2 Desenvolvimento de Mockups](#72-desenvolvimento-de-mockups)
-  - [7.3 Guia Visual](#73-guia-visual)
+  - [7.1 e 7.2 Do Wireframe ao Mockup: A Evolução Visual](#71-e-72-do-wireframe-ao-mockup-a-evolução-visual)
+  - [7.3 Guia Visual (Style Guide)](#73-guia-visual-style-guide)
 - [8. Desenvolvimento do Projeto](#8-desenvolvimento-do-projeto)
-  - [8.1 Arquitetura de Codificação e Estrutura de Diretórios](#81-arquitetura-de-codificação-e-estrutura-de-diretórios)
-  - [8.2 Modelo de Recomendação](#82-modelo-de-recomendação)
+  - [8.1 API de Áudio](#81-api-de-áudio)
+  - [8.2 Algoritmo de NLP Utilizado e sua Implementação](#82-algoritmo-de-nlp-utilizado-e-sua-implementação)
   - [8.3 Desenvolvimento de Features](#83-desenvolvimento-de-features)
     - [8.3.1 Sprint 3](#831-sprint-3)
-    - [8.3.2 Sprint 4](#832-sprint-4)
-    - [8.3.3 Sprint 5](#833-sprint-5)
-  - [8.4 Testes Unitários e de Integração](#84-testes-unitários-e-de-integração)
-  - [8.5 Documentações automáticas](#85-documentações-automáticas)
+  - [8.4 Documentações automáticas](#84-documentações-automáticas)
 - [9. Planejamento e Execução de Testes](#9-planejamento-e-execução-de-testes)
-  - [9.1 ](#91-testes-funcionais)
+  - [9.1 Testes Funcionais](#91-testes-funcionais)
     - [9.1.1 Planejamento](#911-planejamento)
     - [9.1.2 Resultados](#912-resultados)
   - [9.2 Testes de RNFs](#92-testes-de-rnfs)
@@ -87,10 +82,12 @@
   - [9.3 Testes de Usabilidade](#93-testes-de-usabilidade)
     - [9.3.1 Planejamento](#931-planejamento)
     - [9.3.2 Resultados](#932-resultados)
+  - [9.4 Testes Unitários](#94-testes-unitários)
+  - [9.5 Testes de Integração](#95-testes-de-integração)
 - [10. Procedimentos de Implantação](#10-procedimentos-de-implantação)
   - [10.1 Implantação e Configuração do Banco de Dados](#101-implantação-e-configuração-do-banco-de-dados)
   - [10.2 Implantação do Protótipo para uso por equipe de desenvolvimento](#102-implantação-do-protótipo-para-uso-por-equipe-de-desenvolvimento)
-- [11. Orçamento](#11-orçamento)
+- [11. Orçamento e Caixa](#11-orçamento-e-caixa)
 - [Referências](#referências)
 
 # 1. Introdução
@@ -427,7 +424,7 @@ Como a única alteração relevante com a aplicação da solução proposta seri
 
 * **Monitor de Qualidade**: Funcionário terceirizado que avalia, por amostragem, a aderência do atendimento aos padrões da Comgás. Hoje, cerca de 1% das chamadas são avaliadas, o que corresponde a aproximadamente duas ligações por atendente.
 
-### **Fluxo de Negócio do Processo Atual (AS-IS)**
+### 2.5.1 **Fluxo de Negócio do Processo Atual (AS-IS)**
 
 <div align = center>
 <img src="img/diagram (3).svg" alt="Mapeamento do fluxo atual de negócio em BPMN">
@@ -467,10 +464,6 @@ O processo é encerrado após a conclusão da avaliação pelo monitor.
 
 
 Em conclusão, o mapeamento BPMN do processo atual de avaliação da qualidade no atendimento telefônico da Comgás permitiu identificar de forma clara o papel de cada ator, as interações entre eles e a sequência lógica das atividades. Embora o fluxo de atendimento ao cliente não se altere significativamente com a introdução da solução proposta, o uso de tecnologias de reconhecimento de voz e processamento de linguagem natural na etapa de monitoria tem potencial de multiplicar quantidade de chamadas avaliadas, aumentando a cobertura sem acréscimo de custo operacional. Esse ganho de escala contribui para maior precisão no monitoramento da experiência do cliente, reforça a capacidade de identificar desvios de padrão e oferece à Comgás mais dados para melhorar continuamente seu atendimento.
-
-## 2.5.1 Cadeia de Valor
-
-_conteúdo_
 
 ## 2.6 Matriz de Risco do Projeto
 
@@ -525,7 +518,7 @@ _conteúdo_
 
 </div>
 
-## 2.7 Análise SWOT
+## 2.7 Matriz SWOT
 
 &nbsp;&nbsp;&nbsp;&nbsp;A matriz SWOT é uma ferramenta de análises de mercado utilizada para identificar e analisar as forças (Strengths), fraquezas (Weaknesses), oportunidades (Opportunities) e ameaças (Threats) de uma empresa ou projeto. O objetivo dessa análise é oferecer uma visão clara e agrangente das condições internas e externas que podem impactar no desenvolvimento de um projeto e no desempenho da empresa, o que ajuda na formulação de estratégias eficientes para alcançar os objetivos empresariais.
 
@@ -752,7 +745,7 @@ O protótipo é finalizado, documentado e entregue conforme o escopo do projeto.
 
 Em conclusão, a estratégia de entrega para as sprints 3, 4 e 5 assegura o desenvolvimento progressivo e integrado do backend, alinhado ao MVP e às exigências acadêmicas. Cada sprint entrega valor funcional, com foco em qualidade, escalabilidade e integração.
 
-## 3. Canvas do Projeto
+## 2.10 Canvas do Projeto
 
 &nbsp;&nbsp;&nbsp;&nbsp;Segue abaixo, o Canvas MVP da aplicação web desenvolvido a partir das atividades realizadas durante os encontros com o parceiro e as discussões em grupo.
 
@@ -762,7 +755,7 @@ Em conclusão, a estratégia de entrega para as sprints 3, 4 e 5 assegura o dese
 <sup>Fonte: Material produzido pelos autores (2025) </sup>
 </div>
 
-## 2.10 Business Drivers
+## 2.11 Business Drivers
 
 ### 1. Contexto
 A **Comgás**, maior distribuidora de gás natural canalizado da América Latina, atende mais de **2,6 milhões de clientes**, com média de **450 novos clientes por dia**.
@@ -918,7 +911,7 @@ _conteúdo_
 
 # 4. Modelagem de Dados
 
-## 4.1. Modelagem conceitual
+## 4.1 Modelo Conceitual de Dados
 
 <div align="center">
 <sub>Figura 4.1.1 - Modelagem Conceitual Relacional</sub><br>
@@ -1277,15 +1270,9 @@ O **Frontend** permite a interação do usuário final com a aplicação, garant
 
 # 6. Mapeamento Técnico de Infraestrutura e Implantação
 
-_conteúdo_
+## 6.1 Justificativa das Escolhas de Implantação
 
-## 6.1 Diagrama de Implantação da UML
-
-_conteúdo_
-
-## 6.2 Justificativa das Escolhas de Implantação
-
-### 6.2.1 Processo de Deploy do Modelo
+### 6.1.1 Processo de Deploy do Modelo
 
 Este documento descreve o processo de deploy em produção de um algoritmo de NLP (BERT + Regex + TF-IDF) usando Google Cloud Run.  
 
@@ -1420,10 +1407,6 @@ Habilite min-instances > 0 para reduzir cold start.
 Use IAM se quiser restringir o acesso (remova --allow-unauthenticated).
 
 Faça versionamento de imagens (1.0, 1.1, etc.) para rollback rápido.
-
-## 6.3 Considerações sobre Desempenho e Segurança
-
-_conteúdo_
 
 # 7. Projeto Visual da Solução
 
@@ -1576,15 +1559,9 @@ _conteúdo_
 
 # 8. Desenvolvimento do Projeto
 
-_conteúdo_
+## 8.1 API de Áudio
 
-## 8.1 Arquitetura de Codificação e Estrutura de Diretórios
-
-_conteúdo_
-
-## 8.2 API de Áudio
-
-### 8.2.1 API para Receber os Áudios Enviados pelo Usuário
+### 8.1.1 API para Receber os Áudios Enviados pelo Usuário
 
 ### Endpoint Disponível
 
@@ -1719,7 +1696,7 @@ print(f"Audio ID: {resultado['data']['audioId']}")
 print(f"Status: {resultado['data']['status']}")
 ```
 
-### 8.2.2 API para Implementar a Etapa de Speech to Text e Text to Speech
+### 8.1.2 API para Implementar a Etapa de Speech to Text e Text to Speech
 
 #### Endpoints Disponíveis
 
@@ -1910,7 +1887,7 @@ VALUES ('12345', 'Gas_Leak_Report', 0.95, NOW());
 4. **Armazenamento:** Resultado é salvo no banco de dados
 5. **Resposta:** Sistema pode gerar feedback em áudio via TTS API (opcional)
 
-## 8.3 Algoritmo de NLP Utilizado e sua Implementação
+## 8.2 Algoritmo de NLP Utilizado e sua Implementação
 
 ### Visão Geral do Algoritmo
 
@@ -2089,7 +2066,7 @@ print(f"Componentes: BERT={result['component_scores']['bert']:.3f}, "
 
 Esta implementação mostra como a arquitetura híbrida processa transcrições de forma eficiente, combinando a capacidade de análise contextual do BERT com a precisão do regex e a relevância estatística do TF-IDF para produzir avaliações completas de qualidade de atendimento.
 
-## 8.3.1 Sprint 3
+### 8.2.1 Sprint 3
 
 Nesta sprint, o foco do desenvolvimento frontend foi a construção de uma interface de utilizador (UI) completamente funcional e interativa, transformando o protótipo de alta fidelidade numa experiência dinâmica, utilizando dados simulados (*mock data*) para validar os fluxos e componentes. O objetivo principal foi criar a estrutura visual e, mais importante, toda a lógica de estado que permite a manipulação e visualização dos dados no dashboard.
 
@@ -2168,15 +2145,13 @@ Esta secção serve como um guia para validar a interatividade completa do front
 - **Então** a ordem de classificação deve ser invertida (ex: do maior para o menor).
 
 
-## 8.4 Desenvolvimento de Features
-
-_conteúdo_
+## 8.3 Desenvolvimento de Features
 
 **Nota:** Insira uma explicação de entregas em cada Sprint.
 
-## 8.4.1 Sprint 3
+## 8.3.1 Sprint 3
 
-### 8.4.1.1 Tecnologias Utilizadas na Análise
+### 8.3.1.1 Tecnologias Utilizadas na Análise
 
 O modelo faz uso de diferentes abordagens para enriquecer a análise das transcrições:
 
@@ -2209,7 +2184,7 @@ O modelo também aponta que, em geral, os atendentes mantêm postura ética e co
 
 O desenvolvimento do modelo representa um avanço importante para o projeto, pois permite automatizar parte da avaliação de qualidade e identificar padrões de atendimento que podem ser aprimorados nas próximas sprints.
 
-### 8.4.1.2 Webhooks (serviço: `webhook-service`)
+### 8.3.1.2 Webhooks - Implementação Completa
 
 #### 8.4.1.2.1 Objetivo
 
@@ -2591,16 +2566,7 @@ curl -X POST http://localhost:3000/webhook/processing-start \
   -d '{"jobId":"start_job_001","clienteId":"cliente_123"}'
 ```
 
-## 8.4.2 Sprint 4
-
-_conteúdo_
-
-## 8.4.3 Sprint 5
-
-_conteúdo_
-Obs.: Insira informações sobre estratégias para realização dos testes
-
-## 8.6 Documentações automáticas
+## 8.4 Documentações automáticas
 
 _conteúdo_
 Obs.: Insira informações sobre quais frameworks foram usados e como acessar.
@@ -2918,12 +2884,142 @@ Os testes de usabilidade atingiram as metas estabelecidas:
 - Implementar exportação direta de relatórios em PDF
 O feedback dos participantes será utilizado para priorizar ajustes de interface e funcionalidades nas próximas sprints.
 
+## 9.4 Testes Unitários
 
-## 9.4 Testes de Integração
+O objetivo dos testes unitários é verificar a menor unidade de código isoladamente (neste caso, as funções e métodos do `chamadaService.ts`), garantindo que a lógica de negócio interna se comporte conforme o esperado, independentemente de dependências externas como repositórios, banco de dados ou APIs.
+
+Focaremos em validar:
+
+1.  As **regras de negócio** do `createFromJson` (validações de JSON e chamada correta do repositório).
+2.  A **lógica de avaliação** da função `generateBasicEvaluation` (cálculo de score, contagem de palavras, detecção de critérios).
+
+### 9.4.1 Planejamento
+
+#### *Estratégia e Ferramentas*
+
+A estratégia consiste em **mockar** (simular) todas as dependências do serviço.
+
+  * ***Ferramentas:***
+
+      * **Jest:** Framework principal para a escrita e execução dos testes unitários.
+      * **`jest.mock()`:** Mecanismo essencial para isolar o `chamadaRepository` e garantir que nenhuma chamada real ao banco de dados seja feita.
+
+  * ***Abrangência e Justificativa:***
+
+      * **Abrangência:** Testar todos os caminhos possíveis (sucesso e falha/validação) das funções `createFromJson`, `list`, `getById` e garantir a integridade da função `generateBasicEvaluation`.
+      * **Justificativa:** A lógica do service é crítica para o processamento de dados e cálculo de score de qualidade. Uma falha aqui resultará em dados incorretos ou rejeição de chamadas. O **mocking** garante que testamos **apenas** o código do service.
+
+#### *Casos de Teste Unitário (Focando no `chamada.service.ts`)*
+
+| ID | Título do Caso de Teste | Unidade Testada | Pré-condições (Mocks) | Validação dos Resultados |
+| :-- | :--- | :--- | :--- | :--- |
+| **CT-UNIT-001** | *(Sucesso)* `list` e `getById` devem chamar o repositório mockado | `chamadaService.list`, `chamadaService.getById` | `chamadaRepository.list` e `.getById` são mockados com valores de retorno predefinidos. | 1. `chamadaRepository.list` deve ser chamado **exatamente uma vez**. 2. `chamadaRepository.getById` deve ser chamado com o **ID correto**. |
+| **CT-UNIT-002** | *(Sucesso)* `createFromJson` deve passar a validação e persistir dados | `chamadaService.createFromJson` | Um `mockValidJsonData` é fornecido. `chamadaRepository.create` é mockado para retornar um valor. | 1. `chamadaRepository.create` deve ser chamado **exatamente uma vez**. 2. Os dados de `create` devem conter `cliente_id` e `atendente_id` corretamente gerados. 3. O resultado deve conter uma `avaliacao_json` válida e um `nota_qualidade` calculado. |
+| **CT-UNIT-003** | *(Validação - Negativo)* `createFromJson` deve falhar se o JSON de entrada for inválido | `chamadaService.createFromJson` | JSONs de entrada sem campos obrigatórios (`meta`, `results`, `totalBilledTime`) ou com tipos incorretos. | 1. O service deve **lançar um erro** (`rejects.toThrow()`) com a mensagem de validação apropriada. 2. `chamadaRepository.create` **não deve ser chamado** em nenhum cenário de falha de validação. |
+| **CT-UNIT-004** | *(Lógica de Avaliação)* Calcular **nota alta** para transcrição positiva e longa | `generateBasicEvaluation` | Mock de JSON com transcrição \> 50 palavras e presença de palavras positivas ("obrigado", "bom dia"). | 1. O `nota_qualidade` final deve ser **alto** (ex: $\ge 8$). 2. O critério `2.2_cordialidade` deve ser **Aprovado**. 3. O critério `2.3_dialogo_vicios` deve ser **Aprovado**. |
+| **CT-UNIT-005** | *(Lógica de Avaliação)* Calcular **nota baixa** para transcrição negativa e curta | `generateBasicEvaluation` | Mock de JSON com transcrição \< 50 palavras e presença de palavras negativas ("droga", "absurdo"). | 1. O `nota_qualidade` final deve ser **baixo** (ex: $\le 4$). 2. O critério `2.3_dialogo_vicios` deve ser **Reprovado**. 3. O critério `4.0_etica` deve ser **Reprovado**. |
+
+-----
+
+### 9.4.2 Estrutura do Teste (`chamada.service.test.ts`)
+
+O arquivo de teste implementa o **mocking** e os casos descritos acima usando o Jest.
+
+```typescript
+// chamada.service.test.ts
+
+import { chamadaService } from '../services/chamada.service';
+import { chamadaRepository } from '../repositories/chamada.repository'; 
+
+// 1. MOCKING: Isola o Service do Backend/DB
+jest.mock('../repositories/chamada.repository', () => ({
+  chamadaRepository: {
+    list: jest.fn(),
+    getById: jest.fn(),
+    create: jest.fn(),
+  },
+}));
+
+// Mock de JSON de entrada para reuso
+const mockValidJsonData = {
+  // ... (dados de meta, results e totalBilledTime)
+  meta: { seed: 123, persona: 'client-1', scenario: 'suporte', complyCriteriaIds: [], violateCriteriaIds: [] },
+  results: [{ alternatives: [{ transcript: 'Olá, obrigado pela ajuda.' }] }],
+  totalBilledTime: '10s',
+};
+
+
+describe('chamadaService (Testes Unitários)', () => {
+  
+  beforeEach(() => {
+    jest.clearAllMocks();
+    // Prepara o mock para CT-UNIT-002
+    (chamadaRepository.create as jest.Mock).mockResolvedValue(Object.assign({ id: 1 }, mockValidJsonData));
+  });
+
+  // Testes CT-UNIT-001
+  it('CT-UNIT-001: Deve chamar os métodos list e getById do Repository', async () => {
+    await chamadaService.list();
+    await chamadaService.getById(5);
+    
+    expect(chamadaRepository.list).toHaveBeenCalledTimes(1);
+    expect(chamadaRepository.getById).toHaveBeenCalledWith(5);
+  });
+  
+  // Teste CT-UNIT-002
+  it('CT-UNIT-002: Deve processar dados válidos e chamar o Repository.create', async () => {
+    await chamadaService.createFromJson(mockValidJsonData);
+    
+    expect(chamadaRepository.create).toHaveBeenCalledTimes(1);
+    const dataPassed = (chamadaRepository.create as jest.Mock).mock.calls[0][0];
+    
+    expect(dataPassed).toHaveProperty('cliente_id', 'cliente_client-1_123');
+    expect(dataPassed.avaliacao_json).toBeDefined();
+    expect(dataPassed.nota_qualidade).toBeGreaterThanOrEqual(1);
+  });
+
+  // Teste CT-UNIT-003 (Exemplo de Validação)
+  it('CT-UNIT-003: Deve lançar erro se meta estiver faltando e NÃO chamar o create', async () => {
+    const invalidJson = { ...mockValidJsonData, meta: undefined }; 
+    
+    await expect(chamadaService.createFromJson(invalidJson)).rejects.toThrow('JSON deve conter um objeto "meta" válido');
+    expect(chamadaRepository.create).not.toHaveBeenCalled();
+  });
+  
+  // Teste CT-UNIT-004 e CT-UNIT-005 (Lógica de Avaliação)
+  it('CT-UNIT-004 e CT-UNIT-005: Deve calcular nota alta para conversa positiva', async () => {
+      // Cenário CT-UNIT-004
+      const positiveJson = {
+          ...mockValidJsonData,
+          results: [{ alternatives: [{ transcript: Array(60).fill('Muito obrigado, por favor.').join('') + ' Bom dia.' }] }],
+      };
+
+      await chamadaService.createFromJson(positiveJson);
+      const { nota_qualidade, avaliacao_json } = (chamadaRepository.create as jest.Mock).mock.calls[0][0];
+
+      expect(nota_qualidade).toBeGreaterThanOrEqual(8); 
+      expect(avaliacao_json.criterios['2.2_cordialidade'].resultado).toBe('Aprovado');
+  });
+});
+```
+
+-----
+
+### 9.4.3 Resultados
+
+<div align="center">
+  <sub>Figura 9.5.3.1 - Resultado</sub> <br>
+
+  <img src="img/section9/unit_test_chamada.png" alt="Resultado Testes Unitários" style="width: 100%; height: auto;">
+
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+## 9.5 Testes de Integração
 
 O objetivo dos testes de integração é verificar se os diferentes módulos e componentes do sistema, incluindo serviços externos, funcionam corretamente quando combinados. Esta fase de testes foca em validar o fluxo de dados e as interações entre o backend, o banco de dados, o módulo de cache e as APIs externas, garantindo que a comunicação seja robusta e que os erros sejam tratados de forma apropriada.
 
-### 9.4.1 Planejamento
+### 9.5.1 Planejamento
 
 A seguir, são detalhados a estratégia, as ferramentas e os casos de teste planejados para validar as integrações da aplicação.
 
@@ -2958,273 +3054,10 @@ A estratégia consiste em testar cada ponto de integração de forma isolada, ma
 | *CT-INT-004| *(Positivo - Cache)* Utilização da resposta em cache na segunda chamada | Backend ↔ Módulo de Cache | O teste CT-INT-003 foi executado previamente com o mesmo arquivo de áudio. | 1. **Dado* o mesmo arquivo de áudio do teste anterior. 2. *E* a conexão com a API externa está desabilitada (simulado via mock ou ⁠ VCR.py ⁠ em modo de bloqueio). 3. *Quando* o serviço de análise é invocado novamente. | 1. *Então* o resultado da análise deve ser retornado com sucesso. 2. *E* o resultado deve ser idêntico ao da primeira chamada. 3. *E* NENHUMA requisição HTTP para a API da OpenAI deve ter sido realizada, provando que o dado veio do cache. |
 | *CT-INT-005* | *(Positivo)* Persistência bem-sucedida da análise no banco de dados | Backend ↔ Banco de Dados | Uma análise (real ou via cache) foi concluída com sucesso. | 1. *Dado* um objeto de resultado de análise válido. 2. *Quando* a função de persistência é chamada com este objeto. 3. *E* uma consulta é feita diretamente ao banco de dados PostgreSQL. | 1. *Então* um novo registro correspondente à chamada analisada deve existir na tabela apropriada. 2. *E* todos os campos (notas, metadados, etc.) devem estar consistentes com o objeto de resultado. |
 
-### 9.4.2 Resultados
+### 9.5.2 Resultados
 
 ########################
 
-
-## 9.5 Testes Unitários
-
-O objetivo dos testes unitários é verificar a menor unidade de código isoladamente (neste caso, as funções e métodos do `chamadaService.ts`), garantindo que a lógica de negócio interna se comporte conforme o esperado, independentemente de dependências externas como repositórios, banco de dados ou APIs.
-
-Focaremos em validar:
-
-1.  As **regras de negócio** do `createFromJson` (validações de JSON e chamada correta do repositório).
-2.  A **lógica de avaliação** da função `generateBasicEvaluation` (cálculo de score, contagem de palavras, detecção de critérios).
-
-### 9.5.1 Planejamento
-
-#### *Estratégia e Ferramentas*
-
-A estratégia consiste em **mockar** (simular) todas as dependências do serviço.
-
-  * ***Ferramentas:***
-
-      * **Jest:** Framework principal para a escrita e execução dos testes unitários.
-      * **`jest.mock()`:** Mecanismo essencial para isolar o `chamadaRepository` e garantir que nenhuma chamada real ao banco de dados seja feita.
-
-  * ***Abrangência e Justificativa:***
-
-      * **Abrangência:** Testar todos os caminhos possíveis (sucesso e falha/validação) das funções `createFromJson`, `list`, `getById` e garantir a integridade da função `generateBasicEvaluation`.
-      * **Justificativa:** A lógica do service é crítica para o processamento de dados e cálculo de score de qualidade. Uma falha aqui resultará em dados incorretos ou rejeição de chamadas. O **mocking** garante que testamos **apenas** o código do service.
-
-#### *Casos de Teste Unitário (Focando no `chamada.service.ts`)*
-
-| ID | Título do Caso de Teste | Unidade Testada | Pré-condições (Mocks) | Validação dos Resultados |
-| :-- | :--- | :--- | :--- | :--- |
-| **CT-UNIT-001** | *(Sucesso)* `list` e `getById` devem chamar o repositório mockado | `chamadaService.list`, `chamadaService.getById` | `chamadaRepository.list` e `.getById` são mockados com valores de retorno predefinidos. | 1. `chamadaRepository.list` deve ser chamado **exatamente uma vez**. 2. `chamadaRepository.getById` deve ser chamado com o **ID correto**. |
-| **CT-UNIT-002** | *(Sucesso)* `createFromJson` deve passar a validação e persistir dados | `chamadaService.createFromJson` | Um `mockValidJsonData` é fornecido. `chamadaRepository.create` é mockado para retornar um valor. | 1. `chamadaRepository.create` deve ser chamado **exatamente uma vez**. 2. Os dados de `create` devem conter `cliente_id` e `atendente_id` corretamente gerados. 3. O resultado deve conter uma `avaliacao_json` válida e um `nota_qualidade` calculado. |
-| **CT-UNIT-003** | *(Validação - Negativo)* `createFromJson` deve falhar se o JSON de entrada for inválido | `chamadaService.createFromJson` | JSONs de entrada sem campos obrigatórios (`meta`, `results`, `totalBilledTime`) ou com tipos incorretos. | 1. O service deve **lançar um erro** (`rejects.toThrow()`) com a mensagem de validação apropriada. 2. `chamadaRepository.create` **não deve ser chamado** em nenhum cenário de falha de validação. |
-| **CT-UNIT-004** | *(Lógica de Avaliação)* Calcular **nota alta** para transcrição positiva e longa | `generateBasicEvaluation` | Mock de JSON com transcrição \> 50 palavras e presença de palavras positivas ("obrigado", "bom dia"). | 1. O `nota_qualidade` final deve ser **alto** (ex: $\ge 8$). 2. O critério `2.2_cordialidade` deve ser **Aprovado**. 3. O critério `2.3_dialogo_vicios` deve ser **Aprovado**. |
-| **CT-UNIT-005** | *(Lógica de Avaliação)* Calcular **nota baixa** para transcrição negativa e curta | `generateBasicEvaluation` | Mock de JSON com transcrição \< 50 palavras e presença de palavras negativas ("droga", "absurdo"). | 1. O `nota_qualidade` final deve ser **baixo** (ex: $\le 4$). 2. O critério `2.3_dialogo_vicios` deve ser **Reprovado**. 3. O critério `4.0_etica` deve ser **Reprovado**. |
-
------
-
-### 9.5.2 Estrutura do Teste (`chamada.service.test.ts`)
-
-O arquivo de teste implementa o **mocking** e os casos descritos acima usando o Jest.
-
-```typescript
-// chamada.service.test.ts
-
-import { chamadaService } from '../services/chamada.service';
-import { chamadaRepository } from '../repositories/chamada.repository'; 
-
-// 1. MOCKING: Isola o Service do Backend/DB
-jest.mock('../repositories/chamada.repository', () => ({
-  chamadaRepository: {
-    list: jest.fn(),
-    getById: jest.fn(),
-    create: jest.fn(),
-  },
-}));
-
-// Mock de JSON de entrada para reuso
-const mockValidJsonData = {
-  // ... (dados de meta, results e totalBilledTime)
-  meta: { seed: 123, persona: 'client-1', scenario: 'suporte', complyCriteriaIds: [], violateCriteriaIds: [] },
-  results: [{ alternatives: [{ transcript: 'Olá, obrigado pela ajuda.' }] }],
-  totalBilledTime: '10s',
-};
-
-
-describe('chamadaService (Testes Unitários)', () => {
-  
-  beforeEach(() => {
-    jest.clearAllMocks();
-    // Prepara o mock para CT-UNIT-002
-    (chamadaRepository.create as jest.Mock).mockResolvedValue(Object.assign({ id: 1 }, mockValidJsonData));
-  });
-
-  // Testes CT-UNIT-001
-  it('CT-UNIT-001: Deve chamar os métodos list e getById do Repository', async () => {
-    await chamadaService.list();
-    await chamadaService.getById(5);
-    
-    expect(chamadaRepository.list).toHaveBeenCalledTimes(1);
-    expect(chamadaRepository.getById).toHaveBeenCalledWith(5);
-  });
-  
-  // Teste CT-UNIT-002
-  it('CT-UNIT-002: Deve processar dados válidos e chamar o Repository.create', async () => {
-    await chamadaService.createFromJson(mockValidJsonData);
-    
-    expect(chamadaRepository.create).toHaveBeenCalledTimes(1);
-    const dataPassed = (chamadaRepository.create as jest.Mock).mock.calls[0][0];
-    
-    expect(dataPassed).toHaveProperty('cliente_id', 'cliente_client-1_123');
-    expect(dataPassed.avaliacao_json).toBeDefined();
-    expect(dataPassed.nota_qualidade).toBeGreaterThanOrEqual(1);
-  });
-
-  // Teste CT-UNIT-003 (Exemplo de Validação)
-  it('CT-UNIT-003: Deve lançar erro se meta estiver faltando e NÃO chamar o create', async () => {
-    const invalidJson = { ...mockValidJsonData, meta: undefined }; 
-    
-    await expect(chamadaService.createFromJson(invalidJson)).rejects.toThrow('JSON deve conter um objeto "meta" válido');
-    expect(chamadaRepository.create).not.toHaveBeenCalled();
-  });
-  
-  // Teste CT-UNIT-004 e CT-UNIT-005 (Lógica de Avaliação)
-  it('CT-UNIT-004 e CT-UNIT-005: Deve calcular nota alta para conversa positiva', async () => {
-      // Cenário CT-UNIT-004
-      const positiveJson = {
-          ...mockValidJsonData,
-          results: [{ alternatives: [{ transcript: Array(60).fill('Muito obrigado, por favor.').join('') + ' Bom dia.' }] }],
-      };
-
-      await chamadaService.createFromJson(positiveJson);
-      const { nota_qualidade, avaliacao_json } = (chamadaRepository.create as jest.Mock).mock.calls[0][0];
-
-      expect(nota_qualidade).toBeGreaterThanOrEqual(8); 
-      expect(avaliacao_json.criterios['2.2_cordialidade'].resultado).toBe('Aprovado');
-  });
-});
-```
-
------
-
-### 9.5.3 Resultados
-
-<div align="center">
-  <sub>Figura 9.5.3.1 - Resultado</sub> <br>
-
-  <img src="img/section9/unit_test_chamada.png" alt="Resultado Testes Unitários" style="width: 100%; height: auto;">
-
-  <sup>Fonte: Material produzido pelos autores (2025).</sup>
-</div>
-
-
-## 9.5 Testes Unitários
-
-O objetivo dos testes unitários é verificar a menor unidade de código isoladamente (neste caso, as funções e métodos do `chamadaService.ts`), garantindo que a lógica de negócio interna se comporte conforme o esperado, independentemente de dependências externas como repositórios, banco de dados ou APIs.
-
-Focaremos em validar:
-
-1.  As **regras de negócio** do `createFromJson` (validações de JSON e chamada correta do repositório).
-2.  A **lógica de avaliação** da função `generateBasicEvaluation` (cálculo de score, contagem de palavras, detecção de critérios).
-
-### 9.5.1 Planejamento
-
-#### *Estratégia e Ferramentas*
-
-A estratégia consiste em **mockar** (simular) todas as dependências do serviço.
-
-  * ***Ferramentas:***
-
-      * **Jest:** Framework principal para a escrita e execução dos testes unitários.
-      * **`jest.mock()`:** Mecanismo essencial para isolar o `chamadaRepository` e garantir que nenhuma chamada real ao banco de dados seja feita.
-
-  * ***Abrangência e Justificativa:***
-
-      * **Abrangência:** Testar todos os caminhos possíveis (sucesso e falha/validação) das funções `createFromJson`, `list`, `getById` e garantir a integridade da função `generateBasicEvaluation`.
-      * **Justificativa:** A lógica do service é crítica para o processamento de dados e cálculo de score de qualidade. Uma falha aqui resultará em dados incorretos ou rejeição de chamadas. O **mocking** garante que testamos **apenas** o código do service.
-
-#### *Casos de Teste Unitário (Focando no `chamada.service.ts`)*
-
-| ID | Título do Caso de Teste | Unidade Testada | Pré-condições (Mocks) | Validação dos Resultados |
-| :-- | :--- | :--- | :--- | :--- |
-| **CT-UNIT-001** | *(Sucesso)* `list` e `getById` devem chamar o repositório mockado | `chamadaService.list`, `chamadaService.getById` | `chamadaRepository.list` e `.getById` são mockados com valores de retorno predefinidos. | 1. `chamadaRepository.list` deve ser chamado **exatamente uma vez**. 2. `chamadaRepository.getById` deve ser chamado com o **ID correto**. |
-| **CT-UNIT-002** | *(Sucesso)* `createFromJson` deve passar a validação e persistir dados | `chamadaService.createFromJson` | Um `mockValidJsonData` é fornecido. `chamadaRepository.create` é mockado para retornar um valor. | 1. `chamadaRepository.create` deve ser chamado **exatamente uma vez**. 2. Os dados de `create` devem conter `cliente_id` e `atendente_id` corretamente gerados. 3. O resultado deve conter uma `avaliacao_json` válida e um `nota_qualidade` calculado. |
-| **CT-UNIT-003** | *(Validação - Negativo)* `createFromJson` deve falhar se o JSON de entrada for inválido | `chamadaService.createFromJson` | JSONs de entrada sem campos obrigatórios (`meta`, `results`, `totalBilledTime`) ou com tipos incorretos. | 1. O service deve **lançar um erro** (`rejects.toThrow()`) com a mensagem de validação apropriada. 2. `chamadaRepository.create` **não deve ser chamado** em nenhum cenário de falha de validação. |
-| **CT-UNIT-004** | *(Lógica de Avaliação)* Calcular **nota alta** para transcrição positiva e longa | `generateBasicEvaluation` | Mock de JSON com transcrição \> 50 palavras e presença de palavras positivas ("obrigado", "bom dia"). | 1. O `nota_qualidade` final deve ser **alto** (ex: $\ge 8$). 2. O critério `2.2_cordialidade` deve ser **Aprovado**. 3. O critério `2.3_dialogo_vicios` deve ser **Aprovado**. |
-| **CT-UNIT-005** | *(Lógica de Avaliação)* Calcular **nota baixa** para transcrição negativa e curta | `generateBasicEvaluation` | Mock de JSON com transcrição \< 50 palavras e presença de palavras negativas ("droga", "absurdo"). | 1. O `nota_qualidade` final deve ser **baixo** (ex: $\le 4$). 2. O critério `2.3_dialogo_vicios` deve ser **Reprovado**. 3. O critério `4.0_etica` deve ser **Reprovado**. |
-
------
-
-### 9.5.2 Estrutura do Teste (`chamada.service.test.ts`)
-
-O arquivo de teste implementa o **mocking** e os casos descritos acima usando o Jest.
-
-```typescript
-// chamada.service.test.ts
-
-import { chamadaService } from '../services/chamada.service';
-import { chamadaRepository } from '../repositories/chamada.repository'; 
-
-// 1. MOCKING: Isola o Service do Backend/DB
-jest.mock('../repositories/chamada.repository', () => ({
-  chamadaRepository: {
-    list: jest.fn(),
-    getById: jest.fn(),
-    create: jest.fn(),
-  },
-}));
-
-// Mock de JSON de entrada para reuso
-const mockValidJsonData = {
-  // ... (dados de meta, results e totalBilledTime)
-  meta: { seed: 123, persona: 'client-1', scenario: 'suporte', complyCriteriaIds: [], violateCriteriaIds: [] },
-  results: [{ alternatives: [{ transcript: 'Olá, obrigado pela ajuda.' }] }],
-  totalBilledTime: '10s',
-};
-
-
-describe('chamadaService (Testes Unitários)', () => {
-  
-  beforeEach(() => {
-    jest.clearAllMocks();
-    // Prepara o mock para CT-UNIT-002
-    (chamadaRepository.create as jest.Mock).mockResolvedValue(Object.assign({ id: 1 }, mockValidJsonData));
-  });
-
-  // Testes CT-UNIT-001
-  it('CT-UNIT-001: Deve chamar os métodos list e getById do Repository', async () => {
-    await chamadaService.list();
-    await chamadaService.getById(5);
-    
-    expect(chamadaRepository.list).toHaveBeenCalledTimes(1);
-    expect(chamadaRepository.getById).toHaveBeenCalledWith(5);
-  });
-  
-  // Teste CT-UNIT-002
-  it('CT-UNIT-002: Deve processar dados válidos e chamar o Repository.create', async () => {
-    await chamadaService.createFromJson(mockValidJsonData);
-    
-    expect(chamadaRepository.create).toHaveBeenCalledTimes(1);
-    const dataPassed = (chamadaRepository.create as jest.Mock).mock.calls[0][0];
-    
-    expect(dataPassed).toHaveProperty('cliente_id', 'cliente_client-1_123');
-    expect(dataPassed.avaliacao_json).toBeDefined();
-    expect(dataPassed.nota_qualidade).toBeGreaterThanOrEqual(1);
-  });
-
-  // Teste CT-UNIT-003 (Exemplo de Validação)
-  it('CT-UNIT-003: Deve lançar erro se meta estiver faltando e NÃO chamar o create', async () => {
-    const invalidJson = { ...mockValidJsonData, meta: undefined }; 
-    
-    await expect(chamadaService.createFromJson(invalidJson)).rejects.toThrow('JSON deve conter um objeto "meta" válido');
-    expect(chamadaRepository.create).not.toHaveBeenCalled();
-  });
-  
-  // Teste CT-UNIT-004 e CT-UNIT-005 (Lógica de Avaliação)
-  it('CT-UNIT-004 e CT-UNIT-005: Deve calcular nota alta para conversa positiva', async () => {
-      // Cenário CT-UNIT-004
-      const positiveJson = {
-          ...mockValidJsonData,
-          results: [{ alternatives: [{ transcript: Array(60).fill('Muito obrigado, por favor.').join('') + ' Bom dia.' }] }],
-      };
-
-      await chamadaService.createFromJson(positiveJson);
-      const { nota_qualidade, avaliacao_json } = (chamadaRepository.create as jest.Mock).mock.calls[0][0];
-
-      expect(nota_qualidade).toBeGreaterThanOrEqual(8); 
-      expect(avaliacao_json.criterios['2.2_cordialidade'].resultado).toBe('Aprovado');
-  });
-});
-```
-
------
-
-### 9.5.3 Resultados
-
-<div align="center">
-  <sub>Figura 9.5.3.1 - Resultado</sub> <br>
-
-  <img src="img/section9/unit_test_chamada.png" alt="Resultado Testes Unitários" style="width: 100%; height: auto;">
-
-  <sup>Fonte: Material produzido pelos autores (2025).</sup>
-</div>
 
 # 10. Procedimentos de Implantação
 
@@ -3280,5 +3113,3 @@ _conteúdo_
 </div>
 
 # Referências
-
-_conteúdo_
