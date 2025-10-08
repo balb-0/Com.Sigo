@@ -41,9 +41,42 @@ function chunkBySpeaker(words: Word[], maxChars = 500): Array<{ text: string; sp
   return chunks.filter(c => c.text.trim().length > 0);
 }
 
-async function backfillOne(chamadaId: number, transcript: any) {
+async function safeEmbed(text: string): Promise<number[] | null> {
+  try {
+    return await embedText(text);
+  } catch (e: any) {
+    const msg = e?.message || String(e);
+    // Skip bad payloads (400) and continue
+    if (/\b400\b/.test(msg) || /Bad Request/i.test(msg)) {
+      // eslint-disable-next-line no-console
+      console.warn("Skipping segment due to 400 from embeddings API:", msg);
+      return null;
+    }
+    // basic retry once for transient
+    await new Promise(r => setTimeout(r, 500));
+    try { return await embedText(text); } catch { return null; }
+  }
+}
+
+async function backfillOne(chamadaId: number, rawTranscript: any) {
+  const db = getDb();
+  // Skip chamadas that already have segments unless forced
+  const { rows: already } = await db.query("SELECT COUNT(1) AS n FROM chamada_segments WHERE chamada_id = $1", [chamadaId]);
+  const countExisting = Number(already?.[0]?.n || 0);
+  const forceAll = process.env.BACKFILL_FORCE === '1';
+  if (!forceAll && countExisting > 0) {
+    // eslint-disable-next-line no-console
+    console.log(`Skip chamada ${chamadaId} (already has ${countExisting} segment(s))`);
+    return;
+  }
+
+  // Flatten all results[*].alternatives[0].words
   // Flatten all results[*].alternatives[0].words
   const words: Word[] = [];
+  let transcript = rawTranscript;
+  if (typeof transcript === 'string') {
+    try { transcript = JSON.parse(transcript); } catch { /* ignore */ }
+  }
   const results = Array.isArray(transcript?.results) ? transcript.results : [];
   for (const r of results) {
     const alt0 = r?.alternatives?.[0];
@@ -55,22 +88,37 @@ async function backfillOne(chamadaId: number, transcript: any) {
   const chunks = chunkBySpeaker(words);
   const segmentsToInsert: any[] = [];
   for (const c of chunks) {
-    const embedding = await embedText(c.text);
+    const embedding = await safeEmbed(c.text);
     segmentsToInsert.push({
       chamada_id: chamadaId,
       speaker_tag: c.speaker_tag,
       start_time_ms: c.start ?? null,
       end_time_ms: c.end ?? null,
       text: c.text,
-      embedding,
+      embedding: embedding ?? undefined,
     });
   }
-  await insertSegments(segmentsToInsert);
+  const valid = segmentsToInsert.filter(s => Array.isArray(s.embedding));
+  if (valid.length > 0) {
+    await insertSegments(valid);
+  } else {
+    // eslint-disable-next-line no-console
+    console.warn(`No valid segments to insert for chamada ${chamadaId}`);
+  }
 }
 
 async function main() {
   const db = getDb();
-  const { rows } = await db.query("SELECT chamada_id, transcript_json FROM chamada WHERE transcript_json IS NOT NULL");
+  const onlyEmpty = process.env.BACKFILL_ONLY_EMPTY === '1';
+  const sql = onlyEmpty
+    ? `SELECT c.chamada_id, c.transcript_json
+       FROM chamada c
+       LEFT JOIN (
+         SELECT chamada_id, COUNT(1) n FROM chamada_segments GROUP BY chamada_id
+       ) s ON s.chamada_id = c.chamada_id
+       WHERE c.transcript_json IS NOT NULL AND COALESCE(s.n,0) = 0`
+    : `SELECT chamada_id, transcript_json FROM chamada WHERE transcript_json IS NOT NULL`;
+  const { rows } = await db.query(sql);
   for (const row of rows) {
     const chamadaId = Number(row.chamada_id);
     const transcript = row.transcript_json;
