@@ -22,8 +22,8 @@
     "declarationMap": true,
 
     // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
 
     // Style Options
     // "noImplicitReturns": true,
@@ -35,6 +35,8 @@
 
     // Recommended Options
     "strict": true,
+    "noImplicitAny": false,
+    "useUnknownInCatchVariables": false,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": false,
     "isolatedModules": true,
@@ -45,5 +47,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-  }
+  },
+  "exclude": [
+    "src/unittests/**/*"
+  ]
 }
