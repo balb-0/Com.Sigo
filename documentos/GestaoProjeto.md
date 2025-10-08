@@ -188,6 +188,60 @@ Durante a Sprint 5, o foco esteve em **finalizar o projeto de forma estável e c
 
 **Nota:** Projeto finalizado com êxito, atingindo os objetivos definidos no planejamento inicial e consolidando um fluxo de trabalho colaborativo e eficiente.
 
+## 2.6 Análise da Evolução das Métricas (Sprints 2 a 4)
+
+Esta seção documenta a evolução quantitativa da equipe, utilizando como base as planilhas de métricas aferidas ao final das Sprints 2, 3 e 4. A análise busca correlacionar os dados apresentados em cada imagem com as práticas de trabalho e os desafios de processo discutidos nas retrospectivas.
+
+### 2.6.1 Métricas da Sprint 2
+
+A primeira imagem detalha o desempenho da equipe na Sprint 2, que serviu como uma base de referência para a performance do time.
+
+<div align="center">
+  <sub>Figura 1 – Planilha de Métricas da Sprint 2</sub> <br>
+  <img src="img/sprint2.png" alt="Tabela com as métricas detalhadas dos integrantes na Sprint 2" style="max-width: 600px; width: 100%; height: auto;">
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+**Análise e Insights:**
+- **Estimativas Precisas e Produtividade Estável:** A Sprint 2 demonstrou uma forte capacidade de estimativa, com vários membros (como `andrepaula14`, `otaviovasconcelos7`, `ryangartlan2`) cravando o `dev_estimated` com o `dev_time`. O `FP-ajustado` geral da equipe se manteve próximo de 1.0, indicando um ritmo de trabalho saudável e previsível.
+- **Primeiro Sinal de Alerta no Fluxo de Revisão:** Apesar do bom desempenho geral, a planilha já aponta um potencial gargalo. O `review_time` de `rafaelbarbosa400` (15.5 horas) é significativamente mais alto que o da maioria, sugerindo que a etapa de revisão já era um ponto de atrito e que os cards poderiam estar parados na coluna de "Revisão" aguardando ação.
+
+### 2.6.2 Métricas da Sprint 3
+
+A planilha da Sprint 3 captura um momento de oscilação na performance da equipe, refletindo os desafios de processo mencionados na retrospectiva correspondente.
+
+<div align="center">
+  <sub>Figura 2 – Planilha de Métricas da Sprint 3</sub> <br>
+  <img src="img/sprint3.png" alt="Tabela com as métricas detalhadas dos integrantes na Sprint 3" style="max-width: 600px; width: 100%; height: auto;">
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+**Análise e Insights:**
+- **Queda na Produtividade:** Houve uma queda geral no `FP-ajustado` da equipe, que ficou em média ~0.96. Essa redução, embora pequena, é um reflexo quantitativo da "falta de disciplina na execução dos processos" e do desalinhamento nas *dailies* citados na retrospectiva da Sprint 3.
+- **Agravamento Crítico do Gargalo de Revisão:** O `review_time` de `rafaelbarbosa400` escalou para 57.6 horas. Um número tão extremo evidencia uma falha grave no fluxo de trabalho. É a materialização da prática de mover um card para "Revisão" e não realizar a atividade correspondente de imediato. O card ficou parado por dias, inflando o tempo de ciclo e representando um bloqueio claro para a entrega de valor.
+- **Impacto em Cascata:** Um tempo de revisão tão longo não afeta apenas uma pessoa; ele prende uma funcionalidade que poderia estar sendo testada ou validada, impactando o trabalho de todo o time.
+
+### 2.6.3 Métricas da Sprint 4
+
+Os dados da Sprint 4 mostram uma recuperação da equipe, indicando que as ações de melhoria propostas na retrospectiva anterior surtiram efeito, embora alguns desafios persistissem.
+
+<div align="center">
+  <sub>Figura 3 – Planilha de Métricas da Sprint 4</sub> <br>
+  <img src="img/sprint4.png" alt="Tabela com as métricas detalhadas dos integrantes na Sprint 4" style="max-width: 600px; width: 100%; height: auto;">
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+**Análise e Insights:**
+- **Recuperação da Produtividade:** A equipe demonstrou resiliência, com o `FP-ajustado` médio retornando ao patamar de ~1.0. Isso sugere que a reestruturação das *dailies* e o foco em melhorar a comunicação foram eficazes para realinhar o time. A precisão das estimativas também voltou a ser muito alta.
+- **Persistência do Problema de Revisão:** Embora o caso extremo da Sprint 3 tenha sido contornado, o `review_time` continuou sendo um ponto fraco. Diversos membros (`rafaelbarbosa400`, `ryangartlan2`, `vitorbalbo1`) ainda apresentaram tempos de revisão elevados (acima de 10 horas). Isso mostra que, apesar da melhora na comunicação geral, o processo de revisão de código ainda carecia de padronização e prioridade.
+- **Atenção aos "Cards Fantasmas" e Atualizações:** O `FP-ajustado` de `vitorbalbo1` (0.75) destoa do resto da equipe. Isso pode indicar uma tarefa subestimada, mas também pode ser um sintoma de um "card fantasma" ou de uma demora em atualizar seu status, fazendo com que o `dev_time` registrado fosse maior que o real esforço de desenvolvimento. A disciplina na gestão do quadro é fundamental para a acurácia das métricas.
+
+### Conclusão Final da Análise de Métricas
+
+A análise cronológica das planilhas revela uma jornada clara: a equipe iniciou com uma base sólida (Sprint 2), enfrentou uma queda de performance devido a falhas de processo (Sprint 3) e demonstrou capacidade de se recuperar (Sprint 4). Os dados confirmam que a competência técnica do time para estimar e desenvolver tarefas é um ponto forte.
+
+Contudo, o maior gargalo e oportunidade de melhoria reside no fluxo de trabalho, especificamente na etapa de revisão de código e na disciplina de gestão do quadro. As práticas de não atualizar os cards em tempo real ou de deixar tarefas acumulando tempo na coluna de revisão são os principais detratores da agilidade da equipe. Para o futuro, o foco deve ser em criar acordos de trabalho claros para a revisão de código e garantir que o quadro seja um espelho fiel do trabalho em andamento.
+
 # 3. Análise de Riscos
 
 _conteúdo_
@@ -215,3 +269,4 @@ _conteúdo_
 ## 4.3 Lições Aprendidas
 
 _conteúdo_
+
