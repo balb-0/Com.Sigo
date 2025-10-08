@@ -1,4 +1,4 @@
-import './KpiCard.css';
+import './KPICard.css';
 interface KpiCardProps {
     title: string;
     subtitle: string;
