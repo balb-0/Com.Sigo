@@ -3061,15 +3061,153 @@ A estratégia consiste em testar cada ponto de integração de forma isolada, ma
 
 # 10. Procedimentos de Implantação
 
-_conteúdo_
+Esta seção descreve como publicamos e mantemos o protótipo (frontend + backend) e como administramos o banco de dados em um ambiente de produção/staging. O Runbook do projeto contém detalhes operacionais e scripts; aqui estão os passos práticos e as referências para operações recorrentes.
+
+Links dos serviços implantados (produzidos durante o projeto):
+
+- Backend (health): https://two025-2a-t13-es07-g03-back.onrender.com/health
+- Frontend (site): https://two025-2a-t13-es07-g03-front.onrender.com/
+- Deploy da solução (página pública): https://two025-2a-t13-es07-g03-front.onrender.com/
+
+Observação: durante o desenvolvimento utilizamos o Render como provedor de hosting para frontend, backend e possivelmente para o Postgres. Se você for usar outro provedor (AWS, GCP, Heroku, etc.), adapte as etapas de variáveis de ambiente, build e backups conforme o painel do provedor.
 
 ## 10.1 Implantação e Configuração do Banco de Dados
 
-_conteúdo_
+Resumo e responsabilidades:
+
+- Tipo: PostgreSQL (padrão do projeto) com pgvector para vetores de embedding.
+- Responsável: time de infraestrutura / membro designado para deploy.
+- Objetivos: aplicar migrations, manter backups e executar backfills de embeddings quando necessário.
+
+Passos principais:
+
+1) Variáveis de ambiente
+
+- No ambiente de produção/staging, defina `DATABASE_URL` apontando para o Postgres gerenciado.
+- Nunca exponha `DATABASE_URL` em repositório público; use secrets no painel do provedor.
+
+2) Aplicar migrations
+
+- O projeto centraliza migrations no backend. Para executar migrations no servidor de aplicação (ou em CI/CD) use:
+
+```powershell
+cd src/backend
+npm ci
+npm run migrate
+```
+
+- Migrations aplicadas no projeto:
+  - `001_enable_pgvector.sql`
+  - `002_create_chamada_table.sql`
+  - `003_drop_nota_qualidade_check.sql`
+  - `004_drop_chamada_embedding.sql`
+  - `005_create_chamada_segments.sql`
+
+3) Backups e restauração
+
+- Recomenda-se ter backups automáticos configurados no provedor (ex.: snapshots do Render Postgres). Para backup manual com acesso ao banco:
+
+```powershell
+# Exporta todo o banco para um arquivo compactado
+pg_dump "<DATABASE_URL>" -Fc -f backup_producao_$(Get-Date -Format yyyyMMdd).dump
+
+# Restaurar em um banco destino (atenção: sobrescreve dados)
+pg_restore -d "<DATABASE_URL_DESTINO>" -c backup_producao_YYYYMMDD.dump
+```
+
+4) População / Backfill de embeddings
+
+- Sempre que o schema ou a lógica de embeddings for atualizada, re-execute o script de backfill para popular `chamada_segments`:
+
+```powershell
+cd src/backend
+npm run backfill:segments
+```
+
+- O script registra progresso no console com mensagens do tipo `Backfilled chamada X`.
+
+5) Verificações de integridade
+
+- Consultas úteis para checar dados essenciais (quando houver acesso psql):
+
+```powershell
+psql "<DATABASE_URL>" -c "SELECT COUNT(*) FROM chamada WHERE transcript_json IS NOT NULL;"
+psql "<DATABASE_URL>" -c "SELECT COUNT(*) FROM chamada_segments;"
+```
+
+Recomendações operacionais
+
+- Habilite backups automáticos e teste restaurações em um ambiente de staging periodicamente.
+- Restrinja acessos ao banco por IP quando suportado pelo provedor.
+- Registre procedimentos de emergência (quem contatar, como restaurar a partir de backup, tempos de RTO/RPO esperados).
 
 ## 10.2 Implantação do Protótipo para uso por equipe de desenvolvimento
 
-_conteúdo_
+Objetivo: instruções práticas para disponibilizar o protótipo (localmente e em Render) para que a equipe de desenvolvimento e validação possam usar o sistema.
+
+A. Deploy local (desenvolvimento)
+
+1) Backend (rodar localmente)
+
+```powershell
+cd src/backend
+# instalar dependências
+npm ci
+
+# configurar variáveis (ex.: usar .env local com DATABASE_URL apontando para um Postgres local)
+# rodar migrations e seed (se necessário)
+npm run migrate
+npm run seed
+
+# rodar em modo dev
+npm run dev
+# backend estará em http://localhost:4000
+```
+
+2) Frontend (rodar localmente)
+
+```powershell
+cd src/frontend
+npm ci
+npm run dev
+# frontend estará em http://localhost:5173 (com proxy para o backend local)
+```
+
+B. Deploy em ambiente hospedado (Render)
+
+Fluxo típico:
+
+1. Push do branch (ex.: `develop` ou `main`) para o repositório conectado ao Render.
+2. No painel do Render, confirme as variáveis de ambiente do serviço frontend e backend:
+  - Backend: `DATABASE_URL`, `OPENAI_API_KEY`, `NODE_ENV=production` etc.
+  - Frontend: variáveis de build prefixadas (ex.: `VITE_API_URL`) se usadas.
+3. Acompanhe build e logs no painel. Quando o deploy terminar, valide endpoints:
+  - Backend health: https://two025-2a-t13-es07-g03-back.onrender.com/health
+  - Frontend: https://two025-2a-t13-es07-g03-front.onrender.com/
+
+C. Testes pós-deploy e smoke tests
+
+- Teste rápido de integração: abrir o frontend e executar uma busca via Chat que invoque `POST /api/v1/agent/interpret`.
+- Validar que o botão "Ver no Dashboard" gera URLs com parâmetros esperados (ex.: `?filter=custom&lastDays=15&speaker=cliente&semantic=gás`).
+- Revisar logs do backend para chamadas 200/500 e erros de integração.
+
+D. Rollback e histórico
+
+- Use a funcionalidade de histórico de deploy do Render para reverter se necessário.
+- Em casos críticos, marque o commit saudável e faça rollback para esse commit no painel.
+
+Checklist de deploy (rápido)
+
+- [ ] Branch correto no repositório (commit testado)
+- [ ] `DATABASE_URL` e `OPENAI_API_KEY` configuradas no painel do provedor
+- [ ] Build do frontend concluído sem erros
+- [ ] Endpoint `/health` do backend respondendo 200
+- [ ] Backups recentes disponíveis
+
+Observações finais
+
+Esta documentação cobre os procedimentos básicos para implantar e manter o protótipo. Para operações em produção (SLA, monitoramento avançado, escalonamento automático), recomendamos adicionar uma etapa de CI/CD com execução automática de migrations, testes automatizados e playbooks de incident response.
+
 
 # 11. Orçamento e Caixa
 
