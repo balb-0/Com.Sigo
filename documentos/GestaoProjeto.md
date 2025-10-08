@@ -256,17 +256,49 @@ _conteúdo_
 
 # 4. Análise Post Mortem
 
-_conteúdo_
+A análise post mortem é uma reflexão estruturada sobre todo o ciclo de vida do projeto "Com.Sigo". O objetivo desta seção é consolidar os sucessos alcançados, identificar as causas-raiz dos desafios enfrentados e transformar a experiência acumulada em lições concretas que possam ser aplicadas em iniciativas futuras. Esta análise representa o fechamento do ciclo de aprendizado da equipe.
 
 ## 4.1 Sucessos do Projeto
 
-_conteúdo_
+A equipe "Com.Segue" alcançou resultados notáveis, que vão além da simples entrega do produto. Os principais sucessos podem ser categorizados da seguinte forma:
+
+#### 1. Conclusão Integral do Escopo e Entrega Final de Alta Qualidade
+O sucesso mais evidente foi a finalização completa do escopo planejado. Conforme destacado nas retrospectivas das Sprints 4 e 5, o projeto foi concluído com todas as funcionalidades esperadas e a entrega final ocorreu de forma estável e sem incidentes críticos. A capacidade de finalizar grande parte das tarefas da Sprint 5 com antecedência evidencia um planejamento eficaz na reta final e um forte comprometimento da equipe com o objetivo comum.
+
+#### 2. Alta Previsibilidade Técnica e Estabilidade na Produtividade
+A análise das métricas das Sprints 2, 3 e 4 revelou uma competência técnica excepcional. A equipe demonstrou uma notável precisão ao alinhar o tempo de desenvolvimento real (`dev_time`) com o estimado (`dev_estimated`), mesmo em meio a desafios de organização. O Fator de Produtividade (`FP-ajustado`) manteve-se consistentemente próximo de 1.0, exceto por uma leve queda na Sprint 3, indicando um ritmo de desenvolvimento maduro, consistente e, acima de tudo, previsível.
+
+#### 3. Resiliência e Capacidade Comprovada de Melhoria Contínua
+Talvez o maior testemunho da maturidade da equipe tenha sido sua capacidade de identificar uma queda de performance e corrigi-la. A Sprint 3 foi marcada por uma "falta de disciplina nos processos", o que se refletiu quantitativamente em uma queda no FP e na explosão do tempo de revisão. Em resposta, a equipe implementou ações concretas (como a reestruturação das *dailies*), e os dados da Sprint 4 comprovaram a recuperação da produtividade. Isso demonstra que os rituais de retrospectiva não foram meras formalidades, mas sim catalisadores eficazes de mudança.
+
+#### 4. Colaboração e Sinergia Interdisciplinar
+Apesar dos desafios de processo, as retrospectivas consistentemente elogiaram a colaboração e o apoio mútuo entre os membros. A Sprint 2 destacou a "excelente colaboração e comunicação", e a Sprint 4, o "trabalho em grupo" e as "boas discussões durante o desenvolvimento". A equipe soube alavancar a sinergia entre as áreas de frontend, backend e análise para tomar decisões mais assertivas e solucionar problemas complexos de forma coletiva.
 
 ## 4.2 Oportunidades de Melhoria
 
-_conteúdo_
+Os desafios enfrentados pelo projeto representam as mais valiosas oportunidades de aprendizado. As áreas a seguir foram identificadas como pontos críticos para aprimoramento em projetos futuros.
+
+#### 1. Formalização e Priorização do Processo de Revisão de Código
+Este foi, inequivocamente, o principal gargalo do projeto. A análise do `review_time` revelou picos extremos (chegando a 57.6 horas na Sprint 3), evidenciando que a revisão de código não era tratada como uma etapa prioritária e integrada ao fluxo de trabalho. A prática de mover um card para "Revisão" e deixá-lo em uma fila de espera gerou atrasos, imprevisibilidade e um "estoque" desnecessário de código não integrado.
+* **Sugestão para o Futuro:** Implementar um Acordo de Nível de Serviço (SLA) para revisões (ex: toda revisão deve ser iniciada em até 24 horas). Criar um checklist de revisão para padronizar a qualidade e reduzir o tempo de análise. Fomentar a cultura de que a responsabilidade da tarefa só termina quando o código é integrado (`merged`), incentivando revisões mais ágeis.
+
+#### 2. Aprimoramento da Disciplina de Gestão Visual do Trabalho
+As retrospectivas das Sprints 2 e 3 apontaram falhas na organização do Trello. Problemas como a demora em mover cards após a conclusão da tarefa, a existência de "cards fantasmas" ou a falta de clareza nas descrições geraram um desalinhamento entre o quadro e a realidade do trabalho. Isso não só dificulta o acompanhamento do progresso, mas também corrompe a fidelidade das métricas coletadas.
+* **Sugestão para o Futuro:** Instituir o hábito de atualizar o quadro durante as *dailies*, garantindo que o status de cada tarefa seja discutido e ajustado em equipe. Definir um padrão claro para a criação de cards, incluindo critérios de aceite, para evitar ambiguidades.
+
+#### 3. Consistência e Propósito na Execução dos Rituais Ágeis
+A S3 revelou que as reuniões diárias (*dailies*) "nem sempre atingiram seu potencial", tornando-se um ritual sem o foco necessário para sincronizar a equipe e identificar impedimentos. A eficácia dos rituais ágeis depende diretamente do engajamento e da disciplina de todos.
+* **Sugestão para o Futuro:** Reforçar o propósito de cada ritual. As *dailies* devem ser rápidas, focadas nas três perguntas clássicas e na remoção de bloqueios. As reuniões de planejamento (*plannings*) devem garantir que as tarefas sejam bem detalhadas antes do início da sprint, evitando surpresas.
 
 ## 4.3 Lições Aprendidas
 
-_conteúdo_
+Ao final do projeto "Com.Sigo", a equipe "Com.Segue" adquiriu aprendizados valiosos que transcendem a tecnologia desenvolvida:
+
+1.  **A Disciplina de Processo Amplifica a Competência Técnica:** A equipe provou ser tecnicamente excelente, mas os maiores desafios não foram de código, e sim de fluxo de trabalho. A principal lição é que um processo bem definido e seguido com disciplina é o que permite que o talento técnico se traduza em entrega de valor de forma ágil e consistente.
+
+2.  **Métricas São um Espelho da Realidade, Não a Realidade:** Os números (como um `review_time` alto ou um FP baixo) não são o problema, mas sim o sintoma. A equipe aprendeu a usar as métricas como um diagnóstico para investigar suas práticas de trabalho e confirmar as dores sentidas no dia a dia.
+
+3.  **O Fluxo de Valor é Tão Forte Quanto o Seu Elo Mais Fraco:** O projeto demonstrou que um desenvolvimento rápido é inútil se o código ficar parado em uma longa fila de revisão. A otimização do todo é mais importante que a otimização das partes; o foco deve estar em acelerar o ciclo completo da tarefa, do planejamento à entrega.
+
+4.  **A Cultura de Melhoria Contínua é um Diferencial Competitivo:** A capacidade da equipe de se autoavaliar, identificar falhas e implementar melhorias de forma eficaz (como visto na transição da S3 para a S4) é, talvez, o ativo mais valioso construído durante este projeto. Essa habilidade é a base para o sucesso em qualquer desafio futuro.
 
