@@ -244,15 +244,37 @@ Contudo, o maior gargalo e oportunidade de melhoria reside no fluxo de trabalho,
 
 # 3. Análise de Riscos
 
-_conteúdo_
+&ensp;A análise de riscos é um processo fundamental para o gerenciamento de projetos, permitindo a identificação, avaliação e mitigação de potenciais problemas que podem impactar o sucesso do projeto. Com base no documento do projeto "Com.Sigo", foram identificados os seguintes riscos e suas respectivas estratégias de mitigação.
 
 ## 3.1 Riscos identificados
 
-_conteúdo_
+&ensp;Os riscos identificados foram categorizados com base em sua probabilidade de ocorrência e impacto no projeto. A seguir, são apresentados os principais riscos levantados durante a fase de planejamento:
+
+<div align="center">
+
+| Risco | Probabilidade | Impacto | Descrição |
+| :-- | :--- | :--- | :--- |
+| **Ameaças Externas** | Média | Alto | Possíveis mudanças em regulamentos de proteção de dados (LGPD) podem restringir o uso de gravações, afetando a viabilidade do projeto. |
+| **Dependência de Ferramentas** | Alta | Médio | A solução depende de serviços externos (Speech-to-Text, PLN), que podem ter custos variáveis, falhas de integração ou descontinuidade. |
+| **Complexidade Técnica** | Média | Alto | A integração de diferentes tecnologias (NLP, análise de áudio, banco de dados) pode gerar desafios técnicos inesperados. |
+| **Qualidade dos Dados** | Alta | Médio | A precisão da análise depende da qualidade das transcrições e dos dados de áudio, que podem conter ruídos ou inconsistências. |
+
+</div>
 
 ## 3.2 Mitigação de Riscos
 
-_conteúdo_
+&ensp;Para cada risco identificado, foram propostas ações de mitigação para minimizar seus potenciais impactos. As estratégias adotadas incluem:
+
+<div align="center">
+
+| Risco | Ação de Mitigação |
+| :-- | :--- |
+| **Ameaças Externas** | Acompanhamento contínuo da legislação e implementação de práticas de anonimização de dados para garantir a conformidade. |
+| **Dependência de Ferramentas** | Utilização de interfaces de programação de aplicações (APIs) bem documentadas e criação de um módulo de cache (VHS) para respostas da API externa, reduzindo a dependência e os custos. |
+| **Complexidade Técnica** | Realização de provas de conceito (PoCs) para validar a integração das tecnologias e capacitação da equipe nas ferramentas selecionadas. |
+| **Qualidade dos Dados** | Implementação de pré-processamento dos dados para limpeza e normalização, além da escolha de modelos de transcrição com alta acurácia. |
+
+</div>
 
 # 4. Análise Post Mortem
 
