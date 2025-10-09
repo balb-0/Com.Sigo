@@ -188,6 +188,60 @@ Durante a Sprint 5, o foco esteve em **finalizar o projeto de forma estável e c
 
 **Nota:** Projeto finalizado com êxito, atingindo os objetivos definidos no planejamento inicial e consolidando um fluxo de trabalho colaborativo e eficiente.
 
+## 2.6 Análise da Evolução das Métricas (Sprints 2 a 4)
+
+Esta seção documenta a evolução quantitativa da equipe, utilizando como base as planilhas de métricas aferidas ao final das Sprints 2, 3 e 4. A análise busca correlacionar os dados apresentados em cada imagem com as práticas de trabalho e os desafios de processo discutidos nas retrospectivas.
+
+### 2.6.1 Métricas da Sprint 2
+
+A primeira imagem detalha o desempenho da equipe na Sprint 2, que serviu como uma base de referência para a performance do time.
+
+<div align="center">
+  <sub>Figura 1 – Planilha de Métricas da Sprint 2</sub> <br>
+  <img src="img/sprint2.png" alt="Tabela com as métricas detalhadas dos integrantes na Sprint 2" style="max-width: 600px; width: 100%; height: auto;">
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+**Análise e Insights:**
+- **Estimativas Precisas e Produtividade Estável:** A Sprint 2 demonstrou uma forte capacidade de estimativa, com vários membros (como `andrepaula14`, `otaviovasconcelos7`, `ryangartlan2`) cravando o `dev_estimated` com o `dev_time`. O `FP-ajustado` geral da equipe se manteve próximo de 1.0, indicando um ritmo de trabalho saudável e previsível.
+- **Primeiro Sinal de Alerta no Fluxo de Revisão:** Apesar do bom desempenho geral, a planilha já aponta um potencial gargalo. O `review_time` de `rafaelbarbosa400` (15.5 horas) é significativamente mais alto que o da maioria, sugerindo que a etapa de revisão já era um ponto de atrito e que os cards poderiam estar parados na coluna de "Revisão" aguardando ação.
+
+### 2.6.2 Métricas da Sprint 3
+
+A planilha da Sprint 3 captura um momento de oscilação na performance da equipe, refletindo os desafios de processo mencionados na retrospectiva correspondente.
+
+<div align="center">
+  <sub>Figura 2 – Planilha de Métricas da Sprint 3</sub> <br>
+  <img src="img/sprint3.png" alt="Tabela com as métricas detalhadas dos integrantes na Sprint 3" style="max-width: 600px; width: 100%; height: auto;">
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+**Análise e Insights:**
+- **Queda na Produtividade:** Houve uma queda geral no `FP-ajustado` da equipe, que ficou em média ~0.96. Essa redução, embora pequena, é um reflexo quantitativo da "falta de disciplina na execução dos processos" e do desalinhamento nas *dailies* citados na retrospectiva da Sprint 3.
+- **Agravamento Crítico do Gargalo de Revisão:** O `review_time` de `rafaelbarbosa400` escalou para 57.6 horas. Um número tão extremo evidencia uma falha grave no fluxo de trabalho. É a materialização da prática de mover um card para "Revisão" e não realizar a atividade correspondente de imediato. O card ficou parado por dias, inflando o tempo de ciclo e representando um bloqueio claro para a entrega de valor.
+- **Impacto em Cascata:** Um tempo de revisão tão longo não afeta apenas uma pessoa; ele prende uma funcionalidade que poderia estar sendo testada ou validada, impactando o trabalho de todo o time.
+
+### 2.6.3 Métricas da Sprint 4
+
+Os dados da Sprint 4 mostram uma recuperação da equipe, indicando que as ações de melhoria propostas na retrospectiva anterior surtiram efeito, embora alguns desafios persistissem.
+
+<div align="center">
+  <sub>Figura 3 – Planilha de Métricas da Sprint 4</sub> <br>
+  <img src="img/sprint4.png" alt="Tabela com as métricas detalhadas dos integrantes na Sprint 4" style="max-width: 600px; width: 100%; height: auto;">
+  <sup>Fonte: Material produzido pelos autores (2025).</sup>
+</div>
+
+**Análise e Insights:**
+- **Recuperação da Produtividade:** A equipe demonstrou resiliência, com o `FP-ajustado` médio retornando ao patamar de ~1.0. Isso sugere que a reestruturação das *dailies* e o foco em melhorar a comunicação foram eficazes para realinhar o time. A precisão das estimativas também voltou a ser muito alta.
+- **Persistência do Problema de Revisão:** Embora o caso extremo da Sprint 3 tenha sido contornado, o `review_time` continuou sendo um ponto fraco. Diversos membros (`rafaelbarbosa400`, `ryangartlan2`, `vitorbalbo1`) ainda apresentaram tempos de revisão elevados (acima de 10 horas). Isso mostra que, apesar da melhora na comunicação geral, o processo de revisão de código ainda carecia de padronização e prioridade.
+- **Atenção aos "Cards Fantasmas" e Atualizações:** O `FP-ajustado` de `vitorbalbo1` (0.75) destoa do resto da equipe. Isso pode indicar uma tarefa subestimada, mas também pode ser um sintoma de um "card fantasma" ou de uma demora em atualizar seu status, fazendo com que o `dev_time` registrado fosse maior que o real esforço de desenvolvimento. A disciplina na gestão do quadro é fundamental para a acurácia das métricas.
+
+### Conclusão Final da Análise de Métricas
+
+A análise cronológica das planilhas revela uma jornada clara: a equipe iniciou com uma base sólida (Sprint 2), enfrentou uma queda de performance devido a falhas de processo (Sprint 3) e demonstrou capacidade de se recuperar (Sprint 4). Os dados confirmam que a competência técnica do time para estimar e desenvolver tarefas é um ponto forte.
+
+Contudo, o maior gargalo e oportunidade de melhoria reside no fluxo de trabalho, especificamente na etapa de revisão de código e na disciplina de gestão do quadro. As práticas de não atualizar os cards em tempo real ou de deixar tarefas acumulando tempo na coluna de revisão são os principais detratores da agilidade da equipe. Para o futuro, o foco deve ser em criar acordos de trabalho claros para a revisão de código e garantir que o quadro seja um espelho fiel do trabalho em andamento.
+
 # 3. Análise de Riscos
 
 _conteúdo_
@@ -202,16 +256,49 @@ _conteúdo_
 
 # 4. Análise Post Mortem
 
-_conteúdo_
+A análise post mortem é uma reflexão estruturada sobre todo o ciclo de vida do projeto "Com.Sigo". O objetivo desta seção é consolidar os sucessos alcançados, identificar as causas-raiz dos desafios enfrentados e transformar a experiência acumulada em lições concretas que possam ser aplicadas em iniciativas futuras. Esta análise representa o fechamento do ciclo de aprendizado da equipe.
 
 ## 4.1 Sucessos do Projeto
 
-_conteúdo_
+A equipe "Com.Segue" alcançou resultados notáveis, que vão além da simples entrega do produto. Os principais sucessos podem ser categorizados da seguinte forma:
+
+#### 1. Conclusão Integral do Escopo e Entrega Final de Alta Qualidade
+O sucesso mais evidente foi a finalização completa do escopo planejado. Conforme destacado nas retrospectivas das Sprints 4 e 5, o projeto foi concluído com todas as funcionalidades esperadas e a entrega final ocorreu de forma estável e sem incidentes críticos. A capacidade de finalizar grande parte das tarefas da Sprint 5 com antecedência evidencia um planejamento eficaz na reta final e um forte comprometimento da equipe com o objetivo comum.
+
+#### 2. Alta Previsibilidade Técnica e Estabilidade na Produtividade
+A análise das métricas das Sprints 2, 3 e 4 revelou uma competência técnica excepcional. A equipe demonstrou uma notável precisão ao alinhar o tempo de desenvolvimento real (`dev_time`) com o estimado (`dev_estimated`), mesmo em meio a desafios de organização. O Fator de Produtividade (`FP-ajustado`) manteve-se consistentemente próximo de 1.0, exceto por uma leve queda na Sprint 3, indicando um ritmo de desenvolvimento maduro, consistente e, acima de tudo, previsível.
+
+#### 3. Resiliência e Capacidade Comprovada de Melhoria Contínua
+Talvez o maior testemunho da maturidade da equipe tenha sido sua capacidade de identificar uma queda de performance e corrigi-la. A Sprint 3 foi marcada por uma "falta de disciplina nos processos", o que se refletiu quantitativamente em uma queda no FP e na explosão do tempo de revisão. Em resposta, a equipe implementou ações concretas (como a reestruturação das *dailies*), e os dados da Sprint 4 comprovaram a recuperação da produtividade. Isso demonstra que os rituais de retrospectiva não foram meras formalidades, mas sim catalisadores eficazes de mudança.
+
+#### 4. Colaboração e Sinergia Interdisciplinar
+Apesar dos desafios de processo, as retrospectivas consistentemente elogiaram a colaboração e o apoio mútuo entre os membros. A Sprint 2 destacou a "excelente colaboração e comunicação", e a Sprint 4, o "trabalho em grupo" e as "boas discussões durante o desenvolvimento". A equipe soube alavancar a sinergia entre as áreas de frontend, backend e análise para tomar decisões mais assertivas e solucionar problemas complexos de forma coletiva.
 
 ## 4.2 Oportunidades de Melhoria
 
-_conteúdo_
+Os desafios enfrentados pelo projeto representam as mais valiosas oportunidades de aprendizado. As áreas a seguir foram identificadas como pontos críticos para aprimoramento em projetos futuros.
+
+#### 1. Formalização e Priorização do Processo de Revisão de Código
+Este foi, inequivocamente, o principal gargalo do projeto. A análise do `review_time` revelou picos extremos (chegando a 57.6 horas na Sprint 3), evidenciando que a revisão de código não era tratada como uma etapa prioritária e integrada ao fluxo de trabalho. A prática de mover um card para "Revisão" e deixá-lo em uma fila de espera gerou atrasos, imprevisibilidade e um "estoque" desnecessário de código não integrado.
+* **Sugestão para o Futuro:** Implementar um Acordo de Nível de Serviço (SLA) para revisões (ex: toda revisão deve ser iniciada em até 24 horas). Criar um checklist de revisão para padronizar a qualidade e reduzir o tempo de análise. Fomentar a cultura de que a responsabilidade da tarefa só termina quando o código é integrado (`merged`), incentivando revisões mais ágeis.
+
+#### 2. Aprimoramento da Disciplina de Gestão Visual do Trabalho
+As retrospectivas das Sprints 2 e 3 apontaram falhas na organização do Trello. Problemas como a demora em mover cards após a conclusão da tarefa, a existência de "cards fantasmas" ou a falta de clareza nas descrições geraram um desalinhamento entre o quadro e a realidade do trabalho. Isso não só dificulta o acompanhamento do progresso, mas também corrompe a fidelidade das métricas coletadas.
+* **Sugestão para o Futuro:** Instituir o hábito de atualizar o quadro durante as *dailies*, garantindo que o status de cada tarefa seja discutido e ajustado em equipe. Definir um padrão claro para a criação de cards, incluindo critérios de aceite, para evitar ambiguidades.
+
+#### 3. Consistência e Propósito na Execução dos Rituais Ágeis
+A S3 revelou que as reuniões diárias (*dailies*) "nem sempre atingiram seu potencial", tornando-se um ritual sem o foco necessário para sincronizar a equipe e identificar impedimentos. A eficácia dos rituais ágeis depende diretamente do engajamento e da disciplina de todos.
+* **Sugestão para o Futuro:** Reforçar o propósito de cada ritual. As *dailies* devem ser rápidas, focadas nas três perguntas clássicas e na remoção de bloqueios. As reuniões de planejamento (*plannings*) devem garantir que as tarefas sejam bem detalhadas antes do início da sprint, evitando surpresas.
 
 ## 4.3 Lições Aprendidas
 
-_conteúdo_
+Ao final do projeto "Com.Sigo", a equipe "Com.Segue" adquiriu aprendizados valiosos que transcendem a tecnologia desenvolvida:
+
+1.  **A Disciplina de Processo Amplifica a Competência Técnica:** A equipe provou ser tecnicamente excelente, mas os maiores desafios não foram de código, e sim de fluxo de trabalho. A principal lição é que um processo bem definido e seguido com disciplina é o que permite que o talento técnico se traduza em entrega de valor de forma ágil e consistente.
+
+2.  **Métricas São um Espelho da Realidade, Não a Realidade:** Os números (como um `review_time` alto ou um FP baixo) não são o problema, mas sim o sintoma. A equipe aprendeu a usar as métricas como um diagnóstico para investigar suas práticas de trabalho e confirmar as dores sentidas no dia a dia.
+
+3.  **O Fluxo de Valor é Tão Forte Quanto o Seu Elo Mais Fraco:** O projeto demonstrou que um desenvolvimento rápido é inútil se o código ficar parado em uma longa fila de revisão. A otimização do todo é mais importante que a otimização das partes; o foco deve estar em acelerar o ciclo completo da tarefa, do planejamento à entrega.
+
+4.  **A Cultura de Melhoria Contínua é um Diferencial Competitivo:** A capacidade da equipe de se autoavaliar, identificar falhas e implementar melhorias de forma eficaz (como visto na transição da S3 para a S4) é, talvez, o ativo mais valioso construído durante este projeto. Essa habilidade é a base para o sucesso em qualquer desafio futuro.
+
