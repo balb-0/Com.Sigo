@@ -82,3 +82,21 @@ export async function parseFiltersWithAI(text: string): Promise<{ params: Dashbo
     timeoutMs: 20000,
   });
 }
+
+export async function agentInterpret(message: string): Promise<{ reply: string; filters: any; preview: { count: number; items: any[] } }> {
+  return fetchJson(`${API_BASE}/v1/agent/interpret`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message }),
+    timeoutMs: 20000,
+  });
+}
+
+export async function previewFilters(body: { dateRange?: { from: string; to: string }; speaker?: 'cliente'|'agente'|'any'; semantic?: string; status?: string[] }): Promise<{ count: number; ids: number[] }> {
+  return fetchJson(`${API_BASE}/v1/chamadas/filters/preview`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    timeoutMs: 20000,
+  });
+}
